@@ -17,8 +17,6 @@
 
     </div>
     <!-- end page title -->
-
-    </div> <!-- end row -->
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -48,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <div id="datatable-buttons_filter" class="dataTables_filter"><label>Search:<input
+                                <div id="datatable-buttons_filter" class="dataTables_filter float-right"><label>Search:<input
                                             type="search" class="form-control form-control-sm" placeholder=""
                                             aria-controls="datatable-buttons"></label></div>
                             </div>
@@ -209,4 +207,5 @@
             </div>
         </div> <!-- end col -->
     </div>
+
 @endsection
