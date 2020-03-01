@@ -11,7 +11,6 @@ use App\ParcelType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class ParcelController extends Controller
 {
@@ -22,15 +21,24 @@ class ParcelController extends Controller
      */
     public function index()
     {
-        $cod_charge = Merchant::where('merchant_id', Auth::id())->first();
 
+
+        $cod_charge = Merchant::where('merchant_id', Auth::id())->first();
         if (is_null($cod_charge)) {
             $cod_charge = 0;
         } else {
             $cod_charge = $cod_charge->cod_charge;
         }
+        $invoice_data = Parcel::orderBy('created_at', 'DESC')->first();
+        if(is_null($invoice_data)){
+            $invoice=date('dhis');
+        }else{
+            $invoice = $invoice_data->parcel_id . "" . date('dhis');
+        }
+
         return view('admin.parcel.index')
             ->with('cod_charge', $cod_charge)
+            ->with('invoice', $invoice)
             ->with('results', ParcelType::orderBy('created_at', 'DESC')->get());
     }
 
@@ -76,11 +84,14 @@ class ParcelController extends Controller
             'parcel_invoice' => $request['parcel_invoice'],
             'parcel_type_id' => $request['parcel_type_id'],
             'delivery_charge' => $request['delivery_charge'],
+            'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
-            'total_amount' => $request['total_amount'],
+            'total_amount' => $request['payable_amount'] - ($request['cod'] + $request['delivery_charge']),
             'is_same_day' => $request['is_same_day'],
             'delivery_date' => $request['delivery_date'],
             'parcel_notes' => $request['parcel_notes'],
+            'created_at' =>Carbon::now(),
+            'updated_at' =>Carbon::now(),
 
         ];
 
@@ -136,9 +147,9 @@ class ParcelController extends Controller
     public function show(Parcel $parcel)
     {
 
-            $parcels=Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
-                ->get();
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->get();
         return view('merchant.parcel.show')
             ->with('results', $parcels);
     }

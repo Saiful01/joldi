@@ -16,10 +16,9 @@ class CreatePaymentHistoriesTable extends Migration
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->double('payable_amount');
-            $table->unsignedBigInteger('pay_by');//Admin ID
-            $table->date('from_date')->nullable();
-            $table->date('to_date')->nullable();
+            $table->unsignedBigInteger('pay_by')->nullable();//Admin ID
             $table->json('parcels');
+            $table->unsignedBigInteger('merchant_id');
             $table->boolean('is_complete')->default(false);
 
             $table->timestamps();

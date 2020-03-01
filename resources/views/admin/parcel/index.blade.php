@@ -43,25 +43,19 @@
                                 <div class="form-group row">
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text" placeholder="invoice no"
-                                               id="example-text-input-lg" name="parcel_invoice">
+                                        <input class="form-control form-control-lg" type="text" placeholder=""
+                                               id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}" readonly>
                                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                                     </div>
                                 </div>
-                                {{--                                <div class="form-group row">--}}
-                                {{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">parcel--}}
-                                {{--                                        Title</label>--}}
-                                {{--                                    <div class="col-sm-9">--}}
-                                {{--                                        <input class="form-control form-control-lg" type="text"--}}
-                                {{--                                               placeholder="Parcel Title"--}}
-                                {{--                                               id="example-text-input-lg" name="parcel_title">--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
+
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel Title</label>
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
+                                        Title</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text" placeholder="Parcel Title"
-                                               id="example-text-input-lg" name="parcel_title"  >
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder=""
+                                               id="example-text-input-lg" name="parcel_title">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -79,10 +73,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel Price</label>
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
+                                        Price</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text" placeholder="Parcel price"
-                                               id="example-text-input-lg" name="payable_amount"  >
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder="Parcel price"
+                                               id="example-text-input-lg" name="payable_amount">
                                     </div>
                                 </div>
 

@@ -57,6 +57,10 @@ Route::group(['middleware' => 'admin'], function () {
 
 
 
+    Route::get('/admin/view/payments-request', 'PaymentController@adminPayment');
+
+
+
 });
 
 Route::group(['middleware' => 'admin'], function () {
@@ -70,6 +74,8 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::get('/merchant/dashboard', 'DashboardController@dashboard');
     Route::get('/merchant/parcel/show', 'ParcelController@show');
     Route::get('/merchant/payments', 'PaymentHistoryController@merchantPayments');
+    Route::any('/merchant/payments/request', 'PaymentHistoryController@paymentRequest');
+    Route::post('/merchant/payments/store', 'PaymentHistoryController@paymentStore');
     Route::get('/merchant/payments/view', 'PaymentHistoryController@show');
 
 

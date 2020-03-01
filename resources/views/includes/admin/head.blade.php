@@ -8,6 +8,9 @@
 <!-- App favicon -->
 <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+
 <link href="{{asset('assets/libs/chartist/chartist.min.css')}}" rel="stylesheet">
 
 
@@ -19,7 +22,6 @@
 <link href="{{asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 
 <link href="/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
