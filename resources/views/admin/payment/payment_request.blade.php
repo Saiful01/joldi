@@ -35,11 +35,12 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
+                            <th>Merchant Name</th>
                             <th>Phone</th>
                             <th>Amount</th>
 
                             <th>Parcel Count</th>
+                            <th>Status</th>
 
                             <th>Action</th>
 
@@ -56,19 +57,30 @@
                                 <td>{{$res->merchant_phone}}</td>
                                 <td>{{$res->payable_amount}}</td>
 
-                                <td>{{$res->parcels}}</td>
+                                <td>{{count(json_decode($res->parcels,true))}}</td>
                                 <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-info dropdown-toggle" type="button"
-                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/parcel/edit/{{$res->parcel_id}}">Edit</a>
-                                            <a class="dropdown-item"
-                                               href="/parcel/delete/{{$res->parcel_id}}">Delete</a>
+                                    @if($res->is_complete==false)
+                                        <span class="badge badge-warning">Pending</span>
 
+                                    @else
+
+                                        <span class="badge badge-success">Delivered</span>
+                                    @endif
+
+                                </td>
+                                <td>
+                                    <div class="btn-group mr-1 mt-2">
+                                        <button type="button" class="btn btn-info btn-sm">Action</button>
+                                        <button type="button"
+                                                class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               href="/admin/view/payments-request/approve/{{$res->id}}">Approve</a>
+                                            <a class="dropdown-item"
+                                               href="/admin/view/payments-request/cancel/{{$res->id}}">Cancel</a>
                                         </div>
                                     </div>
                                 </td>
