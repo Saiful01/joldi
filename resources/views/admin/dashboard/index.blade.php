@@ -47,8 +47,8 @@
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
                                 <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-{{--                                <h4 class="font-weight-medium font-size-24">1,685 <i--}}
-{{--                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>--}}
+                                <h4 class="font-weight-medium font-size-24"> <i
+                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
 {{--                                    <p class="mb-0">+ 12%</p>--}}
 {{--                                </div>--}}
@@ -70,9 +70,9 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-{{--                                <h4 class="font-weight-medium font-size-24">1,685 <i--}}
-{{--                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>--}}
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Totall parcel</h5>
+                                <h4 class="font-weight-medium font-size-24">{{$par_count}} <i
+                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
 {{--                                    <p class="mb-0">+ 12%</p>--}}
 {{--                                </div>--}}
@@ -94,9 +94,9 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-{{--                                <h4 class="font-weight-medium font-size-24">1,685 <i--}}
-{{--                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>--}}
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50"> Pending</h5>
+                                <h4 class="font-weight-medium font-size-24">{{$delivery_pending}} <i
+                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
 {{--                                    <p class="mb-0">+ 12%</p>--}}
 {{--                                </div>--}}
@@ -118,9 +118,9 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-{{--                                <h4 class="font-weight-medium font-size-24">1,685 <i--}}
-{{--                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>--}}
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Accepted</h5>
+                                <h4 class="font-weight-medium font-size-24">{{$delivery_accepted}} <i
+                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
 {{--                                    <p class="mb-0">+ 12%</p>--}}
 {{--                                </div>--}}
@@ -142,9 +142,9 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-{{--                                <h4 class="font-weight-medium font-size-24">1,685 <i--}}
-{{--                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>--}}
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Canceled</h5>
+                                <h4 class="font-weight-medium font-size-24">{{$delivery_cancelled}} <i
+                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
 {{--                                    <p class="mb-0">+ 12%</p>--}}
 {{--                                </div>--}}
@@ -166,9 +166,9 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-{{--                                <h4 class="font-weight-medium font-size-24">1,685 <i--}}
-{{--                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>--}}
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50"> delivered</h5>
+                                <h4 class="font-weight-medium font-size-24">{{$delivery_delivered}} <i
+                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
 {{--                                    <p class="mb-0">+ 12%</p>--}}
 {{--                                </div>--}}
