@@ -16,11 +16,13 @@ class CreatePaymentHistoriesTable extends Migration
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->double('payable_amount');
-            $table->unsignedBigInteger('pay_by');//Admin ID
-            $table->date('from_date')->nullable();
-            $table->date('to_date')->nullable();
+            $table->unsignedBigInteger('pay_by')->nullable();//Admin ID
             $table->json('parcels');
-            $table->boolean('is_complete')->default(false);
+            $table->unsignedBigInteger('merchant_id');
+            $table->string('paid_status')->default("pending");//pending, approved, cancel
+            $table->boolean('is_merchant_approved')->default(false);//Merchant Approved korle true hobe.
+
+//            $table->foreign('merchant_id')->references('merchant_id')->on('merchants');
 
             $table->timestamps();
         });

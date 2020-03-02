@@ -205,17 +205,18 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <!-- item-->
                         <a class="dropdown-item" href="#"><i
-                                class="mdi mdi-account-circle font-size-17 align-middle mr-1"></i> Profile</a>
+                                    class="mdi mdi-account-circle font-size-17 align-middle mr-1"></i> Profile</a>
                         <a class="dropdown-item" href="#"><i class="mdi mdi-wallet font-size-17 align-middle mr-1"></i>
                             My Wallet</a>
                         <a class="dropdown-item d-block" href="#"><span
-                                class="badge badge-success float-right">11</span><i
-                                class="mdi mdi-settings font-size-17 align-middle mr-1"></i> Settings</a>
+                                    class="badge badge-success float-right">11</span><i
+                                    class="mdi mdi-settings font-size-17 align-middle mr-1"></i> Settings</a>
                         <a class="dropdown-item" href="#"><i
-                                class="mdi mdi-lock-open-outline font-size-17 align-middle mr-1"></i> Lock screen</a>
+                                    class="mdi mdi-lock-open-outline font-size-17 align-middle mr-1"></i> Lock
+                            screen</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-danger" href="/logout"><i
-                                class="bx bx-power-off font-size-17 align-middle mr-1 text-danger"></i> Logout</a>
+                                    class="bx bx-power-off font-size-17 align-middle mr-1 text-danger"></i> Logout</a>
                     </div>
                 </div>
 
@@ -230,56 +231,8 @@
     </header>
 
     <!-- ========== Left Sidebar Start ========== -->
-    <div class="vertical-menu">
 
-        <div data-simplebar class="h-100">
-
-            <!--- Sidemenu -->
-            <div id="sidebar-menu">
-                <!-- Left Menu Start -->
-                <ul class="metismenu list-unstyled" id="side-menu">
-                    <li class="menu-title">Main</li>
-
-                    <li>
-                        <a href="/" class="waves-effect">
-                            <i class="ti-home"></i><span class="badge badge-pill badge-primary float-right">2</span>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/admin/parcels" class=" waves-effect">
-                            <i class="ti-calendar"></i>
-                            <span>Add Parcel</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/merchant/payments/view" class=" waves-effect">
-                            <i class="ti-calendar"></i>
-                            <span>View Payments</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/merchant/parcel/show" class=" waves-effect">
-                            <i class="ti-calendar"></i>
-                            <span>All Consignment</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="calendar.html" class=" waves-effect">
-                            <i class="ti-calendar"></i>
-                            <span>Settings</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-            <!-- Sidebar -->
-        </div>
-    </div>
+    @include('includes.admin.sidebar')
     <!-- Left Sidebar End -->
 
     <!-- ============================================================== -->
@@ -305,7 +258,7 @@
                         ©
                         <script>document.write(new Date().getFullYear())</script>
                         <span class="d-none d-sm-inline-block"> -  <i
-                                class="mdi mdi-heart text-danger"></i> Developed by PLab.</span>
+                                    class="mdi mdi-heart text-danger"></i> Developed by PLab.</span>
                     </div>
                 </div>
             </div>

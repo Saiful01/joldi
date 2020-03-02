@@ -23,9 +23,6 @@ Route::get('/', function () {
 });
 
 
-
-
-
 Route::get('/login', 'LoginController@login');
 Route::post('/login/check', 'LoginController@loginCheck');
 
@@ -56,6 +53,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/deliveryman/delete/{id}', 'DeliveryManController@delete');
 
 
+    Route::get('/admin/view/payments-request', 'PaymentController@adminPayment');
+    Route::get('/admin/view/payments-request/approve/{id}', 'PaymentController@adminPaymentApprove');
+    Route::get('/admin/view/payments-request/cancel/{id}', 'PaymentController@adminPaymentCancel');
 
 });
 
@@ -70,24 +70,19 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::get('/merchant/dashboard', 'DashboardController@dashboard');
     Route::get('/merchant/parcel/show', 'ParcelController@show');
     Route::get('/merchant/payments', 'PaymentHistoryController@merchantPayments');
+    Route::any('/merchant/payments/request', 'PaymentHistoryController@paymentRequest');
+    Route::post('/merchant/payments/store', 'PaymentHistoryController@paymentStore');
     Route::get('/merchant/payments/view', 'PaymentHistoryController@show');
-
-
 
     Route::get('/logout', 'DashboardController@logout');
 
 });
 
 
-
-
-
-
 Route::get('/merchant-test', function () {
 
 
-
-     $credentials = [
+    $credentials = [
         'merchant_phone' => "66",
         'password' => "1234",
     ];
