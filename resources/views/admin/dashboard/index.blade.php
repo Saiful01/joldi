@@ -94,7 +94,7 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50"> Pending</h5>
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50"> Pending Order</h5>
                                 <h4 class="font-weight-medium font-size-24">{{$delivery_pending}} <i
                                         class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
@@ -118,7 +118,7 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Accepted</h5>
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Accepted order</h5>
                                 <h4 class="font-weight-medium font-size-24">{{$delivery_accepted}} <i
                                         class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
@@ -142,7 +142,7 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Canceled</h5>
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Canceled order</h5>
                                 <h4 class="font-weight-medium font-size-24">{{$delivery_cancelled}} <i
                                         class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
@@ -166,7 +166,7 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50"> delivered</h5>
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50"> delivered order</h5>
                                 <h4 class="font-weight-medium font-size-24">{{$delivery_delivered}} <i
                                         class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}

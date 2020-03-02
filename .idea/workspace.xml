@@ -4,10 +4,6 @@
     <list default="true" id="08563383-3e12-467f-9527-b00efb20cdcf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/dashboard/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/admin/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/admin/footer.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/includes/admin/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/includes/admin/head.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/merchant/parcel/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/merchant/parcel/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,7 +120,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../E-commerce" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunManager">
@@ -150,7 +146,8 @@
       <workItem from="1582786526888" duration="22468000" />
       <workItem from="1582961492402" duration="9248000" />
       <workItem from="1582979010107" duration="4183000" />
-      <workItem from="1583042683878" duration="3405000" />
+      <workItem from="1583042683878" duration="4609000" />
+      <workItem from="1583057793166" duration="2155000" />
     </task>
     <servers />
   </component>
@@ -166,10 +163,10 @@
       <screen x="40" y="0" width="1326" height="768" />
     </state>
     <state x="436" y="141" width="524" height="482" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/40.0.1326.768@40.0.1326.768" timestamp="1582543293815" />
-    <state x="473" y="140" width="424" height="482" key="FileChooserDialogImpl" timestamp="1582972443908">
+    <state x="473" y="140" width="424" height="482" key="FileChooserDialogImpl" timestamp="1583070041356">
       <screen x="40" y="0" width="1326" height="768" />
     </state>
-    <state x="473" y="140" width="424" height="482" key="FileChooserDialogImpl/40.0.1326.768@40.0.1326.768" timestamp="1582972443908" />
+    <state x="473" y="140" width="424" height="482" key="FileChooserDialogImpl/40.0.1326.768@40.0.1326.768" timestamp="1583070041356" />
     <state x="379" y="118" width="628" height="528" key="find.popup" timestamp="1582793086161">
       <screen x="40" y="0" width="1326" height="768" />
     </state>
