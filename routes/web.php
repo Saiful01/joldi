@@ -11,6 +11,8 @@
 |
 */
 
+use App\Parcel;
+use App\ParcelStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -101,6 +103,45 @@ Route::get('/merchant-test', function () {
 Route::get('/angular', function () {
 
     return \App\ParcelType::get();
+
+});
+Route::get('/statistics', function () {
+
+
+    $par_count = Parcel::count();
+    $delivery_pending = ParcelStatus::where('delivery_status', 'pending')->count();
+    $delivery_accepted = ParcelStatus::where('delivery_status', 'accepted')->count();
+    $delivery_cancelled = ParcelStatus::where('delivery_status', 'cancelled')->count();
+    $delivery_on_the_way = ParcelStatus::where('delivery_status', 'on_the_way')->count();
+    $delivery_delivered = ParcelStatus::where('delivery_status', 'delivered')->count();
+    $delivery_returned = ParcelStatus::where('delivery_status', 'returned')->count();
+
+    $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('is_complete', true)
+        ->where('delivery_status', "delivered")
+        ->where('is_paid_to_merchant', "pending")
+        //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
+        ->sum('payable_amount');
+
+    $total_sales = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('is_complete', true)
+        ->where('delivery_status', "delivered")
+        ->where('is_paid_to_merchant', "pending")
+        //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
+        ->sum('total_amount');
+
+    return [
+        'par_count' => $par_count,
+        'delivery_pending' => $delivery_pending,
+        'delivery_accepted' => $delivery_accepted,
+        'delivery_cancelled' => $delivery_cancelled,
+        'delivery_on_the_way' => $delivery_on_the_way,
+        'delivery_delivered' => $delivery_delivered,
+        'delivery_returned' => $delivery_returned,
+        'payable_amount' => $payable_amount,
+        'total_sales' => $total_sales
+    ];
+
 
 });
 

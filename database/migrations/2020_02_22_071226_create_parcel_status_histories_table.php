@@ -18,7 +18,7 @@ class CreateParcelStatusHistoriesTable extends Migration
             $table->string('notes')->nullable();
             $table->string('message')->nullable();
             $table->string('parcel_status')->default('pending');
-            $table->unsignedBigInteger('changed_by');//User ID
+            $table->unsignedBigInteger('changed_by');   //User ID
             $table->unsignedBigInteger('parcel_id');
             $table->timestamps();
         });

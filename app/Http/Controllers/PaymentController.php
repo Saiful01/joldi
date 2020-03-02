@@ -11,8 +11,9 @@ class PaymentController extends Controller
     public function adminPayment()
     {
 
-        $results = PaymentHistory::leftJoin('merchants', 'merchants.merchant_id', '=', 'payment_histories.merchant_id')
-            ->where('paid_status', "pending")->get();
+         $results = PaymentHistory::leftJoin('merchants', 'merchants.merchant_id', '=', 'payment_histories.merchant_id')
+          /*  ->where('paid_status', "pending")*/
+            ->get();
 
         return view('admin.payment.payment_request')->with('results', $results);
     }
@@ -46,11 +47,12 @@ class PaymentController extends Controller
     public function adminPaymentCancel($id)
     {
 
+        //$results = PaymentHistory::where('id', $id)->first();
         PaymentHistory::where('id', $id)->update([
-            'is_complete' => false
+            'paid_status' => "rejected"
         ]);
 
+        return back()->with('success', "Rejected Orders");
 
-        return "lol";
     }
 }

@@ -147,7 +147,7 @@ class ParcelController extends Controller
     public function show(Parcel $parcel)
     {
 
-        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->get();
         return view('merchant.parcel.show')

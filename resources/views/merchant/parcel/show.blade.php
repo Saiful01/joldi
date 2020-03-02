@@ -41,17 +41,17 @@
 
                                     <thead>
                                     <tr role="row">
-                                        <th>#</th>
                                         <th>Invoice No</th>
                                         <th>COD</th>
-                                        <th>Delivery Chrage</th>
-                                        <th>Total Amount</th>
-                                        <th>Is Same Day</th>
-                                        <th>Delivery Date</th>
-                                        <th>Customer Name</th>
+                                        <th>D.Chrage</th>
+                                        <th>Amount</th>
+                                        <th>Same Day</th>
+                                        <th>D. Date</th>
+                                        <th>Customer</th>
                                         <th>Phone</th>
                                         <th>Address</th>
                                         <th>Status</th>
+                                        <th>P. Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -63,8 +63,8 @@
 
 
                                         <tr role="row" class="odd">
-                                            <td tabindex="0" class="sorting_1">{{$i++}}</td>
-                                            <td>{{$res->parcel_invoice}}</td>
+
+                                            <th>#{{$res->parcel_invoice}}</th>
                                             {{--                                <td>{{$res->parcel_type_id}}</td>--}}
                                             <td>{{$res->cod}}</td>
                                             <td>{{$res->delivery_charge}}</td>
@@ -89,12 +89,17 @@
                                             <td>{{$res->customer_name}}</td>
                                             <td>{{$res->customer_phone}}</td>
                                             <td>{{$res->customer_address}}</td>
-                                            <td>{{$res->delivery_status}}</td>
+                                            <td>
+                                                <span class="badge badge-pill badge-info">{{$res->delivery_status}}</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pill badge-info">{{$res->is_paid_to_merchant}}</span>
+                                            </td>
                                             <td>
                                                 <div class="btn-group mr-1 mt-2">
-                                                    <button type="button" class="btn btn-info">Info</button>
+                                                    <button type="button" class="btn btn-info btn-sm">Info</button>
                                                     <button type="button"
-                                                            class="btn btn-info dropdown-toggle dropdown-toggle-split"
+                                                            class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split"
                                                             data-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false">
                                                         <i class="mdi mdi-chevron-down"></i>
