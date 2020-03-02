@@ -66,8 +66,8 @@ class PaymentHistoryController extends Controller
 
             $payable_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
                 /* ->where('is_complete', true)
-                 ->where('delivery_status', "delivered")
-                 ->where('is_paid_to_merchant', "pending")*/
+                 ->where('delivery_status', "delivered")*/
+                 ->where('is_paid_to_merchant', "pending")
                 ->orderBy('parcels.created_at', "DESC")
                 ->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
                 ->get();
@@ -76,8 +76,8 @@ class PaymentHistoryController extends Controller
         } else {
             $payable_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
                 /* ->where('is_complete', true)
-                 ->where('delivery_status', "delivered")
-                 ->where('is_paid_to_merchant', "pending")*/
+                 ->where('delivery_status', "delivered")*/
+                 ->where('is_paid_to_merchant', "pending")
                 ->orderBy('parcels.created_at', "DESC")
                 ->get();
             return view('merchant.payment.payment_request')

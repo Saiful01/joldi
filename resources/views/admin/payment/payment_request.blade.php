@@ -59,13 +59,17 @@
 
                                 <td>{{count(json_decode($res->parcels,true))}}</td>
                                 <td>
-                                    @if($res->is_complete==false)
-                                        <span class="badge badge-warning">Pending</span>
+                                    @if($res->paid_status=="pending")
 
+                                        <span class="badge badge-warning">  {{$res->paid_status}}</span>
+                                    @elseif($res->paid_status=="rejected")
+
+                                        <span class="badge badge-danger">  {{$res->paid_status}}</span>
                                     @else
 
-                                        <span class="badge badge-success">Delivered</span>
+                                        <span class="badge badge-success">  {{$res->paid_status}}</span>
                                     @endif
+
 
                                 </td>
                                 <td>
@@ -77,10 +81,16 @@
                                             <i class="mdi mdi-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="/admin/view/payments-request/approve/{{$res->id}}">Approve</a>
-                                            <a class="dropdown-item"
-                                               href="/admin/view/payments-request/cancel/{{$res->id}}">Cancel</a>
+                                            @if($res->paid_status=="pending")
+                                                <a class="dropdown-item"
+                                                   href="/admin/view/payments-request/approve/{{$res->id}}">Approve</a>
+                                                <a class="dropdown-item"
+                                                   href="/admin/view/payments-request/cancel/{{$res->id}}">Cancel</a>
+                                            @elseif($res->paid_status=="rejected")
+                                                <a class="dropdown-item"
+                                                   href="/admin/view/payments-request/approve/{{$res->id}}">Approve</a>
+                                            @endif
+
                                         </div>
                                     </div>
                                 </td>

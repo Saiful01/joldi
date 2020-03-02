@@ -17,10 +17,10 @@ class CreateParcelStatusesTable extends Migration
             $table->bigIncrements('parcel_status_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('parcel_id');
-            $table->string('delivery_status')->default('pending');//pending,on_the_way,rejected, delivered
+            $table->string('delivery_status')->default('pending');//pending,accepted, cancelled, on_the_way, delivered,returned
             $table->string('delivery_man_id')->nullable();
             $table->boolean('is_complete')->default(false);// Amount collected from Customer
-            $table->string('is_paid_to_merchant')->default("pending"); //pending , received //Merchant K pay kora hoise kina seta
+            $table->string('is_paid_to_merchant')->default("pending"); //pending , requested, received //Merchant K pay kora hoise kina seta
 
             $table->timestamps();
         });

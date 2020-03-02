@@ -5,14 +5,14 @@
 <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
 <script src="{{asset('assets/libs/node-waves/waves.min.js')}}"></script>
 
-{{--<!-- Peity chart-->
+<!-- Peity chart-->
 <script src="{{asset('assets/libs/peity/jquery.peity.min.js')}}"></script>
 
 <!-- Plugin Js-->
 <script src="{{asset('assets/libs/chartist/chartist.min.js')}}"></script>
 <script src="{{asset('assets/libs/chartist-plugin-tooltips/chartist-plugin-tooltip.min.js')}}"></script>
 
-<script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>--}}
+<script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>
 
 
 <!--Form start-->
