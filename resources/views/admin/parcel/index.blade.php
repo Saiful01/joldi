@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.merchantapp')
 @section('title', 'Parcel Create')
 
 @section('content')
@@ -66,9 +66,11 @@
                                                 id="my_parcel">
 
                                             <option value="0">Select</option>
-                                            <option ng-repeat="parcel in parcels" value="@{{parcel.parcel_type_id}}">
-                                                @{{parcel.title}}
-                                            </option>
+                                            @foreach($parcel_types as $parcel_type)
+                                                <option value="{{$parcel_type->parcel_type_id}}">
+                                                    {{$parcel_type->title}}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -190,7 +192,7 @@
     <script>
 
 
-        var app = angular.module('parcelApp', []);
+      /*  var app = angular.module('parcelApp', []);
         app.controller('parcelController', function ($scope, $http) {
 
             $http.get("/angular")
@@ -202,16 +204,16 @@
                 });
             // console.log(parcel_type);
 
-            /*function parcelTypeChange(){
+            function parcelTypeChange(){
 
                 console.log($scope.my_parcel);
-            }*/
+            }
 
 
-        });
+        });*/
 
 
-        function isSameDayTrue() {
+      /*  function isSameDayTrue() {
             //var is_same_day = document.getElementById('is_same_day').value;
             document.getElementById('delivery_date').style.display = 'block';
 
@@ -227,7 +229,7 @@
 
         //Select this using js
         var parcel_type = document.getElementById('parcel_type');
-        /*
+
                 //Add event when change happens
                 parcel_type.onchange = function () {
                     var value = parcel_type.value;

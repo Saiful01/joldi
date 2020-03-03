@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.merchantapp')
 @section('title', 'Page Title')
 
 @section('content')
@@ -128,7 +128,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="#" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -152,7 +152,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="#" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -176,7 +176,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="#" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}

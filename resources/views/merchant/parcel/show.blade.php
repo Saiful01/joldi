@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.merchantapp')
 @section('title', 'Customer')
 
 @section('content')
@@ -64,7 +64,7 @@
 
                                         <tr role="row" class="odd">
 
-                                            <th>#{{$res->parcel_invoice}}</th>
+                                            <th>{{$res->parcel_invoice}}</th>
                                             {{--                                <td>{{$res->parcel_type_id}}</td>--}}
                                             <td>{{$res->cod}}</td>
                                             <td>{{$res->delivery_charge}}</td>

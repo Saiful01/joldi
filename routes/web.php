@@ -37,6 +37,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/parcels', 'ParcelController@index');
     Route::post('/parcel/store', 'ParcelController@store');
     Route::get('/parcel/view', 'ParcelController@view');
+    Route::get('/parcel/edit/{{id}}', 'ParcelController@edit');
+    Route::post('/parcel/update', 'ParcelController@update');
+    Route::get('/parcel/delete/{{id}}', 'ParcelController@destroy');
 
     //merchant
 //    Route::post('/merchant/store', 'MerchantController@store');

@@ -28,7 +28,7 @@ class RegistrationController extends Controller
     public function registration(){
         $result=Area::get();
 
-        return view('admin.registration.index')->with('result', $result);
+        return view('merchant.registration.index')->with('result', $result);
 
     }
     public function create()
