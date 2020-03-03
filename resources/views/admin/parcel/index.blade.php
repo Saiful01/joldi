@@ -22,8 +22,8 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    {{--<h5 class="card-title">Add New Parcel</h5>
---}}{{--                    <a href="/parcel/view" type="butoon" class="card-title float-right"> Parcel View </a>--}}{{--
+{{--                    <h5 class="card-title">Add New Parcel</h5>
+                    <a href="/parcel/view" type="butoon" class="card-title float-right"> Parcel View </a>
                     <hr>--}}
                     @if(Session::has('success'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>

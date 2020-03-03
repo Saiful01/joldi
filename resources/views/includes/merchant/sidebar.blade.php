@@ -16,16 +16,16 @@
                 </li>
 
                 <li>
-                    <a href="/admin/merchants" class=" waves-effect">
+                    <a href="/admin/parcels" class=" waves-effect">
                         <i class="ti-paint-roller"></i>
-                        <span>Manage Merchant</span>
+                        <span>Add Parcel</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="/admin/deliverymans" class=" waves-effect">
-                        <i class="ti-paint-roller"></i>
-                        <span>Manage DeliveryMan</span>
+                    <a href="/merchant/payments/request" class=" waves-effect">
+                        <i class="ti-money"></i>
+                        <span>Payment Request</span>
                     </a>
                 </li>
 
@@ -37,7 +37,12 @@
                     </a>
                 </li>
 
-
+                <li>
+                    <a href="/merchant/payments/view" class=" waves-effect">
+                        <i class="ti-money"></i>
+                        <span>View Payments</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="/merchant/parcel/show" class=" waves-effect">

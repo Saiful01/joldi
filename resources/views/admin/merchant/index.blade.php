@@ -7,10 +7,10 @@
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="page-title-box">
-                <h4 class="font-size-18">Parcel Information</h4>
+                <h4 class="font-size-18">Merchants</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Parcel Table</a></li>
+                    <li class="breadcrumb-item"><a href="#">Merchant Table</a></li>
                 </ol>
             </div>
         </div>
@@ -23,25 +23,29 @@
             <div class="card">
                 <div class="card-body">
 
+                    @if(Session::has('success'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
+                    @endif
+
+                    @if(Session::has('failed'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
+                    @endif
+
+
                     <h4 class="card-title">
-                        Parcel Datatable</h4>
-                    {{--                    <p class="card-title-desc">DataTables has most features enabled by--}}
-                    {{--                        default, so all you need to do to use it with your own tables is to call--}}
-                    {{--                        the construction function: <code>$().DataTable();</code>.--}}
-                    {{--                    </p>--}}
+                        Merchant List</h4>
 
                     <table id="" class="table table-bordered dt-responsive nowrap"
                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Merchant Name</th>
+                            <th>Name</th>
                             <th>Phone</th>
-                            <th>Amount</th>
-
-                            <th>Parcel Count</th>
+                            <th>Email</th>
+                            <th>COD</th>
+                            <th>COD Charge</th>
                             <th>Status</th>
-
                             <th>Action</th>
 
                         </tr>
@@ -55,24 +59,29 @@
                                 <td>{{$i++}}</td>
                                 <td>{{$res->merchant_name}}</td>
                                 <td>{{$res->merchant_phone}}</td>
-                                <td>{{$res->payable_amount}}</td>
+                                <td>{{$res->merchant_email}}</td>
 
-                                <td>{{count(json_decode($res->parcels,true))}}</td>
                                 <td>
-                                    @if($res->paid_status=="pending")
-
-                                        <span class="badge badge-warning">  {{$res->paid_status}}</span>
-                                    @elseif($res->paid_status=="rejected")
-
-                                        <span class="badge badge-danger">  {{$res->paid_status}}</span>
+                                    @if($res->is_cod_enable)
+                                        <span class="badge badge-success">Yes</span>
                                     @else
-
-                                        <span class="badge badge-success">  {{$res->paid_status}}</span>
+                                        <span class="badge badge-warning">No</span>
                                     @endif
-
-
                                 </td>
+
+
+                                <td>{{$res->cod_charge}}</td>
+
                                 <td>
+                                    @if($res->active_status)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">Inactive</span>
+                                    @endif
+                                </td>
+
+                                <td>
+
                                     <div class="btn-group mr-1 mt-2">
                                         <button type="button" class="btn btn-info btn-sm">Action</button>
                                         <button type="button"
@@ -81,22 +90,17 @@
                                             <i class="mdi mdi-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            @if($res->paid_status=="pending")
-                                                <a class="dropdown-item"
-                                                   href="/admin/view/payments-request/approve/{{$res->id}}">Approve</a>
-                                                <a class="dropdown-item"
-                                                   href="/admin/view/payments-request/cancel/{{$res->id}}">Cancel</a>
-                                            @elseif($res->paid_status=="rejected")
-                                                <a class="dropdown-item"
-                                                   href="/admin/view/payments-request/approve/{{$res->id}}">Approve</a>
-
+                                            <a class="dropdown-item" href="/admin/merchant/edit/{{$res->merchant_id}}">Edit</a>
+                                            <a class="dropdown-item" href="/admin/merchant/profile/{{$res->merchant_id}}">Profile</a>
+                                            @if($res->active_status)
+                                                <a class="dropdown-item" href="/admin/merchant/inactive/{{$res->merchant_id}}">Inactive</a>
                                             @else
-                                                <a class="dropdown-item"
-                                                   href="#">Already {{$res->paid_status}}</a>
+                                                <a class="dropdown-item" href="/admin/merchant/activate/{{$res->merchant_id}}">Activate</a>
                                             @endif
-
                                         </div>
                                     </div>
+
+
                                 </td>
 
 

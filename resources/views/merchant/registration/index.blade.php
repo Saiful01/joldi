@@ -10,8 +10,8 @@
                             <div class="text-primary text-center p-4">
                                 <h5 class="text-white font-size-20">Free Register</h5>
                                 <p class="text-white-50">Get your free Merchant account now.</p>
-                                <a href="index.html" class="logo logo-admin">
-                                    <img src="assets/images/logo-sm.png" height="24" alt="logo">
+                                <a href="/" class="logo logo-admin">
+                                    <img src="/assets/images/logo-sm.png" height="24" alt="logo">
                                 </a>
                             </div>
                         </div>

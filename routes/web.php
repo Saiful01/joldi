@@ -28,12 +28,25 @@ Route::get('/', function () {
 Route::get('/login', 'LoginController@login');
 Route::post('/login/check', 'LoginController@loginCheck');
 
-Route::get('/registration', 'RegistrationController@registration');
-Route::any('/merchant/store', 'RegistrationController@store');
+//Merchant Login
+Route::get('/merchant/login', 'MerchantController@merchantLogin');
+Route::post('/merchant/login-check', 'MerchantController@merchantLoginCheck');
+
+Route::get('/merchant/registration', 'MerchantController@registration');
+Route::any('/merchant/store', 'MerchantController@store');
 
 
 Route::group(['middleware' => 'admin'], function () {
+
+
     Route::get('/admin/dashboard', 'DashboardController@dashboard');
+    Route::get('/admin/merchants', 'AdminController@merchants');
+    Route::get('/admin/merchant/edit/{id}', 'AdminController@merchantEdit');
+    Route::get('/admin/merchant/inactive/{id}', 'AdminController@merchantInactive');
+    Route::get('/admin/merchant/activate/{id}', 'AdminController@merchantActivate');
+
+
+
     Route::get('/admin/parcels', 'ParcelController@index');
     Route::post('/parcel/store', 'ParcelController@store');
     Route::get('/parcel/view', 'ParcelController@view');
@@ -69,7 +82,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'merchant'], function () {
 
-    Route::get('/merchant/dashboard', 'DashboardController@dashboard');
+    Route::get('/merchant/dashboard', 'MerchantController@dashboard');
+
     Route::get('/merchant/parcel/show', 'ParcelController@show');
     Route::get('/merchant/payments', 'PaymentHistoryController@merchantPayments');
     Route::any('/merchant/payments/request', 'PaymentHistoryController@paymentRequest');
@@ -141,7 +155,6 @@ Route::get('/statistics', function () {
         'payable_amount' => $payable_amount,
         'total_sales' => $total_sales
     ];
-
 
 });
 

@@ -10,16 +10,16 @@ class MerchantMiddleWare
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        //return $next($request);
 
-        if(!Auth::check()){
-            return redirect('/login');
+        if (!Auth::guard('merchant')->check()) {
+            return redirect('/merchant/login');
         }
         return $next($request);
     }

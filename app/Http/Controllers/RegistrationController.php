@@ -25,12 +25,7 @@ class RegistrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function registration(){
-        $result=Area::get();
 
-        return view('admin.registration.index')->with('result', $result);
-
-    }
     public function create()
     {
 
@@ -42,21 +37,7 @@ class RegistrationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
 
-        $request['password']=Hash::make($request['merchant_password']);
-        unset($request['_token']);
-        unset($request['merchant_password']);
-        ;
-        try{
-            Merchant::create($request->all());
-            return back()->with('success',"Successfully Registered. Account will be verified by Admin");
-        }catch (\Exception $exception){
-            return  $exception->getMessage();
-        }
-
-    }
 
     /**
      * Display the specified resource.
