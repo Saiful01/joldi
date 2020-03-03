@@ -35,7 +35,7 @@ Route::any('/merchant/store', 'RegistrationController@store');
 //
 //User: pixonlab_parcel
 //
-//Database: pixonlab_e-parcel
+//Database: c
 
 
 Route::group(['middleware' => 'admin'], function () {
