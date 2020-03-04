@@ -32,7 +32,7 @@
                     @endif
 
 
-                    <form class="custom-validation" method="post" action="/admin/merchant/store" novalidate=""
+                    <form class="custom-validation" method="post" action="/admin/merchant/update" novalidate=""
                           enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant Name</label>
@@ -63,12 +63,17 @@
                                        value="{{$result->merchant_email}}">
                             </div>
                         </div>
+
+
                         <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant Address</label>
+                            <label for="area"  class="col-sm-2 col-form-label">Area</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control form-control-lg" type="text" placeholder="Address"
-                                          id="example-text-input-lg"
-                                          name="merchant_address">{{$result->merchant_address}}</textarea>
+                                <select class="form-control form-control-lg" name="area_id">
+                                    @foreach ($areas as $res)
+                                        <option
+                                            @if ($res->area_id ==$result->area_id) selected @endif value="{{$res->area_id}}">{{$res->area_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

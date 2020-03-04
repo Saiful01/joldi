@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.merchant')
 @section('title', 'Customer')
 
 @section('content')
@@ -106,11 +106,11 @@
                                                     </button>
                                                     <div class="dropdown-menu" style="">
                                                         <a class="dropdown-item"
-                                                           href="/parcel/edit/{{$res->parcel_id}}">Edit</a>
+                                                           href="/merchant/parcel/edit/{{$res->parcel_id}}">Edit</a>
                                                         <a class="dropdown-item"
-                                                           href="/parcel/delete/{{$res->parcel_id}}">Delete</a>
+                                                           href="/merchant/parcel/delete/{{$res->parcel_id}}">Delete</a>
                                                         <a class="dropdown-item"
-                                                           href="/parcel/details/{{$res->parcel_id}}">Details</a>
+                                                           href="/merchant/parcel/details/{{$res->parcel_id}}">Details</a>
                                                     </div>
                                                 </div>
                                             </td>

@@ -16,6 +16,13 @@
                 </li>
 
                 <li>
+                    <a href="/admin/area/view" class=" waves-effect">
+                        <i class="ti-paint-roller"></i>
+                        <span>Manage Area</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="/admin/merchants" class=" waves-effect">
                         <i class="ti-paint-roller"></i>
                         <span>Manage Merchant</span>

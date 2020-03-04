@@ -12,8 +12,8 @@ class Area extends Seeder
     public function run()
     {
         \App\Area::create([
-            'area_name'=>"Area 1",
-            'address'=>"Panthapath, Dhaka",
+            'area_name'=>"Panthapath",
+            'area_address'=>"Concord-Regency,Panthapath, Dhaka",
         ]);
     }
 }

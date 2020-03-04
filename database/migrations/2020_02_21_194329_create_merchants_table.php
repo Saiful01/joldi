@@ -17,6 +17,7 @@ class CreateMerchantsTable extends Migration
             $table->bigIncrements('merchant_id');
             $table->string('merchant_name');
             $table->string('merchant_phone');
+            $table->string('merchant_image')->nullable();
             $table->string('password');
             $table->string('merchant_email')->nullable();
             $table->boolean('active_status')->default(false);

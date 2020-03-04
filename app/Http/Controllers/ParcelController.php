@@ -11,6 +11,7 @@ use App\ParcelType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ParcelController extends Controller
 {
@@ -36,10 +37,10 @@ class ParcelController extends Controller
             $invoice = $invoice_data->parcel_id . "" . date('dhis');
         }
 
-        return view('admin.parcel.index')
+        return view('merchant.parcel.index')
             ->with('cod_charge', $cod_charge)
             ->with('invoice', $invoice)
-            ->with('results', ParcelType::orderBy('created_at', 'DESC')->get());
+            ->with('parcel_types', ParcelType::orderBy('created_at', 'DESC')->get());
     }
 
     /**
@@ -60,14 +61,13 @@ class ParcelController extends Controller
      */
     public function store(Request $request)
     {
-//        $validator= Validator::make($request->all(),[
-//            'delivery_charge'=>'required|digits:1',
-//            'total_amount'=>'required|digits:1',
-//
-//        ]);
-//        if ($validator->fails()){
-//            return back()->with('failed',"Please Delivery Charge or Totall Amount is number");
-//        }
+        $request->validate([
+            'delivery_charge'=>'required|numeric',
+            'total_amount'=>'required|numeric',
+            'parcel_type_id'=> 'required|numeric|min:1',
+
+        ]);
+
         unset($request['_token']);
         unset($request['is_same_day']);
 
@@ -153,6 +153,20 @@ class ParcelController extends Controller
         return view('merchant.parcel.show')
             ->with('results', $parcels);
     }
+    public function details($id)
+    {
+
+          $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('parcels.parcel_id',$id)
+            ->first();
+
+          $history=ParcelStatusHistory::where('parcel_id',$id)->get();
+        return view('merchant.parcel.details')
+            ->with('result', $parcels)
+            ->with('histories', $history);
+    }
+
 
 
     /**
@@ -161,9 +175,10 @@ class ParcelController extends Controller
      * @param \App\Parcel $parcel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Parcel $parcel)
+    public function edit($id)
     {
-        //
+        $result= Parcel::where('percal_id', $id)->first();
+        return view('merchant.parcel.edit')->with('result', $result);
     }
 
     /**

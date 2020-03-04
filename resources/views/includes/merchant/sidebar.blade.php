@@ -16,7 +16,7 @@
                 </li>
 
                 <li>
-                    <a href="/admin/parcels" class=" waves-effect">
+                    <a href="/merchant/parcels" class=" waves-effect">
                         <i class="ti-paint-roller"></i>
                         <span>Add Parcel</span>
                     </a>
@@ -30,12 +30,6 @@
                 </li>
 
 
-                <li>
-                    <a href="/admin/view/payments-request" class=" waves-effect">
-                        <i class="ti-money"></i>
-                        <span>View Payment Request</span>
-                    </a>
-                </li>
 
                 <li>
                     <a href="/merchant/payments/view" class=" waves-effect">
@@ -52,7 +46,7 @@
                 </li>
 
                 <li>
-                    <a href="/merchant/setting" class=" waves-effect">
+                    <a href="/merchant/profile/setting" class=" waves-effect">
                         <i class="ti-settings"></i>
                         <span>Settings</span>
                     </a>

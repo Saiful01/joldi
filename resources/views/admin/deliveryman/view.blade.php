@@ -10,7 +10,7 @@
                 <h4 class="font-size-18">Delivery Man</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Delivery Man Table</a></li>
+                    <li class="breadcrumb-item"><a href="#"> Delivery man Table</a></li>
                 </ol>
             </div>
         </div>
@@ -23,50 +23,77 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title">Delivery Man Datatable</h4>
-                    {{--                    <p class="card-title-desc">DataTables has most features enabled by--}}
-                    {{--                        default, so all you need to do to use it with your own tables is to call--}}
-                    {{--                        the construction function: <code>$().DataTable();</code>.--}}
-                    {{--                    </p>--}}
+                    @if(Session::has('success'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
+                    @endif
 
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    @if(Session::has('failed'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
+                    @endif
+
+
+                    <h4 class="card-title">
+                        Delivery Man List</h4>
+                        <a href="/admin/deliveryman/create" type="button" class="float-right btn btn-success">+new</a>
+
+                    <table id="" class="table table-bordered dt-responsive nowrap"
+                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>phone</th>
-                            <th>Password</th>
+                            <th>Phone</th>
                             <th>Address</th>
                             <th>Active Status</th>
+                            <th>Action</th>
+
                         </tr>
                         </thead>
 
 
                         <tbody>
-                        <tr>
-                            @php($i=1)
-                            @foreach($result as $res)
-
+                        @php($i=1)
+                        @foreach($result as $res)
+                            <tr>
                                 <td>{{$i++}}</td>
                                 <td>{{$res->delivery_man_name}}</td>
                                 <td>{{$res->delivery_man_phone}}</td>
-                                <td>{{$res->delivery_man_password}}</td>
                                 <td>{{$res->delivery_man_address}}</td>
-                                <td>{{$res->active_status}}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/deliveryman/edit/{{$res->delivery_man_id}}">Edit</a>
-                                            <a class="dropdown-item" href="/deliveryman/delete/{{$res->delivery_man_id}}">Delete</a>
 
-                                        </div>
-                                    </div>
+                                <td>
+                                    @if($res->active_status==false)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">Inactive</span>
+                                    @endif
                                 </td>
 
-                        </tr>
+                                <td>
+
+                                    <div class="btn-group mr-1 mt-2">
+                                        <button type="button" class="btn btn-info btn-sm">Action</button>
+                                        <button type="button"
+                                                class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="mdi mdi-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="/admin/deliveryman/edit/{{$res->delivery_man_id}}">Edit</a>
+                                            <a class="dropdown-item" href="/admin/deliveryman/delete/{{$res->delivery_man_id}}">delete</a>
+                                            @if($res->active_status)
+                                                <a class="dropdown-item" href="/admin/deliveryman/inactive/{{$res->delivery_man_id}}">Inactive</a>
+                                            @else
+                                                <a class="dropdown-item" href="/admin/deliveryman/activate/{{$res->delivery_man_id}}">Activate</a>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+                                </td>
+
+
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
 

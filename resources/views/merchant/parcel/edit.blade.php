@@ -1,4 +1,4 @@
-@extends('layouts.merchantapp')
+@extends('layouts.merchant')
 @section('title', 'Parcel Create')
 
 @section('content')
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body">
                     {{--<h5 class="card-title">Add New Parcel</h5>
---}}{{--                    <a href="/parcel/view" type="butoon" class="card-title float-right"> Parcel View </a>--}}{{--
+--}}{{--                    <a href="/tttttt/view" type="butoon" class="card-title float-right"> Parcel View </a>--}}{{--
                     <hr>--}}
                     @if(Session::has('success'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
@@ -33,7 +33,7 @@
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
                     @endif
 
-                    <form class="custom-validation" action="/parcel/update" method="post" enctype="multipart/form-data"
+                    <form class="custom-validation" action="/merchant/parcel/update" method="post" enctype="multipart/form-data"
                           novalidate="">
                         <div class="row">
                             <div class="col-md-6">
@@ -106,7 +106,7 @@
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text"
                                                placeholder="Total Amount"
-                                               id="example-text-input-lg" name="total_amount" value="{{$result->delivery_charge}}" ng-model="total_amount">
+                                               id="example-text-input-lg" name="total_amount" value="{{$result->total_amount}}" ng-model="total_amount">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -114,7 +114,7 @@
                                         Delivery</label>
                                     <div class="col-sm-9">
                                         <input type="checkbox" id="is_same_day" switch="none" checked=""
-                                               name="is_same_day" value="{{$result->delivery_charge}}"
+                                               name="is_same_day" value="{{$result->is_same_day}}"
                                                onchange="if(!this.checked){isSameDayTrue() }else{isSameDayFalse()}">
                                         <label for="is_same_day" data-on-label="ON" data-off-label="OFF"></label>
                                         <span>Check if not delivered in today</span>
@@ -126,7 +126,7 @@
                                         Date</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control form-control-lg" placeholder="yyyy-mm-dd"
-                                               id="datepicker-autoclose" name="delivery_date" value="{{$result->delivery_charge}}">
+                                               id="datepicker-autoclose" name="delivery_date" value="{{$result->delivery_date}}">
                                     </div>
                                 </div>
 
@@ -139,7 +139,7 @@
                                         Name</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="Name"
-                                               id="example-text-input-lg" name="customer_name" value="{{$result->delivery_charge}}">
+                                               id="example-text-input-lg" name="customer_name" value="{{$result->customer_name}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -147,7 +147,7 @@
                                         Phone</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="Phone"
-                                               id="example-text-input-lg" name="customer_phone" value="{{$result->delivery_charge}}">
+                                               id="example-text-input-lg" name="customer_phone" value="{{$result->customer_phone}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -173,7 +173,7 @@
                             <label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>
                             <div class="col-sm-9">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
-                                    Submit
+                                   update
                                 </button>
                                 <button type="reset" class="btn btn-secondary waves-effect">
                                     Reset

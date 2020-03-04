@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use foo\bar;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -24,7 +25,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.area.create');
     }
 
     /**
@@ -35,7 +36,14 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        unset($request['_token']);
+        try {
+            Area::create($request->all());
+            return back()->with('success', "Successfully Saved");
+        }
+        catch (\Exception $exception){
+            return back()->with('failed', $exception->getMessage());
+        }
     }
 
     /**
@@ -46,7 +54,8 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
-        //
+        $result= Area::get();
+        return view('admin.area.view')->with('result', $result);
     }
 
     /**
@@ -55,9 +64,10 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function edit(Area $area)
+    public function edit( $area_id)
     {
-        //
+        $result= Area::where('area_id', $area_id)->first();
+        return view('admin.area.edit')->with('result', $result);
     }
 
     /**
@@ -69,7 +79,14 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        //
+        unset($request['_token']);
+        try {
+            Area::where('area_id', $request['area_id'])->update($request->all());
+            return back()->with('success', "Successfully Saved");
+        }
+        catch (\Exception $exception){
+            return back()->with('failed', $exception->getMessage());
+        }
     }
 
     /**
@@ -78,8 +95,15 @@ class AreaController extends Controller
      * @param  \App\Area  $area
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Area $area)
+    public function destroy($id)
     {
-        //
+        try {
+            Area::where('area_id', $id)->delete();
+            return back()->with('success', "Successfully Deleted");
+
+        }
+        catch (\Exception $exception) {
+            return back()->with('failed', $exception->getMessage());
+        }
     }
 }

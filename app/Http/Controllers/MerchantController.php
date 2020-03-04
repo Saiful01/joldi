@@ -81,9 +81,35 @@ class MerchantController extends Controller
 
         $request['password'] = Hash::make($request['merchant_password']);
         unset($request['_token']);
-        unset($request['merchant_password']);;
+        unset($request['merchant_password']);
+
+        if ($request->hasFile('merchant_image')) {
+
+            $image = $request->file('merchant_image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/merchant');
+            $image->move($destinationPath, $image_name);
+            $array = [
+                'merchant_name' => $request['merchant_name'],
+                'merchant_phone' => $request['merchant_phone'],
+                'password' => $request['password'],
+                'merchant_email' => $request['merchant_email'],
+                'area_id' => $request['area_id'],
+                'image' => $image_name,
+            ];
+        } else {
+            $array = [
+                'merchant_name' => $request['merchant_name'],
+                'merchant_phone' => $request['merchant_phone'],
+                'password' => $request['password'],
+                'merchant_email' => $request['merchant_email'],
+                'area_id' => $request['area_id'],
+
+            ];
+        }
+
         try {
-            Merchant::create($request->all());
+            Merchant::create($array);
             return back()->with('success', "Successfully Registered. Account will be verified by Admin");
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -127,6 +153,13 @@ class MerchantController extends Controller
      * @param  \App\Merchant $merchant
      * @return \Illuminate\Http\Response
      */
+    public function merchantSetting(){
+         $result = Merchant::where('merchant_id',Auth::guard('merchant')->id())->first();
+
+        return view('merchant.setting.index')
+            ->with('result', $result);
+
+    }
     public function edit(Merchant $merchant)
     {
         //

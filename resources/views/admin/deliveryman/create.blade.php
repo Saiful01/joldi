@@ -22,9 +22,16 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
+                    @if(Session::has('success'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
+                    @endif
+
+                    @if(Session::has('failed'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
+                    @endif
                     <h5 class="card-title">Add New Delivery Man</h5>
                     <hr>
-                    <form class="custom-validation" method="post" action="/deliveryman/store" novalidate=""
+                    <form class="custom-validation" method="post" action="/admin/deliveryman/store" novalidate=""
                           enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Name</label>

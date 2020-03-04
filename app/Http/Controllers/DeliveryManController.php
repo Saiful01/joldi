@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DeliveryMan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class DeliveryManController extends Controller
 {
@@ -37,19 +37,22 @@ class DeliveryManController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'delivery_man_name'=> 'requierd',
-            'delivery_man_phone'=> 'requierd',
-            'delivery_man_password'=> 'requierd',
-            'delivery_man_address'=> 'requierd',
+        $validator= Validator::make($request->all(),[
+            'delivery_man_name'=> 'required',
+            'delivery_man_phone'=> 'required',
+            'delivery_man_password'=> 'required',
+            'delivery_man_address'=> 'required',
+
         ]);
+
+
         if ($validator->fails()){
             return back()->with('failed', "Cheack Requierd field");
         }
         unset($request['_token']);
-        $request ['password']= Hash::make($request['delivery_man_password']);
+        $request ['delivery_man_password']= Hash::make($request['delivery_man_password']);
         try {
-            DeliveryMan::create($request->all());
+           DeliveryMan::create($request->all());
             return back()->with('success',"Successfully Saved");
         }
         catch (\Exception $exception) {
@@ -78,7 +81,7 @@ class DeliveryManController extends Controller
     public function edit( $delivery_man_id)
     {
        $result= DeliveryMan::where('delivery_man_id', $delivery_man_id)->first();
-        return view('admin.blade.edit')->with('result', $result);
+        return view('admin.deliveryman.edit')->with('result', $result);
 
     }
 
@@ -92,9 +95,9 @@ class DeliveryManController extends Controller
     public function update(Request $request, DeliveryMan $deliveryMan)
     {
         unset($request['_token']);
-        $request ['password']= Hash::make($request['delivery_man_password']);
+        $request ['delivery_man_password']= Hash::make($request['delivery_man_password']);
         try {
-            DeliveryMan::update($request->all());
+            DeliveryMan::where('delivery_man_id', $request['delivery_man_id'])->update($request->all());
             return back()->with('success',"Successfully Updated");
         }
         catch (\Exception $exception) {
@@ -111,7 +114,7 @@ class DeliveryManController extends Controller
     public function destroy($id)
     {
         try {
-            DeliveryMan::where('delivery_man-id', $id)->delete();
+            DeliveryMan::where('delivery_man_id', $id)->delete();
             return back()->with('success', 'Successfully deleted');
         }
         catch (\Exception $exception){
