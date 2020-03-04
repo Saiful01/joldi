@@ -175,10 +175,16 @@ class ParcelController extends Controller
      * @param \App\Parcel $parcel
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($parcel_id)
     {
-        $result= Parcel::where('percal_id', $id)->first();
-        return view('merchant.parcel.edit')->with('result', $result);
+        $customer= Customer::get();
+        $parcel_types= ParcelType::get();
+        $result= Parcel::where('parcel_id', $parcel_id)->first();
+        return view('merchant.parcel.edit')
+            ->with('parcel_types', $parcel_types)
+        ->with('customer', $customer)
+        ->with('result', $result);
+
     }
 
     /**

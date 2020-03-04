@@ -44,9 +44,9 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder=""
-                                               id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}" readonly>
+                                               id="example-text-input-lg" name="parcel_invoice" value="{{$result->parcel_invoice}}" readonly>
                                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                                        <input type="hidden" name="parcel-id" value="{{$result->parcel-id}}">
+                                        <input type="hidden" name="parcel-id" value="{{$result->parcel_id}}">
                                     </div>
                                 </div>
 
@@ -90,7 +90,7 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                               id="example-text-input-lg" name="cod" value="{{$cod_charge}}" readonly>
+                                               id="example-text-input-lg" name="cod" value="{{$result->cod_charge}}" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -139,7 +139,7 @@
                                         Name</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="Name"
-                                               id="example-text-input-lg" name="customer_name" value="{{$result->customer_name}}">
+                                               id="example-text-input-lg" name="customer_name" value="{{$customer->customer_name}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -147,7 +147,7 @@
                                         Phone</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="Phone"
-                                               id="example-text-input-lg" name="customer_phone" value="{{$result->customer_phone}}">
+                                               id="example-text-input-lg" name="customer_phone" value="{{$customer->customer_phone}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -155,7 +155,7 @@
                                         Address</label>
                                     <div class="col-sm-9">
                                <textarea class="form-control form-control-lg" type="text" placeholder="Customer Address"
-                                         id="example-text-input-lg" name="customer_address">{{$result->customer_address}}</textarea>
+                                         id="example-text-input-lg" name="customer_address">{{$customer->customer_address}}</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
