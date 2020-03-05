@@ -177,7 +177,7 @@ class ParcelController extends Controller
      */
     public function edit($parcel_id)
     {
-        $customer= Customer::get();
+      $customer = Customer::first();
         $parcel_types= ParcelType::get();
         $result= Parcel::where('parcel_id', $parcel_id)->first();
         return view('merchant.parcel.edit')
@@ -196,7 +196,75 @@ class ParcelController extends Controller
      */
     public function update(Request $request, Parcel $parcel)
     {
-        //
+        unset($request['_token']);
+        unset($request['is_same_day']);
+
+        //return  $request->all();
+        if ($request['is_same_day'] == "on") {
+            $request['is_same_day'] = true;
+        } else {
+            $request['is_same_day'] = false;
+        }
+
+        $request['delivery_date'] = Carbon::parse($request['delivery_date'])->format('Y-m-d');
+        $parcel_array = [
+            'parcel_title' => $request['parcel_title'],
+            'parcel_invoice' => $request['parcel_invoice'],
+            'parcel_type_id' => $request['parcel_type_id'],
+            'delivery_charge' => $request['delivery_charge'],
+            'payable_amount' => $request['payable_amount'],
+            'cod' => $request['cod'],
+            'total_amount' => $request['payable_amount'] - ($request['cod'] + $request['delivery_charge']),
+            'is_same_day' => $request['is_same_day'],
+            'delivery_date' => $request['delivery_date'],
+            'parcel_notes' => $request['parcel_notes'],
+            'created_at' =>Carbon::now(),
+            'updated_at' =>Carbon::now(),
+
+        ];
+
+        $parcel_id = Parcel::where('parcel_id', $parcel_id)->update($parcel_array);
+        $customer_array = [
+            'customer_name' => $request['customer_name'],
+            'customer_phone' => $request['customer_phone'],
+            'customer_email' => $request['customer_email'],
+            'customer_address' => $request['customer_address'],
+            'longitude' => $request['longitude'],
+            'latitude' => $request['latitude']
+        ];
+
+        $customer_is_exist = Customer::where('customer_phone', $request['customer_phone'])->first();
+        if (is_null($customer_is_exist)) {
+            $customer_id = Customer::update($customer_array);
+        } else {
+            $customer_id = $customer_is_exist->customer_id;
+        }
+
+        $parcel_status_array = [
+            'customer_id' => $customer_id,
+            'parcel_id' => $parcel_id,
+        ];
+
+        $parcel_history = [
+            'parcel_id' => $parcel_id,
+            'changed_by' => 1,//TODO::Change Later
+        ];
+
+
+        try {
+            ParcelStatusHistory::update($parcel_history);
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+
+
+        try {
+            ParcelStatus::update($parcel_status_array);
+            return back()->with('success', "Successfully Saved");
+        } catch (\Exception $exception) {
+            return back()->with('failed', $exception->getMessage());
+        }
+
     }
 
     /**

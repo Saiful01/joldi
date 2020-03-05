@@ -25,7 +25,18 @@ class DatabaseSeeder extends Seeder
             'password'=>Hash::make('1234'),
         ]);
 
+
+
         $this->call(Area::class);
         $this->call(ParcelType::class);
+
+        \App\Merchant::create([
+
+            'merchant_email'=>"saiful013101@gmail.com",
+            'merchant_name'=>"Saiful",
+            'merchant_phone'=>"455",
+            'password'=>Hash::make('1234'),
+            'area_id'=>1,
+        ]);
     }
 }

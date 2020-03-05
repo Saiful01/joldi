@@ -23,11 +23,12 @@ class PaymentHistoryController extends Controller
     public function paymentStore(Request $request)
     {
 
+
         $results = json_decode($request['parcels'], true);
         $array = [
             'payable_amount' => $request['payable_amount'],
             'parcels' => $request['parcels'],
-            'merchant_id' => Auth::id()
+            'merchant_id' =>Auth::guard('merchant')->id()
         ];
 
         try {
@@ -89,7 +90,9 @@ class PaymentHistoryController extends Controller
 
     public function show()
     {
-        $payment = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')->get();
+        //$payment = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')->get();
+
+        $payment=PaymentHistory::where('merchant_id',Auth::guard('merchant')->id())->orderBy('created_at','DESC')->get();
         return view('merchant.payment.view')->with('results', $payment);
     }
 

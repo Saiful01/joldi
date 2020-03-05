@@ -30,17 +30,16 @@
                     {{--                        the construction function: <code>$().DataTable();</code>.--}}
                     {{--                    </p>--}}
 
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                    <table id="datatablef" class="table table-bordered dt-responsive nowrap"
                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Invoice No</th>
-                            <th>Delivery date</th>
-                            <th>COD</th>
-                            <th>Delivery Chrage</th>
-                            <th>Totall Amount</th>
-                            <th> Current Status</th>
+                            <th>Payable Amount</th>
+                            <th>Payment for</th>
+                            <th>Status</th>
+                            <th>Merchant Approval</th>
+                            <th>Approval Date</th>
 
                         </tr>
                         </thead>
@@ -51,13 +50,31 @@
                         @foreach($results as $res)
                             <tr>
                                 <td>{{$i++}}</td>
-                                <td>{{$res->parcel_invoice}}</td>
-                                <td>{{$res->delivery_date}}</td>
-                                <td>{{$res->cod}}</td>
-                                <td>{{$res->delivery_charge}}</td>
-                                <td>{{$res->total_amount}}</td>
-                                <td>{{$res->delivery_status}}</td>
+                                <td>{{$res->payable_amount}}</td>
 
+
+                                <td><a href="#">{{count(json_decode($res->parcels))}} Parcel</a> </td>
+                                <td>
+                                @if($res->paid_status=='pending')
+                                        <span class="badge badge-pill badge-warning">Pending</span>
+                                    @elseif($res->paid_status=='cancel')
+
+                                        <span class="badge badge-pill badge-danger">Pending</span>
+                                    @elseif($res->paid_status=='approved')
+                                        <span class="badge badge-pill badge-success">Pending</span>
+                                    @endif
+
+                                </td>
+                                <td>
+                                    @if($res->is_merchant_approved)
+                                        <span class="badge badge-pill badge-success">Approved</span>
+
+                                    @else
+                                        <span class="badge badge-pill badge-warning">Not Approved</span>
+                                    @endif
+
+                                </td>
+                                <td>{{$res->updated_at}}</td>
 
                             </tr>
                         @endforeach
