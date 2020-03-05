@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.merchant')
 @section('title', 'Merchant Edit')
 
 @section('content')
@@ -10,7 +10,7 @@
                 <h4 class="font-size-18">Merchants</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Merchant Table</a></li>
+                    <li class="breadcrumb-item"><a href="#">Merchant Edit</a></li>
                 </ol>
             </div>
         </div>
@@ -32,7 +32,7 @@
                     @endif
 
 
-                    <form class="custom-validation" method="post" action="/admin/merchant/update" novalidate=""
+                    <form class="custom-validation" method="post" action="/merchant/setting/update" novalidate=""
                           enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant Name</label>
@@ -61,6 +61,14 @@
                                 <input class="form-control form-control-lg" type="email" placeholder="Email"
                                        id="example-text-input-lg" name="merchant_email"
                                        value="{{$result->merchant_email}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant Image</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="file" placeholder="Email"
+                                       id="example-text-input-lg" name="merchant_email"
+                                       value="{{$result->merchant_image}}">
                             </div>
                         </div>
 

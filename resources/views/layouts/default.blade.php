@@ -1,45 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    @include('includes.admin.head')
+    @include('includes.home.head')
+    <style>
+        #navbar {
+            border-bottom: 2px solid;
+            border-color: black;
+        }
+    </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Login System</a>
+<nav id="navbar" class="navbar navbar-expand-sm navbar-success">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#"><img style="height: 50px" src="/assets/images/logo.png" alt="logo"> </a>
 
-    <!-- Toggler/collapsibe Button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Links -->
+    <ul class="navbar-nav ml-auto ">
+        <li class="nav-item">
+            <a class="nav-link text-success " style="font-weight: bold;" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-success " style="font-weight: bold;" href="#">About Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-success " style="font-weight: bold;" href="#">Contact</a>
+        </li>
+    </ul>
+    @if(Auth::guest())
+        <ul class="navbar-nav ml-auto">
 
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link btn btn-success" href="/merchant/registration">Merchant Registration</a>
+            </li>
+            <li class="nav-item ml-1">
+                <a class="nav-link btn btn-success" href="/merchant/login">Merchant Login</a>
             </li>
         </ul>
+    @endif
 
-        @if(Auth::guest())
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/registration">Registration</a>
-                </li>
-            </ul>
-        @endif
-    </div>
 </nav>
+
 
 <div class="content">
     <div class="container">
         @yield('content')
     </div>
 </div>
+<!-- Footer -->
+<footer class="page-footer font-small cyan darken-3 mt-5">
 
-@include('includes.admin.footer')
+    <!-- Footer Elements -->
+    <div style="background-color: rgba(0,255,128,0.47)" class="container-fluid">
+
+        <!-- Grid row-->
+        <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-12 py-5 text-center">
+                <div class="mb-5 flex-center">
+
+                    <!-- Facebook -->
+                    <a class="fb-ic">
+                        <i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!-- Twitter -->
+                    <a class="tw-ic">
+                        <i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!-- Google +-->
+                    <a class="gplus-ic">
+                        <i class="fab fa-google-plus-g fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!--Linkedin -->
+                    <a class="li-ic">
+                        <i class="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!--Instagram-->
+                    <a class="ins-ic">
+                        <i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                    </a>
+                    <!--Pinterest-->
+                    <a class="pin-ic">
+                        <i class="fab fa-pinterest fa-lg white-text fa-2x"> </i>
+                    </a>
+                </div>
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row-->
+
+    </div>
+    <!-- Footer Elements -->
+
+    <!-- Copyright -->
+    <div style="background-color: #00f75c" class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/"> </a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+@include('includes.home.footer')
 </body>
 </html>

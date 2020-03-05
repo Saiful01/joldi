@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Area manage')
+@section('title', 'ParcelTypes View')
 
 @section('content')
 
@@ -7,10 +7,10 @@
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="page-title-box">
-                <h4 class="font-size-18">Area</h4>
+                <h4 class="font-size-18">Parcel types</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Area Table</a></li>
+                    <li class="breadcrumb-item"><a href="#">Parcel types Table</a></li>
                 </ol>
             </div>
         </div>
@@ -23,8 +23,8 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title">Area Datatable</h4>
-                    <a href="/admin/area/create" type="button" class="btn btn-success float-right"> +new</a>
+                    <h4 class="card-title">Parcel types Datatable</h4>
+                    <a href="/admin/parceltypes/create" type="button" class="btn btn-success float-right"> +new</a>
                     {{--                    <p class="card-title-desc">DataTables has most features enabled by--}}
                     {{--                        default, so all you need to do to use it with your own tables is to call--}}
                     {{--                        the construction function: <code>$().DataTable();</code>.--}}
@@ -35,8 +35,8 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th> Area Name</th>
-                            <th>Address</th>
+                            <th> Parcel types Name</th>
+                            <th>Chrage</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -48,8 +48,8 @@
                             @foreach($result as $res)
 
                                 <td>{{$i++}}</td>
-                                <td>{{$res->area_name}}</td>
-                                <td>{{$res->area_address}}</td>
+                                <td>{{$res->title}}</td>
+                                <td>{{$res->charge}}</td>
                                 <td>
                                     <div class="btn-group mr-1 mt-2">
                                         <button type="button" class="btn btn-info btn-sm">Action</button>
@@ -59,8 +59,8 @@
                                             <i class="mdi mdi-chevron-down"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="/admin/area/edit/{{$res->area_id}}">Edit</a>
-                                            <a class="dropdown-item" href="/admin/area/delete/{{$res->area_id}}">Delete</a>
+                                            <a class="dropdown-item" href="/admin/parceltypes/edit/{{$res->parcel_type_id}}">Edit</a>
+                                            <a class="dropdown-item" href="/admin/parceltypes/delete/{{$res->parcel_type_id}}">Delete</a>
                                         </div>
                                     </div>
                                 </td>

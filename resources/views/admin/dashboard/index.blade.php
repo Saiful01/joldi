@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Page Title')
+@section('title', 'Dashboard')
 
 @section('content')
 
@@ -11,7 +11,7 @@
             <div class="page-title-box">
                 <h4 class="font-size-18">Compact Sidebar</h4>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item active">Welcome to Merchant Dashboard</li>
+                    <li class="breadcrumb-item active">Welcome to Admin Dashboard</li>
                 </ol>
             </div>
         </div>

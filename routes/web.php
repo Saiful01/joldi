@@ -58,6 +58,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/area/edit/{id}', 'AreaController@edit');
     Route::post('/admin/area/update', 'AreaController@update');
     Route::get('/admin/area/delete/{id}', 'AreaController@destroy');
+    // Parcel Type Route
+    Route::get('/admin/parceltypes/create', 'ParcelTypeController@create');
+    Route::get('/admin/parceltypes/view', 'ParcelTypeController@show');
+    Route::post('/admin/parceltypes/store', 'ParcelTypeController@store');
+    Route::get('/admin/parceltypes/edit/{id}', 'ParcelTypeController@edit');
+    Route::post('/admin/parceltypes/update', 'ParcelTypeController@update');
+    Route::get('/admin/parceltypes/delete/{id}', 'ParcelTypeController@destroy');
     // Customer Route
     Route::get('/customer/create', 'CustomerController@create');
     Route::post('/customer/store', 'CustomerController@store');
@@ -77,6 +84,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/view/payments-request/approve/{id}', 'PaymentController@adminPaymentApprove');
     Route::get('/admin/view/payments-request/cancel/{id}', 'PaymentController@adminPaymentCancel');
 
+
+    Route::get('/admin/parcel/show', 'ParcelController@adminParcelShow');
 });
 
 Route::group(['middleware' => 'admin'], function () {
@@ -98,6 +107,8 @@ Route::group(['middleware' => 'merchant'], function () {
 
     Route::get('/merchant/dashboard', 'MerchantController@dashboard');
     Route::get('/merchant/profile/setting', 'MerchantController@merchantSetting');
+    Route::get('/merchant/setting/edit/{{id}}', 'MerchantController@settingedit');
+    Route::post('/merchant/setting/update', 'MerchantController@update');
 
 
     Route::get('/merchant/payments', 'PaymentHistoryController@merchantPayments');

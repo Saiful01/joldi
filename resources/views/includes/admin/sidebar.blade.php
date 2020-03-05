@@ -21,6 +21,12 @@
                         <span>Manage Area</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/admin/parceltypes/view" class=" waves-effect">
+                        <i class="ti-paint-roller"></i>
+                        <span>Manage Parcel Types</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="/admin/merchants" class=" waves-effect">
@@ -47,14 +53,14 @@
 
 
                 <li>
-                    <a href="/merchant/parcel/show" class=" waves-effect">
+                    <a href="/admin/parcel/show" class=" waves-effect">
                         <i class="ti-list"></i>
                         <span>All Consignment</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="/merchant/setting" class=" waves-effect">
+                    <a href="/admin/setting" class=" waves-effect">
                         <i class="ti-settings"></i>
                         <span>Settings</span>
                     </a>

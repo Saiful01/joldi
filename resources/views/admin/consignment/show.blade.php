@@ -1,5 +1,5 @@
-@extends('layouts.merchant')
-@section('title', 'Parcel View')
+@extends('layouts.app')
+@section('title', 'All Consignment')
 
 @section('content')
 
@@ -47,6 +47,7 @@
                                         <th>Amount</th>
                                         <th>Same Day</th>
                                         <th>D. Date</th>
+                                        <th>Deliveryman</th>
                                         <th>Customer</th>
                                         <th>Phone</th>
                                         <th>Address</th>
@@ -86,6 +87,50 @@
                                                 @endif
 
                                             </td>
+                                            <td>
+
+
+                                                @if($res->delivery_man_id==null)
+                                                    <div class="col-sm-6 col-md-3">
+                                                        <div class="text-center">
+                                                            <!-- Small modal -->
+                                                            <button type="button"
+                                                                    class="btn btn-primary waves-effect waves-light"
+                                                                    data-toggle="modal"
+                                                                    data-target=".bs-example-modal-sm">Assign
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal fade bs-example-modal-sm" tabindex="-1"
+                                                             role="dialog" aria-labelledby="mySmallModalLabel"
+                                                             style="display: none;" aria-hidden="true">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title mt-0"
+                                                                            id="mySmallModalLabel">Delivery Man Name</h5>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-hidden="true">
+                                                                            ×
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+{{--                                                                        @foreach($delivery_mans as $res)--}}
+{{--                                                                            <a href="#">   {{$res->delivery_man_name}}</a>--}}
+{{--                                                                        @endforeach--}}
+
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
+                                                    </div>
+                                                @else
+                                                    {{$res->delivery_man_name}}
+                                                @endif
+
+                                            </td>
+
+
                                             <td>{{$res->customer_name}}</td>
                                             <td>{{$res->customer_phone}}</td>
                                             <td>{{$res->customer_address}}</td>
