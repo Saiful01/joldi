@@ -160,7 +160,7 @@ class MerchantController extends Controller
             ->with('result', $result);
 
     }
-    public function settingedit( $id)
+    public function edit( $id)
     {
         $result = Merchant::where('merchant_id', $id)->first();
         $results= Area::where('area_id', $id)->get();
