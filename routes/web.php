@@ -107,7 +107,7 @@ Route::group(['middleware' => 'merchant'], function () {
 
     Route::get('/merchant/dashboard', 'MerchantController@dashboard');
     Route::get('/merchant/profile/setting', 'MerchantController@merchantSetting');
-    Route::get('/merchant/setting/edit/{{id}}', 'MerchantController@settingedit');
+    Route::get('/merchant/setting/edit/{{id}}', 'MerchantController@edit');
     Route::post('/merchant/setting/update', 'MerchantController@update');
 
 
