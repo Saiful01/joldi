@@ -129,11 +129,19 @@ Route::get('/merchant-test', function () {
 });
 
 //API
-Route::get('/angular', function () {
+Route::get('/get-parcel-type', function () {
 
     return \App\ParcelType::get();
 
 });
+Route::get('/get-delivery-charge/{id}', function (\Illuminate\Http\Request $request) {
+
+    return \App\ParcelType::where('parcel_type_id',$request['id'])->first();
+
+});
+
+
+
 Route::get('/statistics', function () {
 
 

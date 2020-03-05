@@ -38,5 +38,13 @@ class DatabaseSeeder extends Seeder
             'password'=>Hash::make('1234'),
             'area_id'=>1,
         ]);
+        \App\Merchant::create([
+
+            'merchant_email'=>"memotiur@gmail.com",
+            'merchant_name'=>"Saiful",
+            'merchant_phone'=>"455",
+            'password'=>Hash::make('123456'),
+            'area_id'=>1,
+        ]);
     }
 }

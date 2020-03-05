@@ -7,7 +7,7 @@
 
 </head>
 
-<body data-sidebar="dark" data-sidebar-size="small" ng-app="parcelApp">
+<body data-sidebar="dark" data-sidebar-size="small">
 
 <!-- Begin page -->
 <div id="layout-wrapper">

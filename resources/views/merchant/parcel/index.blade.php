@@ -18,13 +18,13 @@
     </div>
     <!-- end page title -->
 
-    <div class="row" ng-controller="parcelController">
+    <div class="row" ng-app="myApp" ng-controller="myCtrl">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-{{--                    <h5 class="card-title">Add New Parcel</h5>
-                    <a href="/tttttt/view" type="butoon" class="card-title float-right"> Parcel View </a>
-                    <hr>--}}
+                    {{--                    <h5 class="card-title">Add New Parcel</h5>
+                                        <a href="/tttttt/view" type="butoon" class="card-title float-right"> Parcel View </a>
+                                        <hr>--}}
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -45,7 +45,8 @@
                         <p class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('failed') }}</p>
                     @endif
 
-                    <form class="custom-validation" action="/merchant/parcel/store" method="post" enctype="multipart/form-data"
+                    <form class="custom-validation" action="/merchant/parcel/store" method="post"
+                          enctype="multipart/form-data"
                           novalidate="">
                         <div class="row">
                             <div class="col-md-6">
@@ -56,7 +57,8 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder=""
-                                               id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}" readonly>
+                                               id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
+                                               readonly>
                                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                                     </div>
                                 </div>
@@ -74,16 +76,19 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
                                         Types</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control form-control-lg" name="parcel_type_id"
-                                                id="my_parcel">
+                                        <select ng-model="parcel_type" class="form-control form-control-lg"
+                                                name="parcel_type_id" ng-change="update()">
+                                            {{-- <option value="0">
+                                                 Select
+                                             </option>--}}
 
-                                            <option value="0">Select</option>
-                                            @foreach($parcel_types as $parcel_type)
-                                                <option value="{{$parcel_type->parcel_type_id}}">
-                                                    {{$parcel_type->title}}
-                                                </option>
-                                            @endforeach
+                                            <option ng-repeat="x in parcels" value="@{{x.parcel_type_id}}"
+                                                    ng-selected="1">
+                                                @{{x.title}}
+                                            </option>
                                         </select>
+
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -92,7 +97,8 @@
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text"
                                                placeholder="Parcel price"
-                                               id="example-text-input-lg" name="payable_amount">
+                                               id="example-text-input-lg" name="payable_amount"
+                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
                                     </div>
                                 </div>
 
@@ -101,14 +107,16 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                               id="example-text-input-lg" name="cod" value="{{$cod_charge}}" readonly>
+                                               id="example-text-input-lg" name="cod" value="{{$cod_charge}}" readonly
+                                               ng-model="cod">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                               id="delivery_charge" name="delivery_charge" ng-model="delivery_charge">
+                                               id="delivery_charge" name="delivery_charge" ng-model="delivery_charge"
+                                               readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -203,51 +211,71 @@
 
     <script>
 
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope, $http) {
 
-        var app = angular.module('parcelApp', []);
-        app.controller('parcelController', function ($scope, $http) {
+            $http.get('/get-parcel-type', {}).then(function success(e) {
 
-            $http.get("/angular")
-                .then(function (response) {
-                    // $scope.myWelcome = response.data;
-                    console.log(response.data);
-                    $scope.parcels = response.data;
-                    //$scope.delivery_charge=response.data.charge
+                console.log(e.data);
+                $scope.parcels = e.data;
+            });
+
+            $scope.update = function () {
+
+                $http.get('/get-delivery-charge/' + $scope.parcel_type, {}).then(function success(e) {
+
+                    console.log(e.data.charge);
+
+                    $scope.delivery_charge = e.data.charge;
+                    $scope.total_amount = e.data.charge + $scope.payable_amount + $scope.cod;
+
+                    console.log($scope.total_amount);
                 });
-            // console.log(parcel_type);
-
-            /*function parcelTypeChange(){
-
-                console.log($scope.my_parcel);
-            }*/
 
 
+            };
+
+
+            $scope.totalPriceCalcualtion = function () {
+
+
+                console.log('000');
+                $scope.total_amount = parseFloat($scope.delivery_charge);
+                //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
+
+
+            }
         });
-
-
-        function isSameDayTrue() {
-            //var is_same_day = document.getElementById('is_same_day').value;
-            document.getElementById('delivery_date').style.display = 'block';
-
-            //console.log(document.getElementById("is_same_day").value);
-        }
-
-        function isSameDayFalse() {
-            //var is_same_day = document.getElementById('is_same_day').value;
-            document.getElementById('delivery_date').style.display = 'none';
-
-            //console.log(document.getElementById("is_same_day").value);
-        }
-
-        //Select this using js
-        var parcel_type = document.getElementById('parcel_type');
         /*
-                //Add event when change happens
-                parcel_type.onchange = function () {
-                    var value = parcel_type.value;
-                    console.log(value+"000");
-                    document.getElementById('delivery_charge').value= value
-                }*/
+
+                function isSameDayTrue() {
+                    //var is_same_day = document.getElementById('is_same_day').value;
+                    document.getElementById('delivery_date').style.display = 'block';
+
+                    //console.log(document.getElementById("is_same_day").value);
+                }
+
+                function isSameDayFalse() {
+                    //var is_same_day = document.getElementById('is_same_day').value;
+                    document.getElementById('delivery_date').style.display = 'none';
+
+                    //console.log(document.getElementById("is_same_day").value);
+                }
+
+                //Select this using js
+
+
+                function getParcelType(selectObject) {
+
+                    var value = selectObject.value;
+                    console.log(value);
+
+                    getParcelTypes(value);
+
+                }
+        */
+
+
     </script>
 
 @endsection
