@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Customer')
+@section('title', 'Payment Request view')
 
 @section('content')
 

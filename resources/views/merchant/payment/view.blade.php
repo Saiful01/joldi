@@ -1,5 +1,5 @@
 @extends('layouts.merchant')
-@section('title', 'Customer')
+@section('title', 'View Payment Status')
 
 @section('content')
 
@@ -59,9 +59,9 @@
                                         <span class="badge badge-pill badge-warning">Pending</span>
                                     @elseif($res->paid_status=='cancel')
 
-                                        <span class="badge badge-pill badge-danger">Pending</span>
+                                        <span class="badge badge-pill badge-danger">Cancel</span>
                                     @elseif($res->paid_status=='approved')
-                                        <span class="badge badge-pill badge-success">Pending</span>
+                                        <span class="badge badge-pill badge-success">Approved</span>
                                     @endif
 
                                 </td>

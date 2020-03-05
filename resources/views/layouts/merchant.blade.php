@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    @include('includes.admin.head')
+    @include('includes.merchant.head')
 
 
 </head>

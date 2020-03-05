@@ -1,5 +1,5 @@
 @extends('layouts.merchant')
-@section('title', 'Parcel Create')
+@section('title', 'Parcel Edit')
 
 @section('content')
 

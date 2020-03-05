@@ -160,9 +160,14 @@ class MerchantController extends Controller
             ->with('result', $result);
 
     }
-    public function edit(Merchant $merchant)
+    public function settingedit( $id)
     {
-        //
+        $result = Merchant::where('merchant_id', $id)->first();
+        $results= Area::where('area_id', $id)->get();
+        return view('merchant.setting.edit')
+            ->with('areas', $results)
+            ->with('result', $result);
+
     }
 
     /**
@@ -174,7 +179,12 @@ class MerchantController extends Controller
      */
     public function update(Request $request, Merchant $merchant)
     {
-        //
+        try {
+            Merchant::where('merchant_id' , $request['merchant_id'])->update($request->all());
+            return back()->with('success', "Successfully Updated");
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 
     /**

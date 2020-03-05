@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\DeliveryMan;
 use App\Merchant;
 use App\Parcel;
 use App\ParcelStatus;
@@ -151,6 +152,20 @@ class ParcelController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->get();
         return view('merchant.parcel.show')
+            ->with('results', $parcels);
+    }
+
+
+    public function adminParcelShow(Parcel $parcel)
+    {
+
+          $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->get();
+          $delivery_mans= DeliveryMan::get();
+        return view('admin.consignment.show')
+            ->with('delivery_mans', $delivery_mans)
             ->with('results', $parcels);
     }
     public function details($id)
