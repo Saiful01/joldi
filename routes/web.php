@@ -86,6 +86,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/admin/parcel/show', 'ParcelController@adminParcelShow');
+    Route::get('/admin/setting', 'ParcelController@adminhtml');
 });
 
 Route::group(['middleware' => 'admin'], function () {
@@ -107,7 +108,7 @@ Route::group(['middleware' => 'merchant'], function () {
 
     Route::get('/merchant/dashboard', 'MerchantController@dashboard');
     Route::get('/merchant/profile/setting', 'MerchantController@merchantSetting');
-    Route::get('/merchant/setting/edit/{{id}}', 'MerchantController@edit');
+    Route::get('/merchant/setting/edit/{id}', 'MerchantController@edit');
     Route::post('/merchant/setting/update', 'MerchantController@update');
 
 

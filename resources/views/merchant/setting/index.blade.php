@@ -22,7 +22,7 @@
 
             <!-- Simple card -->
             <div class="card">
-                <img class="card-img-top img-fluid" src="assets/images/{{$result->merchant_image}}" alt="Card image cap">
+                <img class="card-img-top img-fluid" src="/merchant/{{$result->merchant_image}}" alt="Card image cap">
                 <div class="card-body">
                     <h4> Name: {{$result->merchant_name}}</h4>
                     <h6> Phone: {{$result->merchant_phone}}</h6>

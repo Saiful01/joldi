@@ -67,7 +67,7 @@
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant Image</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="file" placeholder="Email"
-                                       id="example-text-input-lg" name="merchant_email"
+                                       id="example-text-input-lg" name="merchant_image"
                                        value="{{$result->merchant_image}}">
                             </div>
                         </div>

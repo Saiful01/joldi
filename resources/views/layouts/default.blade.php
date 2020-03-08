@@ -10,35 +10,7 @@
     </style>
 </head>
 <body>
-<nav id="navbar" class="navbar navbar-expand-sm navbar-success">
-    <!-- Brand/logo -->
-    <a class="navbar-brand" href="#"><img style="height: 50px" src="/assets/images/logo.png" alt="logo"> </a>
 
-    <!-- Links -->
-    <ul class="navbar-nav ml-auto ">
-        <li class="nav-item">
-            <a class="nav-link text-success " style="font-weight: bold;" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-success " style="font-weight: bold;" href="#">About Us</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-success " style="font-weight: bold;" href="#">Contact</a>
-        </li>
-    </ul>
-    @if(Auth::guest())
-        <ul class="navbar-nav ml-auto">
-
-            <li class="nav-item">
-                <a class="nav-link btn btn-success" href="/merchant/registration">Merchant Registration</a>
-            </li>
-            <li class="nav-item ml-1">
-                <a class="nav-link btn btn-success" href="/merchant/login">Merchant Login</a>
-            </li>
-        </ul>
-    @endif
-
-</nav>
 
 
 <div class="content">

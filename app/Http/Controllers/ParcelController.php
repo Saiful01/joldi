@@ -96,7 +96,7 @@ class ParcelController extends Controller
 
         ];
 
-        $parcel_id = Parcel::insertGetId($parcel_array);
+       return $parcel_id = Parcel::insertGetId($parcel_array);
         $customer_array = [
             'customer_name' => $request['customer_name'],
             'customer_phone' => $request['customer_phone'],
@@ -298,5 +298,8 @@ class ParcelController extends Controller
             return back()->with('failed', $exception->getMessage());
         }
 
+    }
+    public function adminhtml(){
+        return view('admin.consignment.html');
     }
 }

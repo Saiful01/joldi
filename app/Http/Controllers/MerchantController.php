@@ -179,8 +179,37 @@ class MerchantController extends Controller
      */
     public function update(Request $request, Merchant $merchant)
     {
+
+       // unset($request['_token']);
+
+        if ($request->hasFile('merchant_image')) {
+
+            $image = $request->file('merchant_image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/merchant');
+            $image->move($destinationPath, $image_name);
+            $array = [
+                'merchant_name' => $request['merchant_name'],
+                'merchant_phone' => $request['merchant_phone'],
+                'merchant_email' => $request['merchant_email'],
+                'merchant_image' => $image_name,
+            ];
+        } else {
+            $array = [
+                'merchant_name' => $request['merchant_name'],
+                'merchant_phone' => $request['merchant_phone'],
+                'merchant_email' => $request['merchant_email'],
+
+            ];
+        }
+
+        //return  $array;
+
+
+
+
         try {
-            Merchant::where('merchant_id' , $request['merchant_id'])->update($request->all());
+            Merchant::where('merchant_id' , $request['merchant_id'])->update($array);
             return back()->with('success', "Successfully Updated");
         } catch (\Exception $exception) {
             return $exception->getMessage();

@@ -72,6 +72,19 @@
                                                id="example-text-input-lg" name="parcel_title">
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
+                                        Price</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder="Parcel price"
+                                               id="example-text-input-lg" name="payable_amount"
+                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
+                                    </div>
+                                </div>
+
+
                                 <div class="form-group row">
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
                                         Types</label>
@@ -91,18 +104,6 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                        Price</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder="Parcel price"
-                                               id="example-text-input-lg" name="payable_amount"
-                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
-                                    </div>
-                                </div>
-
-
                                 <div class="form-group row">
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
                                     <div class="col-sm-9">
@@ -227,7 +228,7 @@
                     console.log(e.data.charge);
 
                     $scope.delivery_charge = e.data.charge;
-                    $scope.total_amount = e.data.charge + $scope.payable_amount + $scope.cod;
+                    $scope.total_amount = e.data.charge + parseFloat($scope.payable_amount );
 
                     console.log($scope.total_amount);
                 });

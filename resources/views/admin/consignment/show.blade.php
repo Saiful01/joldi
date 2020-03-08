@@ -108,17 +108,33 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title mt-0"
-                                                                            id="mySmallModalLabel">Delivery Man Name</h5>
+                                                                            id="mySmallModalLabel">Delivery Man
+                                                                            Name</h5>
                                                                         <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-hidden="true">
                                                                             ×
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-{{--                                                                        @foreach($delivery_mans as $res)--}}
-{{--                                                                            <a href="#">   {{$res->delivery_man_name}}</a>--}}
-{{--                                                                        @endforeach--}}
+                                                                        <div class="form-group" data-select2-id="119">
+                                                                            <label class="control-label">Delivery Man
+                                                                                Select</label>
+                                                                            <select
+                                                                                class="form-control select2 select2-hidden-accessible"
+                                                                                data-select2-id="1" tabindex="-1"
+                                                                                aria-hidden="true">
+                                                                                <option data-select2-id="3">Select
+                                                                                </option>
+{{--                                                                                @foreach($delivery_mans as $res)--}}
 
+{{--                                                                                    <option--}}
+{{--                                                                                        value="{{$res->delivery_man_id}}"--}}
+{{--                                                                                        data-select2-id="121"> {{$res->delivery_man_name}}--}}
+{{--                                                                                    </option>--}}
+{{--                                                                                @endforeach--}}
+                                                                            </select>
+
+                                                                        </div>
                                                                     </div>
                                                                 </div><!-- /.modal-content -->
                                                             </div><!-- /.modal-dialog -->

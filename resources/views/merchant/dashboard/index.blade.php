@@ -55,7 +55,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -106,7 +106,7 @@
                                     <a href="/merchant/payments/request" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
-                                {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+                                {{--                            php artisan cache:clear    <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcel/show" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -152,7 +152,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcel/show" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -176,7 +176,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcel/show" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -310,7 +310,7 @@
                                 <td><span class="badge badge-success">{{$list->delivery_status}}</span></td>
                                 <td>
                                     <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Details</a>
+                                        <a href="/merchant/parcel/details/{{$list->parcel_id}}" class="btn btn-primary btn-sm">Details</a>
                                     </div>
                                 </td>
                             </tr>
