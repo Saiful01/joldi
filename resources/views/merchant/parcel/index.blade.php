@@ -108,8 +108,8 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                               id="example-text-input-lg" name="cod" value="{{$cod_charge}}" readonly
-                                               ng-model="cod">
+                                              value="{{$cod_charge}}" name="cod"
+                                               readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -141,13 +141,16 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row" id="delivery_date" style="display: none">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery
-                                        Date</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-lg" placeholder="yyyy-mm-dd"
-                                               id="datepicker-autoclose" name="delivery_date">
+                                <div class="form-group" id="delivery_date" style="display: none">
+                                    <div class="row">
+                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery
+                                            Date</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control form-control-lg" placeholder="yyyy-mm-dd"
+                                                   id="datepicker-autoclose" name="delivery_date">
+                                        </div>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -188,20 +191,20 @@
                                 </div>
 
 
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>
-                            <div class="col-sm-9">
-                                <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
-                                    Submit
-                                </button>
-                                <button type="reset" class="btn btn-secondary waves-effect">
-                                    Reset
-                                </button>
-                            </div>
-                        </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
+                                            Submit
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary waves-effect">
+                                            Reset
+                                        </button>
+                                    </div>
+                                </div>
 
+                            </div>
+                        </div>
 
                     </form>
 
@@ -215,6 +218,8 @@
         var app = angular.module('myApp', []);
         app.controller('myCtrl', function ($scope, $http) {
 
+            $scope.delivery_charge=0;
+            $scope.payable_amount=0;
             $http.get('/get-parcel-type', {}).then(function success(e) {
 
                 console.log(e.data);
@@ -239,15 +244,16 @@
 
             $scope.totalPriceCalcualtion = function () {
 
+                $scope.total_amount = $scope.delivery_charge + parseFloat($scope.payable_amount);
 
-                console.log('000');
-                $scope.total_amount = parseFloat($scope.delivery_charge);
+                console.log('000'+$scope.delivery_charge + parseFloat($scope.payable_amount ));
+
                 //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
 
 
             }
         });
-        /*
+
 
                 function isSameDayTrue() {
                     //var is_same_day = document.getElementById('is_same_day').value;
@@ -263,18 +269,6 @@
                     //console.log(document.getElementById("is_same_day").value);
                 }
 
-                //Select this using js
-
-
-                function getParcelType(selectObject) {
-
-                    var value = selectObject.value;
-                    console.log(value);
-
-                    getParcelTypes(value);
-
-                }
-        */
 
 
     </script>

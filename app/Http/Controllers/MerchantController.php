@@ -97,6 +97,21 @@ class MerchantController extends Controller
                 'area_id' => $request['area_id'],
                 'image' => $image_name,
             ];
+//            elseif ($request->hasFile('merchant_company_logo')) {
+//
+//            $logo = $request->file('merchant_company_logo');
+//            $logo_name = time() . '.' . $logo->getClientOriginalExtension();
+//            $destinationPath = public_path('/companylogo');
+//            $logo->move($destinationPath, $logo_name);
+//            $array = [
+//                'merchant_name' => $request['merchant_name'],
+//                'merchant_phone' => $request['merchant_phone'],
+//                'password' => $request['password'],
+//                'merchant_email' => $request['merchant_email'],
+//                'area_id' => $request['area_id'],
+//                'image' => $image_name,
+//                'logo' => $logo_name,
+//            ];
         } else {
             $array = [
                 'merchant_name' => $request['merchant_name'],

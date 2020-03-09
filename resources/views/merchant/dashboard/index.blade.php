@@ -205,19 +205,11 @@
                                 <li class="feed-item">
                                     <div class="feed-item-list">
                                         <span class="date">Jan 20</span>
-                                        <span class="activity-text">At vero eos et accusamus et iusto odio
-                                                        dignissimos ducimus qui deleniti atque...<a href="#" class="text-success">Read more</a></span>
+                                        <span class="activity-text">At vero eos et accusamus <a href="#" class="text-success">Read more</a></span>
                                     </div>
                                 </li>
 
 
-                                <li class="feed-item">
-                                    <div class="feed-item-list">
-                                        <span class="date">Jan 16</span>
-                                        <span class="activity-text">Sed ut perspiciatis unde omnis iste natus
-                                                        error sit rem.</span>
-                                    </div>
-                                </li>
                             </ol>
                             <div class="text-center">
                                 <a href="#" class="btn btn-primary">Load More</a>

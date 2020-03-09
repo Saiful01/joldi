@@ -20,6 +20,7 @@ class CreateMerchantsTable extends Migration
             $table->string('merchant_image')->nullable();
             $table->string('password');
             $table->string('merchant_email')->nullable();
+            $table->string('merchant_company_logo')->nullable();
             $table->boolean('active_status')->default(false);
             $table->unsignedBigInteger('area_id');
             $table->boolean('is_cod_enable')->default(false);

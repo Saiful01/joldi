@@ -17,7 +17,7 @@
 
                 <li>
                     <a href="/merchant/parcels" class=" waves-effect">
-                        <i class="ti-paint-roller"></i>
+                        <i class="fas fa-archive"></i>
                         <span>Add Parcel</span>
                     </a>
                 </li>
@@ -33,14 +33,14 @@
 
                 <li>
                     <a href="/merchant/payments/view" class=" waves-effect">
-                        <i class="ti-money"></i>
+                        <i class="fa fa-th-list"></i>
                         <span>View Payments</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/merchant/parcel/show" class=" waves-effect">
-                        <i class="ti-list"></i>
+                        <i class="fa fa-gift"></i>
                         <span>All Consignment</span>
                     </a>
                 </li>
