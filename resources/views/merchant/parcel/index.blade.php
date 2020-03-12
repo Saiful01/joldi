@@ -232,8 +232,8 @@
 
                     console.log(e.data.charge);
 
-                    $scope.delivery_charge = e.data.charge;
-                    $scope.total_amount = e.data.charge + parseFloat($scope.payable_amount );
+                    $scope.delivery_charge =parseFloat( e.data.charge);
+                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount );
 
                     console.log($scope.total_amount);
                 });
@@ -244,9 +244,9 @@
 
             $scope.totalPriceCalcualtion = function () {
 
-                $scope.total_amount = $scope.delivery_charge + parseFloat($scope.payable_amount);
+                $scope.total_amount = parseFloat($scope.delivery_charge)+ parseFloat($scope.payable_amount);
 
-                console.log('000'+$scope.delivery_charge + parseFloat($scope.payable_amount ));
+                console.log(parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount ));
 
                 //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
 

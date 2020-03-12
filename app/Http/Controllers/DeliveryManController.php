@@ -37,20 +37,8 @@ class DeliveryManController extends Controller
      */
     public function store(Request $request)
     {
-        $validator= Validator::make($request->all(),[
-            'delivery_man_name'=> 'required',
-            'delivery_man_phone'=> 'required',
-            'delivery_man_password'=> 'required',
-            'delivery_man_address'=> 'required',
-
-        ]);
-
-
-        if ($validator->fails()){
-            return back()->with('failed', "Cheack Requierd field");
-        }
         unset($request['_token']);
-        $request ['delivery_man_password']= Hash::make($request['delivery_man_password']);
+        $request ['password']= Hash::make($request['password']);
         try {
            DeliveryMan::create($request->all());
             return back()->with('success',"Successfully Saved");

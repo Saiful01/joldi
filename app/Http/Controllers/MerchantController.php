@@ -6,6 +6,9 @@ use App\Area;
 use App\Merchant;
 use App\Parcel;
 use App\ParcelStatus;
+use App\User;
+use Sentional;
+use Reminder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -150,6 +153,35 @@ class MerchantController extends Controller
             ->withInput();
 
     }
+    public function forgotpassword(){
+        return view('merchant.login.forgot');
+    }
+    public function resetpassword(Request $request){
+        $user = User::whereEmail($request->merchant_email)->first();
+
+        if ($user== null){
+            return back()->with('failed',"Email does not Exist");
+        }
+
+        $user= Sentinel::findById($user->id);
+        $reminder= Reminder::exists($user) ? : Reminder:: create($user);
+        $this->sendEmail($user, $reminder->code);
+        return back()->with('success',"Reset Code sent to Your email");
+
+    }
+    private function sendEmail($user, $code)
+    {
+        Mail::send(
+            'email.forgot',
+            ['user'=>$user,'code'=>$code],
+            function ($message) use($user){
+                $message->to ($user->merchant_email);
+                $message->subject("$user->merchant_name, reset Your password.");
+
+            }
+
+        );
+    }
 
     public function create()
     {
@@ -241,4 +273,6 @@ class MerchantController extends Controller
     {
         //
     }
+
+
 }

@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 col-xl-5">
                 <div class="card overflow-hidden">
-                    <div class="bg-primary">
+                    <div class="bg-success">
                         <div class="text-primary text-center p-4">
                             <h5 class="text-white font-size-20">Welcome Back !</h5>
                             <p class="text-white-50">Sign in to continue to JOLDI.</p>
@@ -57,7 +57,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6 text-right">
-                                        <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log
+                                        <button class="btn btn-success w-md waves-effect waves-light" type="submit">Log
                                             In
                                         </button>
                                     </div>
@@ -65,7 +65,7 @@
 
                                 <div class="form-group mt-2 mb-0 row">
                                     <div class="col-12 mt-4">
-                                        <a href="#"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                        <a href="/merchant/forgot-password"><i class="mdi mdi-lock"></i> Forgot your password?</a>
                                     </div>
                                 </div>
 
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="mt-5 text-center">
-                    <p>Don't have an account ? <a href="#" class="font-weight-medium text-primary">
+                    <p>Don't have an account ? <a href="/merchant/registration" class="font-weight-medium text-primary">
                             Signup now </a></p>
                 </div>
 

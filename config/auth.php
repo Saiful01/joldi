@@ -50,6 +50,12 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'deliveryman' => [
+            'driver' => 'session',
+            'provider' => 'deliverymans',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -73,6 +79,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'deliverymans' => [
+            'driver' => 'eloquent',
+            'model' => App\DeliveryMan::class,
         ],
         'merchants' => [
             'driver' => 'eloquent',

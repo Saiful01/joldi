@@ -47,7 +47,7 @@ class LoginController extends Controller
     public function test(){
 
 
-            return $credentials = [
+             $credentials = [
                 'merchant_phone' => "420",
                 'merchant_password' => "420",
             ];

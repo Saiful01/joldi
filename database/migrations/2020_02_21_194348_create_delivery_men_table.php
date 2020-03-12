@@ -17,7 +17,7 @@ class CreateDeliveryMenTable extends Migration
             $table->bigIncrements('delivery_man_id');
             $table->string('delivery_man_name');
             $table->string('delivery_man_phone');
-            $table->string('delivery_man_password');
+            $table->string('password');
             $table->string('delivery_man_address');
             $table->boolean('active_status')->default(true);
             $table->timestamps();

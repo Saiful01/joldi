@@ -183,6 +183,23 @@ class ParcelController extends Controller
             ->with('histories', $history);
     }
 
+    public function adminAssignDeliveryMan(Request $request)
+    {
+
+
+        try{
+
+            ParcelStatus::where('parcel_id',$request['parcel_id'])->update(['delivery_man_id'=>$request['delivery_man_id']]);
+            return back()->with('success', "Successfully Assigned Delivery Man");
+        }catch (\Exception $exception){
+
+return $exception->getMessage();
+
+        }
+
+
+    }
+
 
 
     /**
@@ -300,7 +317,15 @@ class ParcelController extends Controller
         }
 
     }
-    public function adminhtml(){
-        return view('admin.consignment.html');
+    public function adminParceldetails($id){
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('parcels.parcel_id',$id)
+            ->first();
+
+        $history=ParcelStatusHistory::where('parcel_id',$id)->get();
+        return view('admin.consignment.details')
+            ->with('result', $parcels)
+            ->with('histories', $history);
     }
 }

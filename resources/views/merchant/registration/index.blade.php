@@ -6,12 +6,12 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="card overflow-hidden">
-                        <div class="bg-primary">
+                        <div class="bg-success">
                             <div class="text-primary text-center p-4">
                                 <h5 class="text-white font-size-20">Free Register</h5>
                                 <p class="text-white-50">Get your free Merchant account now.</p>
                                 <a href="/" class="logo logo-admin">
-                                    <img src="/assets/images/logo-sm.png" height="24" alt="logo">
+                                    <img src="/assets/images/logo.png" height="24" alt="logo">
                                 </a>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
 
                                     <div class="form-group row">
                                         <div class="col-12 text-right">
-                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Register</button>
+                                            <button class="btn btn-success w-md waves-effect waves-light" type="submit">Register</button>
                                         </div>
                                     </div>
 
@@ -77,7 +77,7 @@
 
                     <div class="mt-5 text-center">
 
-                        <p>Already have an account ? <a href="/login" class="font-weight-medium text-primary"> Login </a> </p>
+                        <p>Already have an account ? <a href="/merchant/login" class="font-weight-medium text-primary"> Login </a> </p>
                         <p>© <script>document.write(new Date().getFullYear())</script> Logistics Crafted with <i class="mdi mdi-heart text-danger"></i> by PLab</p>
                     </div>
 

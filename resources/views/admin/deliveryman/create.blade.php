@@ -55,7 +55,7 @@
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="Password" placeholder="Password"
-                                       id="example-text-input-lg" name="delivery_man_password">
+                                       id="example-text-input-lg" name="password">
                             </div>
                         </div>
                         <div class="form-group row">
