@@ -46,7 +46,7 @@
                                         <input class="form-control form-control-lg" type="text" placeholder=""
                                                id="example-text-input-lg" name="parcel_invoice" value="{{$result->parcel_invoice}}" readonly>
                                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                                        <input type="hidden" name="parcel-id" value="{{$result->parcel_id}}">
+                                        <input type="hidden" name="parcel_id" value="{{$result->parcel_id}}">
                                     </div>
                                 </div>
 

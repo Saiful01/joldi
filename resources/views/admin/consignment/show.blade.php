@@ -108,7 +108,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title mt-0"
-                                                                            id="mySmallModalLabel">Assign Deliveryman {{$res->parcel_id}}</h5>
+                                                                            id="mySmallModalLabel">Assign Deliveryman for Parcel No {{$res->parcel_id}}</h5>
                                                                         <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-hidden="true">
                                                                             ×
@@ -127,14 +127,15 @@
 
                                                                                     @foreach($delivery_mans as $delivery_man)
                                                                                         <option value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
+
                                                                                     @endforeach
 
                                                                                 </select>
                                                                             </div>
 
                                                                             <div class="form-group">
-                                                                                <label class="control-label">Select Deliveryman</label>
-                                                                                <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">Save</button>
+{{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
+                                                                                <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light float-right">Save</button>
                                                                             </div>
 
 

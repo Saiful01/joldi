@@ -9,7 +9,7 @@
     <div class="row align-items-center" ng-controller="dashboardController">
         <div class="col-sm-6">
             <div class="page-title-box">
-                <h4 class="font-size-18">Compact Sidebar</h4>
+{{--                <h4 class="font-size-18">Compact Sidebar</h4>--}}
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item active">Welcome to Merchant Dashboard</li>
                 </ol>
@@ -71,7 +71,7 @@
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
                                 <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Payable Amount</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$payable_amount}} <i
+                                <h4 class="font-weight-medium font-size-24">{{$sum}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                 {{--                                <div class="mini-stat-label bg-success">--}}
                                 {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -87,6 +87,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xl-4 col-md-6">
                     <div class="card mini-stat bg-primary text-white">
                         <div class="card-body">
@@ -95,7 +96,7 @@
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
                                 <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Total Sales</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$total_sales}} <i
+                                <h4 class="font-weight-medium font-size-24"> <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                 {{--                                <div class="mini-stat-label bg-success">--}}
                                 {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -231,9 +232,9 @@
                     <h4 class="card-title mb-4">Sales Report</h4>
 
                     <div class="cleafix">
-                        <p class="float-left"><i class="mdi mdi-calendar mr-1 text-primary"></i> Jan 01 -
-                            Jan 31</p>
-                        <h5 class="font-18 text-right">$4230</h5>
+{{--                        <p class="float-left"><i class="mdi mdi-calendar mr-1 text-primary"></i> Jan 01 ---}}
+{{--                            Jan 31</p>--}}
+                        <h5 class="font-18 text-right">{{$par_count}}</h5>
                     </div>
 
                     <div id="ct-donut" class="ct-chart wid"></div>

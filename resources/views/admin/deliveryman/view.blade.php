@@ -61,7 +61,7 @@
                                 <td>{{$res->delivery_man_address}}</td>
 
                                 <td>
-                                    @if($res->active_status==false)
+                                    @if($res->active_status)
                                         <span class="badge badge-success">Active</span>
                                     @else
                                         <span class="badge badge-danger">Inactive</span>

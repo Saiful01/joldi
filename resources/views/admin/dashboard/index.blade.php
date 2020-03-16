@@ -9,7 +9,7 @@
     <div class="row align-items-center" ng-controller="dashboardController">
         <div class="col-sm-6">
             <div class="page-title-box">
-                <h4 class="font-size-18">Compact Sidebar</h4>
+{{--                <h4 class="font-size-18">Compact Sidebar</h4>--}}
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item active">Welcome to Admin Dashboard</li>
                 </ol>
@@ -46,8 +46,8 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-                                <h4 class="font-weight-medium font-size-24"> <i
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Total Merchant</h5>
+                                <h4 class="font-weight-medium font-size-24">{{$merchant_count}} <i
                                         class="mdi mdi-arrow-up text-success ml-2"></i></h4>
 {{--                                <div class="mini-stat-label bg-success">--}}
 {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -55,7 +55,7 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/admin/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/admin/merchants" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -70,8 +70,8 @@
                                 <div class="float-left mini-stat-img mr-4">
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Payable Amount</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$payable_amount}} <i
+                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Total Charge</h5>
+                                <h4 class="font-weight-medium font-size-24">{{$total_delivery_charge}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                 {{--                                <div class="mini-stat-label bg-success">--}}
                                 {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -95,7 +95,7 @@
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
                                 <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Total Sales</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$total_sales}} <i
+                                <h4 class="font-weight-medium font-size-24">{{$sum}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                 {{--                                <div class="mini-stat-label bg-success">--}}
                                 {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -241,7 +241,7 @@
                     <div class="cleafix">
                         <p class="float-left"><i class="mdi mdi-calendar mr-1 text-primary"></i> Jan 01 -
                             Jan 31</p>
-                        <h5 class="font-18 text-right">$4230</h5>
+                        <h5 class="font-18 text-right">{{$par_count}}</h5>
                     </div>
 
                     <div id="ct-donut" class="ct-chart wid"></div>
@@ -310,7 +310,7 @@
                                 <td><span class="badge badge-success">{{$list->delivery_status}}</span></td>
                                 <td>
                                     <div>
-                                        <a href="#" class="btn btn-primary btn-sm">Details</a>
+                                        <a href="/admin/parcel/details/{{$list->parcel_id}}" class="btn btn-primary btn-sm">Details</a>
                                     </div>
                                 </td>
                             </tr>

@@ -19,7 +19,7 @@ class CreateDeliveryMenTable extends Migration
             $table->string('delivery_man_phone');
             $table->string('password');
             $table->string('delivery_man_address');
-            $table->boolean('active_status')->default(true);
+            $table->boolean('active_status')->default(false);
             $table->timestamps();
         });
     }

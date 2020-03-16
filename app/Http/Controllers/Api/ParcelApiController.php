@@ -22,16 +22,25 @@ class ParcelApiController extends Controller
 
         $delivery_man_id=$request['delivery_man_id'];
 
-       try{
-           $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-               ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')
-               ->where('parcel_statuses.delivery_man_id',$delivery_man_id)
-               ->get();
-       }catch (\Exception $exception){
+        try{
+            $query=Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                ->where('parcel_statuses.delivery_man_id',$delivery_man_id);
 
-           $status_code=$exception->getCode();
-           $message=$exception->getMessage();
-       }
+
+                if($request['status']!="all"){
+                    $query->where('parcel_statuses.delivery_status', $request['status']);
+                }
+
+            $parcels=$query->get();
+
+
+        }catch (\Exception $exception){
+
+            $status_code=$exception->getCode();
+            $message=$exception->getMessage();
+        }
 
         return [
             'status_code'=>$status_code,

@@ -24,7 +24,6 @@ class ParcelController extends Controller
     public function index()
     {
 
-
         $cod_charge = Merchant::where('merchant_id', Auth::id())->first();
         if (is_null($cod_charge)) {
             $cod_charge = 0;
@@ -63,6 +62,7 @@ class ParcelController extends Controller
     public function store(Request $request)
     {
 
+
         $request->validate([
             'delivery_charge'=>'required|numeric',
             'total_amount'=>'required|numeric',
@@ -83,6 +83,7 @@ class ParcelController extends Controller
         $request['delivery_date'] = Carbon::parse($request['delivery_date'])->format('Y-m-d');
         $parcel_array = [
             'parcel_title' => $request['parcel_title'],
+            'merchant_id' =>Auth::guard('merchant')->id(),
             'parcel_invoice' => $request['parcel_invoice'],
             'parcel_type_id' => $request['parcel_type_id'],
             'delivery_charge' => $request['delivery_charge'],
@@ -151,6 +152,7 @@ class ParcelController extends Controller
 
          $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('merchant_id',Auth::guard('merchant')->id())
             ->get();
         return view('merchant.parcel.show')
             ->with('results', $parcels);
@@ -164,7 +166,7 @@ class ParcelController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->get();
-          $delivery_mans= DeliveryMan::get();
+          $delivery_mans= DeliveryMan::where('active_status', true)->get();
         return view('admin.consignment.show')
             ->with('delivery_mans', $delivery_mans)
             ->with('results', $parcels);
@@ -256,7 +258,7 @@ return $exception->getMessage();
 
         ];
 
-        $parcel_id = Parcel::where('parcel_id', $parcel_id)->update($parcel_array);
+        $parcel_id = Parcel::where('parcel_id', $request['parcel_id'])->update($parcel_array);
         $customer_array = [
             'customer_name' => $request['customer_name'],
             'customer_phone' => $request['customer_phone'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Merchant;
 use App\Parcel;
 use App\ParcelStatus;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,7 @@ class DashboardController extends Controller
     {
 
         $par_count = Parcel::count();
+        $merchant_count = Merchant::count();
         $delivery_pending = ParcelStatus::where('delivery_status', 'pending')->count();
         $delivery_accepted = ParcelStatus::where('delivery_status', 'accepted')->count();
         $delivery_cancelled = ParcelStatus::where('delivery_status', 'cancelled')->count();
@@ -51,6 +53,7 @@ class DashboardController extends Controller
 
 
         $sum = Parcel::sum('total_amount');
+        $total_delivery_charge=Parcel::sum('delivery_charge');
         $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->orderBy('parcels.created_at', "DESC")
@@ -59,6 +62,7 @@ class DashboardController extends Controller
 
         return view('admin.dashboard.index')
             ->with('par_count', $par_count)
+            ->with('merchant_count', $merchant_count)
             ->with('delivery_pending', $delivery_pending)
             ->with('delivery_accepted', $delivery_accepted)
             ->with('delivery_cancelled', $delivery_cancelled)
@@ -68,6 +72,7 @@ class DashboardController extends Controller
             ->with('payable_amount', $payable_amount)
             ->with('total_sales', $total_sales)
             ->with('parcel_list', $parcel_list)
+            ->with('total_delivery_charge', $total_delivery_charge)
 
             ->with('sum', $sum);
 
