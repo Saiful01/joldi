@@ -41,13 +41,7 @@
                                     </address>
                                 </div>
                                 <div class="col-6 text-right">
-                             {{--       https://www.simplesoftware.io/simple-qrcode/--}}
-
-                                        {!! QrCode::size(150)->generate($result->parcel_invoice); !!}
-
-
-
-                                   {{-- QrCode::generate('Make me into a QrCode!', '../public/qrcodes/qrcode.svg');--}}
+                            
                                 </div>
                             </div>
 
