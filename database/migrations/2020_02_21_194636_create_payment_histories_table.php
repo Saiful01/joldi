@@ -17,7 +17,7 @@ class CreatePaymentHistoriesTable extends Migration
             $table->bigIncrements('id');
             $table->double('payable_amount');
             $table->unsignedBigInteger('pay_by')->nullable();//Admin ID
-            $table->json('parcels');
+            $table->longText('parcels');
             $table->unsignedBigInteger('merchant_id');
             $table->string('paid_status')->default("pending");//pending, approved, cancel
             $table->boolean('is_merchant_approved')->default(false);//Merchant Approved korle true hobe.

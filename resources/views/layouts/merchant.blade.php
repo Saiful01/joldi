@@ -7,7 +7,7 @@
 
 </head>
 
-<body data-sidebar="dark" data-sidebar-size="small">
+<body data-sidebar="dark" data-sidebar-size="small" ng-app="parcelApp">
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -18,7 +18,7 @@
                 <!-- LOGO -->
                 <div class="navbar-brand-box">
 
-                    <a href="#" class="logo logo-light">
+                    <a href="/merchant/dashboard" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="/assets/images/logo.png" alt="" height="32">
                                 </span>

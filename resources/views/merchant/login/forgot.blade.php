@@ -8,8 +8,8 @@
                     <div class="card overflow-hidden">
                         <div class="bg-success">
                             <div class="text-primary text-center p-4">
-                                <h5 class="text-white font-size-20">Welcome !</h5>
-                                <p class="text-white-50">Admin Login to JOLDI.</p>
+                                <h5 class="text-white font-size-20">Welcome Back !</h5>
+                                <p class="text-white-50">Reset Your Password to JOLDI.</p>
                                 <a href="#" class="logo logo-admin">
                                     <img src="/assets/images/logo.png" height="20" alt="logo">
                                 </a>
@@ -32,42 +32,22 @@
                                 @endif
 
 
-                                <form class="form-horizontal mt-4" action="/login/check" method="post">
+                                <form class="form-horizontal mt-4" action="/merchant/password-reset" method="post">
 
                                     <div class="form-group">
                                         <label for="username">Email</label>
-                                        <input type="text" class="form-control" id="username" name="email"
+                                        <input type="text" class="form-control" id="username" name="merchant_email"
                                                placeholder="Enter username">
                                         <input type="hidden" class="form-control" value="{{csrf_token()}}" name="_token">
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="password"
-                                               placeholder="Enter password" name="password">
-                                    </div>
-
                                     <div class="form-group row">
-                                        <div class="col-sm-6">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input"
-                                                       id="customControlInline">
-                                                <label class="custom-control-label" for="customControlInline">Remember
-                                                    me</label>
-                                            </div>
-                                        </div>
                                         <div class="col-sm-6 text-right">
-                                            <button class="btn btn-success w-md waves-effect waves-light" type="submit">Log
-                                                In
+                                            <button class="btn btn-success w-md waves-effect waves-light" type="submit">Reset Password
                                             </button>
                                         </div>
                                     </div>
 
-                                    <div class="form-group mt-2 mb-0 row">
-                                        <div class="col-12 mt-4">
-                                            <a href="#"><i class="mdi mdi-lock"></i> Forgot your password?</a>
-                                        </div>
-                                    </div>
 
                                 </form>
 
@@ -76,10 +56,10 @@
 
                     </div>
 
-{{--                    <div class="mt-5 text-center">--}}
-{{--                        <p>Don't have an account ? <a href="#" class="font-weight-medium text-primary">--}}
-{{--                                Signup now </a></p>--}}
-{{--                    </div>--}}
+                    <div class="mt-5 text-center">
+                        <p>Don't have an account ? <a href="/merchant/registration" class="font-weight-medium text-primary">
+                                Signup now </a></p>
+                    </div>
 
 
                 </div>

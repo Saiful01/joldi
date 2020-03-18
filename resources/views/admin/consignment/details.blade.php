@@ -1,4 +1,4 @@
-@extends('layouts.merchant')
+@extends('layouts.app')
 @section('title', 'Parcel Details')
 
 @section('content')
@@ -25,8 +25,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="invoice-title">
-                                <h4 class="float-right font-size-16"><strong>Invoice
-                                        # {{$result->parcel_invoice}}</strong></h4>
+                                <h4 class="float-right font-size-16"><strong>Invoice # {{$result->parcel_invoice}}</strong></h4>
                                 <h3 class="mt-0">
                                     <img src="/assets/images/logo.png" alt="logo" height="24">
                                 </h3>
@@ -44,7 +43,9 @@
                                 <div class="col-6 text-right">
 
 
-                                    {!! QrCode::size(150)->generate($result->parcel_invoice); !!}
+                                        {!! QrCode::size(150)->generate($result->parcel_invoice); !!}
+
+
 
 
                                 </div>
@@ -76,10 +77,8 @@
 
                                     <div class="d-print-none">
                                         <div class="float-right">
-                                            <a href="javascript:window.print()"
-                                               class="btn btn-success waves-effect waves-light"><i
-                                                        class="fa fa-print"></i> Print</a>
-                                            {{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
+                                            <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i> Print</a>
+{{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
                                         </div>
                                     </div>
                                 </div>

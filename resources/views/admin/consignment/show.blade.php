@@ -97,44 +97,52 @@
                                                             <button type="button"
                                                                     class="btn btn-primary waves-effect waves-light"
                                                                     data-toggle="modal"
-                                                                    data-target=".bs-example-modal-sm">Assign
+                                                                    data-target=".modal-id{{$res->parcel_id}}">Assign
                                                             </button>
                                                         </div>
 
-                                                        <div class="modal fade bs-example-modal-sm" tabindex="-1"
+                                                        <div class="modal fade modal-id{{$res->parcel_id}}" tabindex="-1"
                                                              role="dialog" aria-labelledby="mySmallModalLabel"
                                                              style="display: none;" aria-hidden="true">
                                                             <div class="modal-dialog modal-sm">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title mt-0"
-                                                                            id="mySmallModalLabel">Delivery Man
-                                                                            Name</h5>
+                                                                            id="mySmallModalLabel">Assign Deliveryman for Parcel No {{$res->parcel_id}}</h5>
                                                                         <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-hidden="true">
                                                                             ×
                                                                         </button>
                                                                     </div>
                                                                     <div class="modal-body">
-                                                                        <div class="form-group" data-select2-id="119">
-                                                                            <label class="control-label">Delivery Man
-                                                                                Select</label>
-                                                                            <select
-                                                                                class="form-control select2 select2-hidden-accessible"
-                                                                                data-select2-id="1" tabindex="-1"
-                                                                                aria-hidden="true">
-                                                                                <option data-select2-id="3">Select
-                                                                                </option>
-{{--                                                                                @foreach($delivery_mans as $res)--}}
 
-{{--                                                                                    <option--}}
-{{--                                                                                        value="{{$res->delivery_man_id}}"--}}
-{{--                                                                                        data-select2-id="121"> {{$res->delivery_man_name}}--}}
-{{--                                                                                    </option>--}}
-{{--                                                                                @endforeach--}}
-                                                                            </select>
+                                                                        <form method="get" action="/admin/parcel/assign-deliveryman">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Select Deliveryman</label>
 
-                                                                        </div>
+                                                                                <input name="_token" value="{{csrf_token()}}" type="hidden"/>
+                                                                                <input name="parcel_id" value="{{$res->parcel_id}}" type="hidden"/>
+                                                                                <select class="form-control select2" name="delivery_man_id">
+                                                                                    <option>Select</option>
+
+                                                                                    @foreach($delivery_mans as $delivery_man)
+                                                                                        <option value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
+
+                                                                                    @endforeach
+
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+{{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
+                                                                                <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light float-right">Save</button>
+                                                                            </div>
+
+
+                                                                        </form>
+
+
+
                                                                     </div>
                                                                 </div><!-- /.modal-content -->
                                                             </div><!-- /.modal-dialog -->
@@ -186,12 +194,12 @@
                                                         <i class="mdi mdi-chevron-down"></i>
                                                     </button>
                                                     <div class="dropdown-menu" style="">
+{{--                                                        <a class="dropdown-item"--}}
+{{--                                                           href="/merchant/parcel/edit/{{$res->parcel_id}}">Edit</a>--}}
+{{--                                                        <a class="dropdown-item"--}}
+{{--                                                           href="/merchant/parcel/delete/{{$res->parcel_id}}">Delete</a>--}}
                                                         <a class="dropdown-item"
-                                                           href="/merchant/parcel/edit/{{$res->parcel_id}}">Edit</a>
-                                                        <a class="dropdown-item"
-                                                           href="/merchant/parcel/delete/{{$res->parcel_id}}">Delete</a>
-                                                        <a class="dropdown-item"
-                                                           href="/merchant/parcel/details/{{$res->parcel_id}}">Details</a>
+                                                           href="/admin/parcel/details/{{$res->parcel_id}}">Details</a>
                                                     </div>
                                                 </div>
                                             </td>

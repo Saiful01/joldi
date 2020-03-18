@@ -18,6 +18,7 @@ class CreateParcelsTable extends Migration
             $table->string('parcel_title')->nullable();
             $table->string('parcel_invoice');
             $table->unsignedBigInteger('parcel_type_id');
+            $table->unsignedBigInteger('merchant_id');
             $table->double('payable_amount')->nullable();
 
             $table->double('delivery_charge')->default(0);
@@ -29,6 +30,7 @@ class CreateParcelsTable extends Migration
             $table->string('parcel_notes')->nullable();
 
             $table->foreign('parcel_type_id')->references('parcel_type_id')->on('parcel_types');
+            $table->foreign('merchant_id')->references('merchant_id')->on('merchants');
 
             $table->timestamps();
         });

@@ -18,7 +18,7 @@
     </div>
     <!-- end page title -->
 
-    <div class="row" ng-app="myApp" ng-controller="myCtrl">
+    <div class="row" ng-controller="parcelController">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -60,6 +60,7 @@
                                                id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
                                                readonly>
                                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
+
                                     </div>
                                 </div>
 
@@ -213,64 +214,5 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
 
-    <script>
-
-        var app = angular.module('myApp', []);
-        app.controller('myCtrl', function ($scope, $http) {
-
-            $scope.delivery_charge=0;
-            $scope.payable_amount=0;
-            $http.get('/get-parcel-type', {}).then(function success(e) {
-
-                console.log(e.data);
-                $scope.parcels = e.data;
-            });
-
-            $scope.update = function () {
-
-                $http.get('/get-delivery-charge/' + $scope.parcel_type, {}).then(function success(e) {
-
-                    console.log(e.data.charge);
-
-                    $scope.delivery_charge = e.data.charge;
-                    $scope.total_amount = e.data.charge + parseFloat($scope.payable_amount );
-
-                    console.log($scope.total_amount);
-                });
-
-
-            };
-
-
-            $scope.totalPriceCalcualtion = function () {
-
-                $scope.total_amount = $scope.delivery_charge + parseFloat($scope.payable_amount);
-
-                console.log('000'+$scope.delivery_charge + parseFloat($scope.payable_amount ));
-
-                //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
-
-
-            }
-        });
-
-
-                function isSameDayTrue() {
-                    //var is_same_day = document.getElementById('is_same_day').value;
-                    document.getElementById('delivery_date').style.display = 'block';
-
-                    //console.log(document.getElementById("is_same_day").value);
-                }
-
-                function isSameDayFalse() {
-                    //var is_same_day = document.getElementById('is_same_day').value;
-                    document.getElementById('delivery_date').style.display = 'none';
-
-                    //console.log(document.getElementById("is_same_day").value);
-                }
-
-
-
-    </script>
 
 @endsection

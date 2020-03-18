@@ -63,6 +63,23 @@
                                        value="{{$result->merchant_email}}">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant COD</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="text" placeholder="COD"
+                                       id="example-text-input-lg" name="cod_charge"
+                                       value="{{$result->cod_charge}}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant COD Enable</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-lg"  type="text" placeholder="IS COD ENABLE"
+                                        id="example-text-input-lg" name="is_cod_enable">
+                                    <option value="{{$result->is_cod_enable}}" >{{$result->is_cod_enable}}</option>
+                                </select>
+                            </div>
+                        </div>
 
 
                         <div class="form-group row">

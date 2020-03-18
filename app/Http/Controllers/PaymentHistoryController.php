@@ -35,7 +35,7 @@ class PaymentHistoryController extends Controller
             PaymentHistory::create($array);
         } catch (\Exception $exception) {
 
-            return $exception->getMessage();
+            return "".$exception->getMessage();
         }
 
 
@@ -62,15 +62,19 @@ class PaymentHistoryController extends Controller
 
         if ($request->isMethod('post')) {
 
+
+
             $date_from = new Carbon($request['from_date']);
             $date_to = new Carbon($request['to_date']);
 
-            $payable_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+             $payable_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
                 /* ->where('is_complete', true)
                  ->where('delivery_status', "delivered")*/
+
                  ->where('is_paid_to_merchant', "pending")
                 ->orderBy('parcels.created_at', "DESC")
                 ->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
+                 ->where('merchant_id',Auth::guard('merchant')->id())
                 ->get();
             return view('merchant.payment.payment_request')
                 ->with('results', $payable_list);
@@ -80,8 +84,10 @@ class PaymentHistoryController extends Controller
                  ->where('delivery_status', "delivered")*/
                  ->where('is_paid_to_merchant', "pending")
                 ->orderBy('parcels.created_at', "DESC")
+                ->where('merchant_id',Auth::guard('merchant')->id())
                 ->get();
             return view('merchant.payment.payment_request')
+
                 ->with('results', $payable_list);
         }
 

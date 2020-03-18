@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\DeliveryMan;
 use App\Merchant;
 use App\Parcel;
 use Illuminate\Http\Request;
@@ -50,6 +51,35 @@ class AdminController extends Controller
 
         try {
             Merchant::where('merchant_id', $id)->update([
+                'active_status' => true
+            ]);
+
+            return back()->with('success', "Successfully Activate");
+        } catch (\Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
+    }
+    public function deliverymanInactive($id)
+    {
+
+        try {
+            DeliveryMan::where('delivery_man_id', $id)->update([
+                'active_status' => false
+            ]);
+
+            return back()->with('success', "Successfully Inactive");
+        } catch (\Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
+    }
+
+    public function deliverymanActivate($id)
+    {
+
+        try {
+            DeliveryMan::where('delivery_man_id', $id)->update([
                 'active_status' => true
             ]);
 

@@ -33,6 +33,10 @@ Route::get('/merchant/login', 'MerchantController@merchantLogin');
 Route::post('/merchant/login-check', 'MerchantController@merchantLoginCheck');
 
 Route::get('/merchant/registration', 'MerchantController@registration');
+Route::get('/merchant/forgot-password', 'MerchantController@forgotpassword');
+Route::post('/merchant/password-reset', 'MerchantController@resetpassword');
+Route::get('/merchant/confirm-password/{id}', 'MerchantController@confirmpassword');
+Route::any('/merchant/store', 'MerchantController@store');
 Route::any('/merchant/store', 'MerchantController@store');
 
 
@@ -78,6 +82,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/deliveryman/edit/{id}', 'DeliveryManController@edit');
     Route::post('/admin/deliveryman/update', 'DeliveryManController@update');
     Route::get('/admin/deliveryman/delete/{id}', 'DeliveryManController@destroy');
+    Route::get('/admin/deliveryman/inactive/{id}', 'AdminController@deliverymanInactive');
+    Route::get('/admin/deliveryman/activate/{id}', 'AdminController@deliverymanActivate');
 
 
     Route::get('/admin/view/payments-request', 'PaymentController@adminPayment');
@@ -86,6 +92,9 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/admin/parcel/show', 'ParcelController@adminParcelShow');
+    Route::get('/admin/parcel/details/{id}', 'ParcelController@adminParceldetails');
+    Route::get('/admin/parcel/assign-deliveryman', 'ParcelController@adminAssignDeliveryMan');
+
     Route::get('/admin/setting', 'ParcelController@adminhtml');
 });
 
@@ -157,13 +166,27 @@ Route::get('/get-delivery-charge/{id}', function (\Illuminate\Http\Request $requ
 Route::get('/statistics', function () {
 
 
-    $par_count = Parcel::count();
-    $delivery_pending = ParcelStatus::where('delivery_status', 'pending')->count();
-    $delivery_accepted = ParcelStatus::where('delivery_status', 'accepted')->count();
-    $delivery_cancelled = ParcelStatus::where('delivery_status', 'cancelled')->count();
-    $delivery_on_the_way = ParcelStatus::where('delivery_status', 'on_the_way')->count();
-    $delivery_delivered = ParcelStatus::where('delivery_status', 'delivered')->count();
-    $delivery_returned = ParcelStatus::where('delivery_status', 'returned')->count();
+    $par_count = Parcel::
+    where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->count();
+    $delivery_pending = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcel_statuses.delivery_status', 'pending')->count();
+    $delivery_accepted = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcel_statuses.delivery_status', 'accepted')->count();
+    $delivery_cancelled = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcel_statuses.delivery_status', 'cancelled')->count();
+    $delivery_on_the_way = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcel_statuses.delivery_status', 'on_the_way')->count();
+    $delivery_delivered = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcel_statuses.delivery_status', 'delivered')->count();
+    $delivery_returned = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcel_statuses.delivery_status', 'returned')->count();
 
     $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
         ->where('is_complete', true)

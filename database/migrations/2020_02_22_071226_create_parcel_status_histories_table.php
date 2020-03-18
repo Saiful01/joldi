@@ -20,6 +20,7 @@ class CreateParcelStatusHistoriesTable extends Migration
             $table->string('parcel_status')->default('pending');
             $table->unsignedBigInteger('changed_by');   //User ID
             $table->unsignedBigInteger('parcel_id');
+            $table->string('user_type')->default("admin");
             $table->timestamps();
         });
     }
