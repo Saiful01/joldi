@@ -109,7 +109,7 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                              value="{{$cod_charge}}" name="cod"
+                                               value="{{$cod_charge}}" name="cod"
                                                readonly>
                                     </div>
                                 </div>
@@ -147,7 +147,8 @@
                                         <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery
                                             Date</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-lg" placeholder="yyyy-mm-dd"
+                                            <input type="text" class="form-control form-control-lg"
+                                                   placeholder="yyyy-mm-dd"
                                                    id="datepicker-autoclose" name="delivery_date">
                                         </div>
                                     </div>
@@ -213,6 +214,5 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
-
 
 @endsection

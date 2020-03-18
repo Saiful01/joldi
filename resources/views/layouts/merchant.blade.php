@@ -4,10 +4,9 @@
 <head>
     @include('includes.merchant.head')
 
-
 </head>
 
-<body data-sidebar="dark" data-sidebar-size="small" ng-app="parcelApp">
+<body data-sidebar="dark" data-sidebar-size="small" ng-app="parcelCreateApp" >
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -274,7 +273,61 @@
 @include('includes.admin.footer')
 
 <script>
+    var app = angular.module('parcelCreateApp', []);
+    app.controller('parcelController', function ($scope, $http) {
+
+        $scope.delivery_charge = 0;
+        $scope.payable_amount = 0;
+        $http.get('/get-parcel-type', {}).then(function success(e) {
+
+            console.log(e.data);
+            $scope.parcels = e.data;
+        });
+
+        $scope.update = function () {
+
+            $http.get('/get-delivery-charge/' + $scope.parcel_type, {}).then(function success(e) {
+
+                console.log(e.data.charge);
+
+                $scope.delivery_charge = parseFloat(e.data.charge);
+                $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount);
+
+                console.log($scope.total_amount);
+            });
+
+
+        };
+
+
+        $scope.totalPriceCalcualtion = function () {
+
+            $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount);
+
+            console.log(parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount));
+
+            //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
+
+
+        }
+    });
+
+
+    function isSameDayTrue() {
+        //var is_same_day = document.getElementById('is_same_day').value;
+        document.getElementById('delivery_date').style.display = 'block';
+
+        //console.log(document.getElementById("is_same_day").value);
+    }
+
+    function isSameDayFalse() {
+        //var is_same_day = document.getElementById('is_same_day').value;
+        document.getElementById('delivery_date').style.display = 'none';
+
+        //console.log(document.getElementById("is_same_day").value);
+    }
 
 </script>
+
 </body>
 </html>
