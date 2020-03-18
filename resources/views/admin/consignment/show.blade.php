@@ -161,15 +161,15 @@
                                             <td>
                                                 @if($res->delivery_status=="pending")
                                                     <span class="badge badge-pill badge-primary">Pending</span>
-                                                @elseif($res->is_paid_to_merchant=="accepted")
+                                                @elseif($res->delivery_status=="accepted")
                                                     <span class="badge badge-pill badge-secondary"> Accepted</span>
-                                                @elseif($res->is_paid_to_merchant=="cancelled")
+                                                @elseif($res->delivery_status=="cancelled")
                                                     <span class="badge badge-pill badge-danger"> Cancelled</span>
-                                                @elseif($res->is_paid_to_merchant=="on_the-way")
+                                                @elseif($res->delivery_status=="on_the_way")
                                                     <span class="badge badge-pill badge-info"> On The Way</span>
-                                                @elseif($res->is_paid_to_merchant=="delivered")
+                                                @elseif($res->delivery_status=="delivered")
                                                     <span class="badge badge-pill badge-success"> Delivered</span>
-                                                @elseif($res->is_paid_to_merchant=="returned")
+                                                @elseif($res->delivery_status=="returned")
                                                     <span class="badge badge-pill badge-warning"> Returned</span>
 
                                                 @endif

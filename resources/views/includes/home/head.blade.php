@@ -1,12 +1,7 @@
-<title>Home @yield('title')</title>
+<title>Admin @yield('title')</title>
 <meta charset="utf-8" />
 
-{{-- Bootstrap 4 link--}}
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +14,7 @@
 
 
 <link href="{{asset('assets/libs/chartist/chartist.min.css')}}" rel="stylesheet">
+<link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
 
 <!-- Bootstrap Css -->
@@ -39,4 +35,52 @@
 
 <!-- Responsive datatable examples -->
 <link href="/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+
+
+<meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="pingback" href="https://joldi.com.bd/xmlrpc.php"/>
+
+
+    <title>Joldi Courier |</title>
+    <link rel='dns-prefetch' href='//fonts.googleapis.com'/>
+    <link rel='dns-prefetch' href='//s.w.org'/>
+
+
+    <meta content="Divi Child v.1.0" name="generator"/>
+    <style type="text/css">
+        img.wp-smiley,
+        img.emoji {
+            display: inline !important;
+            border: none !important;
+            box-shadow: none !important;
+            height: 1em !important;
+            width: 1em !important;
+            margin: 0 .07em !important;
+            vertical-align: -0.1em !important;
+            background: none !important;
+            padding: 0 !important;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' id='ags-divi-icons-css' href='/css/icons.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='wp-block-library-css' href='/css/style.min.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='divi-fonts-css' href='/css/family.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='divi-style-css' href='/css/content.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='et-builder-googlefonts-cached-css' href='/css/latin.css' type='text/css' media='all'/>
+    <link rel='stylesheet' id='dashicons-css' href='/css/dashicons.min.css' type='text/css' media='all'/>
+    <script type='text/javascript' src='/js/jquery.js'></script>
+    <script type='text/javascript' src='/js/jquery-migrate.min.js'></script>
+
+    <script type='text/javascript' src='/js/icons.js'></script>
+    <link rel='https://api.w.org/' href='https://joldi.com.bd/wp-json/'/>
+    <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://joldi.com.bd/xmlrpc.php?rsd"/>
+    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://joldi.com.bd/wp-includes/wlwmanifest.xml"/>
+
+    <link rel="stylesheet" id="et-core-unified-cached-inline-styles" href="/css/unified.min.css"/>
 

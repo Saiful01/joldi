@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\DeliveryMan;
 use App\Merchant;
+use App\Notification;
 use App\Parcel;
 use App\ParcelStatus;
 use App\ParcelStatusHistory;
@@ -188,10 +189,28 @@ class ParcelController extends Controller
     public function adminAssignDeliveryMan(Request $request)
     {
 
+        $invoice=Parcel::where('parcel_id',$request['parcel_id'])->first();
+
 
         try{
 
             ParcelStatus::where('parcel_id',$request['parcel_id'])->update(['delivery_man_id'=>$request['delivery_man_id']]);
+            ParcelStatus::where('parcel_id', $request['parcel_id'])->update(['delivery_status'=>'on_the_way']);
+          $array= [
+                'parcel_status'=> 'on_the_way',
+                'changed_by'=>Auth::guard()->user()->id,
+                'parcel_id'=>$request['parcel_id'],
+                'user_type'=>'admin'
+            ];
+
+            ParcelStatusHistory::create($array);
+           $notification= [
+                'message'=>'Assigned for  no '.$invoice->parcel_invoice,
+                'for_user_id'=> $request['delivery_man_id'],
+                'changed_by'=>Auth::guard()->user()->id,
+
+            ];
+            Notification::create($notification);
             return back()->with('success', "Successfully Assigned Delivery Man");
         }catch (\Exception $exception){
 
@@ -212,12 +231,11 @@ return $exception->getMessage();
      */
     public function edit($parcel_id)
     {
-      $customer = Customer::first();
-        $parcel_types= ParcelType::get();
-        $result= Parcel::where('parcel_id', $parcel_id)->first();
+           $result= Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+             ->where('parcels.parcel_id',$parcel_id)
+            ->first();
         return view('merchant.parcel.edit')
-            ->with('parcel_types', $parcel_types)
-        ->with('customer', $customer)
         ->with('result', $result);
 
     }
@@ -231,8 +249,12 @@ return $exception->getMessage();
      */
     public function update(Request $request, Parcel $parcel)
     {
+
+
+        if($request['parcel_type_id']=="? undefined:undefined ?"){
+            return back()->with('failed',"Plaese select Parcel Type");
+        }
         unset($request['_token']);
-        unset($request['is_same_day']);
 
         //return  $request->all();
         if ($request['is_same_day'] == "on") {
@@ -242,7 +264,7 @@ return $exception->getMessage();
         }
 
         $request['delivery_date'] = Carbon::parse($request['delivery_date'])->format('Y-m-d');
-        $parcel_array = [
+          $parcel_array = [
             'parcel_title' => $request['parcel_title'],
             'parcel_invoice' => $request['parcel_invoice'],
             'parcel_type_id' => $request['parcel_type_id'],
@@ -268,37 +290,9 @@ return $exception->getMessage();
             'latitude' => $request['latitude']
         ];
 
-        $customer_is_exist = Customer::where('customer_phone', $request['customer_phone'])->first();
-        if (is_null($customer_is_exist)) {
-            $customer_id = Customer::update($customer_array);
-        } else {
-            $customer_id = $customer_is_exist->customer_id;
-        }
+       Customer::where('customer_id', $request['customer_id'])->update($customer_array);
+            return back()->with('success', "Successfully update");
 
-        $parcel_status_array = [
-            'customer_id' => $customer_id,
-            'parcel_id' => $parcel_id,
-        ];
-
-        $parcel_history = [
-            'parcel_id' => $parcel_id,
-            'changed_by' => 1,//TODO::Change Later
-        ];
-
-
-        try {
-            ParcelStatusHistory::update($parcel_history);
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
-
-
-        try {
-            ParcelStatus::update($parcel_status_array);
-            return back()->with('success', "Successfully Saved");
-        } catch (\Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
-        }
 
     }
 

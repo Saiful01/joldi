@@ -236,11 +236,11 @@
         <div class="col-xl-4">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Sales Report</h4>
+                    <h4 class="card-title mb-4">Parcel Report</h4>
 
                     <div class="cleafix">
-                        <p class="float-left"><i class="mdi mdi-calendar mr-1 text-primary"></i> Jan 01 -
-                            Jan 31</p>
+{{--                        <p class="float-left"><i class="mdi mdi-calendar mr-1 text-primary"></i> Jan 01 ---}}
+{{--                            Jan 31</p>--}}
                         <h5 class="font-18 text-right">{{$par_count}}</h5>
                     </div>
 

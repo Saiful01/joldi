@@ -23,7 +23,7 @@ Route::get('/', function () {
 
     return view('common.home.index');
 });
-
+Route::get('/merchant/help', 'HomeController@help');
 
 Route::get('/login', 'LoginController@login');
 Route::post('/login/check', 'LoginController@loginCheck');

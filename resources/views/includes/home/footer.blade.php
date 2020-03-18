@@ -1,3 +1,143 @@
+
+<script type="text/javascript">
+    var et_animation_data = [{
+        "class": "et_pb_image_0",
+        "style": "zoomBottom",
+        "repeat": "once",
+        "duration": "1000ms",
+        "delay": "0ms",
+        "intensity": "9%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_text_1",
+        "style": "fade",
+        "repeat": "once",
+        "duration": "550ms",
+        "delay": "0ms",
+        "intensity": "50%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_blurb_0",
+        "style": "zoomBottom",
+        "repeat": "once",
+        "duration": "1000ms",
+        "delay": "0ms",
+        "intensity": "10%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_blurb_1",
+        "style": "zoomBottom",
+        "repeat": "once",
+        "duration": "1000ms",
+        "delay": "0ms",
+        "intensity": "10%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_blurb_2",
+        "style": "zoomBottom",
+        "repeat": "once",
+        "duration": "1000ms",
+        "delay": "0ms",
+        "intensity": "10%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_blurb_3",
+        "style": "zoomBottom",
+        "repeat": "once",
+        "duration": "1000ms",
+        "delay": "0ms",
+        "intensity": "10%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_text_2",
+        "style": "fade",
+        "repeat": "once",
+        "duration": "550ms",
+        "delay": "0ms",
+        "intensity": "50%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_text_3",
+        "style": "fade",
+        "repeat": "once",
+        "duration": "550ms",
+        "delay": "0ms",
+        "intensity": "50%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_text_4",
+        "style": "fade",
+        "repeat": "once",
+        "duration": "550ms",
+        "delay": "0ms",
+        "intensity": "50%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_text_6",
+        "style": "fade",
+        "repeat": "once",
+        "duration": "550ms",
+        "delay": "0ms",
+        "intensity": "50%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }, {
+        "class": "et_pb_text_8",
+        "style": "fade",
+        "repeat": "once",
+        "duration": "550ms",
+        "delay": "0ms",
+        "intensity": "50%",
+        "starting_opacity": "0%",
+        "speed_curve": "ease-in-out"
+    }];
+</script>
+<script type='text/javascript'>
+    /* <![CDATA[ */
+    var DIVI = {"item_count": "%d Item", "items_count": "%d Items"};
+    var et_shortcodes_strings = {"previous": "Previous", "next": "Next"};
+    var et_pb_custom = {
+        "ajaxurl": "https:\/\/joldi.com.bd\/wp-admin\/admin-ajax.php",
+        "images_uri": "https:\/\/joldi.com.bd\/wp-content\/themes\/Divi\/images",
+        "builder_images_uri": "https:\/\/joldi.com.bd\/wp-content\/themes\/Divi\/includes\/builder\/images",
+        "et_frontend_nonce": "a01886b1a0",
+        "subscription_failed": "Please, check the fields below to make sure you entered the correct information.",
+        "et_ab_log_nonce": "ea58a9307d",
+        "fill_message": "Please, fill in the following fields:",
+        "contact_error_message": "Please, fix the following errors:",
+        "invalid": "Invalid email",
+        "captcha": "Captcha",
+        "prev": "Prev",
+        "previous": "Previous",
+        "next": "Next",
+        "wrong_captcha": "You entered the wrong number in captcha.",
+        "is_builder_plugin_used": "",
+        "ignore_waypoints": "no",
+        "is_divi_theme_used": "1",
+        "widget_search_selector": ".widget_search",
+        "is_ab_testing_active": "",
+        "page_id": "440",
+        "unique_test_id": "",
+        "ab_bounce_rate": "5",
+        "is_cache_plugin_active": "no",
+        "is_shortcode_tracking": ""
+    };
+    var et_pb_box_shadow_elements = [];
+    /* ]]> */
+</script>
+<script type='text/javascript' src='https://joldi.com.bd/wp-content/themes/Divi/js/custom.min.js?ver=3.9'></script>
+<script type='text/javascript'
+        src='https://joldi.com.bd/wp-content/themes/Divi/core/admin/js/common.js?ver=3.9'></script>
+<script type='text/javascript' src='https://joldi.com.bd/wp-includes/js/wp-embed.min.js?ver=5.3.2'></script>
 <!-- JAVASCRIPT -->
 <script src="{{asset('/assets/libs/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

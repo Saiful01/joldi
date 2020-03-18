@@ -21,9 +21,9 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        $par_count = Parcel::count();
+       $par_count = Parcel::count();
         $merchant_count = Merchant::count();
-        $delivery_pending = ParcelStatus::where('delivery_status', 'pending')->count();
+         $delivery_pending = ParcelStatus::where('delivery_status', 'pending')->count();
         $delivery_accepted = ParcelStatus::where('delivery_status', 'accepted')->count();
         $delivery_cancelled = ParcelStatus::where('delivery_status', 'cancelled')->count();
         $delivery_on_the_way = ParcelStatus::where('delivery_status', 'on_the_way')->count();

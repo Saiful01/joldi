@@ -109,7 +109,7 @@
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                              value="{{$cod_charge}}" name="cod"
+                                               value="{{$cod_charge}}" name="cod"
                                                readonly>
                                     </div>
                                 </div>
@@ -147,7 +147,8 @@
                                         <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery
                                             Date</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-lg" placeholder="yyyy-mm-dd"
+                                            <input type="text" class="form-control form-control-lg"
+                                                   placeholder="yyyy-mm-dd"
                                                    id="datepicker-autoclose" name="delivery_date">
                                         </div>
                                     </div>
@@ -214,5 +215,61 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
 
+
+    <script>
+        var app = angular.module('parcelCreateApp', []);
+        app.controller('parcelController', function ($scope, $http) {
+
+            $scope.delivery_charge = 0;
+            $scope.payable_amount = 0;
+            $http.get('/get-parcel-type', {}).then(function success(e) {
+
+                console.log(e.data);
+                $scope.parcels = e.data;
+            });
+
+            $scope.update = function () {
+
+                $http.get('/get-delivery-charge/' + $scope.parcel_type, {}).then(function success(e) {
+
+                    console.log(e.data.charge);
+
+                    $scope.delivery_charge = parseFloat(e.data.charge);
+                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount);
+
+                    console.log($scope.total_amount);
+                });
+
+            };
+
+
+            $scope.totalPriceCalcualtion = function () {
+
+                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount);
+
+                console.log(parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount));
+
+                //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
+
+
+            }
+        });
+
+
+        function isSameDayTrue() {
+            //var is_same_day = document.getElementById('is_same_day').value;
+            document.getElementById('delivery_date').style.display = 'block';
+
+            //console.log(document.getElementById("is_same_day").value);
+        }
+
+        function isSameDayFalse() {
+            //var is_same_day = document.getElementById('is_same_day').value;
+            document.getElementById('delivery_date').style.display = 'none';
+
+            //console.log(document.getElementById("is_same_day").value);
+        }
+
+    </script>
 
 @endsection
