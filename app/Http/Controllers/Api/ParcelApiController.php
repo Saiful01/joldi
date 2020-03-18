@@ -145,4 +145,25 @@ class ParcelApiController extends Controller
             'data'=>$parcels_details,
         ];
     }
+    public function parcelTracking(Request $request){
+
+        $status_code=200;
+        $message="Logged in";
+        $access_token="ABC";
+        $phone=null;
+        $app_secret_key=null;
+        $status=null;
+         $parcel_id= $request['parcel_id'];
+        try {
+            $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                ->join('customers', 'customers.customer_id', '=', 'parcel_statuses.customer_id')
+                ->where('parcels.parcel_id', $parcel_id)
+                ->first();
+        }catch (\Exception $exception) {
+
+        }
+
+
+
+    }
 }
