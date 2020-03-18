@@ -189,4 +189,77 @@ class ParcelApiController extends Controller
         ];
     }
 
+
+    public function collectParcel(Request $request)
+    {
+
+        $status_code = 200;
+        $message = "Parcel Updated";
+        $access_token = "ABC";
+        $parcels_details = null;
+        $access_token = 0;
+
+
+        $parcel_invoice = $request['parcel_id'];
+        $status = $request['status'];
+
+        $changed_by = $request['changed_by'];
+        $notes = $request['notes'];
+
+
+        $is_exist = Parcel::where('parcel_invoice', $parcel_invoice)//TODO::Need Modificatuion
+        ->first();
+        if (is_null($is_exist)) {
+            return [
+                'status_code' => 400,
+                'message' => "Not Found",
+                'access_token' => $access_token,
+                'getTotalAmount' => 0,
+                'data' => $parcels_details,
+            ];
+        }
+
+        try {
+            if ($status == "delivered") {
+
+                $parcel_array = [
+                    'delivery_status' => $status,
+                    'is_complete' => true,
+                ];
+            } else {
+
+                $parcel_array = [
+                    'delivery_status' => $status,
+                ];
+            }
+
+            ParcelStatus::where('parcel_id', $is_exist->parcel_id)->update($parcel_array);
+
+            //Insert into History Table
+
+            $array = [
+                'parcel_id' => $is_exist->parcel_id,
+                'changed_by' => $changed_by,
+                'parcel_status' => $status,
+                'notes' => $notes,
+                'user_type' => "deliveryman",
+
+            ];
+
+            ParcelStatusHistory::create($array);
+
+        } catch (\Exception $exception) {
+
+            $status_code = $exception->getCode();
+            $message = $exception->getMessage();
+        }
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
+            'getTotalAmount' => $is_exist->payable_amount,
+            'data' => $parcels_details,
+        ];
+    }
 }
