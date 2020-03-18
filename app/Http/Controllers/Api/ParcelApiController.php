@@ -53,6 +53,45 @@ class ParcelApiController extends Controller
 
     }
 
+    public function parcelTracking(Request $request)
+    {
+
+
+        $status_code = 200;
+        $message = "Get Parcels";
+        $access_token = "ABC";
+        $parcels = null;
+
+        $customer_phone = $request['customer_phone'];
+
+        try {
+            $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                /*   ->join('delivery_men', 'parcel_statuses.customer_phone', '=', 'delivery_men.delivery_man_id')*/
+                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                ->where('customers.customer_phone', $customer_phone);
+
+
+            if ($request['status'] != "all") {
+                $query->where('parcel_statuses.delivery_status', $request['status']);
+            }
+            $parcels = $query->get();
+
+        } catch (\Exception $exception) {
+
+            $status_code = $exception->getCode();
+            $message = $exception->getMessage();
+        }
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
+            'data' => $parcels,
+        ];
+
+
+    }
+
     public function getParcelDetails(Request $request)
     {
 

@@ -23,3 +23,5 @@ Route::post('/parcels', 'Api\ParcelApiController@getParcel');
 Route::post('/parcel-details', 'Api\ParcelApiController@getParcelDetails');
 Route::post('/parcel-update', 'Api\ParcelApiController@parcelUpdate');
 
+Route::post('/parcel/tracking', 'Api\ParcelApiController@parcelTracking');
+
