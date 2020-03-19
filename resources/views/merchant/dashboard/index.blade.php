@@ -16,23 +16,23 @@
             </div>
         </div>
 
-        <div class="col-sm-6">
-            <div class="float-right d-none d-md-block">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle waves-effect waves-light" type="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="mdi mdi-settings mr-2"></i> Settings
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--        <div class="col-sm-6">--}}
+{{--            <div class="float-right d-none d-md-block">--}}
+{{--                <div class="dropdown">--}}
+{{--                    <button class="btn btn-primary dropdown-toggle waves-effect waves-light" type="button"--}}
+{{--                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                        <i class="mdi mdi-settings mr-2"></i> Settings--}}
+{{--                    </button>--}}
+{{--                    <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                        <a class="dropdown-item" href="#">Action</a>--}}
+{{--                        <a class="dropdown-item" href="#">Another action</a>--}}
+{{--                        <a class="dropdown-item" href="#">Something else here</a>--}}
+{{--                        <div class="dropdown-divider"></div>--}}
+{{--                        <a class="dropdown-item" href="#">Separated link</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
     <!-- end page title -->
 
@@ -71,7 +71,7 @@
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
                                 <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Payable Amount</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$sum}} <i
+                                <h4 class="font-weight-medium font-size-24">{{$payable_amount}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                 {{--                                <div class="mini-stat-label bg-success">--}}
                                 {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -96,7 +96,7 @@
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
                                 <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Total Sales</h5>
-                                <h4 class="font-weight-medium font-size-24"> <i
+                                <h4 class="font-weight-medium font-size-24">{{$total_sales}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                 {{--                                <div class="mini-stat-label bg-success">--}}
                                 {{--                                    <p class="mb-0">+ 12%</p>--}}

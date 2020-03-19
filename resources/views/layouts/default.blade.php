@@ -19,7 +19,7 @@
                     <ul id="top-menu" class="nav">
                         <li id="menu-item-522"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-522"><a
-                                href="https://joldi.com.bd/contact/">Contact Us</a></li>
+                                href="#">Contact Us</a></li>
                         <li id="menu-item-525"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-525"><a href="#">About
                                 Us</a></li>

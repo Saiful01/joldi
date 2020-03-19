@@ -71,7 +71,7 @@
                                             <td>{{$res->delivery_charge}}</td>
                                             <td>{{$res->total_amount}}</td>
                                             <td>
-                                                @if($res->is_same_day==0)
+                                                @if($res->is_same_day==true)
                                                     <span class="badge badge-pill badge-info">Yes</span>
                                                 @else
                                                     <span class="badge badge-pill badge-danger">No</span>
@@ -79,7 +79,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($res->is_same_day==0)
+                                                @if($res->is_same_day==true)
                                                     Today
                                                 @else
                                                     {{$res->delivery_date}}

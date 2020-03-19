@@ -73,6 +73,8 @@ class DashboardController extends Controller
             ->with('total_sales', $total_sales)
             ->with('parcel_list', $parcel_list)
             ->with('total_delivery_charge', $total_delivery_charge)
+            ->with('total_amount', $total_sales)
+
 
             ->with('sum', $sum);
 

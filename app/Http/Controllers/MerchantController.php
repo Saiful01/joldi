@@ -7,6 +7,7 @@ use App\Merchant;
 use App\Parcel;
 use App\ParcelStatus;
 use App\User;
+use http\Message;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
@@ -199,10 +200,10 @@ class MerchantController extends Controller
     {
 
         $message="To reset your password Go to this link: ".$url;
-        Mail::send(
-            function ($message,$user){
-                $message->to ($user);
-                $message->subject("reset Your password.");
+        Mail::send('login.mail',
+            function (Message $message) use($user, $url){
+                $message->to ($user['email']);
+
 
             }
 
@@ -212,9 +213,10 @@ class MerchantController extends Controller
 
 
 
-         //$this->decrypt($id);
+         $this->decrypt($id);
 
         return view('merchant.login.confirmpassword')->with('id',$id);
+        Merchant::where('merchant_id', $id)->update('password');
     }
 
     public function create()

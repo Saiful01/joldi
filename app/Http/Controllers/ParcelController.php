@@ -64,6 +64,8 @@ class ParcelController extends Controller
     {
 
 
+
+        $is_same_day = false;
         $request->validate([
             'delivery_charge'=>'required|numeric',
             'total_amount'=>'required|numeric',
@@ -72,14 +74,12 @@ class ParcelController extends Controller
         ]);
 
         unset($request['_token']);
-        unset($request['is_same_day']);
 
         //return  $request->all();
         if ($request['is_same_day'] == "on") {
-            $request['is_same_day'] = true;
-        } else {
-            $request['is_same_day'] = false;
+            $is_same_day = true;
         }
+
 
         $request['delivery_date'] = Carbon::parse($request['delivery_date'])->format('Y-m-d');
         $parcel_array = [
@@ -91,7 +91,7 @@ class ParcelController extends Controller
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
             'total_amount' => $request['payable_amount'] - ($request['cod'] + $request['delivery_charge']),
-            'is_same_day' => $request['is_same_day'],
+            'is_same_day' => $is_same_day,
             'delivery_date' => $request['delivery_date'],
             'parcel_notes' => $request['parcel_notes'],
             'created_at' =>Carbon::now(),
@@ -163,7 +163,7 @@ class ParcelController extends Controller
     public function adminParcelShow(Parcel $parcel)
     {
 
-          $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->get();
