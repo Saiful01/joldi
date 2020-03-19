@@ -9,30 +9,13 @@
     <div class="row align-items-center" ng-controller="dashboardController">
         <div class="col-sm-6">
             <div class="page-title-box">
-{{--                <h4 class="font-size-18">Compact Sidebar</h4>--}}
+                {{--                <h4 class="font-size-18">Compact Sidebar</h4>--}}
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item active">Welcome to Merchant Dashboard</li>
                 </ol>
             </div>
         </div>
 
-{{--        <div class="col-sm-6">--}}
-{{--            <div class="float-right d-none d-md-block">--}}
-{{--                <div class="dropdown">--}}
-{{--                    <button class="btn btn-primary dropdown-toggle waves-effect waves-light" type="button"--}}
-{{--                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                        <i class="mdi mdi-settings mr-2"></i> Settings--}}
-{{--                    </button>--}}
-{{--                    <div class="dropdown-menu dropdown-menu-right">--}}
-{{--                        <a class="dropdown-item" href="#">Action</a>--}}
-{{--                        <a class="dropdown-item" href="#">Another action</a>--}}
-{{--                        <a class="dropdown-item" href="#">Something else here</a>--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <a class="dropdown-item" href="#">Separated link</a>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
     </div>
     <!-- end page title -->
 
@@ -47,18 +30,19 @@
                                     <img src="/assets/images/services-icon/01.png" alt="">
                                 </div>
                                 <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-                                <h4 class="font-weight-medium font-size-24"> <i
-                                        class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-{{--                                <div class="mini-stat-label bg-success">--}}
-{{--                                    <p class="mb-0">+ 12%</p>--}}
-{{--                                </div>--}}
+                                <h4 class="font-weight-medium font-size-24"><i
+                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
+                                {{--                                <div class="mini-stat-label bg-success">--}}
+                                {{--                                    <p class="mb-0">+ 12%</p>--}}
+                                {{--                                </div>--}}
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/merchant/parcels" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcels" class="text-white-50"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
-{{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+                                {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
                             </div>
                         </div>
                     </div>
@@ -79,7 +63,8 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/merchant/payments/request" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/payments/request" class="text-white-50"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -104,7 +89,8 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/merchant/payments/request" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/payments/request" class="text-white-50"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                            php artisan cache:clear    <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -129,7 +115,8 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/merchant/parcel/show" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcel/show" class="text-white-50"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -153,7 +140,8 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/merchant/parcel/show" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcel/show" class="text-white-50"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -177,7 +165,8 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="/merchant/parcel/show" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    <a href="/merchant/parcel/show" class="text-white-50"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -206,7 +195,8 @@
                                 <li class="feed-item">
                                     <div class="feed-item-list">
                                         <span class="date">Jan 20</span>
-                                        <span class="activity-text">At vero eos et accusamus <a href="#" class="text-success">Read more</a></span>
+                                        <span class="activity-text">At vero eos et accusamus <a href="#"
+                                                                                                class="text-success">Read more</a></span>
                                     </div>
                                 </li>
 
@@ -232,8 +222,8 @@
                     <h4 class="card-title mb-4">Parcel Report</h4>
 
                     <div class="cleafix">
-{{--                        <p class="float-left"><i class="mdi mdi-calendar mr-1 text-primary"></i> Jan 01 ---}}
-{{--                            Jan 31</p>--}}
+                        {{--                        <p class="float-left"><i class="mdi mdi-calendar mr-1 text-primary"></i> Jan 01 ---}}
+                        {{--                            Jan 31</p>--}}
                         <h5 class="font-18 text-right">{{$par_count}}</h5>
                     </div>
 
@@ -282,7 +272,7 @@
                         <table class="table table-hover table-centered table-nowrap mb-0">
                             <thead>
                             <tr>
-                                <th scope="col"> Invoice </th>
+                                <th scope="col"> Invoice</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Amount</th>
@@ -292,22 +282,23 @@
                             <tbody>
                             <tr>
                                 @foreach($parcel_list as $list)
-                                <th scope="row">{{$list->parcel_invoice}}</th>
-                                <td>
+                                    <th scope="row">{{$list->parcel_invoice}}</th>
+                                    <td>
 
-                                              {{$list->customer_name}}
+                                        {{$list->customer_name}}
 
-                                </td>
-                                <td>{{$list->delivery_date}}</td>
-                                <td>{{$list->total_amount}}</td>
-                                <td><span class="badge badge-success">{{$list->delivery_status}}</span></td>
-                                <td>
-                                    <div>
-                                        <a href="/merchant/parcel/details/{{$list->parcel_id}}" class="btn btn-primary btn-sm">Details</a>
-                                    </div>
-                                </td>
+                                    </td>
+                                    <td>{{$list->delivery_date}}</td>
+                                    <td>{{$list->total_amount}}</td>
+                                    <td><span class="badge badge-success">{{$list->delivery_status}}</span></td>
+                                    <td>
+                                        <div>
+                                            <a href="/merchant/parcel/details/{{$list->parcel_id}}"
+                                               class="btn btn-primary btn-sm">Details</a>
+                                        </div>
+                                    </td>
                             </tr>
-                           @endforeach
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -316,5 +307,37 @@
         </div>
     </div>
     <!-- end row -->
+
+    <script>
+
+        var app = angular.module('parcelCreateApp', []);
+
+
+
+        app.controller('dashboardController', function ($scope, $http) {
+
+            console.log("lolll");
+
+
+            $http.get("/statistics")
+                .then(function (response) {
+                    // $scope.myWelcome = response.data;
+                    console.log(response.data);
+                    //$scope.parcels = response.data;
+                    console.log("lolll");
+
+                    var chart = new Chartist.Pie("#ct-donut", {series: [response.data.delivery_pending, response.data.delivery_accepted, response.data.delivery_cancelled,response.data.delivery_on_the_way,response.data.delivery_delivered,response.data.delivery_returned], labels: [1, 2, 3,1, 2, 3]}, {
+                        donut: !0,
+                        showLabel: !1,
+                        plugins: [Chartist.plugins.tooltip()]
+                    });
+
+                });
+
+        });
+
+
+
+    </script>
 
 @endsection

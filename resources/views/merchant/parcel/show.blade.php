@@ -42,7 +42,7 @@
                                     <thead>
                                     <tr role="row">
                                         <th>Invoice No</th>
-                                        <th>COD</th>
+                                      {{--  <th>COD</th>--}}
                                         <th>D.Chrage</th>
                                         <th>Amount</th>
                                         <th>Same Day</th>
@@ -66,11 +66,11 @@
 
                                             <th>#{{$res->parcel_invoice}}</th>
                                             {{--                                <td>{{$res->parcel_type_id}}</td>--}}
-                                            <td>{{$res->cod}}</td>
+                                         {{--   <td>{{$res->cod}}</td>--}}
                                             <td>{{$res->delivery_charge}}</td>
                                             <td>{{$res->total_amount}}</td>
                                             <td>
-                                                @if($res->is_same_day==0)
+                                                @if($res->is_same_day==true)
                                                     <span class="badge badge-pill badge-info">Yes</span>
                                                 @else
                                                     <span class="badge badge-pill badge-danger">No</span>
@@ -78,7 +78,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($res->is_same_day==0)
+                                                @if($res->is_same_day==true)
                                                     Today
                                                 @else
                                                     {{$res->delivery_date}}

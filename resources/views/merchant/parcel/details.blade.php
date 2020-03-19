@@ -21,6 +21,24 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                <div class="">
+
+                                    <div class="d-print-none">
+                                        <div class="float-right">
+                                            <a href="javascript:window.print()"
+                                               class="btn btn-sm btn-success waves-effect waves-light"><i
+                                                        class="fa fa-print"></i> Print</a>
+                                            {{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div> <!-- end row -->
 
                     <div class="row">
                         <div class="col-12">
@@ -49,9 +67,10 @@
 
                                 </div>
                             </div>
+                            <hr>
 
                             <div class="row">
-                                <div class="col-6 mt-4">
+                                <div class="col-12">
                                     <address>
                                         <strong>Charge:</strong><br>
                                         Amount: {{$result->payable_amount}}<br>
@@ -61,32 +80,11 @@
                                         Date: {{$result->delivery_date}}<br>
                                     </address>
                                 </div>
-                                <div class="col-6 mt-4 text-right">
 
-                                </div>
                             </div>
 
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div>
-                                <div class="">
-
-                                    <div class="d-print-none">
-                                        <div class="float-right">
-                                            <a href="javascript:window.print()"
-                                               class="btn btn-success waves-effect waves-light"><i
-                                                        class="fa fa-print"></i> Print</a>
-                                            {{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div> <!-- end row -->
 
                 </div>
             </div>

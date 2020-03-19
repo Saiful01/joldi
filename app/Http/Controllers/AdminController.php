@@ -24,7 +24,7 @@ class AdminController extends Controller
     {
 
         $result = Merchant::where('merchant_id', $id)->first();
-        $results= Area::where('area_id', $id)->get();
+        $results = Area::where('area_id', $id)->get();
         return view('admin.merchant.edit')
             ->with('areas', $results)
             ->with('result', $result);
@@ -60,6 +60,7 @@ class AdminController extends Controller
             return back()->with('success', $exception->getMessage());
         }
     }
+
     public function deliverymanInactive($id)
     {
 
@@ -98,7 +99,9 @@ class AdminController extends Controller
         $result = Merchant::orderBy('created_at', 'DESC')->get();
         return view('admin.merchant.index')->with('results', $result);
     }
-    public function merchantUpdate(Request $request){
+
+    public function merchantUpdate(Request $request)
+    {
 
         $request['password'] = Hash::make($request['merchant_password']);
         unset($request['_token']);
@@ -142,10 +145,12 @@ class AdminController extends Controller
         }
 
     }
-    public function merchantProfile($id){
 
-        $result = Merchant::where ('merchant_id' , $id)->first();
-        $results= Area::where('area_id', $id)->get();
+    public function merchantProfile($id)
+    {
+
+        $result = Merchant::where('merchant_id', $id)->first();
+        $results = Area::where('area_id', $id)->get();
         $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->orderBy('parcels.created_at', "DESC")

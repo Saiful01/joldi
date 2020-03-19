@@ -19,6 +19,9 @@ class CreateParcelsTable extends Migration
             $table->string('parcel_invoice');
             $table->unsignedBigInteger('parcel_type_id');
             $table->unsignedBigInteger('merchant_id');
+            $table->unsignedBigInteger('shop_id');
+            $table->unsignedBigInteger('area_id');
+
             $table->double('payable_amount')->nullable();
 
             $table->double('delivery_charge')->default(0);

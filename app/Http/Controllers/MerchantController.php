@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Merchant;
 use App\Parcel;
-use App\ParcelStatus;
+use App\Shop;
 use App\User;
 use http\Message;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 
 class MerchantController extends Controller
 {
@@ -29,32 +29,36 @@ class MerchantController extends Controller
 
     public function dashboard()
     {
+
+        Session::get("shop_id");
+        Session::get("shop_name");
+
         $par_count = Parcel::
-            where('parcels.merchant_id',Auth::guard('merchant')->id())
+        where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->count();
         $delivery_pending = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-             ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'pending')->count();
         $delivery_accepted = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-             ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'accepted')->count();
         $delivery_cancelled = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-             ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'cancelled')->count();
         $delivery_on_the_way = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-             ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'on_the_way')->count();
         $delivery_delivered = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-             ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'delivered')->count();
         $delivery_returned = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-             ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'returned')->count();
         $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->where('is_complete', true)
             ->where('delivery_status', "delivered")
             ->where('is_paid_to_merchant', "pending")
-            ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
             ->sum('payable_amount');
 
@@ -62,7 +66,7 @@ class MerchantController extends Controller
             ->where('is_complete', true)
             ->where('delivery_status', "delivered")
             ->where('is_paid_to_merchant', "pending")
-            ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
             ->sum('total_amount');
 
@@ -74,15 +78,15 @@ class MerchantController extends Controller
               ->sum(DB::raw('payable_amount-(cod + delivery_charge)'));*/
 
 
-        $sum = Parcel::where('parcels.merchant_id',Auth::guard('merchant')->id())
-        ->sum('total_amount');
+        $sum = Parcel::where('parcels.merchant_id', Auth::guard('merchant')->id())
+            ->sum('total_amount');
 //        $price = Parcel::where('parcels.merchant_id',Auth::guard('merchant')->id())
 //        ->sum('payable_amount');
         $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->orderBy('parcels.created_at', "DESC")
             ->limit(10)
-            ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+            ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->get();
 
         return view('merchant.dashboard.index')
@@ -148,8 +152,12 @@ class MerchantController extends Controller
             ];
         }
 
+
         try {
-            Merchant::create($array);
+            $merchant_id = Merchant::insertGetId($array);
+
+            //TODO:: Insert into Shop Table
+            $this->storeShop($merchant_id);
             return back()->with('success', "Successfully Registered. Account will be verified by Admin");
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -160,6 +168,7 @@ class MerchantController extends Controller
 
     public function merchantLogin()
     {
+
         return view('merchant.login.index');
     }
 
@@ -167,6 +176,16 @@ class MerchantController extends Controller
     {
         $credentials = $request->only('merchant_email', 'password');
         if (Auth::guard('merchant')->attempt($credentials)) {
+
+            $id = Auth::guard('merchant')->id();
+            $shop = Shop::where('merchant_id', $id)->first();
+            if (!is_null($shop)) {
+
+                Session::put("shop_id", $shop->shop_id);
+                Session::put("shop_name", $shop->shop_name);
+            }
+
+
             return redirect()->intended('/merchant/dashboard');
         }
 
@@ -175,47 +194,53 @@ class MerchantController extends Controller
             ->withInput();
 
     }
-    public function forgotpassword(){
+
+    public function forgotpassword()
+    {
         return view('merchant.login.forgot');
     }
-    public function resetpassword(Request $request){
+
+    public function resetpassword(Request $request)
+    {
         $user = User::whereEmail($request->merchant_email)->first();
 
-        if (is_null($user)){
-            return back()->with('failed',"Email does not Exist");
-        }else{
+        if (is_null($user)) {
+            return back()->with('failed', "Email does not Exist");
+        } else {
 
 
-            $id=$this->encrypt($user->id);
-            $url= url('/')."/merchant/confirm-password/".$id;
+            $id = $this->encrypt($user->id);
+            $url = url('/') . "/merchant/confirm-password/" . $id;
 
             $this->sendEmail($user->email, $url);
-            return back()->with('success',"Check you email to Reset Password");
+            return back()->with('success', "Check you email to Reset Password");
 
         }
 
 
     }
+
     private function sendEmail($user, $url)
     {
 
-        $message="To reset your password Go to this link: ".$url;
+        $message = "To reset your password Go to this link: " . $url;
         Mail::send('login.mail',
-            function (Message $message) use($user, $url){
-                $message->to ($user['email']);
+            function (Message $message) use ($user, $url) {
+                $message->to($user['email']);
 
 
             }
 
         );
     }
-    public function confirmpassword($id){
+
+    public function confirmpassword($id)
+    {
 
 
+        $this->decrypt($id);
 
-         $this->decrypt($id);
-
-        return view('merchant.login.confirmpassword')->with('id',$id);
+        return view('merchant.login.confirmpassword')->with('id', $id);
         Merchant::where('merchant_id', $id)->update('password');
     }
 
@@ -236,17 +261,19 @@ class MerchantController extends Controller
      * @param  \App\Merchant $merchant
      * @return \Illuminate\Http\Response
      */
-    public function merchantSetting(){
-         $result = Merchant::where('merchant_id',Auth::guard('merchant')->id())->first();
+    public function merchantSetting()
+    {
+        $result = Merchant::where('merchant_id', Auth::guard('merchant')->id())->first();
 
         return view('merchant.setting.index')
             ->with('result', $result);
 
     }
-    public function edit( $id)
+
+    public function edit($id)
     {
         $result = Merchant::where('merchant_id', $id)->first();
-        $results= Area::where('area_id', $id)->get();
+        $results = Area::where('area_id', $id)->get();
         return view('merchant.setting.edit')
             ->with('areas', $results)
             ->with('result', $result);
@@ -263,7 +290,7 @@ class MerchantController extends Controller
     public function update(Request $request, Merchant $merchant)
     {
 
-       // unset($request['_token']);
+        // unset($request['_token']);
 
         if ($request->hasFile('merchant_image')) {
 
@@ -289,10 +316,8 @@ class MerchantController extends Controller
         //return  $array;
 
 
-
-
         try {
-            Merchant::where('merchant_id' , $request['merchant_id'])->update($array);
+            Merchant::where('merchant_id', $request['merchant_id'])->update($array);
             return back()->with('success', "Successfully Updated");
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -315,16 +340,28 @@ class MerchantController extends Controller
     {
         return strtr(base64_encode($input), '+/=', '._-');
     }
+
     function randomString()
     {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         return substr(str_shuffle(str_repeat($pool, 5)), 0, 8);
     }
+
     function decrypt($input)
     {
         return base64_decode(strtr($input, '._-', '+/='));
     }
 
+    private function storeShop($merchant_id)
+    {
+
+        $array = [
+            'merchant_id' => $merchant_id,
+            'shop_name' => "My Shop",
+            'shop_address' => "Address",
+        ];
+        Shop::create($array);
+    }
 
 
 }

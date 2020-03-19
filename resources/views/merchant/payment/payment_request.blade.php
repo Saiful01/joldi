@@ -115,7 +115,7 @@
                             @foreach($results as $result)
                                 <tr>
                                     <th>{{$result->parcel_invoice}}</th>
-                                    <th>{{$result->payable_amount}}</th>
+                                    <th>{{$result->payable_amount+$result->cod+$result->delivery_charge}}</th>
                                     <th>{{$result->cod+$result->delivery_charge}}</th>
                                     <th>{{$result->payable_amount-($result->cod+$result->delivery_charge)}}</th>
                                     <th>{{$result->delivery_date}}</th>

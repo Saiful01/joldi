@@ -39,6 +39,7 @@ class DeliveryManController extends Controller
     {
         unset($request['_token']);
         $request ['password']= Hash::make($request['password']);
+        $request ['active_status']= true;
         try {
            DeliveryMan::create($request->all());
             return back()->with('success',"Successfully Saved");

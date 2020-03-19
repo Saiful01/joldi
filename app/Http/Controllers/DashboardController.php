@@ -6,7 +6,6 @@ use App\Merchant;
 use App\Parcel;
 use App\ParcelStatus;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
@@ -21,9 +20,9 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-       $par_count = Parcel::count();
+        $par_count = Parcel::count();
         $merchant_count = Merchant::count();
-         $delivery_pending = ParcelStatus::where('delivery_status', 'pending')->count();
+        $delivery_pending = ParcelStatus::where('delivery_status', 'pending')->count();
         $delivery_accepted = ParcelStatus::where('delivery_status', 'accepted')->count();
         $delivery_cancelled = ParcelStatus::where('delivery_status', 'cancelled')->count();
         $delivery_on_the_way = ParcelStatus::where('delivery_status', 'on_the_way')->count();
@@ -44,18 +43,18 @@ class DashboardController extends Controller
             //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
             ->sum('total_amount');
 
-      /*  $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-           /* ->where('is_complete', true)
-            ->where('delivery_status', "delivered")
-            ->where('is_paid_to_merchant', "pending")
-            ->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
-            ->sum(DB::raw('payable_amount-(cod + delivery_charge)'));*/
+        /*  $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+             /* ->where('is_complete', true)
+              ->where('delivery_status', "delivered")
+              ->where('is_paid_to_merchant', "pending")
+              ->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
+              ->sum(DB::raw('payable_amount-(cod + delivery_charge)'));*/
 
 
         $sum = Parcel::sum('total_amount');
-        $total_delivery_charge=Parcel::sum('delivery_charge');
+        $total_delivery_charge = Parcel::sum('delivery_charge');
         $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-           ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->orderBy('parcels.created_at', "DESC")
             ->limit(10)
             ->get();
@@ -74,8 +73,6 @@ class DashboardController extends Controller
             ->with('parcel_list', $parcel_list)
             ->with('total_delivery_charge', $total_delivery_charge)
             ->with('total_amount', $total_sales)
-
-
             ->with('sum', $sum);
 
     }

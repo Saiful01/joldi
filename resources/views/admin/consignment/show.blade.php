@@ -95,7 +95,7 @@
                                                         <div class="text-center">
                                                             <!-- Small modal -->
                                                             <button type="button"
-                                                                    class="btn btn-primary waves-effect waves-light"
+                                                                    class="btn btn-sm btn-primary waves-effect waves-light"
                                                                     data-toggle="modal"
                                                                     data-target=".modal-id{{$res->parcel_id}}">Assign
                                                             </button>
@@ -108,7 +108,7 @@
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title mt-0"
-                                                                            id="mySmallModalLabel">Assign Deliveryman for Parcel No {{$res->parcel_id}}</h5>
+                                                                            id="mySmallModalLabel">Assign Deliveryman</h5>
                                                                         <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-hidden="true">
                                                                             ×
@@ -135,7 +135,7 @@
 
                                                                             <div class="form-group">
 {{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
-                                                                                <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light float-right">Save</button>
+                                                                                <button type="submit" class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">Save</button>
                                                                             </div>
 
 

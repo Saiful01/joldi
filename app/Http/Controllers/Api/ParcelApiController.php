@@ -62,18 +62,18 @@ class ParcelApiController extends Controller
         $access_token = "ABC";
         $parcels = null;
 
-        $customer_phone = $request['customer_phone'];
+        $customer_phone = $request['phone_number'];
 
         try {
             $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
                 /*   ->join('delivery_men', 'parcel_statuses.customer_phone', '=', 'delivery_men.delivery_man_id')*/
                 ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
-                ->where('customers.customer_phone', $customer_phone);
-
-
-            if ($request['status'] != "all") {
-                $query->where('parcel_statuses.delivery_status', $request['status']);
-            }
+                ->where('customers.customer_phone', $customer_phone)
+                ->orderBy('parcels.created_at', "DESC");
+            /*
+                        if ($request['status'] != "all") {
+                            $query->where('parcel_statuses.delivery_status', $request['status']);
+                        }*/
             $parcels = $query->get();
 
         } catch (\Exception $exception) {
@@ -139,7 +139,6 @@ class ParcelApiController extends Controller
         $message = "Parcel Updated";
         $access_token = "ABC";
         $parcels_details = null;
-
 
         $parcel_id = $request['parcel_id'];
         $status = $request['status'];
@@ -243,9 +242,7 @@ class ParcelApiController extends Controller
                 'parcel_status' => $status,
                 'notes' => $notes,
                 'user_type' => "deliveryman",
-
             ];
-
             ParcelStatusHistory::create($array);
 
         } catch (\Exception $exception) {

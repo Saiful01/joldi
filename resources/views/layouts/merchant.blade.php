@@ -6,7 +6,7 @@
 
 </head>
 
-<body data-sidebar="dark" data-sidebar-size="small" ng-app="parcelCreateApp" >
+<body data-sidebar="dark" data-sidebar-size="small" ng-app="parcelCreateApp">
 
 <!-- Begin page -->
 <div id="layout-wrapper">

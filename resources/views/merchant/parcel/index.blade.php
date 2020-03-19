@@ -10,7 +10,7 @@
                 <h4 class="font-size-18">Parcel</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Add New Parcel</a></li>
+                    <li class="breadcrumb-item"><a href="#">Add New Parcel, <span style="color: red">You are adding Parcel for {{\Illuminate\Support\Facades\Session::get('shop_name')}}</span> Change</a></li>
                 </ol>
             </div>
         </div>
