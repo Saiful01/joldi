@@ -14,6 +14,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/merchant/shop/view" class=" waves-effect">
+                        <i class="fas fa-archive"></i>
+                        <span>Shop management</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="/merchant/parcels" class=" waves-effect">
@@ -21,6 +27,7 @@
                         <span>Add Parcel</span>
                     </a>
                 </li>
+
 
                 <li>
                     <a href="/merchant/payments/request" class=" waves-effect">

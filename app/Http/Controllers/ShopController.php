@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Shop;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -14,7 +15,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        return view('merchant.shop.create');
     }
 
     /**
@@ -35,7 +36,28 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        unset($request['_token']);
+        $id = Auth::guard('merchant')->id();
+        $array= [
+            'shop_name'=> $request['shop_name'],
+            'shop_address'=> $request['shop_address'],
+            'shop_phone'=> $request['shop_phone'],
+            'merchant_id'=> $id
+        ];
+        try {
+            Shop::create($array);
+            return back()->with('success', "Successfully saved");
+        }
+        catch (\Exception $exception) {
+            return back()->with('failed', $exception->getMessage());
+        }
+
+
+            Shop::create($array);
+
+
+
     }
 
     /**
@@ -46,7 +68,8 @@ class ShopController extends Controller
      */
     public function show(Shop $shop)
     {
-        //
+        $result=Shop::get();
+        return view('merchant.shop.view')->with('result', $result);
     }
 
     /**
@@ -55,9 +78,10 @@ class ShopController extends Controller
      * @param  \App\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function edit(Shop $shop)
+    public function edit( $shop_id)
     {
-        //
+      $result= Shop::where('shop_id', $shop_id)->first();
+        return view('merchant.shop.edit')->with('result', $result);
     }
 
     /**
@@ -69,7 +93,14 @@ class ShopController extends Controller
      */
     public function update(Request $request, Shop $shop)
     {
-        //
+        unset($request['_token']);
+        try {
+            Shop::where('shop_id', $request['shop_id'])->update($request->all());
+            return back()->with('success',"Successfully updated");
+
+        } catch (\Exception $exception){
+            return back()->with('failed', $exception->getMessage());
+        }
     }
 
     /**
@@ -78,8 +109,14 @@ class ShopController extends Controller
      * @param  \App\Shop  $shop
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Shop $shop)
+    public function destroy( $id)
     {
-        //
+        try {
+            Shop::where('shop_id', $id)->delete();
+            return back()->with('success', "Successfully Deleted");
+
+        } catch (\Exception $exception) {
+            return back()->with('failed', $exception->getMessage());
+        }
     }
 }

@@ -126,6 +126,14 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::post('/merchant/payments/store', 'PaymentHistoryController@paymentStore');
     Route::get('/merchant/payments/view', 'PaymentHistoryController@show');
 
+    //shop manage
+    Route::get('/merchant/shop/create', 'ShopController@index');
+    Route::get('/merchant/shop/view', 'ShopController@show');
+    Route::post('/merchant/shop/store', 'ShopController@store');
+    Route::get('/merchant/shop/edit/{id}', 'ShopController@edit');
+    Route::post('/merchant/shop/update', 'ShopController@update');
+    Route::get('/merchant/shop/delete/{id}', 'ShopController@destroy');
+
     Route::get('/logout', 'DashboardController@logout');
 
 });

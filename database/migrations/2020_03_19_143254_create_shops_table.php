@@ -18,7 +18,12 @@ class CreateShopsTable extends Migration
             $table->bigInteger('merchant_id');
             $table->string('shop_name');
             $table->string('shop_address');
+            $table->string('shop_phone')->nullable();
+
+            $table->foreign('merchant_id')->references('merchant_id')->on('merchants');
+
             $table->timestamps();
+
         });
     }
 

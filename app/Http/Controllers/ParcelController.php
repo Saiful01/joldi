@@ -10,6 +10,7 @@ use App\Parcel;
 use App\ParcelStatus;
 use App\ParcelStatusHistory;
 use App\ParcelType;
+use App\Shop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
