@@ -185,7 +185,6 @@ class MerchantController extends Controller
                 Session::put("shop_name", $shop->shop_name);
             }
 
-
             return redirect()->intended('/merchant/dashboard');
         }
 

@@ -134,6 +134,8 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::post('/merchant/shop/update', 'ShopController@update');
     Route::get('/merchant/shop/delete/{id}', 'ShopController@destroy');
 
+    Route::get('/merchant/current/shop', 'ShopController@merchantCurrentShop');
+
     Route::get('/logout', 'DashboardController@logout');
 
 });

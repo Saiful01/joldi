@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\Customer;
 use App\DeliveryMan;
 use App\Merchant;
@@ -38,9 +39,13 @@ class ParcelController extends Controller
             $invoice = $invoice_data->parcel_id . "" . date('dhis');
         }
 
+
+
         return view('merchant.parcel.index')
             ->with('cod_charge', $cod_charge)
             ->with('invoice', $invoice)
+            ->with('areas',    $result = Area::get())
+            ->with('shops', Shop::where('merchant_id',Auth::guard('merchant')->id())->get())
             ->with('parcel_types', ParcelType::orderBy('created_at', 'DESC')->get());
     }
 
@@ -86,6 +91,8 @@ class ParcelController extends Controller
             'merchant_id' => Auth::guard('merchant')->id(),
             'parcel_invoice' => $request['parcel_invoice'],
             'parcel_type_id' => $request['parcel_type_id'],
+            'shop_id' => $request['shop_id'],
+            'area_id' => $request['area_id'],
             'delivery_charge' => $request['delivery_charge'],
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],

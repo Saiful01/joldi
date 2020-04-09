@@ -10,7 +10,9 @@
                 <h4 class="font-size-18">Parcel</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Add New Parcel, <span style="color: red">You are adding Parcel for {{\Illuminate\Support\Facades\Session::get('shop_name')}}</span> Change</a></li>
+                    <li class="breadcrumb-item"><a href="#">Add New Parcel, <span style="color: red">You are adding Parcel for {{\Illuminate\Support\Facades\Session::get('shop_name')}}</span>
+                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal">Change</button>
+                        </a></li>
                 </ol>
             </div>
         </div>
@@ -60,6 +62,7 @@
                                                id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
                                                readonly>
                                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
+                                        <input type="hidden" name="shop_id" value="{{Session::get('shop_id')}}">
 
 
                                     </div>
@@ -74,18 +77,6 @@
                                                id="example-text-input-lg" name="parcel_title">
                                     </div>
                                 </div>
-
-                                <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                        Price</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder="Parcel price"
-                                               id="example-text-input-lg" name="payable_amount"
-                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
-                                    </div>
-                                </div>
-
 
                                 <div class="form-group row">
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
@@ -106,7 +97,7 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row" style="display: none;">
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
@@ -161,6 +152,18 @@
                                 <h5 class=" mb-3">Customer Information </h5>
                                 <hr>
                                 <div class="form-group row">
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
+                                        Price</label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder="Parcel price"
+                                               id="example-text-input-lg" name="payable_amount"
+                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
                                     <label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
                                         Name</label>
                                     <div class="col-sm-9">
@@ -174,6 +177,20 @@
                                     <div class="col-sm-9">
                                         <input class="form-control form-control-lg" type="text" placeholder="Phone"
                                                id="example-text-input-lg" name="customer_phone">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Area</label>
+                                    <div class="col-sm-9">
+
+                                        <select class="form-control form-control-lg"
+                                                name="area_id">
+                                            @foreach($areas as $area)
+                                                <option value="{{$area->area_id}}">{{$area->area_name}}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -215,6 +232,38 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
+
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <form action="/merchant/current/shop">
+                        <div class="form-group">
+                            <label for="sel1">Select Shop:</label>
+                            <select class="form-control" name="shop">
+                                @foreach($shops as $shop)
+                                    <option value="{{$shop->shop_id}}">{{$shop->shop_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script>
