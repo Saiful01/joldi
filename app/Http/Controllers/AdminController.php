@@ -102,6 +102,7 @@ class AdminController extends Controller
 
     public function merchantUpdate(Request $request)
     {
+        return $request;
 
         $request['password'] = Hash::make($request['merchant_password']);
         unset($request['_token']);

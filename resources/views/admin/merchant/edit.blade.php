@@ -76,7 +76,8 @@
                             <div class="col-sm-10">
                                 <select class="form-control form-control-lg"  type="text" placeholder="IS COD ENABLE"
                                         id="example-text-input-lg" name="is_cod_enable">
-                                    <option value="{{$result->is_cod_enable}}" >{{$result->is_cod_enable}}</option>
+                                    <option value="{{$result->is_cod_enable==1}}"  >Active</option>
+                                    <option value="{{$result->is_cod_enable==0}}"  >Inactive</option>
                                 </select>
                             </div>
                         </div>

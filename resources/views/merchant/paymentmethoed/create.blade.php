@@ -1,5 +1,5 @@
-@extends('layouts.app')
-@section('title', 'Deliveryman Create')
+@extends('layouts.merchant')
+@section('title', 'PaymentMethoed create')
 
 @section('content')
 
@@ -7,10 +7,10 @@
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="page-title-box">
-                <h4 class="font-size-18"> Deliovery Man</h4>
+                <h4 class="font-size-18">Payment Methoed</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Add New  Delivery Man</a></li>
+                    <li class="breadcrumb-item"><a href="#">Add New Payment Methoed</a></li>
                 </ol>
             </div>
         </div>
@@ -29,57 +29,43 @@
                     @if(Session::has('failed'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
                     @endif
-                    <h5 class="card-title">Add New Delivery Man</h5>
+                    <h5 class="card-title">Add New Payment Methoed</h5>
                     <hr>
-                    <form class="custom-validation" method="post" action="/admin/deliveryman/store" novalidate=""
+                    <form class="custom-validation" method="post" action="/merchant/paymentmethoed/store" novalidate=""
                           enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Name</label>
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Payment Methoed Name</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="text" placeholder="Name"
-                                       id="example-text-input-lg" name="delivery_man_name" required>
+                                       id="example-text-input-lg" name="payment_methoed_name" required>
                                 <input type="hidden" name="_token" value="{{{csrf_token()}}}"/>
+
                             </div>
                         </div>
 
 
                         <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Phone</label>
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Account Number</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="text" placeholder="phone"
-                                       id="example-text-input-lg" name="delivery_man_phone" required>
+                                       id="example-text-input-lg" name="account_number" >
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Password</label>
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Branch address</label>
                             <div class="col-sm-10">
-                                <input class="form-control form-control-lg" type="Password" placeholder="Password"
-                                       id="example-text-input-lg" name="password">
+                                <input class="form-control form-control-lg" type="email" placeholder="Address"
+                                       id="example-text-input-lg" name="branch_address">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Address</label>
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Payee Name</label>
                             <div class="col-sm-10">
-                                <input class="form-control form-control-lg" type="text" placeholder="Address"
-                                       id="example-text-input-lg" name="delivery_man_address">
+                                <input class="form-control form-control-lg" type="email" placeholder="Name"
+                                       id="example-text-input-lg" name="payee_name">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Profile Image</label>
-                            <div class="col-sm-10">
-                                <input class="form-control form-control-lg" type="file" placeholder=""
-                                       id="example-text-input-lg" name="delivery_man_image">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> NID/Passport Document</label>
-                            <div class="col-sm-10">
-                                <input class="form-control form-control-lg" type="file" placeholder=""
-                                       id="example-text-input-lg" name="delivery_man_document">
-                            </div>
-                        </div>
-
 
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"></label>

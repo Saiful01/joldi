@@ -36,6 +36,25 @@
             </div>
 
         </div>
+        <div class="col-md-6 col-lg-6 col-xl-3">
+
+            <!-- Simple card -->
+            <div class="card">
+                <div class="card-title">
+                    <h5> Payment Methoed Details</h5>
+                </div>
+                <div class="card-body">
+                    <h4> Payment Methoed Name: {{$result->payment_methoed_name}}</h4>
+                    <h6> Account Number: {{$result->account_number}}</h6>
+                    <h6> Branch Addrss: {{$result->branch_address}}</h6>
+                    <h6> Branch Addrss: {{$result->payee_name}}</h6>
+
+                    <a href="/merchant/paymentmethoed/edit/{{$result->paymentmethoed_id}}" class="btn btn-primary waves-effect waves-light">Edit</a>
+                    <a href="/merchant/paymentmethoed/create" class="btn btn-info waves-effect waves-light">create</a>
+                </div>
+            </div>
+
+        </div>
 
 
     </div>

@@ -108,6 +108,7 @@ class MerchantController extends Controller
     public function store(Request $request)
     {
 
+
         $request['password'] = Hash::make($request['merchant_password']);
         unset($request['_token']);
         unset($request['merchant_password']);
@@ -290,6 +291,7 @@ class MerchantController extends Controller
     {
 
         // unset($request['_token']);
+
 
         if ($request->hasFile('merchant_image')) {
 

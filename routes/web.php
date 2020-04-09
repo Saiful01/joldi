@@ -133,6 +133,13 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::get('/merchant/shop/edit/{id}', 'ShopController@edit');
     Route::post('/merchant/shop/update', 'ShopController@update');
     Route::get('/merchant/shop/delete/{id}', 'ShopController@destroy');
+    //PaymentMathoed manage
+    Route::get('/merchant/paymentmethoed/create', 'PaymentMEthoedController@index');
+    Route::get('/merchant/paymentmethoed/view', 'PaymentMEthoedController@show');
+    Route::post('/merchant/paymentmethoed/store', 'PaymentMEthoedController@store');
+    Route::get('/merchant/paymentmethoed/edit/{id}', 'PaymentMEthoedController@edit');
+    Route::post('/merchant/paymentmethoed/update', 'PaymentMEthoedController@update');
+//    Route::get('/merchant/paymentmethoed/delete/{id}', 'PaymentMEthoedController@destroy');
 
     Route::get('/merchant/current/shop', 'ShopController@merchantCurrentShop');
 

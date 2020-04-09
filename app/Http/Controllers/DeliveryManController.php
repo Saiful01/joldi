@@ -37,15 +37,62 @@ class DeliveryManController extends Controller
      */
     public function store(Request $request)
     {
+//        return $request;
         unset($request['_token']);
         $request ['password']= Hash::make($request['password']);
         $request ['active_status']= true;
-        try {
-           DeliveryMan::create($request->all());
-            return back()->with('success',"Successfully Saved");
+
+        if ($request->hasFile('delivery_man_image')) {
+
+
+            $image = $request->file('delivery_man_image');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliverymanimage');
+            $image->move($destinationPath,$image_name);
+            $array= [
+
+                'delivery_man_name'=>$request['delivery_man_name'],
+                'delivery_man_phone'=>$request['delivery_man_phone'],
+                'delivery_man_image'=>$image_name,
+                'password'=>$request['password'],
+                'delivery_man_address'=>$request['delivery_man_address'],
+                'active_status'=>$request['active_status'],
+            ];
         }
-        catch (\Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+        else if ($request->hasFile('delivery_man_document')) {
+
+
+            $image = $request->file('delivery_man_document');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliverymanNid');
+            $image->move($destinationPath,$image_name);
+            $array= [
+
+                'delivery_man_name'=>$request['delivery_man_name'],
+                'delivery_man_phone'=>$request['delivery_man_phone'],
+                'delivery_man_document'=>$image_name,
+                'password'=>$request['password'],
+                'delivery_man_address'=>$request['delivery_man_address'],
+                'active_status'=>$request['active_status'],
+            ];
+        }else{
+            $array= [
+
+                'delivery_man_name'=>$request['delivery_man_name'],
+                'delivery_man_phone'=>$request['delivery_man_phone'],
+                'password'=>$request['password'],
+                'delivery_man_address'=>$request['delivery_man_address'],
+                'active_status'=>$request['active_status'],
+            ];
+
+
+        }
+        try {
+            DeliveryManController::create($array);
+            return back()-> with('success',"Successfully Saved");
+        }catch(\Exception $exception) {
+
+            return back()->with('failed',$exception->getMessage());
         }
     }
 
