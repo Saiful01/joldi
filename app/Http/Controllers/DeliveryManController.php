@@ -88,7 +88,7 @@ class DeliveryManController extends Controller
 
         }
         try {
-            DeliveryManController::create($array);
+            DeliveryMan::create($array);
             return back()-> with('success',"Successfully Saved");
         }catch(\Exception $exception) {
 

@@ -171,6 +171,34 @@
                                                     <span class="badge badge-pill badge-success"> Delivered</span>
                                                 @elseif($res->delivery_status=="returned")
                                                     <span class="badge badge-pill badge-warning"> Returned</span>
+                                                @elseif($res->delivery_status=="partial_delivered")
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">admin</button>
+
+                                                    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm">
+                                                            <div class="modal-content">
+
+                                                                <span class="badge badge-pill "> Partial Delivered</span>
+                                                                <form>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-10">
+                                                                            <input type="text"  class="form-control-plaintext" placeholder="write note here" style="border: 1px solid">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <div class="col-sm-3">
+                                                                            <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
+                                                                                Update
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </form>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 @endif
                                             </td>
