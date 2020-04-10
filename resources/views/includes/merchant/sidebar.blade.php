@@ -14,12 +14,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li>
-                    <a href="/merchant/shop/view" class=" waves-effect">
-                        <i class="fas fa-archive"></i>
-                        <span>Shop management</span>
-                    </a>
-                </li>
+
 
                 <li>
                     <a href="/merchant/parcels" class=" waves-effect">
@@ -51,7 +46,12 @@
                         <span>All Consignment</span>
                     </a>
                 </li>
-
+                <li>
+                    <a href="/merchant/shop/view" class=" waves-effect">
+                        <i class="fas fa-archive"></i>
+                        <span>Shop management</span>
+                    </a>
+                </li>
                 <li>
                     <a href="/merchant/profile/setting" class=" waves-effect">
                         <i class="ti-settings"></i>

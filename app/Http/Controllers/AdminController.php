@@ -24,7 +24,7 @@ class AdminController extends Controller
     {
 
         $result = Merchant::where('merchant_id', $id)->first();
-        $results = Area::where('area_id', $id)->get();
+        $results = Area::get();
         return view('admin.merchant.edit')
             ->with('areas', $results)
             ->with('result', $result);
@@ -102,7 +102,7 @@ class AdminController extends Controller
 
     public function merchantUpdate(Request $request)
     {
-        return $request;
+        //return $request;
 
         $request['password'] = Hash::make($request['merchant_password']);
         unset($request['_token']);

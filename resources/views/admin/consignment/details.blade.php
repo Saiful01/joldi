@@ -25,9 +25,10 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="invoice-title">
-                                <h4 class="float-right font-size-16"><strong>Invoice # {{$result->parcel_invoice}}</strong></h4>
+                                <h4 class="float-right font-size-16"><strong>Invoice
+                                        # {{$result->parcel_invoice}}</strong></h4>
                                 <h3 class="mt-0">
-                                    <img src="/assets/images/logo.png" alt="logo" height="24">
+                                    <img src="/assets/images/logo.png" alt="logo" height="36">
                                 </h3>
                             </div>
                             <hr>
@@ -43,9 +44,7 @@
                                 <div class="col-6 text-right">
 
 
-                                        {!! QrCode::size(150)->generate($result->parcel_invoice); !!}
-
-
+                                    {!! QrCode::size(150)->generate($result->parcel_invoice); !!}
 
 
                                 </div>
@@ -58,7 +57,7 @@
                                         Amount: {{$result->payable_amount}}<br>
                                         Charge: {{$result->delivery_charge}}<br>
                                         Total Amount: {{$result->total_amount}}<br>
-                                        Status: {{$result->delivery_status}}<br>
+                                        Status: <span class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
                                         Date: {{$result->delivery_date}}<br>
                                     </address>
                                 </div>
@@ -77,8 +76,10 @@
 
                                     <div class="d-print-none">
                                         <div class="float-right">
-                                            <a href="javascript:window.print()" class="btn btn-success waves-effect waves-light"><i class="fa fa-print"></i> Print</a>
-{{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
+                                            <a href="javascript:window.print()"
+                                               class="btn btn-success waves-effect waves-light"><i
+                                                        class="fa fa-print"></i> Print</a>
+                                            {{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +105,8 @@
                             <li class="feed-item">
                                 <div class="feed-item-list">
                                     <span class="date">{{$history->created_at}}</span>
-                                    <span class="activity-text badge badge-info">{{$history->parcel_status}}</span>
+                                    <span class="activity-text badge badge-info">{{statusFormat($history->parcel_status) }}</span>
+                                    <p>{{$history->notes}}</p>
                                 </div>
                             </li>
 
