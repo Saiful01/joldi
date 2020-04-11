@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant COD</label>
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant COD (%)</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="text" placeholder="COD"
                                        id="example-text-input-lg" name="cod_charge"
@@ -74,10 +74,10 @@
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">Merchant COD Enable</label>
                             <div class="col-sm-10">
-                                <select class="form-control form-control-lg"  type="text" placeholder="IS COD ENABLE"
+                                <select class="form-control form-control-lg"  type="text"
                                         id="example-text-input-lg" name="is_cod_enable">
-                                    <option value="{{$result->is_cod_enable==1}}"  >Active</option>
-                                    <option value="{{$result->is_cod_enable==0}}"  >Inactive</option>
+                                    <option value="1" @if($result->is_cod_enable==1) selected @endif >Active</option>
+                                    <option value="0" @if($result->is_cod_enable==0) selected @endif>Inactive</option>
                                 </select>
                             </div>
                         </div>
@@ -85,13 +85,17 @@
 
                         <div class="form-group row">
                             <label for="area"  class="col-sm-2 col-form-label">Area</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
                                 <select class="form-control form-control-lg" name="area_id">
                                     @foreach ($areas as $res)
                                         <option
                                             @if ($res->area_id ==$result->area_id) selected @endif value="{{$res->area_id}}">{{$res->area_name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                <a  class="btn btn-success" href="/admin/area/create">+New</a>
                             </div>
                         </div>
 

@@ -40,12 +40,11 @@ class ParcelController extends Controller
         }
 
 
-
         return view('merchant.parcel.index')
             ->with('cod_charge', $cod_charge)
             ->with('invoice', $invoice)
-            ->with('areas',    $result = Area::get())
-            ->with('shops', Shop::where('merchant_id',Auth::guard('merchant')->id())->get())
+            ->with('areas', $result = Area::get())
+            ->with('shops', Shop::where('merchant_id', Auth::guard('merchant')->id())->get())
             ->with('parcel_types', ParcelType::orderBy('created_at', 'DESC')->get());
     }
 
@@ -222,6 +221,42 @@ class ParcelController extends Controller
         } catch (\Exception $exception) {
 
             return $exception->getMessage();
+
+        }
+
+
+    }
+
+    public function productReceiveByAdmin(Request $request)
+    {
+
+
+        try {
+
+            $array = [
+                'parcel_status' => 'returned_to_admin',
+                'changed_by' => Auth::guard()->user()->id,
+                'parcel_id' => $request['parcel_id'],
+                'user_type' => 'admin',
+                'notes' => $request['notes']
+            ];
+
+            //Update Parcel Status
+            ParcelStatus::where('parcel_id', $request['parcel_id'])->update(['delivery_status' => 'returned_to_admin', 'is_complete' => true]);
+
+            //Insert Into parcel Histiry
+            ParcelStatusHistory::create($array);
+            /*  $notification = [
+                  'message' => 'Assigned for  no ' . $invoice->parcel_invoice,
+                  'for_user_id' => $request['delivery_man_id'],
+                  'changed_by' => Auth::guard()->user()->id,
+
+              ];
+              Notification::create($notification);*/
+            return back()->with('success', "Successfully Returned to Admin");
+        } catch (\Exception $exception) {
+
+            return back()->with('failed', $exception->getMessage());
 
         }
 
