@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Merchant;
 use App\Parcel;
+use App\PaymentMethoed;
 use App\Shop;
 use App\User;
 use http\Message;
@@ -264,6 +265,7 @@ class MerchantController extends Controller
     public function merchantSetting()
     {
         $result = Merchant::where('merchant_id', Auth::guard('merchant')->id())->first();
+        $result= PaymentMethoed::where('merchant_id', Auth::guard('merchant')->id())->first();
 
         return view('merchant.setting.index')
             ->with('result', $result);

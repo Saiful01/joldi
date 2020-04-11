@@ -179,37 +179,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title mb-4">Activity</h4>
-                            <ol class="activity-feed">
-                                <li class="feed-item">
-                                    <div class="feed-item-list">
-                                        <span class="date">Jan 22</span>
-                                        <span class="activity-text">Responded to need “Volunteer
-                                                        Activities”</span>
-                                    </div>
-                                </li>
-                                <li class="feed-item">
-                                    <div class="feed-item-list">
-                                        <span class="date">Jan 20</span>
-                                        <span class="activity-text">At vero eos et accusamus <a href="#"
-                                                                                                class="text-success">Read more</a></span>
-                                    </div>
-                                </li>
 
-
-                            </ol>
-                            <div class="text-center">
-                                <a href="#" class="btn btn-primary">Load More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
     <!-- end row -->

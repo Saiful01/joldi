@@ -36,7 +36,7 @@ class PaymentMethoedController extends Controller
      */
     public function store(Request $request)
     {
-        unset($request['token']);
+        unset($request['_token']);
         $id = Auth::guard('merchant')->id();
         $array = [
             'payment_methoed_name' => $request['payment_methoed_name'],
@@ -75,7 +75,7 @@ class PaymentMethoedController extends Controller
      */
     public function edit( $paymentmethoed_id)
     {
-       return $result=PaymentMethoed::where('paymentmethoed_id', $paymentmethoed_id)->first();
+        $result=PaymentMethoed::where('paymentmethoed_id', $paymentmethoed_id)->first();
         return view('merchant.paymentmethoed.edit')->with('result', $result);
 
     }
@@ -89,10 +89,12 @@ class PaymentMethoedController extends Controller
      */
     public function update(Request $request, PaymentMethoed $paymentMethoed)
     {
-        unset($request['token']);
+        unset($request['_token']);
+//        return $request;
+
         try {
             PaymentMethoed::where('paymentmethoed_id', $request['paymentmethoed_id'])->update($request->all());
-            return back()->with('success', "successfully saved");
+            return back()->with('success', "successfully updated");
         }
         catch (\Exception $exception){
             return back()->with('failed', $exception->getMessage());

@@ -31,7 +31,7 @@
                     @endif
                     <h5 class="card-title">Add New Payment Methoed</h5>
                     <hr>
-                    <form class="custom-validation" method="post" action="/merchant/Paymentmethoed/update" novalidate=""
+                    <form class="custom-validation" method="post" action="/merchant/paymentmethoed/update" novalidate=""
                           enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">Payment Methoed Name</label>
