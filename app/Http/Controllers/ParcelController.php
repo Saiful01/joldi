@@ -23,7 +23,7 @@ class ParcelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($day)
     {
 
         $cod_charge = Merchant::where('merchant_id', Auth::id())->first();
@@ -39,10 +39,15 @@ class ParcelController extends Controller
             $invoice = $invoice_data->parcel_id . "" . date('dhis');
         }
 
+        $is_same_day = true;
+        if ($day == "next_day") {
+            $is_same_day = false;
+        }
 
         return view('merchant.parcel.index')
             ->with('cod_charge', $cod_charge)
             ->with('invoice', $invoice)
+            ->with('is_same_day', $is_same_day)
             ->with('areas', $result = Area::get())
             ->with('shops', Shop::where('merchant_id', Auth::guard('merchant')->id())->get())
             ->with('parcel_types', ParcelType::orderBy('created_at', 'DESC')->get());
@@ -79,9 +84,9 @@ class ParcelController extends Controller
         unset($request['_token']);
 
         //return  $request->all();
-        if ($request['is_same_day'] == "on") {
+       /* if ($request['is_same_day'] == "on") {
             $is_same_day = true;
-        }
+        }*/
 
 
         $request['delivery_date'] = Carbon::parse($request['delivery_date'])->format('Y-m-d');

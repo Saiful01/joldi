@@ -107,7 +107,7 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'merchant'], function () {
 
-    Route::get('/merchant/parcels', 'ParcelController@index');
+    Route::get('/merchant/parcels/{day}', 'ParcelController@index');
     Route::post('/merchant/parcel/store', 'ParcelController@store');
     Route::get('/merchant/parcel/show', 'ParcelController@show');
     Route::get('/merchant/parcel/details/{id}', 'ParcelController@details');

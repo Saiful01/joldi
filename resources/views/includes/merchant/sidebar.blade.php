@@ -70,7 +70,7 @@
         <div class="modal-content">
             <div class="card card-body pickupOptions border-0 p-2">
                 <div class="row">
-                    <div class="col-6"><a href="/merchant/parcels">
+                    <div class="col-6"><a href="/merchant/parcels/next_day">
                             <div class="card info-card border-0 my-3 cursor-pointer">
                                 <div class="card-body rounded text-white" style="background-color: #4E599A " >
 {{--                                    <div class="text-center over-badge"><span class="content">24h</span></div>--}}
@@ -80,7 +80,7 @@
                         </a>
 
                     </div>
-                    <div class="col-6"><a href="/merchant/parcels">
+                    <div class="col-6"><a href="/merchant/parcels/same_day">
                             <div class="card info-card border-0 my-3 cursor-pointer">
                                 <div class="card-body rounded text-white " style="background-color: #25A7B7">
 {{--                                    <div class="text-center over-badge"><span class="content">12h</span></div>--}}
