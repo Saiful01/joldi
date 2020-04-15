@@ -42,7 +42,7 @@
                                     <thead>
                                     <tr role="row">
                                         <th>Invoice No</th>
-                                      {{--  <th>COD</th>--}}
+                                        {{--  <th>COD</th>--}}
                                         <th>D.Chrage</th>
                                         <th>Amount</th>
                                         <th>Same Day</th>
@@ -66,7 +66,7 @@
 
                                             <th>#{{$res->parcel_invoice}}</th>
                                             {{--                                <td>{{$res->parcel_type_id}}</td>--}}
-                                         {{--   <td>{{$res->cod}}</td>--}}
+                                            {{--   <td>{{$res->cod}}</td>--}}
                                             <td>{{$res->delivery_charge}}</td>
                                             <td>{{$res->total_amount}}</td>
                                             <td>
@@ -92,16 +92,18 @@
                                             <td>
                                                 @if($res->delivery_status=="pending")
                                                     <span class="badge badge-pill badge-primary">Pending</span>
-                                                @elseif($res->is_paid_to_merchant=="accepted")
-                                                    <span class="badge badge-pill badge-secondary"> Accepted</span>
-                                                @elseif($res->is_paid_to_merchant=="cancelled")
+                                                @elseif($res->delivery_status=="accepted")
+                                                    <span class="badge badge-pill badge-success"> Accepted</span>
+                                                @elseif($res->delivery_status=="cancelled")
                                                     <span class="badge badge-pill badge-danger"> Cancelled</span>
-                                                @elseif($res->is_paid_to_merchant=="on_the-way")
+                                                @elseif($res->delivery_status=="on_the-way")
                                                     <span class="badge badge-pill badge-info"> On The Way</span>
-                                                @elseif($res->is_paid_to_merchant=="delivered")
+                                                @elseif($res->delivery_status=="delivered")
                                                     <span class="badge badge-pill badge-success"> Delivered</span>
-                                                @elseif($res->is_paid_to_merchant=="returned")
+                                                @elseif($res->delivery_status=="returned")
                                                     <span class="badge badge-pill badge-warning"> Returned</span>
+                                                @else
+                                                    <span class="badge badge-pill badge-warning"> {{statusFormat($res->delivery_status)}}</span>
 
                                                 @endif
                                             </td>

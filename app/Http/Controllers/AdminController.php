@@ -6,7 +6,9 @@ use App\Area;
 use App\DeliveryMan;
 use App\Merchant;
 use App\Parcel;
+use App\PaymentMethoed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -151,7 +153,8 @@ class AdminController extends Controller
     {
 
         $result = Merchant::where('merchant_id', $id)->first();
-        $results = Area::where('area_id', $id)->get();
+        $results = Area::where('area_id', $id)->first();
+        $payment_data = PaymentMethoed::where('merchant_id', Auth::guard('merchant')->id())->get();
         $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->orderBy('parcels.created_at', "DESC")
@@ -161,6 +164,7 @@ class AdminController extends Controller
         return view('admin.merchant.profile')
             ->with('result', $result)
             ->with('results', $results)
+            ->with('payment_data', $payment_data)
             ->with('parcel_list', $parcel_list);
 
 

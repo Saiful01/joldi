@@ -245,7 +245,7 @@
                         ©
                         <script>document.write(new Date().getFullYear())</script>
                         <span class="d-none d-sm-inline-block"> -  <i
-                                    class="mdi mdi-heart text-danger"></i> Developed by PLab.</span>
+                                    class="mdi mdi-heart text-danger"></i> Developed by <a href="http://pixonlab.com/" target="_blanck">PLab</a>.</span>
                     </div>
                 </div>
             </div>

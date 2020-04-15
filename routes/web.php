@@ -12,7 +12,6 @@
 */
 
 use App\Parcel;
-use App\ParcelStatus;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -37,7 +36,7 @@ Route::get('/merchant/forgot-password', 'MerchantController@forgotpassword');
 Route::post('/merchant/password-reset', 'MerchantController@resetpassword');
 Route::get('/merchant/confirm-password/{id}', 'MerchantController@confirmpassword');
 Route::any('/merchant/store', 'MerchantController@store');
-Route::any('/merchant/store', 'MerchantController@store');
+
 
 
 Route::group(['middleware' => 'admin'], function () {
@@ -175,35 +174,34 @@ Route::get('/get-parcel-type', function () {
 });
 Route::get('/get-delivery-charge/{id}', function (\Illuminate\Http\Request $request) {
 
-    return \App\ParcelType::where('parcel_type_id',$request['id'])->first();
+    return \App\ParcelType::where('parcel_type_id', $request['id'])->first();
 
 });
-
 
 
 Route::get('/statistics', function () {
 
 
     $par_count = Parcel::
-    where('parcels.merchant_id',Auth::guard('merchant')->id())
+    where('parcels.merchant_id', Auth::guard('merchant')->id())
         ->count();
     $delivery_pending = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcels.merchant_id', Auth::guard('merchant')->id())
         ->where('parcel_statuses.delivery_status', 'pending')->count();
     $delivery_accepted = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcels.merchant_id', Auth::guard('merchant')->id())
         ->where('parcel_statuses.delivery_status', 'accepted')->count();
     $delivery_cancelled = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcels.merchant_id', Auth::guard('merchant')->id())
         ->where('parcel_statuses.delivery_status', 'cancelled')->count();
     $delivery_on_the_way = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcels.merchant_id', Auth::guard('merchant')->id())
         ->where('parcel_statuses.delivery_status', 'on_the_way')->count();
     $delivery_delivered = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcels.merchant_id', Auth::guard('merchant')->id())
         ->where('parcel_statuses.delivery_status', 'delivered')->count();
     $delivery_returned = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-        ->where('parcels.merchant_id',Auth::guard('merchant')->id())
+        ->where('parcels.merchant_id', Auth::guard('merchant')->id())
         ->where('parcel_statuses.delivery_status', 'returned')->count();
 
     $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
