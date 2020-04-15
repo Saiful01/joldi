@@ -73,7 +73,6 @@ class ParcelController extends Controller
     {
 
 
-        $is_same_day = false;
         $request->validate([
             'delivery_charge' => 'required|numeric',
             'total_amount' => 'required|numeric',
@@ -83,13 +82,15 @@ class ParcelController extends Controller
 
         unset($request['_token']);
 
-        //return  $request->all();
-       /* if ($request['is_same_day'] == "on") {
-            $is_same_day = true;
-        }*/
+
+        if ($request['is_same_day']) {
+            $delivery_date = Carbon::now()->format('Y-m-d');
+        } else {
+            $delivery_date = Carbon::now()->addDays(1)->format('Y-m-d');
+            $request['is_same_day']=false;
+        }
 
 
-        $request['delivery_date'] = Carbon::parse($request['delivery_date'])->format('Y-m-d');
         $parcel_array = [
             'parcel_title' => $request['parcel_title'],
             'merchant_id' => Auth::guard('merchant')->id(),
@@ -101,13 +102,16 @@ class ParcelController extends Controller
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
             'total_amount' => $request['payable_amount'] - ($request['cod'] + $request['delivery_charge']),
-            'is_same_day' => $is_same_day,
-            'delivery_date' => $request['delivery_date'],
+            'is_same_day' => $request['is_same_day'],
+            'delivery_date' => $delivery_date,
             'parcel_notes' => $request['parcel_notes'],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
         ];
+
+
+        //return $parcel_array;
 
         $parcel_id = Parcel::insertGetId($parcel_array);
         $customer_array = [
@@ -161,7 +165,7 @@ class ParcelController extends Controller
     public function show(Parcel $parcel)
     {
 
-        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->where('merchant_id', Auth::guard('merchant')->id())
             ->get();

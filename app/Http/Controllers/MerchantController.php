@@ -12,7 +12,6 @@ use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -159,7 +158,7 @@ class MerchantController extends Controller
             $merchant_id = Merchant::insertGetId($array);
 
             //TODO:: Insert into Shop Table
-            $this->storeShop($merchant_id);
+            $this->storeShop($merchant_id, $request['merchant_name']);
             return back()->with('success', "Successfully Registered. Account will be verified by Admin");
         } catch (\Exception $exception) {
             return $exception->getMessage();
@@ -221,18 +220,27 @@ class MerchantController extends Controller
 
     }
 
-    private function sendEmail($user, $url)
+    private function sendEmail($to, $url)
     {
 
         $message = "To reset your password Go to this link: " . $url;
-        Mail::send('login.mail',
-            function (Message $message) use ($user, $url) {
-                $message->to($user['email']);
+
+        $subject = "Password Reset";
+
+        $headers = "From: info@joldi.com.bd" . "\r\n" .
+            "CC: memotiur@gmail.com";
+
+        mail($to, $subject, $message, $headers);
 
 
-            }
+        /* Mail::send('login.mail',
+             function (Message $message) use ($user, $url) {
+                 $message->to($user['email']);
 
-        );
+
+             }
+
+         );*/
     }
 
     public function confirmpassword($id)
@@ -265,9 +273,10 @@ class MerchantController extends Controller
     public function merchantSetting()
     {
         $result = Merchant::where('merchant_id', Auth::guard('merchant')->id())->first();
-        $result= PaymentMethoed::where('merchant_id', Auth::guard('merchant')->id())->first();
+        $payment_data = PaymentMethoed::where('merchant_id', Auth::guard('merchant')->id())->get();
 
         return view('merchant.setting.index')
+            ->with('payment_data', $payment_data)
             ->with('result', $result);
 
     }
@@ -275,7 +284,7 @@ class MerchantController extends Controller
     public function edit($id)
     {
         $result = Merchant::where('merchant_id', $id)->first();
-        $results = Area::where('area_id', $id)->get();
+        $results = Area::get();
         return view('merchant.setting.edit')
             ->with('areas', $results)
             ->with('result', $result);
@@ -355,7 +364,7 @@ class MerchantController extends Controller
         return base64_decode(strtr($input, '._-', '+/='));
     }
 
-    private function storeShop($merchant_id)
+    private function storeShop($merchant_id, $merchant_name)
     {
 
         $array = [
@@ -363,7 +372,20 @@ class MerchantController extends Controller
             'shop_name' => "My Shop",
             'shop_address' => "Address",
         ];
+
         Shop::create($array);
+
+        //Store Payment Method
+
+
+        $payment_method = [
+            'merchant_id' => $merchant_id,
+            'payment_methoed_name' => "",
+            'account_number' => "",
+            'payee_name' => $merchant_name
+        ];
+
+        PaymentMethoed::create($payment_method);
     }
 
 

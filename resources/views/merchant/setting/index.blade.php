@@ -18,11 +18,11 @@
     </div>
     <!-- end page title -->
     <div class="row">
-        <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="col-md-10 col-lg-10 col-xl-6">
 
             <!-- Simple card -->
             <div class="card">
-                <img class="card-img-top img-fluid" src="/merchant/{{$result->merchant_image}}" alt="Card image cap">
+                <img class="card-img-top img-fluid" src="/merchant/{{$result->merchant_image}}" alt="Card image cap" style="width: 100px;" width="100px">
                 <div class="card-body">
                     <h4> Name: {{$result->merchant_name}}</h4>
                     <h6> Phone: {{$result->merchant_phone}}</h6>
@@ -31,12 +31,13 @@
                     <h6> COD Enable: @if($result->is_cod_enable==0) No @else yes @endif</h6>
                     <h6> COD Charge: {{$result->cod_charge}}</h6>
                     <h6> Area: {{$result->area_name}}</h6>
-                    <a href="/merchant/setting/edit/{{$result->merchant_id}}" class="btn btn-primary waves-effect waves-light">Edit</a>
+                    <a href="/merchant/setting/edit/{{$result->merchant_id}}"
+                       class="btn btn-primary waves-effect waves-light">Edit</a>
                 </div>
             </div>
 
         </div>
-        <div class="col-md-6 col-lg-6 col-xl-3">
+        <div class="col-md-6 col-lg-6">
 
             <!-- Simple card -->
             <div class="card">
@@ -44,13 +45,19 @@
                     <h5 class="mt-2 text-center text-success"> Payment Methoed Details</h5>
                 </div>
                 <div class="card-body">
-                    <h5> Payment Methoed : {{$result->payment_methoed_name}}</h5>
-                    <h6> Account Number: {{$result->account_number}}</h6>
-                    <h6> Branch Addrss: {{$result->branch_address}}</h6>
-                    <h6> Payee Name: {{$result->payee_name}}</h6>
+                    @foreach($payment_data as $data)
+                        <h6> <strong>Payment Method :</strong> {{$data->payment_methoed_name}}</h6>
+                        <h6> <strong>Account Number:</strong> {{$data->account_number}}</h6>
+                        <h6> <strong>Branch Addrss:</strong> {{$data->branch_address}}</h6>
+                        <h6> <strong>Payee Name:</strong> {{$data->payee_name}}</h6>
 
-                    <a href="/merchant/paymentmethoed/edit/{{$result->paymentmethoed_id}}" class="btn btn-primary waves-effect waves-light">Edit</a>
-                    <a href="/merchant/paymentmethoed/create" class="btn btn-info waves-effect waves-light">create</a>
+                        <a href="/merchant/paymentmethoed/edit/{{$data->paymentmethoed_id}}"
+                           class="btn btn-primary btn-sm waves-effect waves-light">Edit</a>
+
+                    @endforeach
+                    <hr>
+                    <a href="/merchant/paymentmethoed/create"
+                       class="btn btn-info btn-sm waves-effect waves-light">+create</a>
                 </div>
             </div>
 

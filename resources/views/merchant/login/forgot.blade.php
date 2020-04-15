@@ -36,8 +36,8 @@
 
                                     <div class="form-group">
                                         <label for="username">Email</label>
-                                        <input type="text" class="form-control" id="username" name="merchant_email"
-                                               placeholder="Enter username">
+                                        <input type="email" class="form-control" id="username" name="merchant_email"
+                                               placeholder="">
                                         <input type="hidden" class="form-control" value="{{csrf_token()}}" name="_token">
                                     </div>
 

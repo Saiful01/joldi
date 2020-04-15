@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\CurrentLocation;
+use App\DeliveryMan;
 use App\Http\Controllers\Controller;
 use App\Parcel;
 use App\ParcelStatus;
@@ -62,19 +64,35 @@ class ParcelApiController extends Controller
         $access_token = "ABC";
         $parcels = null;
 
-        $customer_phone = $request['phone_number'];
+        $customer_phone = $request['customer_phone'];
+        // return $customer = Customer::where('customer_phone', $customer_phone)->get();
+
+        //return $customer->customer_id;
+
 
         try {
-            $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-                /*   ->join('delivery_men', 'parcel_statuses.customer_phone', '=', 'delivery_men.delivery_man_id')*/
-                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                /*->join('delivery_men', 'parcel_statuses.customer_phone', '=', 'delivery_men.delivery_man_id')*/
+                ->leftJoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
                 ->where('customers.customer_phone', $customer_phone)
-                ->orderBy('parcels.created_at', "DESC");
-            /*
-                        if ($request['status'] != "all") {
-                            $query->where('parcel_statuses.delivery_status', $request['status']);
-                        }*/
-            $parcels = $query->get();
+                ->orderBy('parcels.created_at', "DESC")
+                ->get();
+
+            foreach ($parcels as $parcel) {
+
+                if ($parcel->delivery_man_id != null) {
+                    $delivery = DeliveryMan::where('delivery_man_id', $parcel->delivery_man_id)->first();
+
+                    $parcel->delivery_man_name = $delivery->delivery_man_name;
+                    $parcel->delivery_man_phone = $delivery->delivery_man_phone;
+                } else {
+                    $parcel->delivery_man_name = "Not Assigned";
+                    $parcel->delivery_man_phone = "Not Assigned";
+                }
+
+
+            }
+
 
         } catch (\Exception $exception) {
 
@@ -219,18 +237,13 @@ class ParcelApiController extends Controller
         }
 
         try {
-            if ($status == "delivered") {
 
-                $parcel_array = [
-                    'delivery_status' => $status,
-                    'is_complete' => true,
-                ];
-            } else {
 
-                $parcel_array = [
-                    'delivery_status' => $status,
-                ];
-            }
+            $parcel_array = [
+                'delivery_status' => $status,
+                'is_paid_to_merchant' => "received",
+            ];
+
 
             ParcelStatus::where('parcel_id', $is_exist->parcel_id)->update($parcel_array);
 
@@ -259,4 +272,62 @@ class ParcelApiController extends Controller
             'data' => $parcels_details,
         ];
     }
+
+    public function locationStore(Request $request)
+    {
+
+        $status_code = 200;
+        $message = "Location Updated";
+        $access_token = "ABC";
+        $parcels_details = null;
+        $access_token = 0;
+
+
+        try {
+
+            $array = [
+                'delivery_man_id' => $request['delivery_man_id'],
+                'lat' => $request['lat'],
+                'lon' => $request['lon'],
+                'address' => $request['address'],
+
+            ];
+            CurrentLocation::create($array);
+
+        } catch (\Exception $exception) {
+
+            $status_code = $exception->getCode();
+            $message = $exception->getMessage();
+        }
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
+            'data' => $parcels_details
+        ];
+    }
+
+
+    public function locationGet(Request $request)
+    {
+
+        $status_code = 200;
+        $message = "Location Get";
+        $access_token = "ABC";
+        $data = null;
+        $access_token = 0;
+
+
+        $data = CurrentLocation::where('delivery_man_id', $request['delivery_man_id'])->orderBy('created_at')->first();
+
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
+            'data' => $data,
+        ];
+    }
+
 }

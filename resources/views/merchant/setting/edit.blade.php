@@ -74,12 +74,13 @@
 
 
                         <div class="form-group row">
-                            <label for="area"  class="col-sm-2 col-form-label">Area</label>
+                            <label for="area" class="col-sm-2 col-form-label">Area</label>
                             <div class="col-sm-10">
                                 <select class="form-control form-control-lg" name="area_id">
                                     @foreach ($areas as $res)
                                         <option
-                                            @if ($res->area_id ==$result->area_id) selected @endif value="{{$res->area_id}}">{{$res->area_name}}</option>
+                                                @if ($res->area_id ==$result->area_id) selected
+                                                @endif value="{{$res->area_id}}">{{$res->area_name}}</option>
                                     @endforeach
                                 </select>
                             </div>

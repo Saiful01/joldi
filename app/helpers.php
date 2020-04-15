@@ -3,8 +3,10 @@
 function statusFormat($status)
 {
 
-    return strtoupper(str_replace('_', ' ', $status)); ;
+    return ucfirst(str_replace('_', ' ', $status));;
 }
+
+
 
 
 

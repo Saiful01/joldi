@@ -11,7 +11,8 @@
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Add New Parcel, <span style="color: red">You are adding Parcel for {{\Illuminate\Support\Facades\Session::get('shop_name')}}</span>
-                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal">Change</button>
+                            <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal">Change
+                            </button>
                         </a></li>
                 </ol>
             </div>
@@ -122,29 +123,15 @@
                                                id="example-text-input-lg" name="total_amount" ng-model="total_amount">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day
-                                        Delivery</label>
+
+
+                                <div class="form-group row" style="display: none;">
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Is Same
+                                        day</label>
                                     <div class="col-sm-9">
-                                        <input type="checkbox" id="is_same_day" switch="none" checked=""
-                                               name="is_same_day"
-                                               onchange="if(!this.checked){isSameDayTrue() }else{isSameDayFalse()}">
-                                        <label for="is_same_day" data-on-label="ON" data-off-label="OFF"></label>
-                                        <span>Check if not delivered in today</span>
+                                        <input class="form-control form-control-lg" type="hidden" name="is_same_day"
+                                               value="{{$is_same_day}}">
                                     </div>
-                                </div>
-
-                                <div class="form-group" id="delivery_date" style="display: none">
-                                    <div class="row">
-                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery
-                                            Date</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-lg"
-                                                   placeholder="yyyy-mm-dd"
-                                                   id="datepicker-autoclose" name="delivery_date">
-                                        </div>
-                                    </div>
-
                                 </div>
 
                             </div>
@@ -241,7 +228,7 @@
 
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">Shop Selection</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
