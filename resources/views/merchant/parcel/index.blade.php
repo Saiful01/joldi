@@ -63,6 +63,8 @@
                                                readonly>
                                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                                         <input type="hidden" name="shop_id" value="{{Session::get('shop_id')}}">
+                                        <input type="hidden" name="is_same_day" value="{{$is_same_day}}">
+
 
 
                                     </div>
@@ -122,30 +124,30 @@
                                                id="example-text-input-lg" name="total_amount" ng-model="total_amount">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day
-                                        Delivery</label>
-                                    <div class="col-sm-9">
-                                        <input type="checkbox" id="is_same_day" switch="none" checked=""
-                                               name="is_same_day"
-                                               onchange="if(!this.checked){isSameDayTrue() }else{isSameDayFalse()}">
-                                        <label for="is_same_day" data-on-label="ON" data-off-label="OFF"></label>
-                                        <span>Check if not delivered in today</span>
-                                    </div>
-                                </div>
+{{--                                <div class="form-group row">--}}
+{{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day--}}
+{{--                                        Delivery</label>--}}
+{{--                                    <div class="col-sm-9">--}}
+{{--                                        <input type="checkbox" id="is_same_day" switch="none" checked=""--}}
+{{--                                               name="is_same_day"--}}
+{{--                                               onchange="if(!this.checked){isSameDayTrue() }else{isSameDayFalse()}">--}}
+{{--                                        <label for="is_same_day" data-on-label="ON" data-off-label="OFF"></label>--}}
+{{--                                        <span>Check if not delivered in today</span>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="form-group" id="delivery_date" style="display: none">
-                                    <div class="row">
-                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery
-                                            Date</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control form-control-lg"
-                                                   placeholder="yyyy-mm-dd"
-                                                   id="datepicker-autoclose" name="delivery_date">
-                                        </div>
-                                    </div>
+{{--                                <div class="form-group" id="delivery_date" style="display: none">--}}
+{{--                                    <div class="row">--}}
+{{--                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery--}}
+{{--                                            Date</label>--}}
+{{--                                        <div class="col-sm-9">--}}
+{{--                                            <input type="text" class="form-control form-control-lg"--}}
+{{--                                                   placeholder="yyyy-mm-dd"--}}
+{{--                                                   id="datepicker-autoclose" name="delivery_date">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
 
                             </div>
                             <div class="col-md-6">
