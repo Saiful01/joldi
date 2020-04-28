@@ -15,6 +15,7 @@ use App\Shop;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ParcelController extends Controller
 {
@@ -71,7 +72,8 @@ class ParcelController extends Controller
      */
     public function store(Request $request)
     {
-
+       if($request->shop_id== null)
+           Redirect::to('/logout');
 
         $request->validate([
             'delivery_charge' => 'required|numeric',

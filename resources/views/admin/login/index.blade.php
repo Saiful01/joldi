@@ -6,12 +6,12 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="card overflow-hidden">
-                        <div class="bg-success">
+                        <div style="background: #1DC68C !important;">
                             <div class="text-primary text-center p-4">
                                 <h5 class="text-white font-size-20">Welcome !</h5>
-                                <p class="text-white-50">Admin Login to JOLDI.</p>
+                                <p class="text-white">Admin Login to JOLDI.</p>
                                 <a href="#" class="logo logo-admin">
-                                    <img src="/assets/images/logo.png" height="20" alt="logo">
+                                    <img src="/assets/images/logo.png" height="20" width="85%" alt="logo">
                                 </a>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6 text-right">
-                                            <button class="btn btn-success w-md waves-effect waves-light" type="submit">Log
+                                            <button class="btn text-white w-md waves-effect waves-light" style="background: #1DC68C !important;" type="submit">Log
                                                 In
                                             </button>
                                         </div>
