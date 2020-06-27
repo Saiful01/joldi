@@ -95,6 +95,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/parcel/receive-by-admin', 'ParcelController@productReceiveByAdmin');
 
     Route::get('/admin/setting', 'ParcelController@adminhtml');
+    Route::post('/merchant-all/change', 'AdminController@changeMerchant');
 });
 
 Route::group(['middleware' => 'admin'], function () {

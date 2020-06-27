@@ -50,6 +50,13 @@
                                        id="example-text-input-lg" name="area_address" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Area Value</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="text" placeholder="Value"
+                                       id="example-text-input-lg" name="value" required>
+                            </div>
+                        </div>
 
 
                         <div class="form-group row">

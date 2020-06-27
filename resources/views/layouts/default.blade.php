@@ -38,10 +38,12 @@
                         <li id="menu-item-528"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-528"><a
                                 href="/merchant/registration"><span
-                                    class="et_pb_more_button et_pb_button">Register</span></a></li>
+                                    class="btn  w-md waves-effect waves-light text-white"
+                                    style="background: #1DC68C !important;">Register</span></a></li>
                         <li id="menu-item-578"
                             class="menu-item menu-item-type-custom menu-item-object-custom menu-item-578"><a
-                                href="/merchant/login"><span class="et_pb_more_button et_pb_button">Login</span></a>
+                                href="/merchant/login"><span class="btn  w-md waves-effect waves-light text-white"
+                                                             style="background: #1DC68C !important;">Login</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -66,14 +68,12 @@
     </header> <!-- #main-header -->
 
 
-
-
-
-        @yield('content')
+@yield('content')
 
 
 <!-- Footer -->
-    <div class="et_pb_section et_pb_section_3 et_pb_with_background et_section_regular section_has_divider et_pb_bottom_divider et_pb_top_divider">
+    <div
+        class="et_pb_section et_pb_section_3 et_pb_with_background et_section_regular section_has_divider et_pb_bottom_divider et_pb_top_divider">
         <div class="et_pb_top_inside_divider"></div>
 
 
@@ -81,7 +81,8 @@
             <div class="et_pb_column et_pb_column_1_3 et_pb_column_11    et_pb_css_mix_blend_mode_passthrough">
 
 
-                <div class="et_pb_module et_pb_text et_pb_text_4 et_animated et_pb_bg_layout_dark  et_pb_text_align_left">
+                <div
+                    class="et_pb_module et_pb_text et_pb_text_4 et_animated et_pb_bg_layout_dark  et_pb_text_align_left">
 
 
                     <div class="et_pb_text_inner">
@@ -101,7 +102,8 @@
             <div class="et_pb_column et_pb_column_1_3 et_pb_column_12    et_pb_css_mix_blend_mode_passthrough">
 
 
-                <div class="et_pb_module et_pb_text et_pb_text_6 et_animated et_pb_bg_layout_dark  et_pb_text_align_left">
+                <div
+                    class="et_pb_module et_pb_text et_pb_text_6 et_animated et_pb_bg_layout_dark  et_pb_text_align_left">
 
 
                     <div class="et_pb_text_inner">
@@ -117,10 +119,12 @@
                     </div>
                 </div> <!-- .et_pb_text -->
             </div> <!-- .et_pb_column -->
-            <div class="et_pb_column et_pb_column_1_3 et_pb_column_13    et_pb_css_mix_blend_mode_passthrough et-last-child">
+            <div
+                class="et_pb_column et_pb_column_1_3 et_pb_column_13    et_pb_css_mix_blend_mode_passthrough et-last-child">
 
 
-                <div class="et_pb_module et_pb_text et_pb_text_8 et_animated et_pb_bg_layout_dark  et_pb_text_align_left">
+                <div
+                    class="et_pb_module et_pb_text et_pb_text_8 et_animated et_pb_bg_layout_dark  et_pb_text_align_left">
 
 
                     <div class="et_pb_text_inner">

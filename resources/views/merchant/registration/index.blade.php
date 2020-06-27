@@ -6,10 +6,10 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="card overflow-hidden">
-                        <div class="bg-success">
+                        <div style="background: #1DC68C !important;">
                             <div class="text-primary text-center p-4">
                                 <h5 class="text-white font-size-20">Free Register</h5>
-                                <p class="text-white-50">Get your free Merchant account now.</p>
+                                <p class="text-white">Get your free Merchant account now.</p>
                                 <a href="/" class="logo logo-admin">
                                     <img src="/assets/images/logo.png" height="24" alt="logo">
                                 </a>
@@ -58,7 +58,7 @@
 
                                     <div class="form-group row">
                                         <div class="col-12 text-right">
-                                            <button class="btn btn-success w-md waves-effect waves-light" type="submit">Register</button>
+                                            <button class="btn  w-md waves-effect waves-light text-white" style="background: #1DC68C !important;" type="submit">Register</button>
                                         </div>
                                     </div>
 

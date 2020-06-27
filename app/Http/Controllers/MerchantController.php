@@ -12,6 +12,7 @@ use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -154,7 +155,24 @@ class MerchantController extends Controller
         }
 
 
+
         try {
+
+
+            //TODO::send email with confirmation url to u
+            $to_email = $request['merchant_email'];
+
+            $data = array(
+                'name' => $request['merchant_name'],
+                'body' => " Successfully Registered, Please wait for acitive your account"
+            );
+
+            Mail::send('mail', $data, function ($message) use ($to_email) {
+
+                $message->to($to_email);
+                $message->subject('Registration mail');
+
+            });
             $merchant_id = Merchant::insertGetId($array);
 
             //TODO:: Insert into Shop Table

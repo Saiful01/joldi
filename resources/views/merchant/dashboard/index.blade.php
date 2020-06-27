@@ -39,8 +39,8 @@
                             </div>
                             <div class="pt-2">
                                 <div class="float-right">
-                                    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"class="text-white-50"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
+
+                                    <a href="" data-toggle="modal" data-target=".bd-example-modal-lg" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
                                 </div>
 
                                 {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
@@ -279,6 +279,42 @@
         </div>
     </div>
     <!-- end row -->
+    //modal
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="card card-body pickupOptions border-0 p-2">
+
+                    <h5 class="text-center">Choose Delivery Type</h5>
+                    <div class="row">
+
+                        <div class="col-6"><a href="/merchant/parcels/next_day">
+                                <div class="card info-card border-0 my-3 cursor-pointer">
+                                    <div class="card-body rounded text-white" style="background-color: #4E599A ">
+                                        {{--                                    <div class="text-center over-badge"><span class="content">24h</span></div>--}}
+                                        <p class="font-13 mb-0 text-center line-height-1_25 lbl">Next Day</p>
+                                        <p class="font-12 text-center line-height-1_25 mb-0 opacity-7_5">Delivery</p></div>
+                                </div>
+                            </a>
+
+                        </div>
+                        <div class="col-6"><a href="/merchant/parcels/same_day">
+                                <div class="card info-card border-0 my-3 cursor-pointer">
+                                    <div class="card-body rounded text-white " style="background-color: #25A7B7">
+                                        {{--                                    <div class="text-center over-badge"><span class="content">12h</span></div>--}}
+                                        <p class="font-13 mb-0 text-center line-height-1_25 lbl">Same Day</p>
+                                        <p class="font-12 text-center line-height-1_25 mb-0 opacity-7_5">Delivery</p></div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <script>
 
