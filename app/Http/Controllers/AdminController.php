@@ -10,6 +10,7 @@ use App\PaymentMethoed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -32,11 +33,15 @@ class AdminController extends Controller
             ->with('result', $result);
 
     }
+    public function changeMerchant( Request $request){
+        return $request->all();
+    }
 
-    public function merchantInactive($id)
+    public function merchantInactive( $id)
     {
 
         try {
+
             Merchant::where('merchant_id', $id)->update([
                 'active_status' => false
             ]);
@@ -52,10 +57,24 @@ class AdminController extends Controller
     {
 
         try {
+         $merchant =  Merchant::where('merchant_id', $id)->first();
             Merchant::where('merchant_id', $id)->update([
                 'active_status' => true
             ]);
+            //TODO::send email with confirmation url to u
+            $to_email = $merchant->merchant_email;
 
+            $data = array(
+                'name' => $merchant->merchant_name,
+                'body' => getMerchantActiveMessage()
+            );
+
+            Mail::send('mail', $data, function ($message) use ($to_email) {
+
+                $message->to($to_email);
+                $message->subject('Account Verified mail');
+
+            });
             return back()->with('success', "Successfully Activate");
         } catch (\Exception $exception) {
 

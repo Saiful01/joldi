@@ -5,6 +5,9 @@ function statusFormat($status)
 
     return ucfirst(str_replace('_', ' ', $status));;
 }
+function getMerchantActiveMessage(){
+    return " your account have been successfully verified. Start your delivery today ";
+}
 
 
 
