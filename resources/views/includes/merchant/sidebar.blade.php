@@ -17,7 +17,7 @@
 
 
                 <li>
-                    <a href="" data-toggle="modal" data-target=".bd-example-modal-lg" class=" waves-effect">
+                    <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" class=" waves-effect">
                         <i class="fas fa-archive"></i>
                         <span>Add Parcel</span>
                     </a>

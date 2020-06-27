@@ -224,9 +224,7 @@ class MerchantController extends Controller
     {
 
         $message = "To reset your password Go to this link: " . $url;
-
         $subject = "Password Reset";
-
         $headers = "From: info@joldi.com.bd" . "\r\n" .
             "CC: memotiur@gmail.com";
 

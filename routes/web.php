@@ -38,7 +38,6 @@ Route::get('/merchant/confirm-password/{id}', 'MerchantController@confirmpasswor
 Route::any('/merchant/store', 'MerchantController@store');
 
 
-
 Route::group(['middleware' => 'admin'], function () {
 
 
