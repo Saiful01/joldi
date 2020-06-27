@@ -42,15 +42,12 @@
                                     <thead>
                                     <tr role="row">
                                         <th>Invoice No</th>
-                                        <th>COD</th>
                                         <th>D.Chrage</th>
                                         <th>Amount</th>
                                         <th>Same Day</th>
                                         <th>D. Date</th>
                                         <th>Deliveryman</th>
-                                        <th>Customer</th>
-                                        <th>Phone</th>
-                                        <th>Address</th>
+                                        <th>Note</th>
                                         <th>Status</th>
                                         <th>P. Status</th>
                                         <th>Action</th>
@@ -67,7 +64,6 @@
 
                                             <th>#{{$res->parcel_invoice}}</th>
                                             {{--                                <td>{{$res->parcel_type_id}}</td>--}}
-                                            <td>{{$res->cod}}</td>
                                             <td>{{$res->delivery_charge}}</td>
                                             <td>{{$res->total_amount}}</td>
                                             <td>
@@ -166,9 +162,8 @@
                                             </td>
 
 
-                                            <td>{{$res->customer_name}}</td>
-                                            <td>{{$res->customer_phone}}</td>
-                                            <td>{{$res->customer_address}}</td>
+
+                                            <td>{{$res->parcel_notes}}</td>
                                             <td>
                                                 @if($res->delivery_status=="pending")
                                                     <span class="badge badge-pill badge-primary">Pending</span>

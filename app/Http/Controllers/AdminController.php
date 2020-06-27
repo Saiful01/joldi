@@ -37,25 +37,75 @@ class AdminController extends Controller
 
 
         if($request['change']==1){
+            try {
 
-            foreach ($request['merchant_id'] as $merchant_id){
+                foreach ($request['merchant_id'] as $merchant_id){
 
-                //echo $merchant_id;
+                    //echo $merchant_id;
 
-                $this->merchantActivate($merchant_id);
+                    $this->merchantActivate($merchant_id);
 
 
-                //Change here
+                    //Change here
+
+                }
+                return back()->with('success', "Successfully Active");
 
             }
+            catch (\Exception $exception){
+                return back()->with('failed', $exception->getMessage());
+            }
+
+
+
+
 
 
             //Active
         }else{
-            //Inactive
+            try {
+                //Inactive
+                foreach ($request['merchant_id'] as $merchant_id){
+
+                    //echo $merchant_id;
+
+                    $this->merchantInactive($merchant_id);
+
+
+                    //Change here
+
+
+                }
+                return back()->with('success', "Successfully Inactive");
+
+
+            }
+            catch (\Exception $exception){
+                return back()->with('failed', $exception->getMessage());
+            }
+
+
         }
 
+
         //return $request->all();
+    }
+    public function deliverymanChange( Request $request){
+
+        if($request['change']==1){
+
+            foreach ($request['delivery_man_id'] as $delivery_man_id){
+
+                $this->deliverymanActivate($delivery_man_id);
+            }
+            return back()->with('success', "Successfully Active");
+        }else{
+            foreach ($request['delivery_man_id'] as $delivery_man_id){
+                $this->deliverymanInactive($delivery_man_id);
+
+            }
+            return back()->with('success', "Successfully Inactive");
+        }
     }
 
     public function merchantInactive( $id)
@@ -63,7 +113,7 @@ class AdminController extends Controller
 
         try {
 
-            Merchant::qawhere('merchant_id', $id)->update([
+            Merchant::where('merchant_id', $id)->update([
                 'active_status' => false
             ]);
 
@@ -96,7 +146,7 @@ class AdminController extends Controller
                 $message->subject('Account Verified mail');
 
             });
-            return back()->with('success', "Successfully Activate");
+            return 'success';
         } catch (\Exception $exception) {
 
             return back()->with('success', $exception->getMessage());

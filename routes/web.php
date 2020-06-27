@@ -76,6 +76,7 @@ Route::group(['middleware' => 'admin'], function () {
     // Delivery Man Route
     Route::get('/admin/deliveryman/create', 'DeliveryManController@create');
     Route::get('/admin/deliverymans', 'DeliveryManController@show');
+    Route::post('/deliveryman-all/change', 'AdminController@deliverymanChange');
     Route::post('/admin/deliveryman/store', 'DeliveryManController@store');
     Route::get('/admin/deliveryman/edit/{id}', 'DeliveryManController@edit');
     Route::post('/admin/deliveryman/update', 'DeliveryManController@update');
@@ -87,6 +88,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/view/payments-request', 'PaymentController@adminPayment');
     Route::get('/admin/view/payments-request/approve/{id}', 'PaymentController@adminPaymentApprove');
     Route::get('/admin/view/payments-request/cancel/{id}', 'PaymentController@adminPaymentCancel');
+    Route::post('/paymentrequest-all/change', 'PaymentController@PaymentRequestChange');
 
 
     Route::get('/admin/parcel/show', 'ParcelController@adminParcelShow');

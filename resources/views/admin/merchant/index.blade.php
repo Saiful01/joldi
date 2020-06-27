@@ -34,88 +34,96 @@
 
                     <h4 class="card-title">
                         Merchant List</h4>
-                        <form method="post" action="/merchant-all/change"  >
-                            <table id="" class="table table-bordered dt-responsive nowrap"
-                                   style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                <thead>
+                    <form method="post" action="/merchant-all/change">
+                        <table id="" class="table table-bordered dt-responsive nowrap"
+                               style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>COD</th>
+                                <th>COD Charge</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            @php($i=1)
+                            @foreach($results as $res)
+
                                 <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>COD</th>
-                                    <th>COD Charge</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <td><input class="ml-2" type="checkbox" name="merchant_id[]"
+                                               value="{{$res->merchant_id}}"></td>
+                                    <td>{{$res->merchant_name}}</td>
+                                    <td>{{$res->merchant_phone}}</td>
+                                    <td>{{$res->merchant_email}}</td>
+
+                                    <td>
+                                        @if($res->is_cod_enable)
+                                            <span class="badge badge-success">Yes</span>
+                                        @else
+                                            <span class="badge badge-warning">No</span>
+                                        @endif
+                                    </td>
+
+
+                                    <td>{{$res->cod_charge}}</td>
+
+                                    <td>
+                                        @if($res->active_status)
+                                            <span class="badge badge-success">Active</span>
+                                        @else
+                                            <span class="badge badge-danger">Inactive</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+
+                                        <div class="btn-group mr-1 mt-2">
+                                            <button type="button" class="btn btn-info btn-sm">Action</button>
+                                            <button type="button"
+                                                    class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="mdi mdi-chevron-down"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item"
+                                                   href="/admin/merchant/edit/{{$res->merchant_id}}">Edit</a>
+                                                <a class="dropdown-item"
+                                                   href="/admin/merchant/profile/{{$res->merchant_id}}">Profile</a>
+                                                @if($res->active_status)
+                                                    <a class="dropdown-item"
+                                                       href="/admin/merchant/inactive/{{$res->merchant_id}}">Inactive</a>
+                                                @else
+                                                    <a class="dropdown-item"
+                                                       href="/admin/merchant/activate/{{$res->merchant_id}}">Activate</a>
+                                                @endif
+                                            </div>
+                                        </div>
+
+
+                                    </td>
+
 
                                 </tr>
-                                </thead>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <button name="change" class="btn btn-primary float-right waves-effect waves-light mr-1"
+                                value="1" type="submit" onclick="return confirm('are you sure?')">Active
+                        </button>
+                        <button name="change" class="btn btn-danger float-right waves-effect waves-light mr-1" value="2"
+                                type="submit" onclick="return confirm('are you sure?')">Inactive
+                        </button>
 
 
-                                <tbody>
-                                @php($i=1)
-                                @foreach($results as $res)
-
-                                    <tr>
-                                        <td><input class="ml-2" type="checkbox" name="merchant_id[]"
-                                                   value="{{$res->merchant_id}}"> </td>
-                                        <td>{{$res->merchant_name}}</td>
-                                        <td>{{$res->merchant_phone}}</td>
-                                        <td>{{$res->merchant_email}}</td>
-
-                                        <td>
-                                            @if($res->is_cod_enable)
-                                                <span class="badge badge-success">Yes</span>
-                                            @else
-                                                <span class="badge badge-warning">No</span>
-                                            @endif
-                                        </td>
-
-
-                                        <td>{{$res->cod_charge}}</td>
-
-                                        <td>
-                                            @if($res->active_status)
-                                                <span class="badge badge-success">Active</span>
-                                            @else
-                                                <span class="badge badge-danger">Inactive</span>
-                                            @endif
-                                        </td>
-
-                                        <td>
-
-                                            <div class="btn-group mr-1 mt-2">
-                                                <button type="button" class="btn btn-info btn-sm">Action</button>
-                                                <button type="button"
-                                                        class="btn btn-info btn-sm dropdown-toggle dropdown-toggle-split"
-                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-chevron-down"></i>
-                                                </button>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="/admin/merchant/edit/{{$res->merchant_id}}">Edit</a>
-                                                    <a class="dropdown-item" href="/admin/merchant/profile/{{$res->merchant_id}}">Profile</a>
-                                                    @if($res->active_status)
-                                                        <a class="dropdown-item" href="/admin/merchant/inactive/{{$res->merchant_id}}">Inactive</a>
-                                                    @else
-                                                        <a class="dropdown-item" href="/admin/merchant/activate/{{$res->merchant_id}}">Activate</a>
-                                                    @endif
-                                                </div>
-                                            </div>
-
-
-                                        </td>
-
-
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            <button name="change" value="1" type="submit" >Active</button>
-                            <button name="change" value="2" type="submit" >Inactive</button>
-
-
-                        </form>
+                    </form>
 
 
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ParcelStatus;
 use App\PaymentHistory;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -16,6 +17,23 @@ class PaymentController extends Controller
             ->get();
 
         return view('admin.payment.payment_request')->with('results', $results);
+    }
+    public function PaymentRequestChange( Request $request){
+
+        if($request['change']==1){
+
+            foreach ($request['id'] as $id){
+
+                $this->adminPaymentApprove($id);
+            }
+            return back()->with('success', "Successfully Active");
+        }else{
+            foreach ($request['id'] as $id){
+                $this->adminPaymentCancel($id);
+
+            }
+            return back()->with('success', "Successfully Inactive");
+        }
     }
 
     public function adminPaymentApprove($id)
