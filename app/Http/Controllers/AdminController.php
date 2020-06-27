@@ -34,7 +34,28 @@ class AdminController extends Controller
 
     }
     public function changeMerchant( Request $request){
-        return $request->all();
+
+
+        if($request['change']==1){
+
+            foreach ($request['merchant_id'] as $merchant_id){
+
+                //echo $merchant_id;
+
+                $this->merchantActivate($merchant_id);
+
+
+                //Change here
+
+            }
+
+
+            //Active
+        }else{
+            //Inactive
+        }
+
+        //return $request->all();
     }
 
     public function merchantInactive( $id)
@@ -42,7 +63,7 @@ class AdminController extends Controller
 
         try {
 
-            Merchant::where('merchant_id', $id)->update([
+            Merchant::qawhere('merchant_id', $id)->update([
                 'active_status' => false
             ]);
 
