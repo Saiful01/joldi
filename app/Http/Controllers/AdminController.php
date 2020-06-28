@@ -15,6 +15,74 @@ use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     //
+    public function sameDaySearch(){
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->where('parcels.is_same_day', true)
+            ->get();
+        $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas= Area::get();
+
+        return view('admin.consignment.show')
+            ->with('delivery_mans', $delivery_mans)
+            ->with('areas', $areas)
+            ->with('results', $parcels);
+
+    }
+    public function nextDaySearch(){
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->where('parcels.is_same_day', false)
+            ->get();
+        $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas= Area::get();
+
+        return view('admin.consignment.show')
+            ->with('delivery_mans', $delivery_mans)
+            ->with('areas', $areas)
+            ->with('results', $parcels);
+
+    }
+    public function invoiceSearch(Request $request){
+        $invoice=$request['invoice'];
+        $parcels = Parcel::where('parcel_invoice','LIKE','%'.$invoice.'%')
+            ->join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->get();
+        $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas= Area::get();
+
+        return view('admin.consignment.show')
+            ->with('delivery_mans', $delivery_mans)
+            ->with('results', $parcels)
+            ->with('areas', $areas)
+            ->with('invoice', $invoice);
+
+    }
+    public function areaSearch(Request $request){
+          $area=$request['area_id'];
+           $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+               ->where('areas.area_id','LIKE','%'.$area.'%')
+            ->get();
+        $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas= Area::get();
+
+        return view('admin.consignment.show')
+            ->with('delivery_mans', $delivery_mans)
+            ->with('results', $parcels)
+            ->with('areas', $areas)
+            ->with('area', $area);
+
+    }
 
     public function merchants()
     {
@@ -183,14 +251,14 @@ class AdminController extends Controller
         }
     }
 
-    public function try($id)
+/*    public function try($id)
     {
 
 
         return $id;
         $result = Merchant::orderBy('created_at', 'DESC')->get();
         return view('admin.merchant.index')->with('results', $result);
-    }
+    }*/
 
     public function merchantUpdate(Request $request)
     {

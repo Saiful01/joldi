@@ -34,6 +34,7 @@
 
                     <h4 class="card-title">
                         Delivery Man List</h4>
+                        <a href="/admin/deliveryman/tarck" type="button" class="float-left btn btn-info">Deliveryman Location</a>
                         <a href="/admin/deliveryman/create" type="button" class="float-right btn btn-success">+new</a>
                         <form method="post" action="/deliveryman-all/change">
                             <table id="" class="table table-bordered dt-responsive nowrap"

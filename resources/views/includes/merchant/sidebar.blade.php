@@ -6,7 +6,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Main</li>
+             {{--   <li class="menu-title">Main</li>--}}
 
                 <li>
                     <a href="/merchant/dashboard" class="waves-effect">

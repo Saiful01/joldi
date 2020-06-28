@@ -14,6 +14,9 @@
                             <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal">Change
                             </button>
                         </a></li>
+                    {{--<a class="btn btn-sm btn-danger float-right d-inline" href="">Track Parcel</a>--}}
+
+
                 </ol>
             </div>
         </div>
@@ -52,13 +55,13 @@
                           enctype="multipart/form-data"
                           novalidate="">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <h5 class=" mb-3">Parcel Information </h5>
                                 <hr>
 
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
-                                    <div class="col-sm-9">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>--}}
+                                    <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text" placeholder=""
                                                id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
                                                readonly>
@@ -67,30 +70,29 @@
                                         <input type="hidden" name="is_same_day" value="{{$is_same_day}}">
 
 
-
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                        Title</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder=""
-                                               id="example-text-input-lg" name="parcel_title">
-                                    </div>
-                                </div>
+                                {{--     <div class="form-group row">
+                                         <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
+                                             Title</label>
+                                         <div class="col-sm-12">
+                                             <input class="form-control form-control-lg" type="text"
+                                                    placeholder=""
+                                                    id="example-text-input-lg" name="parcel_title">
+                                         </div>
+                                     </div>--}}
 
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                        Types</label>
-                                    <div class="col-sm-9">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
+                                        Types</label>--}}
+                                    <div class="col-sm-12">
                                         <select ng-model="parcel_type" class="form-control form-control-lg"
                                                 name="parcel_type_id" ng-change="update()">
                                             {{-- <option value="0">
                                                  Select
                                              </option>--}}
-
+                                            <option value="" selected disabled hidden>ওজন</option>
                                             <option ng-repeat="x in parcels" value="@{{x.parcel_type_id}}"
                                                     ng-selected="1">
                                                 @{{x.title}}
@@ -101,61 +103,71 @@
                                     </div>
                                 </div>
                                 <div class="form-group row" style="display: none;">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>
-                                    <div class="col-sm-9">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>--}}
+                                    <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
                                                value="{{$cod_charge}}" name="cod"
                                                readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text" placeholder="0"
+                                    {{--   <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>--}}
+                                    <div class="col-sm-12">
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder="ডেলিভারি চার্জ"
                                                id="delivery_charge" name="delivery_charge" ng-model="delivery_charge"
                                                readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
-                                        Amount</label>
-                                    <div class="col-sm-9">
+                                    {{-- <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
+                                         Price</label>--}}
+                                    <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text"
-                                               placeholder="Total Amount"
+                                               placeholder="পার্সেল  প্রাইস"
+                                               id="example-text-input-lg" name="payable_amount"
+                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{--   <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
+                                           Amount</label>--}}
+                                    <div class="col-sm-12">
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder="মোট টাকা"
                                                id="example-text-input-lg" name="total_amount" ng-model="total_amount">
                                     </div>
                                 </div>
-{{--                                <div class="form-group row">--}}
-{{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day--}}
-{{--                                        Delivery</label>--}}
-{{--                                    <div class="col-sm-9">--}}
-{{--                                        <input type="checkbox" id="is_same_day" switch="none" checked=""--}}
-{{--                                               name="is_same_day"--}}
-{{--                                               onchange="if(!this.checked){isSameDayTrue() }else{isSameDayFalse()}">--}}
-{{--                                        <label for="is_same_day" data-on-label="ON" data-off-label="OFF"></label>--}}
-{{--                                        <span>Check if not delivered in today</span>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                                {{--                                <div class="form-group row">--}}
+                                {{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day--}}
+                                {{--                                        Delivery</label>--}}
+                                {{--                                    <div class="col-sm-12">--}}
+                                {{--                                        <input type="checkbox" id="is_same_day" switch="none" checked=""--}}
+                                {{--                                               name="is_same_day"--}}
+                                {{--                                               onchange="if(!this.checked){isSameDayTrue() }else{isSameDayFalse()}">--}}
+                                {{--                                        <label for="is_same_day" data-on-label="ON" data-off-label="OFF"></label>--}}
+                                {{--                                        <span>Check if not delivered in today</span>--}}
+                                {{--                                    </div>--}}
+                                {{--                                </div>--}}
 
-{{--                                <div class="form-group" id="delivery_date" style="display: none">--}}
-{{--                                    <div class="row">--}}
-{{--                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery--}}
-{{--                                            Date</label>--}}
-{{--                                        <div class="col-sm-9">--}}
-{{--                                            <input type="text" class="form-control form-control-lg"--}}
-{{--                                                   placeholder="yyyy-mm-dd"--}}
-{{--                                                   id="datepicker-autoclose" name="delivery_date">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                {{--                                <div class="form-group" id="delivery_date" style="display: none">--}}
+                                {{--                                    <div class="row">--}}
+                                {{--                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery--}}
+                                {{--                                            Date</label>--}}
+                                {{--                                        <div class="col-sm-12">--}}
+                                {{--                                            <input type="text" class="form-control form-control-lg"--}}
+                                {{--                                                   placeholder="yyyy-mm-dd"--}}
+                                {{--                                                   id="datepicker-autoclose" name="delivery_date">--}}
+                                {{--                                        </div>--}}
+                                {{--                                    </div>--}}
 
-{{--                                </div>--}}
-
+                                {{--                                </div>--}}
 
 
                                 <div class="form-group row" style="display: none;">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Is Same
-                                        day</label>
-                                    <div class="col-sm-9">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Is Same
+                                        day</label>--}}
+                                    <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="hidden" name="is_same_day"
                                                value="{{$is_same_day}}">
                                     </div>
@@ -163,44 +175,37 @@
 
 
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <h5 class=" mb-3">Customer Information </h5>
                                 <hr>
+
+
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                        Price</label>
-                                    <div class="col-sm-9">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Name</label>--}}
+                                    <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text"
-                                               placeholder="Parcel price"
-                                               id="example-text-input-lg" name="payable_amount"
-                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Name</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text" placeholder="Name"
+                                               placeholder="কাস্টমার নাম"
                                                id="example-text-input-lg" name="customer_name">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Phone</label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control form-control-lg" type="text" placeholder="Phone"
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Phone</label>--}}
+                                    <div class="col-sm-12">
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder=" কাস্টমার ফোন"
                                                id="example-text-input-lg" name="customer_phone">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Area</label>
-                                    <div class="col-sm-9">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Area</label>--}}
+                                    <div class="col-sm-12">
 
                                         <select class="form-control form-control-lg"
                                                 name="area_id">
+                                            <option>এলাকা</option>
                                             @foreach($areas as $area)
                                                 <option value="{{$area->area_id}}">{{$area->area_name}}</option>
                                             @endforeach
@@ -209,26 +214,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Address</label>
-                                    <div class="col-sm-9">
-                               <textarea class="form-control form-control-lg" type="text" placeholder="Customer Address"
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Address</label>--}}
+                                    <div class="col-sm-12">
+                               <textarea class="form-control form-control-lg" type="text" placeholder="কাস্টমার ঠিকানা"
                                          id="example-text-input-lg" name="customer_address"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">
-                                        Note</label>
-                                    <div class="col-sm-9">
-                               <textarea class="form-control form-control-lg" type="text" placeholder="Write Note..."
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">--}}
+                                    {{--Note</label>--}}
+                                    <div class="col-sm-12">
+                               <textarea class="form-control form-control-lg" type="text"
+                                         placeholder="কোনো বিশেষ নির্দেশনা"
                                          id="example-text-input-lg" name="parcel_notes"></textarea>
                                     </div>
                                 </div>
 
 
                                 <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>
-                                    <div class="col-sm-9">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>--}}
+                                    <div class="col-sm-12">
                                         <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
                                             Submit
                                         </button>
@@ -239,9 +245,18 @@
                                 </div>
 
                             </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>ডেলিভারি চার্জ বিস্তারিত </h6>
+                                        <hr >
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </form>
+
 
                 </div>
             </div>

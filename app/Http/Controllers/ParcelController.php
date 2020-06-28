@@ -182,10 +182,13 @@ class ParcelController extends Controller
         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->get();
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas= Area::get();
         return view('admin.consignment.show')
             ->with('delivery_mans', $delivery_mans)
+            ->with('areas', $areas)
             ->with('results', $parcels);
     }
 

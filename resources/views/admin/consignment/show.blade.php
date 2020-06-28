@@ -29,9 +29,54 @@
                     @if(Session::has('failed'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
                     @endif
-                    <h4 class="card-title">Parcels</h4>
-                    <p class="card-title-desc">
-                    </p>
+                        <div class="row mb-3">
+                           {{-- <div class="col-md-1">
+                                <h4 class="card-title">Parcels</h4>
+                            </div>--}}
+                            <div class="col-md-2">
+                                <form method="post" action="/same-day/serach" >
+                                    <button class="btn  btn-primary waves-effect waves-light">Same Day</button>
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+                                </form>
+                            </div>
+                            <div class="col-md-2">
+                                <form method="post" action="/next-day/serach" >
+                                    <button class="btn  btn-success waves-effect waves-light">Next Day</button>
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                </form>
+
+                            </div>
+                            <div class="col-md-4">
+                                <form class="form-inline" method="post" action="/invoice/serach">
+                                    <div class="form-group mx-sm-3 ">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                        <input type="text" class="form-control" id="inputPassword2" name="invoice" placeholder="Invoice">
+                                        <button type="submit" class="btn btn-info form-group ml-2">Search</button>
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <form class="form-inline" method="post" action="/area/serach">
+                                    <div class="form-group mx-sm-3 ">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                        <select  class="form-control"  name="area_id" >
+                                            @foreach($areas as $area)
+                                            <option value="{{$area->area_id}}">{{$area->area_name}}</option>
+                                            @endforeach
+
+                                        </select>
+                                        <button type="submit" class="btn btn-info form-group ml-2">Search</button>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+
+
+
 
                     <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                         <div class="row">
@@ -48,6 +93,7 @@
                                         <th>D. Date</th>
                                         <th>Deliveryman</th>
                                         <th>Note</th>
+                                        <th>Area</th>
                                         <th>Status</th>
                                         <th>P. Status</th>
                                         <th>Action</th>
@@ -164,6 +210,7 @@
 
 
                                             <td>{{$res->parcel_notes}}</td>
+                                            <td>{{$res->area_name}}</td>
                                             <td>
                                                 @if($res->delivery_status=="pending")
                                                     <span class="badge badge-pill badge-primary">Pending</span>

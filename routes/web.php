@@ -76,6 +76,7 @@ Route::group(['middleware' => 'admin'], function () {
     // Delivery Man Route
     Route::get('/admin/deliveryman/create', 'DeliveryManController@create');
     Route::get('/admin/deliverymans', 'DeliveryManController@show');
+    Route::get('/admin/deliveryman/tarck', 'DeliveryManController@locationtrack');
     Route::post('/deliveryman-all/change', 'AdminController@deliverymanChange');
     Route::post('/admin/deliveryman/store', 'DeliveryManController@store');
     Route::get('/admin/deliveryman/edit/{id}', 'DeliveryManController@edit');
@@ -98,6 +99,10 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/admin/setting', 'ParcelController@adminhtml');
     Route::post('/merchant-all/change', 'AdminController@changeMerchant');
+    Route::post('/same-day/serach', 'AdminController@sameDaySearch');
+    Route::post('/next-day/serach', 'AdminController@nextDaySearch');
+    Route::post('/invoice/serach', 'AdminController@invoiceSearch');
+    Route::post('/area/serach', 'AdminController@areaSearch');
 });
 
 Route::group(['middleware' => 'admin'], function () {

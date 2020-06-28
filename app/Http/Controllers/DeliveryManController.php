@@ -18,6 +18,11 @@ class DeliveryManController extends Controller
     {
         //
     }
+    public function locationtrack()
+    {
+        return view('admin.deliveryman.map');
+
+    }
 
     /**
      * Show the form for creating a new resource.
