@@ -170,9 +170,48 @@ class ParcelController extends Controller
          $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->where('merchant_id', Auth::guard('merchant')->id())
+             ->orderBy('parcels.created_at', "DESC")
             ->get();
         return view('merchant.parcel.show')
             ->with('results', $parcels);
+    }
+    public function sameDaySearch(Parcel $parcel)
+    {
+
+         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('merchant_id', Auth::guard('merchant')->id())
+            ->where('is_same_day', true)
+             ->orderBy('parcels.created_at', "DESC")
+            ->get();
+        return view('merchant.parcel.show')
+            ->with('results', $parcels);
+    }
+    public function nextDaySearch(Parcel $parcel)
+    {
+
+         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('merchant_id', Auth::guard('merchant')->id())
+            ->where('is_same_day', false)
+             ->orderBy('parcels.created_at', "DESC")
+            ->get();
+        return view('merchant.parcel.show')
+            ->with('results', $parcels);
+    }
+    public function invoiceSearch(Parcel $parcel, Request $request)
+    {
+        $invoice=$request['invoice'];
+
+         $parcels = Parcel::where('parcel_invoice','LIKE','%'.$invoice.'%')
+             ->join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('merchant_id', Auth::guard('merchant')->id())
+            ->where('is_same_day', false)
+            ->get();
+        return view('merchant.parcel.show')
+            ->with('results', $parcels)
+            ->with('invoice', $invoice);
     }
 
 
@@ -183,6 +222,7 @@ class ParcelController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->orderBy('parcels.created_at', "DESC")
             ->get();
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas= Area::get();
@@ -357,6 +397,15 @@ class ParcelController extends Controller
      * @param \App\Parcel $parcel
      * @return \Illuminate\Http\Response
      */
+    public function deleleParcel( Request $request){
+
+            foreach ($request['parcel_id'] as $parcel_id){
+
+                $this->destroy($parcel_id);
+            }
+            return back()->with('success', "Successfully Deleted");
+
+    }
     public function destroy($id)
     {
         try {
