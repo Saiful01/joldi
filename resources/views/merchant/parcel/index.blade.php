@@ -56,22 +56,23 @@
                           novalidate="">
                         <div class="row">
                             <div class="col-md-4">
-                                <h5 class=" mb-3">Parcel Information </h5>
+                                <h5 class=" mb-3">{{$invoice}} </h5>
                                 <hr>
 
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>--}}
+                          {{--      <div class="form-group row">
+                                    --}}{{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>--}}{{--
                                     <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text" placeholder=""
                                                id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
                                                readonly>
-                                        <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                                        <input type="hidden" name="shop_id" value="{{Session::get('shop_id')}}">
-                                        <input type="hidden" name="is_same_day" value="{{$is_same_day}}">
+
 
 
                                     </div>
-                                </div>
+                                </div>--}}
+                                <input type="hidden" name="_token" value="{{{csrf_token()}}}">
+                                <input type="hidden" name="shop_id" value="{{Session::get('shop_id')}}">
+                                <input type="hidden" name="is_same_day" value="{{$is_same_day}}">
 
                                 {{--     <div class="form-group row">
                                          <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
@@ -110,15 +111,15 @@
                                                readonly>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    {{--   <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>--}}
+                         {{--       <div class="form-group row">
+                                    --}}{{--   <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>--}}{{--
                                     <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text"
                                                placeholder="ডেলিভারি চার্জ"
                                                id="delivery_charge" name="delivery_charge" ng-model="delivery_charge"
                                                readonly>
                                     </div>
-                                </div>
+                                </div>--}}
                                 <div class="form-group row">
                                     {{-- <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
                                          Price</label>--}}
@@ -129,15 +130,15 @@
                                                ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    {{--   <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
-                                           Amount</label>--}}
+                           {{--     <div class="form-group row">
+                                    --}}{{--   <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
+                                           Amount</label>--}}{{--
                                     <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text"
                                                placeholder="মোট টাকা"
                                                id="example-text-input-lg" name="total_amount" ng-model="total_amount">
                                     </div>
-                                </div>
+                                </div>--}}
                                 {{--                                <div class="form-group row">--}}
                                 {{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day--}}
                                 {{--                                        Delivery</label>--}}
@@ -250,6 +251,25 @@
                                     <div class="card-header">
                                         <h6>ডেলিভারি চার্জ বিস্তারিত </h6>
                                         <hr >
+                                    </div>
+                                    <div class="card-body" style="background-color: rgba(210,210,210,0.47)">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <h6>Cash Collection</h6>
+                                                <h6>Delivery Charge</h6>
+                                                <h6>Cod Charge</h6>
+                                                <hr>
+                                                <h6>Total Payble Amount</h6>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6>Tk. 100</h6>
+                                                <h6>Tk. 60</h6>
+                                                <h6>Tk. 0</h6>
+                                                <hr>
+                                                <h6>Tk. 40</h6>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
