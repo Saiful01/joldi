@@ -207,7 +207,6 @@ class ParcelController extends Controller
              ->join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->where('merchant_id', Auth::guard('merchant')->id())
-            ->where('is_same_day', false)
             ->get();
         return view('merchant.parcel.show')
             ->with('results', $parcels)

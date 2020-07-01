@@ -120,9 +120,9 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::get('/merchant/parcel/edit/{id}', 'ParcelController@edit');
     Route::post('/merchant/parcel/update', 'ParcelController@update');
     Route::get('/merchant/parcel/delete/{id}', 'ParcelController@destroy');
-    Route::post('/same-day/serach', 'ParcelController@sameDaySearch');
-    Route::post('/next-day/serach', 'ParcelController@nextDaySearch');
-    Route::post('/invoice/serach', 'ParcelController@invoiceSearch');
+    Route::post('/merchant/same-day/serach', 'ParcelController@sameDaySearch');
+    Route::post('/merchant/next-day/serach', 'ParcelController@nextDaySearch');
+    Route::post('/merchant/invoice/serach', 'ParcelController@invoiceSearch');
     Route::post('/parcel-all/change', 'ParcelController@deleleParcel');
 
 

@@ -34,21 +34,21 @@
                                  <h4 class="card-title">Parcels</h4>
                              </div>
                             <div class="col-md-2">
-                                <form method="post" action="/same-day/serach" >
+                                <form method="post" action="/merchant/same-day/serach" >
                                     <button class="btn  btn-primary waves-effect waves-light">Same Day</button>
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                                 </form>
                             </div>
                             <div class="col-md-2">
-                                <form method="post" action="/next-day/serach" >
+                                <form method="post" action="/merchant/next-day/serach" >
                                     <button class="btn  btn-success waves-effect waves-light">Next Day</button>
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 </form>
 
                             </div>
                             <div class="col-md-4">
-                                <form class="form-inline" method="post" action="/invoice/serach">
+                                <form class="form-inline" method="post" action="/merchant/invoice/serach">
                                     <div class="form-group mx-sm-3 ">
                                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         <input type="text" class="form-control" id="inputPassword2" name="invoice" placeholder="Invoice">
