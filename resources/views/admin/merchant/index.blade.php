@@ -39,7 +39,8 @@
                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th><input class="ml-1" type="checkbox" onclick="toggle(this);" /><br />
+                                </th>
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Email</th>
@@ -57,7 +58,7 @@
                             @foreach($results as $res)
 
                                 <tr>
-                                    <td><input class="ml-2" type="checkbox" name="merchant_id[]"
+                                    <td><input class="ml-1" type="checkbox" name="merchant_id[]"
                                                value="{{$res->merchant_id}}"></td>
                                     <td>{{$res->merchant_name}}</td>
                                     <td>{{$res->merchant_phone}}</td>
@@ -114,6 +115,7 @@
                             @endforeach
                             </tbody>
                         </table>
+
                         <input type="hidden" name="_token" value="{{csrf_token()}}">
                         <button name="change" class="btn btn-primary float-right waves-effect waves-light mr-1"
                                 value="1" type="submit" onclick="return confirm('are you sure?')">Active

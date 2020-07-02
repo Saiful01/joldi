@@ -79,11 +79,12 @@
                                 <div class="row">
                                     <div class="col-sm-12">
 
-                                        <table class="table mb-0">
+                                        <table class="table mb-0 table-bordered">
 
                                             <thead>
                                             <tr role="row">
-                                                <th>#</th>
+                                                <th><input class="ml-1" type="checkbox" onclick="toggle(this);" /><br />
+                                                </th>
                                                 <th>Invoice No</th>
                                                 {{--  <th>COD</th>--}}
                                                 <th>D.Chrage</th>
@@ -109,7 +110,7 @@
 
                                                     <td><input  type="checkbox" name="parcel_id[]"
                                                                 value="{{$res->parcel_id}}"></td>
-                                                    <td>#{{$res->parcel_invoice}}</td>
+                                                    <td>{{$res->parcel_invoice}}</td>
                                                     {{--                                <td>{{$res->parcel_type_id}}</td>--}}
                                                     {{--   <td>{{$res->cod}}</td>--}}
                                                     <td>{{$res->delivery_charge}}</td>
@@ -190,10 +191,12 @@
                                 </div>
 
                             </div>
+
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            {{--<button name="change" class="btn btn-primary float-right waves-effect waves-light mr-1"
-                                    value="1" type="submit" onclick="return confirm('are you sure?')">Active
-                            </button>--}}
+                            <button name="change" class="btn btn-primary float-right waves-effect waves-light mr-1"
+                                    value="1" type="submit" onclick="return confirm('are you sure?')">Print
+                            </button>
+                            {{--<a href="/merchant/print/all" class="btn btn-info float-right waves-effect waves-light mr-1" >Print</a>--}}
                             <button name="change" class="btn btn-danger float-right waves-effect waves-light mr-1" value="2"
                                     type="submit" onclick="return confirm('are you sure?')">Delete
                             </button>

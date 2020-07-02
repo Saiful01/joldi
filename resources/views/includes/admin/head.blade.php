@@ -13,7 +13,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
 
+
 <link href="{{asset('assets/libs/chartist/chartist.min.css')}}" rel="stylesheet">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
 

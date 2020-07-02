@@ -55,8 +55,15 @@
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">Shop address</label>
                             <div class="col-sm-10">
-                                <input class="form-control form-control-lg" type="email" placeholder="Address"
+                                <input class="form-control form-control-lg" type="text" placeholder="Address"
                                        id="example-text-input-lg" name="shop_address" value="{{$result->shop_address}}"  required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Shop Logo</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="file"
+                                       id="example-text-input-lg" name="logo"   required>
                             </div>
                         </div>
 

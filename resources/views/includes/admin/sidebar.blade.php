@@ -6,7 +6,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">Main</li>
+               {{-- <li class="menu-title">Main</li>--}}
 
                 <li>
                     <a href="/" class="waves-effect">
@@ -17,27 +17,27 @@
 
                 <li>
                     <a href="/admin/area/view" class=" waves-effect">
-                        <i class="ti-paint-roller"></i>
+                        <i class="ti-location-pin"></i>
                         <span>Manage Area</span>
                     </a>
                 </li>
                 <li>
                     <a href="/admin/parceltypes/view" class=" waves-effect">
-                        <i class="ti-paint-roller"></i>
+                        <i class="fas fa-archive"></i>
                         <span>Manage Parcel Types</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/admin/merchants" class=" waves-effect">
-                        <i class="ti-paint-roller"></i>
+                        <i class="fas fa-users"></i>
                         <span>Manage Merchant</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/admin/deliverymans" class=" waves-effect">
-                        <i class="ti-paint-roller"></i>
+                        <i class="fa fa-user-cog"></i>
                         <span>Manage DeliveryMan</span>
                     </a>
                 </li>
@@ -45,7 +45,7 @@
 
                 <li>
                     <a href="/admin/view/payments-request" class=" waves-effect">
-                        <i class="ti-money"></i>
+                        <i class="fas fa-money-bill"></i>
                         <span>View Payment Request</span>
                     </a>
                 </li>
@@ -54,7 +54,7 @@
 
                 <li>
                     <a href="/admin/parcel/show" class=" waves-effect">
-                        <i class="ti-list"></i>
+                        <i class="fa fa-clipboard-list"></i>
                         <span>All Consignment</span>
                     </a>
                 </li>

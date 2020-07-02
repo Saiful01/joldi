@@ -30,13 +30,15 @@
                     {{--                        the construction function: <code>$().DataTable();</code>.--}}
                     {{--                    </p>--}}
 
-                    <table id="" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <table id="" class="table table-bordered dt-responsive nowrap"
+                           style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
                             <th>phone</th>
                             <th>Address</th>
+                            <th>Logo</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -52,12 +54,18 @@
                                 <td>{{$res->shop_phone}}</td>
                                 <td>{{$res->shop_address}}</td>
                                 <td>
+                                    <img src="/assets/images/shop_logo/{{$res->logo}}" class="img-thumbnail" width="100px" alt="logo">
+                                </td>
+                                <td>
                                     <div class="dropdown">
-                                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-info dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
                                             Action
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="/merchant/shop/edit/{{$res->shop_id}}">Edit</a>
+                                            <a class="dropdown-item"
+                                               href="/merchant/shop/edit/{{$res->shop_id}}">Edit</a>
                                             <a class="dropdown-item" href="/merchant/shop/delete/{{$res->shop_id}}">Delete</a>
 
                                         </div>

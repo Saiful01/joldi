@@ -58,11 +58,14 @@
                             <div class="col-md-4">
                                 <h5 class=" mb-3">{{$invoice}} </h5>
                                 <hr>
+                                <input class="form-control form-control-lg" type="hidden" placeholder=""
+                                       id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
+                                       readonly>
 
-                          {{--      <div class="form-group row">
-                                    --}}{{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>--}}{{--
+                            {{--    <div class="form-group row">
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
                                     <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text" placeholder=""
+                                        <input class="form-control form-control-lg" type="hidden" placeholder=""
                                                id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
                                                readonly>
 

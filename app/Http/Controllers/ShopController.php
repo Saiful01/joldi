@@ -39,13 +39,34 @@ class ShopController extends Controller
     {
 
         unset($request['_token']);
-        $id = Auth::guard('merchant')->id();
-        $array = [
-            'shop_name' => $request['shop_name'],
-            'shop_address' => $request['shop_address'],
-            'shop_phone' => $request['shop_phone'],
-            'merchant_id' => $id
-        ];
+       $id = Auth::guard('merchant')->id();
+
+        if ($request->hasFile('logo')) {
+
+
+            $image = $request->file('logo');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/shop_logo');
+            $image->move($destinationPath, $image_name);
+            $array = [
+                'shop_name' => $request['shop_name'],
+                'shop_phone' => $request['shop_phone'],
+                'shop_address' => $request['shop_address'],
+                'logo' => $image_name,
+                'merchant_id'=>$id
+            ];
+        }
+        else{
+            $array = [
+                'shop_name' => $request['shop_name'],
+                'shop_phone' => $request['shop_phone'],
+                'shop_address' => $request['shop_address'],
+                'merchant_id'=>$id
+            ];
+
+        }
+
+
         try {
             Shop::create($array);
             return back()->with('success', "Successfully saved");
@@ -53,8 +74,6 @@ class ShopController extends Controller
             return back()->with('failed', $exception->getMessage());
         }
 
-
-        Shop::create($array);
 
 
     }
@@ -110,8 +129,34 @@ class ShopController extends Controller
     public function update(Request $request, Shop $shop)
     {
         unset($request['_token']);
+        $id = Auth::guard('merchant')->id();
+
+        if ($request->hasFile('logo')) {
+
+
+            $image = $request->file('logo');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/shop_logo');
+            $image->move($destinationPath, $image_name);
+            $array = [
+                'shop_name' => $request['shop_name'],
+                'shop_phone' => $request['shop_phone'],
+                'shop_address' => $request['shop_address'],
+                'logo' => $image_name,
+                'merchant_id'=>$id
+            ];
+        }
+        else{
+            $array = [
+                'shop_name' => $request['shop_name'],
+                'shop_phone' => $request['shop_phone'],
+                'shop_address' => $request['shop_address'],
+                'merchant_id'=>$id
+            ];
+
+        }
         try {
-            Shop::where('shop_id', $request['shop_id'])->update($request->all());
+            Shop::where('shop_id', $request['shop_id'])->update($array);
             return back()->with('success', "Successfully updated");
 
         } catch (\Exception $exception) {

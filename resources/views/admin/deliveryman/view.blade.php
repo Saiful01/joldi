@@ -41,7 +41,8 @@
                                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th><input class="ml-1" type="checkbox" onclick="toggle(this);" /><br />
+                                    </th>
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Address</th>
@@ -98,6 +99,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <button name="change" class="btn btn-primary float-right waves-effect waves-light mr-1"
                                     value="1" type="submit" onclick="return confirm('are you sure?')">Active
@@ -117,4 +119,6 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
 
+
 @endsection
+

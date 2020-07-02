@@ -68,10 +68,10 @@ class AdminController extends Controller
     public function areaSearch(Request $request){
           $area=$request['area_id'];
            $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-               ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+             /*  ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')*/
                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
-               ->where('area_id','LIKE','%'.$area.'%')
+               ->where('areas.area_id','LIKE','%'.$area.'%')
             ->get();
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas= Area::get();

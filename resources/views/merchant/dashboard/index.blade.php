@@ -24,158 +24,171 @@
             <div class="row">
                 <div class="col-xl-4 col-md-6">
                     <div class="card mini-stat bg-primary text-white">
-                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg"class="text-white-50">
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <div class="float-left mini-stat-img mr-4">
-                                    <img src="/assets/images/services-icon/01.png" alt="">
-                                </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Add Parcel</h5>
-                                <h4 class="font-weight-medium font-size-24"><i
+                        <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" class="text-white">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="float-left mini-stat-img mr-4">
+                                        <img src="/assets/images/services-icon/01.png" alt="">
+                                    </div>
+                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Add Parcel</h5>
+                                    <h4 class="font-weight-medium font-size-24"><i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                {{--                                <div class="mini-stat-label bg-success">--}}
-                                {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                {{--                                </div>--}}
-                            </div>
-                            <div class="pt-2">
-                                <div class="float-right">
-
-                                    <a href="" data-toggle="modal" data-target=".bd-example-modal-lg" class="text-white-50"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    {{--                                <div class="mini-stat-label bg-success">--}}
+                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
+                                    {{--                                </div>--}}
                                 </div>
+                                <div class="pt-2">
+                                    <div class="float-right">
 
-                                {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+                                        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg"
+                                           class="text-white"><i class="mdi mdi-arrow-right h5"></i></a>
+                                    </div>
+
+                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                                </div>
                             </div>
-                        </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card mini-stat bg-primary text-white">
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <div class="float-left mini-stat-img mr-4">
-                                    <img src="/assets/images/services-icon/01.png" alt="">
-                                </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Payable Amount</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$payable_amount}} <i
+                <a href="/merchant/payments/request" class="text-white">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card mini-stat bg-pink text-white">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="float-left mini-stat-img mr-4">
+                                        <img src="/assets/images/services-icon/01.png" alt="">
+                                    </div>
+                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Payable Amount</h5>
+                                    <h4 class="font-weight-medium font-size-24">{{$payable_amount}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                {{--                                <div class="mini-stat-label bg-success">--}}
-                                {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                {{--                                </div>--}}
-                            </div>
-                            <div class="pt-2">
-                                <div class="float-right">
-                                    <a href="/merchant/payments/request" class="text-white-50"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    {{--                                <div class="mini-stat-label bg-success">--}}
+                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
+                                    {{--                                </div>--}}
                                 </div>
+                                <div class="pt-2">
+                                    <div class="float-right">
+                                        <a href="/merchant/payments/request" class="text-white"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    </div>
 
-                                {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-4 col-md-6">
-                    <div class="card mini-stat bg-primary text-white">
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <div class="float-left mini-stat-img mr-4">
-                                    <img src="/assets/images/services-icon/01.png" alt="">
-                                </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Total Sales</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$total_sales}} <i
+                </a>
+                <a href="/merchant/payments/request" class="text-white">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card mini-stat bg-success text-white">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="float-left mini-stat-img mr-4">
+                                        <img src="/assets/images/services-icon/01.png" alt="">
+                                    </div>
+                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Total Sales</h5>
+                                    <h4 class="font-weight-medium font-size-24">{{$total_sales}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                {{--                                <div class="mini-stat-label bg-success">--}}
-                                {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                {{--                                </div>--}}
-                            </div>
-                            <div class="pt-2">
-                                <div class="float-right">
-                                    <a href="/merchant/payments/request" class="text-white-50"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    {{--                                <div class="mini-stat-label bg-success">--}}
+                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
+                                    {{--                                </div>--}}
                                 </div>
+                                <div class="pt-2">
+                                    <div class="float-right">
+                                        <a href="/merchant/payments/request" class="text-white"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    </div>
 
-                                {{--                            php artisan cache:clear    <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+                                    {{--                            php artisan cache:clear    <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-4 col-md-6">
-                    <div class="card mini-stat bg-primary text-white">
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <div class="float-left mini-stat-img mr-4">
-                                    <img src="/assets/images/services-icon/01.png" alt="">
-                                </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Totall parcel</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$par_count}} <i
+                </a>
+                <a href="/merchant/parcel/show" class="text-white">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card mini-stat bg-info text-white">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="float-left mini-stat-img mr-4">
+                                        <img src="/assets/images/services-icon/01.png" alt="">
+                                    </div>
+                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Totall parcel</h5>
+                                    <h4 class="font-weight-medium font-size-24">{{$par_count}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                {{--                                <div class="mini-stat-label bg-success">--}}
-                                {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                {{--                                </div>--}}
-                            </div>
-                            <div class="pt-2">
-                                <div class="float-right">
-                                    <a href="/merchant/parcel/show" class="text-white-50"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    {{--                                <div class="mini-stat-label bg-success">--}}
+                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
+                                    {{--                                </div>--}}
                                 </div>
+                                <div class="pt-2">
+                                    <div class="float-right">
+                                        <a href="/merchant/parcel/show" class="text-white"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    </div>
 
-                                {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card mini-stat bg-primary text-white">
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <div class="float-left mini-stat-img mr-4">
-                                    <img src="/assets/images/services-icon/01.png" alt="">
-                                </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50">Canceled</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$delivery_cancelled}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                {{--                                <div class="mini-stat-label bg-success">--}}
-                                {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                {{--                                </div>--}}
-                            </div>
-                            <div class="pt-2">
-                                <div class="float-right">
-                                    <a href="/merchant/parcel/show" class="text-white-50"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                </div>
 
-                                {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+
+                </a>
+                <a href="/merchant/parcel/show" class="text-white">
+
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card mini-stat bg-danger text-white">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="float-left mini-stat-img mr-4">
+                                        <img src="/assets/images/services-icon/01.png" alt="">
+                                    </div>
+                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Canceled</h5>
+                                    <h4 class="font-weight-medium font-size-24">{{$delivery_cancelled}} <i
+                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
+                                    {{--                                <div class="mini-stat-label bg-success">--}}
+                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
+                                    {{--                                </div>--}}
+                                </div>
+                                <div class="pt-2">
+                                    <div class="float-right">
+                                        <a href="/merchant/parcel/show" class="text-white"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    </div>
+
+                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="card mini-stat bg-primary text-white">
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <div class="float-left mini-stat-img mr-4">
-                                    <img src="/assets/images/services-icon/01.png" alt="">
-                                </div>
-                                <h5 class="font-size-16 text-uppercase mt-0 text-white-50"> Pending</h5>
-                                <h4 class="font-weight-medium font-size-24">{{$delivery_pending}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                {{--                                <div class="mini-stat-label bg-success">--}}
-                                {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                {{--                                </div>--}}
-                            </div>
-                            <div class="pt-2">
-                                <div class="float-right">
-                                    <a href="/merchant/parcel/show" class="text-white-50"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                </div>
+                </a>
+                <a href="/merchant/parcel/show" class="text-white">
 
-                                {{--                                <p class="text-white-50 mb-0 mt-1">Since last month</p>--}}
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card mini-stat bg-warning text-white">
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <div class="float-left mini-stat-img mr-4">
+                                        <img src="/assets/images/services-icon/01.png" alt="">
+                                    </div>
+                                    <h5 class="font-size-16 text-uppercase mt-0 text-white"> Pending</h5>
+                                    <h4 class="font-weight-medium font-size-24">{{$delivery_pending}} <i
+                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
+                                    {{--                                <div class="mini-stat-label bg-success">--}}
+                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
+                                    {{--                                </div>--}}
+                                </div>
+                                <div class="pt-2">
+                                    <div class="float-right">
+                                        <a href="/merchant/parcel/show" class="text-white"><i
+                                                class="mdi mdi-arrow-right h5"></i></a>
+                                    </div>
+
+                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
 
 
             </div>
@@ -294,7 +307,8 @@
                                     <div class="card-body rounded text-white" style="background-color: #4E599A ">
                                         {{--                                    <div class="text-center over-badge"><span class="content">24h</span></div>--}}
                                         <p class="font-13 mb-0 text-center line-height-1_25 lbl">Next Day</p>
-                                        <p class="font-12 text-center line-height-1_25 mb-0 opacity-7_5">Delivery</p></div>
+                                        <p class="font-12 text-center line-height-1_25 mb-0 opacity-7_5">Delivery</p>
+                                    </div>
                                 </div>
                             </a>
 
@@ -304,7 +318,8 @@
                                     <div class="card-body rounded text-white " style="background-color: #25A7B7">
                                         {{--                                    <div class="text-center over-badge"><span class="content">12h</span></div>--}}
                                         <p class="font-13 mb-0 text-center line-height-1_25 lbl">Same Day</p>
-                                        <p class="font-12 text-center line-height-1_25 mb-0 opacity-7_5">Delivery</p></div>
+                                        <p class="font-12 text-center line-height-1_25 mb-0 opacity-7_5">Delivery</p>
+                                    </div>
                                 </div>
                             </a>
 
@@ -321,7 +336,6 @@
         var app = angular.module('parcelCreateApp', []);
 
 
-
         app.controller('dashboardController', function ($scope, $http) {
 
             console.log("lolll");
@@ -334,7 +348,10 @@
                     //$scope.parcels = response.data;
                     console.log("lolll");
 
-                    var chart = new Chartist.Pie("#ct-donut", {series: [response.data.delivery_pending, response.data.delivery_accepted, response.data.delivery_cancelled,response.data.delivery_on_the_way,response.data.delivery_delivered,response.data.delivery_returned], labels: [1, 2, 3,1, 2, 3]}, {
+                    var chart = new Chartist.Pie("#ct-donut", {
+                        series: [response.data.delivery_pending, response.data.delivery_accepted, response.data.delivery_cancelled, response.data.delivery_on_the_way, response.data.delivery_delivered, response.data.delivery_returned],
+                        labels: [1, 2, 3, 1, 2, 3]
+                    }, {
                         donut: !0,
                         showLabel: !1,
                         plugins: [Chartist.plugins.tooltip()]
@@ -343,7 +360,6 @@
                 });
 
         });
-
 
 
     </script>

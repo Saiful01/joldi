@@ -45,8 +45,11 @@
                             <div class="invoice-title">
                                 <h4 class="float-right font-size-16"><strong>Invoice
                                         # {{$result->parcel_invoice}}</strong></h4>
-                                <h3 class="mt-0">
+                                {{--<h3 class="mt-0">
                                     <img src="/assets/images/logo.png" alt="logo" height="24">
+                                </h3>--}}
+                                <h3 class="mt-0">
+                                    <img src="/assets/images/shop_logo/{{$shop->logo}}" alt="logo" height="40">
                                 </h3>
                             </div>
                             <hr>

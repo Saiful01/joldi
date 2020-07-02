@@ -19,6 +19,7 @@ class CreateShopsTable extends Migration
             $table->string('shop_name');
             $table->string('shop_address');
             $table->string('shop_phone')->nullable();
+            $table->string('logo');
 
             $table->foreign('merchant_id')->references('merchant_id')->on('merchants');
 

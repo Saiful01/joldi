@@ -123,7 +123,8 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::post('/merchant/same-day/serach', 'ParcelController@sameDaySearch');
     Route::post('/merchant/next-day/serach', 'ParcelController@nextDaySearch');
     Route::post('/merchant/invoice/serach', 'ParcelController@invoiceSearch');
-    Route::post('/parcel-all/change', 'ParcelController@deleleParcel');
+    Route::post('/parcel-all/change', 'ParcelController@allParcel');
+    /*Route::get('/merchant/print/all', 'ParcelController@printParcel');*/
 
 
     Route::get('/merchant/dashboard', 'MerchantController@dashboard');
