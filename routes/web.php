@@ -16,15 +16,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 Route::get('/', function () {
-    if (Auth::check()) {
+    /*if (Auth::check()) {
         return Redirect::to('/admin/dashboard');
-    }
+    }*/
 
     return view('common.home.index');
 });
 Route::get('/merchant/help', 'HomeController@help');
 
 Route::get('/login', 'LoginController@login');
+Route::get('/admin/login', 'LoginController@login');
 Route::post('/login/check', 'LoginController@loginCheck');
 
 //Merchant Login
@@ -38,7 +39,6 @@ Route::get('/merchant/confirm-password/{id}', 'MerchantController@confirmpasswor
 Route::any('/merchant/store', 'MerchantController@store');
 Route::get('/deliveryman/registration', 'DeliveryManController@index');
 Route::post('/deliveryman/store', 'DeliveryManController@registrationStore');
-
 
 
 Route::group(['middleware' => 'admin'], function () {
@@ -98,6 +98,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/parcel/show', 'ParcelController@adminParcelShow');
     Route::get('/admin/parcel/details/{id}', 'ParcelController@adminParceldetails');
     Route::get('/admin/parcel/assign-deliveryman', 'ParcelController@adminAssignDeliveryMan');
+    Route::get('/admin/parcel/assign-pickup-man', 'ParcelController@adminAssignPickUpMan');
     Route::get('/admin/parcel/receive-by-admin', 'ParcelController@productReceiveByAdmin');
 
     Route::get('/admin/setting', 'ParcelController@adminhtml');

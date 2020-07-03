@@ -62,17 +62,17 @@
                                        id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
                                        readonly>
 
-                            {{--    <div class="form-group row">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="hidden" placeholder=""
-                                               id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
-                                               readonly>
+                                {{--    <div class="form-group row">
+                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
+                                        <div class="col-sm-12">
+                                            <input class="form-control form-control-lg" type="hidden" placeholder=""
+                                                   id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
+                                                   readonly>
 
 
 
-                                    </div>
-                                </div>--}}
+                                        </div>
+                                    </div>--}}
                                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                                 <input type="hidden" name="shop_id" value="{{Session::get('shop_id')}}">
                                 <input type="hidden" name="is_same_day" value="{{$is_same_day}}">
@@ -110,38 +110,38 @@
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>--}}
                                     <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                               value="{{$cod_charge}}" name="cod"
-                                               readonly>
+                                               value="{{$cod_charge}}" name="cod" ng-model="cod"
+                                        >
                                     </div>
                                 </div>
-                         {{--       <div class="form-group row">
-                                    --}}{{--   <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>--}}{{--
+                                <div class="form-group row" style="display: none">
+                                    <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>
                                     <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text"
                                                placeholder="ডেলিভারি চার্জ"
                                                id="delivery_charge" name="delivery_charge" ng-model="delivery_charge"
                                                readonly>
                                     </div>
-                                </div>--}}
+                                </div>
                                 <div class="form-group row">
                                     {{-- <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
                                          Price</label>--}}
                                     <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text"
+                                        <input class="form-control form-control-lg" type="number"
                                                placeholder="পার্সেল  প্রাইস"
                                                id="example-text-input-lg" name="payable_amount"
                                                ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
                                     </div>
                                 </div>
-                           {{--     <div class="form-group row">
-                                    --}}{{--   <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
-                                           Amount</label>--}}{{--
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder="মোট টাকা"
-                                               id="example-text-input-lg" name="total_amount" ng-model="total_amount">
-                                    </div>
-                                </div>--}}
+                                     <div class="form-group row" style="display: none">
+                                            <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
+                                                Amount</label>
+                                         <div class="col-sm-12">
+                                             <input class="form-control form-control-lg" type="text"
+                                                    placeholder="মোট টাকা"
+                                                    id="example-text-input-lg" name="total_amount" ng-model="total_amount">
+                                         </div>
+                                     </div>
                                 {{--                                <div class="form-group row">--}}
                                 {{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day--}}
                                 {{--                                        Delivery</label>--}}
@@ -242,9 +242,9 @@
                                         <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
                                             Submit
                                         </button>
-                                        <button type="reset" class="btn btn-secondary waves-effect">
-                                            Reset
-                                        </button>
+                                        {{-- <button type="reset" class="btn btn-secondary waves-effect">
+                                             Reset
+                                         </button>--}}
                                     </div>
                                 </div>
 
@@ -253,7 +253,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h6>ডেলিভারি চার্জ বিস্তারিত </h6>
-                                        <hr >
+                                        <hr>
                                     </div>
                                     <div class="card-body" style="background-color: rgba(210,210,210,0.47)">
                                         <div class="row">
@@ -265,11 +265,11 @@
                                                 <h6>Total Payble Amount</h6>
                                             </div>
                                             <div class="col-md-4">
-                                                <h6>Tk. 100</h6>
-                                                <h6>Tk. 60</h6>
-                                                <h6>Tk. 0</h6>
+                                                <h6 ng-bind="payable_amount">Tk. 100</h6>
+                                                <h6 ng-bind="delivery_charge">Tk. 60</h6>
+                                                <h6 ng-bind="cod_charge">Tk. 0</h6>
                                                 <hr>
-                                                <h6>Tk. 40</h6>
+                                                <h6 ng-bind="total_amount">Tk. 40</h6>
                                             </div>
                                         </div>
 
@@ -325,6 +325,9 @@
 
             $scope.delivery_charge = 0;
             $scope.payable_amount = 0;
+            $scope.total_amount = 0;
+            $scope.cod_charge = '<?php echo $cod_charge?>';
+            $scope.cod = '<?php echo $cod_charge?>';
             $http.get('/get-parcel-type', {}).then(function success(e) {
 
                 console.log(e.data);
@@ -338,7 +341,8 @@
                     console.log(e.data.charge);
 
                     $scope.delivery_charge = parseFloat(e.data.charge);
-                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount);
+                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge);
+                    ;
 
                     console.log($scope.total_amount);
                 });
@@ -348,9 +352,9 @@
 
             $scope.totalPriceCalcualtion = function () {
 
-                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount);
+                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge);
 
-                console.log(parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount));
+                console.log("hhhh" + parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount));
 
                 //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
 

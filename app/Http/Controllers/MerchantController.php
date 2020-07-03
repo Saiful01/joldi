@@ -108,54 +108,17 @@ class MerchantController extends Controller
 
     public function store(Request $request)
     {
-
-
-        $request['password'] = Hash::make($request['merchant_password']);
         unset($request['_token']);
-        unset($request['merchant_password']);
-
         if ($request->hasFile('merchant_image')) {
 
             $image = $request->file('merchant_image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/merchant');
             $image->move($destinationPath, $image_name);
-            $array = [
-                'merchant_name' => $request['merchant_name'],
-                'merchant_phone' => $request['merchant_phone'],
-                'password' => $request['password'],
-                'merchant_email' => $request['merchant_email'],
-                'area_id' => $request['area_id'],
-                'image' => $image_name,
-            ];
-//            elseif ($request->hasFile('merchant_company_logo')) {
-//
-//            $logo = $request->file('merchant_company_logo');
-//            $logo_name = time() . '.' . $logo->getClientOriginalExtension();
-//            $destinationPath = public_path('/companylogo');
-//            $logo->move($destinationPath, $logo_name);
-//            $array = [
-//                'merchant_name' => $request['merchant_name'],
-//                'merchant_phone' => $request['merchant_phone'],
-//                'password' => $request['password'],
-//                'merchant_email' => $request['merchant_email'],
-//                'area_id' => $request['area_id'],
-//                'image' => $image_name,
-//                'logo' => $logo_name,
-//            ];
-        } else {
-            $array = [
-                'merchant_name' => $request['merchant_name'],
-                'merchant_phone' => $request['merchant_phone'],
-                'password' => $request['password'],
-                'merchant_email' => $request['merchant_email'],
-                'area_id' => $request['area_id'],
-
-            ];
+            $request['image'] = $image_name;
         }
 
-
-
+        $request['password'] = Hash::make($request['password']);
         try {
 
 
@@ -167,13 +130,13 @@ class MerchantController extends Controller
                 'body' => " Successfully Registered, Please wait for acitive your account"
             );
 
-            Mail::send('mail', $data, function ($message) use ($to_email) {
+         /*   Mail::send('mail', $data, function ($message) use ($to_email) {
 
                 $message->to($to_email);
                 $message->subject('Registration mail');
 
-            });
-            $merchant_id = Merchant::insertGetId($array);
+            });*/
+            $merchant_id = Merchant::insertGetId($request->all());
 
             //TODO:: Insert into Shop Table
             $this->storeShop($merchant_id, $request['merchant_name']);

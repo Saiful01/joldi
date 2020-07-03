@@ -18,7 +18,7 @@ class CreateAreasTable extends Migration
             $table->string('area_name');
             $table->double('lat')->nullable();
             $table->double('lon')->nullable();
-            $table->string('value');
+            $table->double('value');
             $table->string('area_address')->nullable();
             $table->timestamps();
         });

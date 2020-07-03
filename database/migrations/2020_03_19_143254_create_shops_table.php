@@ -17,9 +17,9 @@ class CreateShopsTable extends Migration
             $table->bigIncrements('shop_id');
             $table->unsignedBigInteger('merchant_id');
             $table->string('shop_name');
-            $table->string('shop_address');
+            $table->string('shop_address')->nullable();
             $table->string('shop_phone')->nullable();
-            $table->string('logo');
+            $table->string('logo')->nullable();
 
             $table->foreign('merchant_id')->references('merchant_id')->on('merchants');
 

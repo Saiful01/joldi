@@ -5,6 +5,19 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
+
+                    @if(Session::has('success'))
+                        <div class="alert alert-success mt-5" role="alert">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
+
+                    @if(Session::has('failed'))
+                        <div class="alert alert-danger mt-5" role="alert">
+                            {{ Session::get('failed') }}
+                        </div>
+                    @endif
+
                     <div class="card overflow-hidden">
                         <div style="background: #1DC68C !important;">
                             <div class="text-primary text-center p-4">
@@ -15,22 +28,8 @@
                                 </a>
                             </div>
                         </div>
-
                         <div class="card-body p-4">
                             <div class="p-3">
-
-                                @if(Session::has('success'))
-                                    <div class="alert alert-success mt-5" role="alert">
-                                        {{ Session::get('success') }}
-                                    </div>
-                                @endif
-
-                                @if(Session::has('failed'))
-                                    <div class="alert alert-danger mt-5" role="alert">
-                                        {{ Session::get('failed') }}
-                                    </div>
-                                @endif
-
 
                                 <form class="form-horizontal mt-4" action="/merchant/login-check" method="post">
 

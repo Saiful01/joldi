@@ -36,6 +36,7 @@
                         <tr>
                             <th>#</th>
                             <th> Area Name</th>
+                            <th>Charge</th>
                             <th>Address</th>
                             <th>Action</th>
                         </tr>
@@ -49,6 +50,7 @@
 
                                 <td>{{$i++}}</td>
                                 <td>{{$res->area_name}}</td>
+                                <td>{{$res->value}}</td>
                                 <td>{{$res->area_address}}</td>
                                 <td>
                                     <div class="btn-group mr-1 mt-2">

@@ -29,56 +29,55 @@
                     @if(Session::has('failed'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
                     @endif
-                        <div class="row mb-3">
-                           {{-- <div class="col-md-1">
-                                <h4 class="card-title">Parcels</h4>
-                            </div>--}}
-                            <div class="col-md-2">
-                                <form method="post" action="/same-day/serach" >
-                                    <button class="btn  btn-primary waves-effect waves-light">Same Day</button>
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <div class="row mb-3">
+                        {{-- <div class="col-md-1">
+                             <h4 class="card-title">Parcels</h4>
+                         </div>--}}
+                        <div class="col-md-2">
+                            <form method="post" action="/same-day/serach">
+                                <button class="btn  btn-primary waves-effect waves-light">Same Day</button>
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                                </form>
-                            </div>
-                            <div class="col-md-2">
-                                <form method="post" action="/next-day/serach" >
-                                    <button class="btn  btn-success waves-effect waves-light">Next Day</button>
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                </form>
-
-                            </div>
-                            <div class="col-md-4">
-                                <form class="form-inline" method="post" action="/invoice/serach">
-                                    <div class="form-group mx-sm-3 ">
-                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <input type="text" class="form-control" id="inputPassword2" name="invoice" placeholder="Invoice">
-                                        <button type="submit" class="btn btn-info form-group ml-2">Search</button>
-
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-4">
-                                <form class="form-inline" method="post" action="/area/serach">
-                                    <div class="form-group mx-sm-3 ">
-                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                        <select  class="form-control"  name="area_id" >
-                                            @foreach($areas as $area)
-                                            <option value="{{$area->area_id}}">{{$area->area_name}}</option>
-                                            @endforeach
-
-                                        </select>
-                                        <button type="submit" class="btn btn-info form-group ml-2">Search</button>
-
-                                    </div>
-                                </form>
-                            </div>
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <form method="post" action="/next-day/serach">
+                                <button class="btn  btn-success waves-effect waves-light">Next Day</button>
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            </form>
 
                         </div>
+                        <div class="col-md-4">
+                            <form class="form-inline" method="post" action="/invoice/serach">
+                                <div class="form-group mx-sm-3 ">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <input type="text" class="form-control" id="inputPassword2" name="invoice"
+                                           placeholder="Invoice">
+                                    <button type="submit" class="btn btn-info form-group ml-2">Search</button>
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form class="form-inline" method="post" action="/area/serach">
+                                <div class="form-group mx-sm-3 ">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <select class="form-control" name="area_id">
+                                        @foreach($areas as $area)
+                                            <option value="{{$area->area_id}}">{{$area->area_name}}</option>
+                                        @endforeach
+
+                                    </select>
+                                    <button type="submit" class="btn btn-info form-group ml-2">Search</button>
+
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
 
 
-
-
-                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer" style='overflow-x:auto'>
                         <div class="row">
                             <div class="col-sm-12">
 
@@ -91,6 +90,7 @@
                                         <th>Amount</th>
                                         <th>Same Day</th>
                                         <th>D. Date</th>
+                                        <th>Pickup Man</th>
                                         <th>Deliveryman</th>
                                         <th>Note</th>
                                         <th>Area</th>
@@ -129,6 +129,90 @@
                                                 @endif
 
                                             </td>
+
+                                            <td>}
+
+
+
+                                                @if($res->order_pickupman_id==null)
+                                                    <div class="col-sm-6 col-md-3">
+                                                        <div class="text-center">
+                                                            <!-- Small modal -->
+                                                            <button type="button"
+                                                                    class="btn btn-sm btn-primary waves-effect waves-light"
+                                                                    data-toggle="modal"
+                                                                    data-target=".modal-id{{$res->parcel_id}}">Assign
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal fade modal-id{{$res->parcel_id}}"
+                                                             tabindex="-1"
+                                                             role="dialog" aria-labelledby="mySmallModalLabel"
+                                                             style="display: none;" aria-hidden="true">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title mt-0"
+                                                                            id="mySmallModalLabel">Assign
+                                                                            Deliveryman</h5>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-hidden="true">
+                                                                            ×
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+
+                                                                        <form method="get"
+                                                                              action="/admin/parcel/assign-pickup-man">
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Select
+                                                                                    Deliveryman</label>
+
+                                                                                <input name="_token"
+                                                                                       value="{{csrf_token()}}"
+                                                                                       type="hidden"/>
+                                                                                <input name="parcel_id"
+                                                                                       value="{{$res->parcel_id}}"
+                                                                                       type="hidden"/>
+                                                                                <select class="form-control select2"
+                                                                                        name="delivery_man_id">
+                                                                                    <option>Select</option>
+
+                                                                                    @foreach($delivery_mans as $delivery_man)
+                                                                                        <option value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
+
+                                                                                    @endforeach
+
+                                                                                </select>
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                {{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
+                                                                                <button type="submit"
+                                                                                        class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
+                                                                                    Save
+                                                                                </button>
+                                                                            </div>
+
+
+                                                                        </form>
+
+
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
+                                                    </div>
+                                                @else
+                                                    {{$res->delivery_man_name}}
+                                                @endif
+
+
+
+
+                                            </td>
+
+
                                             <td>
 
 
@@ -206,6 +290,7 @@
                                                 @endif
 
                                             </td>
+
 
 
 

@@ -12,7 +12,7 @@ function getMerchantActiveMessage(){
 }
 
 
-function dateFormat($date)
+function getDateFormat($date)
 {
 
     $createdAt = Carbon::parse($date);

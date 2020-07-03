@@ -80,6 +80,7 @@ class DashboardController extends Controller
     public function logout()
     {
         Auth::logout();
+        Auth::guard('merchant')->logout();
         return Redirect::to('/');
 
 

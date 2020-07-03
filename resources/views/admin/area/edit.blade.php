@@ -52,6 +52,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Charge</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="number" placeholder="Value"
+                                       id="example-text-input-lg" name="value" value="{{$result->value}}" required>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"></label>
