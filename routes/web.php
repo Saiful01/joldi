@@ -36,6 +36,9 @@ Route::get('/merchant/forgot-password', 'MerchantController@forgotpassword');
 Route::post('/merchant/password-reset', 'MerchantController@resetpassword');
 Route::get('/merchant/confirm-password/{id}', 'MerchantController@confirmpassword');
 Route::any('/merchant/store', 'MerchantController@store');
+Route::get('/deliveryman/registration', 'DeliveryManController@index');
+Route::post('/deliveryman/store', 'DeliveryManController@registrationStore');
+
 
 
 Route::group(['middleware' => 'admin'], function () {

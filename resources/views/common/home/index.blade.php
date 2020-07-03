@@ -41,6 +41,11 @@
                                     <a class="et_pb_button et_pb_button_0 et_pb_bg_layout_light"
                                        href="/merchant/registration">BECOME A MERCHANT</a>
                                 </div>
+                                <div
+                                    class="et_pb_button_module_wrapper et_pb_button_0_wrapper et_pb_button_alignment_ et_pb_module ">
+                                    <a class="et_pb_button et_pb_button_0 et_pb_bg_layout_light"
+                                       href="/deliveryman/registration">BECOME A DeliveryMan</a>
+                                </div>
                             </div> <!-- .et_pb_column -->
                             <div
                                 class="et_pb_column et_pb_column_1_2 et_pb_column_1    et_pb_css_mix_blend_mode_passthrough et-last-child">

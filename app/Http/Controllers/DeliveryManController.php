@@ -16,7 +16,7 @@ class DeliveryManController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.deliveryman.registration');
     }
     public function locationtrack()
     {
@@ -53,7 +53,7 @@ class DeliveryManController extends Controller
 
             $image = $request->file('delivery_man_image');
             $image_name = time() . '.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/assets/images/deliverymanimage');
+            $destinationPath = public_path('/assets/images/deliveryman/profile');
             $image->move($destinationPath,$image_name);
             $array= [
 
@@ -63,6 +63,8 @@ class DeliveryManController extends Controller
                 'password'=>$request['password'],
                 'delivery_man_address'=>$request['delivery_man_address'],
                 'active_status'=>$request['active_status'],
+                'delivery_man_type'=>$request['delivery_man_type'],
+                'delivery_man_email'=>$request['delivery_man_email']
             ];
         }
         else if ($request->hasFile('delivery_man_document')) {
@@ -70,7 +72,7 @@ class DeliveryManController extends Controller
 
             $image = $request->file('delivery_man_document');
             $image_name = time() . '.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/assets/images/deliverymanNid');
+            $destinationPath = public_path('/assets/images/deliveryman/deliverymanNid');
             $image->move($destinationPath,$image_name);
             $array= [
 
@@ -80,6 +82,8 @@ class DeliveryManController extends Controller
                 'password'=>$request['password'],
                 'delivery_man_address'=>$request['delivery_man_address'],
                 'active_status'=>$request['active_status'],
+                'delivery_man_type'=>$request['delivery_man_type'],
+                'delivery_man_email'=>$request['delivery_man_email']
             ];
         }else{
             $array= [
@@ -89,6 +93,8 @@ class DeliveryManController extends Controller
                 'password'=>$request['password'],
                 'delivery_man_address'=>$request['delivery_man_address'],
                 'active_status'=>$request['active_status'],
+                'delivery_man_type'=>$request['delivery_man_type'],
+                'delivery_man_email'=>$request['delivery_man_email']
             ];
 
 
@@ -96,6 +102,89 @@ class DeliveryManController extends Controller
         try {
             DeliveryMan::create($array);
             return back()-> with('success',"Successfully Saved");
+        }catch(\Exception $exception) {
+
+            return back()->with('failed',$exception->getMessage());
+        }
+    }
+    public function registrationStore(Request $request)
+    {
+        unset($request['_token']);
+        $request ['password']= Hash::make($request['password']);
+        $request ['active_status']= false;
+
+        if ($request->hasFile('image')) {
+
+
+            $image = $request->file('image');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliveryman/profile');
+            $image->move($destinationPath,$image_name);
+            $request['delivery_man_image'] = $image_name;
+
+        }
+        else if ($request->hasFile('nid')) {
+
+
+            $image = $request->file('nid');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliveryman/deliverymanNid');
+            $image->move($destinationPath,$image_name);
+            $request['delivery_man_document'] = $image_name;
+
+        }
+        else if ($request->hasFile('licen')) {
+
+
+            $image = $request->file('licen');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliveryman/driving_license');
+            $image->move($destinationPath,$image_name);
+            $request['license'] = $image_name;
+
+
+
+        }
+        else if ($request->hasFile('tax')) {
+
+
+            $image = $request->file('tax');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliveryman/tax_token');
+            $image->move($destinationPath,$image_name);
+            $request['tax_token'] = $image_name;
+
+
+        }
+        else if ($request->hasFile('blue')) {
+
+
+            $image = $request->file('blue');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliveryman/blue_book');
+            $image->move($destinationPath,$image_name);
+            $request['blue_book'] = $image_name;
+
+
+        }
+        else if ($request->hasFile('insu')) {
+
+
+            $image = $request->file('insu');
+            $image_name = time() . '.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/assets/images/deliveryman/insurance');
+            $image->move($destinationPath,$image_name);
+            $request['insurence'] = $image_name;
+
+        }
+
+        $data = $request->except(['image', '_token']);
+
+        /* return $request->all();*/
+
+        try {
+            DeliveryMan::create($data);
+            return back()-> with('success',"Registration Successfull");
         }catch(\Exception $exception) {
 
             return back()->with('failed',$exception->getMessage());
