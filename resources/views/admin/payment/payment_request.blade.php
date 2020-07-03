@@ -34,7 +34,8 @@
                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th><input class="ml-1" type="checkbox" onclick="toggle(this);" /><br />
+                                </th>
                                 <th>Merchant Name</th>
                                 <th>Phone</th>
                                 <th>Amount</th>
