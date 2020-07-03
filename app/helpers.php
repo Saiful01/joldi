@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 function statusFormat($status)
 {
 
@@ -7,6 +9,14 @@ function statusFormat($status)
 }
 function getMerchantActiveMessage(){
     return " your account have been successfully verified. Start your delivery today ";
+}
+
+
+function dateFormat($date)
+{
+
+    $createdAt = Carbon::parse($date);
+    return $createdAt->format('d M, Y g:i A');
 }
 
 
