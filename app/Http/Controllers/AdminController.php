@@ -310,10 +310,12 @@ class AdminController extends Controller
     public function merchantProfile($id)
     {
 
-        $result = Merchant::where('merchant_id', $id)->first();
+       return $result = Merchant::where('merchant_id', $id)
+           ->leftjoin('areas','areas.area_id','='.'merchants.area_id')
+           ->first();
         $results = Area::where('area_id', $id)->first();
         $payment_data = PaymentMethoed::where('merchant_id', Auth::guard('merchant')->id())->get();
-        $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        return $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->orderBy('parcels.created_at', "DESC")
             ->limit(10)
