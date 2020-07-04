@@ -19,66 +19,77 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-lg-12">
+
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{session('success')}}!</strong>
+                </div>
+            @endif
+            @if(session('failed'))
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{session('failed')}}!</strong>
+                </div>
+            @endif
+
+
             <div class="card">
                 <div class="card-body">
+                    <div class="row">
 
-                    @if(session('success'))
-                        <div class="alert alert-success alert-dismissible">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>{{session('success')}}!</strong>
-                        </div>
-                    @endif
-                    @if(session('failed'))
-                        <div class="alert alert-danger alert-dismissible">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>{{session('failed')}}!</strong>
-                        </div>
-                    @endif
+                        <div class="col-md-9">
+                            <form class="form-inline" action="/merchant/payments/request" method="post"
+                                  enctype="multipart/form-data"
+                                  novalidate="">
 
-                    <form class="form-inline" action="/merchant/payments/request" method="post"
-                          enctype="multipart/form-data"
-                          novalidate="">
+                                <div class="form-group">
+                                    <label style="padding-right: 5px">From</label>
+                                    <div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="mm/dd/yyyy"
+                                                   id="datepicker"
+                                                   name="from_date">
+                                            <input type="hidden" name="_token" value="{{{csrf_token()}}}">
 
-                        <div class="form-group">
-                            <label style="padding-right: 5px">From</label>
-                            <div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker"
-                                           name="from_date">
-                                    <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                        </div><!-- input-group -->
                                     </div>
-                                </div><!-- input-group -->
-                            </div>
-                        </div>
+                                </div>
 
-                        <div class="form-group">
-                            <label style="padding-right: 5px;padding-left: 5px">To</label>
-                            <div>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="mm/dd/yyyy"
-                                           id="datepicker-autoclose" name="to_date">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                <div class="form-group">
+                                    <label style="padding-right: 5px;padding-left: 5px">To</label>
+                                    <div>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="mm/dd/yyyy"
+                                                   id="datepicker-autoclose" name="to_date">
+                                            <div class="input-group-append">
+                                                <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                            </div>
+                                        </div><!-- input-group -->
                                     </div>
-                                </div><!-- input-group -->
-                            </div>
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <div class="col-sm-12">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
 
-
-                        <div class="form-group">
-
-                            <div class="col-sm-12">
-                                <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
-                                    Search
-                                </button>
-                            </div>
+                        <div class="col-md-3">
+                            <a href="/merchant/payments/view" class="btn btn-success float-right">View Payments</a>
                         </div>
 
-                    </form>
-
+                    </div>
 
                 </div>
             </div>
@@ -117,7 +128,7 @@
                                     <th>{{$result->parcel_invoice}}</th>
                                     <th>{{$result->payable_amount+$result->cod+$result->delivery_charge}}</th>
                                     <th>{{$result->cod+$result->delivery_charge}}</th>
-                                    <th>{{$result->payable_amount-($result->cod+$result->delivery_charge)}}</th>
+                                    <th>{{$result->payable_amount+($result->cod+$result->delivery_charge)}}</th>
                                     <th>{{$result->delivery_date}}</th>
                                     <th>{{$result->updated_at}}</th>
                                     <?php

@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Mail;
 class AdminController extends Controller
 {
     //
-    public function sameDaySearch(){
+    public function sameDaySearch()
+    {
         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
@@ -23,7 +24,7 @@ class AdminController extends Controller
             ->where('parcels.is_same_day', true)
             ->get();
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
-        $areas= Area::get();
+        $areas = Area::get();
 
         return view('admin.consignment.show')
             ->with('delivery_mans', $delivery_mans)
@@ -31,7 +32,9 @@ class AdminController extends Controller
             ->with('results', $parcels);
 
     }
-    public function nextDaySearch(){
+
+    public function nextDaySearch()
+    {
         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
@@ -39,7 +42,7 @@ class AdminController extends Controller
             ->where('parcels.is_same_day', false)
             ->get();
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
-        $areas= Area::get();
+        $areas = Area::get();
 
         return view('admin.consignment.show')
             ->with('delivery_mans', $delivery_mans)
@@ -47,16 +50,18 @@ class AdminController extends Controller
             ->with('results', $parcels);
 
     }
-    public function invoiceSearch(Request $request){
-        $invoice=$request['invoice'];
-        $parcels = Parcel::where('parcel_invoice','LIKE','%'.$invoice.'%')
+
+    public function invoiceSearch(Request $request)
+    {
+        $invoice = $request['invoice'];
+        $parcels = Parcel::where('parcel_invoice', 'LIKE', '%' . $invoice . '%')
             ->join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->get();
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
-        $areas= Area::get();
+        $areas = Area::get();
 
         return view('admin.consignment.show')
             ->with('delivery_mans', $delivery_mans)
@@ -65,16 +70,18 @@ class AdminController extends Controller
             ->with('invoice', $invoice);
 
     }
-    public function areaSearch(Request $request){
-          $area=$request['area_id'];
-           $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-             /*  ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')*/
-               ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
-            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
-               ->where('areas.area_id','LIKE','%'.$area.'%')
+
+    public function areaSearch(Request $request)
+    {
+        $area = $request['area_id'];
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            /*  ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')*/
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->where('areas.area_id', 'LIKE', '%' . $area . '%')
             ->get();
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
-        $areas= Area::get();
+        $areas = Area::get();
 
         return view('admin.consignment.show')
             ->with('delivery_mans', $delivery_mans)
@@ -101,16 +108,18 @@ class AdminController extends Controller
             ->with('result', $result);
 
     }
-    public function changeMerchant( Request $request){
+
+    public function changeMerchant(Request $request)
+    {
         if (!$request['merchant_id']) {
             return back()->with('failed', "Please select atleast 1 item");
         }
 
 
-        if($request['change']==1){
+        if ($request['change'] == 1) {
             try {
 
-                foreach ($request['merchant_id'] as $merchant_id){
+                foreach ($request['merchant_id'] as $merchant_id) {
 
                     //echo $merchant_id;
 
@@ -122,21 +131,16 @@ class AdminController extends Controller
                 }
                 return back()->with('success', "Successfully Active");
 
-            }
-            catch (\Exception $exception){
+            } catch (\Exception $exception) {
                 return back()->with('failed', $exception->getMessage());
             }
 
 
-
-
-
-
             //Active
-        }else{
+        } else {
             try {
                 //Inactive
-                foreach ($request['merchant_id'] as $merchant_id){
+                foreach ($request['merchant_id'] as $merchant_id) {
 
                     //echo $merchant_id;
 
@@ -150,8 +154,7 @@ class AdminController extends Controller
                 return back()->with('success', "Successfully Inactive");
 
 
-            }
-            catch (\Exception $exception){
+            } catch (\Exception $exception) {
                 return back()->with('failed', $exception->getMessage());
             }
 
@@ -161,20 +164,22 @@ class AdminController extends Controller
 
         //return $request->all();
     }
-    public function deliverymanChange( Request $request){
+
+    public function deliverymanChange(Request $request)
+    {
         if (!$request['delivery_man_id']) {
             return back()->with('failed', "Please select atleast 1 item");
         }
 
-        if($request['change']==1){
+        if ($request['change'] == 1) {
 
-            foreach ($request['delivery_man_id'] as $delivery_man_id){
+            foreach ($request['delivery_man_id'] as $delivery_man_id) {
 
                 $this->deliverymanActivate($delivery_man_id);
             }
             return back()->with('success', "Successfully Active");
-        }else{
-            foreach ($request['delivery_man_id'] as $delivery_man_id){
+        } else {
+            foreach ($request['delivery_man_id'] as $delivery_man_id) {
                 $this->deliverymanInactive($delivery_man_id);
 
             }
@@ -182,7 +187,7 @@ class AdminController extends Controller
         }
     }
 
-    public function merchantInactive( $id)
+    public function merchantInactive($id)
     {
 
         try {
@@ -202,7 +207,7 @@ class AdminController extends Controller
     {
 
         try {
-         $merchant =  Merchant::where('merchant_id', $id)->first();
+            $merchant = Merchant::where('merchant_id', $id)->first();
             Merchant::where('merchant_id', $id)->update([
                 'active_status' => true
             ]);
@@ -257,14 +262,14 @@ class AdminController extends Controller
         }
     }
 
-/*    public function try($id)
-    {
+    /*    public function try($id)
+        {
 
 
-        return $id;
-        $result = Merchant::orderBy('created_at', 'DESC')->get();
-        return view('admin.merchant.index')->with('results', $result);
-    }*/
+            return $id;
+            $result = Merchant::orderBy('created_at', 'DESC')->get();
+            return view('admin.merchant.index')->with('results', $result);
+        }*/
 
     public function merchantUpdate(Request $request)
     {
@@ -316,12 +321,12 @@ class AdminController extends Controller
     public function merchantProfile($id)
     {
 
-       return $result = Merchant::where('merchant_id', $id)
-           ->leftjoin('areas','areas.area_id','='.'merchants.area_id')
-           ->first();
+        $result = Merchant::where('merchant_id', $id)
+            ->leftjoin('areas', 'areas.area_id', '=', 'merchants.area_id')
+            ->first();
         $results = Area::where('area_id', $id)->first();
         $payment_data = PaymentMethoed::where('merchant_id', Auth::guard('merchant')->id())->get();
-        return $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+        $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->orderBy('parcels.created_at', "DESC")
             ->limit(10)

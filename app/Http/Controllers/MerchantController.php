@@ -130,12 +130,12 @@ class MerchantController extends Controller
                 'body' => " Successfully Registered, Please wait for acitive your account"
             );
 
-         /*   Mail::send('mail', $data, function ($message) use ($to_email) {
+            /*   Mail::send('mail', $data, function ($message) use ($to_email) {
 
-                $message->to($to_email);
-                $message->subject('Registration mail');
+                   $message->to($to_email);
+                   $message->subject('Registration mail');
 
-            });*/
+               });*/
             $merchant_id = Merchant::insertGetId($request->all());
 
             //TODO:: Insert into Shop Table
@@ -150,6 +150,10 @@ class MerchantController extends Controller
 
     public function merchantLogin()
     {
+        if (Auth::guard('merchant')->check()) {
+
+            return Redirect::to('/merchant/dashboard');
+        }
 
         return view('merchant.login.index');
     }

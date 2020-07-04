@@ -22,7 +22,6 @@ class ParcelController extends Controller
 
     public function index($day)
     {
-
         $cod_charge = Merchant::where('merchant_id', Auth::guard('merchant')->id())->first();
         if (is_null($cod_charge)) {
             $cod_charge = 0;
@@ -40,7 +39,6 @@ class ParcelController extends Controller
         if ($day == "next_day") {
             $is_same_day = false;
         }
-
         //return $cod_charge;
         return view('merchant.parcel.index')
             ->with('cod_charge', $cod_charge)
@@ -51,29 +49,13 @@ class ParcelController extends Controller
             ->with('parcel_types', ParcelType::orderBy('created_at', 'DESC')->get());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(Request $request)
 
     {
-        $area_charge=Area::where('area_id', $request['area_id'])->first();
-       /* return $request->all();*/
+        $area_charge = Area::where('area_id', $request['area_id'])->first();
+        //return $request->all();
         if ($request->shop_id == null)
-         /*   return back()->with('failed', "Please Select Your Shop");*/
+            /*   return back()->with('failed', "Please Select Your Shop");*/
             Redirect::to('/logout');
 
         $request->validate([
@@ -113,7 +95,6 @@ class ParcelController extends Controller
             'updated_at' => Carbon::now(),
 
         ];
-
 
 
         //return $parcel_array;
@@ -326,6 +307,15 @@ class ParcelController extends Controller
     {
         $invoice = Parcel::where('parcel_id', $request['parcel_id'])->first();
 
+
+        $request->validate([
+            /*  'delivery_charge' => 'required|numeric',*/
+            /*  'total_amount' => 'required|numeric',*/
+            'delivery_man_id' => 'required|numeric|min:1',
+
+        ]);
+
+
         try {
 
             ParcelStatus::where('parcel_id', $request['parcel_id'])->update([
@@ -436,7 +426,7 @@ class ParcelController extends Controller
         }
         unset($request['_token']);
 
-        $area_charge=Area::where('area_id', $request['area_id'])->first();
+        $area_charge = Area::where('area_id', $request['area_id'])->first();
 
 
         //return $request->all();

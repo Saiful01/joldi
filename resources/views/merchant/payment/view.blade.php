@@ -9,8 +9,8 @@
             <div class="page-title-box">
                 <h4 class="font-size-18">Payment Information</h4>
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Payment Table</a></li>
+                    <li class="breadcrumb-item"><a href="/merchant/dashboard">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/merchant/payments/request">Payment Request</a></li>
                 </ol>
             </div>
         </div>

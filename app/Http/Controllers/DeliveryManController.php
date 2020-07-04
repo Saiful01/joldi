@@ -35,78 +35,6 @@ class DeliveryManController extends Controller
         return view('admin.deliveryman.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-//        return $request;
-        unset($request['_token']);
-        $request ['password'] = Hash::make($request['password']);
-        $request ['active_status'] = true;
-
-        if ($request->hasFile('delivery_man_image')) {
-
-
-            $image = $request->file('delivery_man_image');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/deliveryman/profile');
-            $image->move($destinationPath, $image_name);
-            $array = [
-
-                'delivery_man_name' => $request['delivery_man_name'],
-                'delivery_man_phone' => $request['delivery_man_phone'],
-                'delivery_man_image' => $image_name,
-                'password' => $request['password'],
-                'delivery_man_address' => $request['delivery_man_address'],
-                'active_status' => $request['active_status'],
-                'delivery_man_type' => $request['delivery_man_type'],
-                'delivery_man_email' => $request['delivery_man_email']
-            ];
-        } else if ($request->hasFile('delivery_man_document')) {
-
-
-            $image = $request->file('delivery_man_document');
-            $image_name = time() . '.' . $image->getClientOriginalExtension();
-            $destinationPath = public_path('/images/deliveryman/deliverymanNid');
-            $image->move($destinationPath, $image_name);
-            $array = [
-
-                'delivery_man_name' => $request['delivery_man_name'],
-                'delivery_man_phone' => $request['delivery_man_phone'],
-                'delivery_man_document' => $image_name,
-                'password' => $request['password'],
-                'delivery_man_address' => $request['delivery_man_address'],
-                'active_status' => $request['active_status'],
-                'delivery_man_type' => $request['delivery_man_type'],
-                'delivery_man_email' => $request['delivery_man_email']
-            ];
-        } else {
-            $array = [
-
-                'delivery_man_name' => $request['delivery_man_name'],
-                'delivery_man_phone' => $request['delivery_man_phone'],
-                'password' => $request['password'],
-                'delivery_man_address' => $request['delivery_man_address'],
-                'active_status' => $request['active_status'],
-                'delivery_man_type' => $request['delivery_man_type'],
-                'delivery_man_email' => $request['delivery_man_email']
-            ];
-
-
-        }
-        try {
-            DeliveryMan::create($array);
-            return back()->with('success', "Successfully Saved");
-        } catch (\Exception $exception) {
-
-            return back()->with('failed', $exception->getMessage());
-        }
-    }
-
     public function registrationStore(Request $request)
     {
         unset($request['_token']);
@@ -204,6 +132,7 @@ class DeliveryManController extends Controller
         $result = DeliveryMan::orderBY('created_at', "DESC")->get();
         return view('admin.deliveryman.view')->with('result', $result);
     }
+
     public function details($id)
     {
         $result = DeliveryMan::where('delivery_man_id', $id)->first();

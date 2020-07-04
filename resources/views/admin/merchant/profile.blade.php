@@ -31,7 +31,7 @@
                     <h6> Active Status: @if($result->active_status==0) NO @else YES @endif</h6>
                     <h6> COD Enable: @if($result->is_cod_enable==0) No @else yes @endif</h6>
                     <h6> COD Charge: {{$result->cod_charge}}</h6>
-                    <h6> Area: {{$results->area_name}}</h6>
+                    <h6> Area: {{$result->area_name}}</h6>
                 </div>
             </div>
         </div>

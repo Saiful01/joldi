@@ -19,16 +19,10 @@
     <!-- end page title -->
     <div class="row">
         <div class="col-12">
+            @include('includes.message')
             <div class="card">
                 <div class="card-body">
 
-                    @if(Session::has('success'))
-                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
-                    @endif
-
-                    @if(Session::has('failed'))
-                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('failed') }}</p>
-                    @endif
                     <div class="row mb-3">
                         {{-- <div class="col-md-1">
                              <h4 class="card-title">Parcels</h4>
@@ -82,20 +76,20 @@
                         <div class="row">
                             <div class="col-sm-12">
 
-                                <table class="table mb-0">
+                                <table class="table mb-0 table-bordered">
 
                                     <thead>
                                     <tr role="row">
                                         <th>Invoice No</th>
-                                        <th>D.Chrage</th>
+                                       {{-- <th>D.Chrage</th>--}}
                                         <th>Amount</th>
                                         <th>Same Day</th>
-                                        <th>D. Date</th>
+                                        <th>DeliveryDate</th>
                                         <th>Pickup Man</th>
                                         <th>Deliveryman</th>
                                         <th>Hub Receiver</th>
-                                        <th>Note</th>
-                                        <th>Area</th>
+
+                                        <td>Area</td>
                                         <th>Status</th>
                                         <th>P. Status</th>
                                         <th>Action</th>
@@ -112,7 +106,7 @@
 
                                             <th>{{$res->parcel_invoice}}</th>
                                             {{--                                <td>{{$res->parcel_type_id}}</td>--}}
-                                            <td>{{$res->delivery_charge}}</td>
+                                       {{--     <td>{{$res->delivery_charge}}</td>--}}
                                             <td>{{$res->total_amount}}</td>
                                             <td>
                                                 @if($res->is_same_day==true)
@@ -126,7 +120,7 @@
                                                 @if($res->is_same_day==true)
                                                     Today
                                                 @else
-                                                    {{$res->delivery_date}}
+                                                    {{getDateFormat($res->delivery_date)}}
 
                                                 @endif
 
@@ -287,8 +281,6 @@
 
                                             <td>{{getUserNameFromId($res->hub_receiver)}}</td>
 
-
-                                            <td>{{$res->parcel_notes}}</td>
                                             <td>{{$res->area_name}}</td>
                                             <td>
                                                 @if($res->delivery_status=="pending")
@@ -365,7 +357,7 @@
 
 
                                                 @else
-                                                    <span class="badge badge-pill badge-success">{{$res->delivery_status}}</span>
+                                                    <span class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
                                                 @endif
                                             </td>
                                             <td>

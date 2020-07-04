@@ -27,18 +27,18 @@
                 <li>
                     <a href="/merchant/payments/request" class=" waves-effect">
                         <i class="ti-money"></i>
-                        <span>Payment Request</span>
+                        <span>Payments</span>
                     </a>
                 </li>
 
 
-                <li>
+               {{-- <li>
                     <a href="/merchant/payments/view" class=" waves-effect">
                         <i class="fa fa-th-list"></i>
                         <span>View Payments</span>
                     </a>
                 </li>
-
+--}}
                 <li>
                     <a href="/merchant/parcel/show" class=" waves-effect">
                         <i class="fa fa-gift"></i>

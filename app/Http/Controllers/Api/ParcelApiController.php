@@ -227,7 +227,6 @@ class ParcelApiController extends Controller
                     'is_complete' => true,
                 ];
             } else {
-
                 $parcel_array = [
                     'delivery_status' => $status,
                 ];

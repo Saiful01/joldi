@@ -81,7 +81,8 @@
                                         Area Charge: {{$result->value}}<br>
                                         COD Charge: {{$result->cod}}<br>
                                         Total Amount: {{$result->total_amount}}<br>
-                                        Status: <span class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
+                                        Status: <span
+                                                class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
                                         Date: {{$result->delivery_date}}<br>
                                     </address>
                                 </div>
