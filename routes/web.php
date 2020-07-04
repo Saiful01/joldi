@@ -87,6 +87,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/deliveryman/delete/{id}', 'DeliveryManController@destroy');
     Route::get('/admin/deliveryman/inactive/{id}', 'AdminController@deliverymanInactive');
     Route::get('/admin/deliveryman/activate/{id}', 'AdminController@deliverymanActivate');
+    Route::get('/admin/deliveryman/details/{id}', 'DeliveryManController@details');
 
 
     Route::get('/admin/view/payments-request', 'PaymentController@adminPayment');

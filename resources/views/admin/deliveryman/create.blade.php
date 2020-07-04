@@ -31,7 +31,7 @@
                     @endif
                     <h5 class="card-title">Add New Delivery Man</h5>
                     <hr>
-                    <form class="custom-validation" method="post" action="/admin/deliveryman/store" novalidate=""
+                    <form class="custom-validation" method="post" action="/deliveryman/store" novalidate=""
                           enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Name</label>
@@ -44,9 +44,16 @@
 
 
                         <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Email</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="email" placeholder="Email"
+                                       id="example-text-input-lg" name="delivery_man_email" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Phone</label>
                             <div class="col-sm-10">
-                                <input class="form-control form-control-lg" type="text" placeholder="phone"
+                                <input class="form-control form-control-lg" type="number" placeholder="phone"
                                        id="example-text-input-lg" name="delivery_man_phone" required>
                             </div>
                         </div>
@@ -66,18 +73,63 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Type</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-lg" id="test" onchange="showDiv('hidden_div', this)"
+                                        name="delivery_man_type">
+
+
+                                    <option value="1">Motorbike</option>
+                                    <option value="2">Cycle</option>
+
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Profile Image</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="file" placeholder=""
-                                       id="example-text-input-lg" name="delivery_man_image">
+                                       id="example-text-input-lg" name="image">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"> NID/Passport Document</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="file" placeholder=""
-                                       id="example-text-input-lg" name="delivery_man_document">
+                                       id="example-text-input-lg" name="nid">
                             </div>
+                        </div>
+                        <div id="hidden_div">
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">License</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="file" placeholder=""
+                                       id="example-text-input-lg" name="licen">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Tax Token</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="file" placeholder=""
+                                       id="example-text-input-lg" name="tax">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Blue Book</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="file" placeholder=""
+                                       id="example-text-input-lg" name="blue">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Insurance</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="file" placeholder=""
+                                       id="example-text-input-lg" name="insu">
+                            </div>
+                        </div>
                         </div>
 
 
@@ -87,9 +139,9 @@
                                 <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
                                     Submit
                                 </button>
-                                <button type="reset" class="btn btn-secondary waves-effect">
+                              {{--  <button type="reset" class="btn btn-secondary waves-effect">
                                     Reset
-                                </button>
+                                </button>--}}
                             </div>
                         </div>
                     </form>
@@ -98,5 +150,13 @@
             </div>
         </div> <!-- end col -->
     </div> <!-- end row -->
+
+    <script type="text/javascript">
+
+        function showDiv(divId, element) {
+            document.getElementById(divId).style.display = element.value == 1 ? 'block' : 'none';
+        }
+
+    </script>
 
 @endsection

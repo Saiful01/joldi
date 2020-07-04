@@ -130,7 +130,7 @@ class DeliveryManController extends Controller
             $image_name = "nid_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $image_name);
-            $request['nid'] = $image_name;
+            $request['delivery_man_document'] = $image_name;
 
         }
 
@@ -201,8 +201,13 @@ class DeliveryManController extends Controller
      */
     public function show(DeliveryMan $deliveryMan)
     {
-        $result = DeliveryMan::get();
+        $result = DeliveryMan::orderBY('created_at', "DESC")->get();
         return view('admin.deliveryman.view')->with('result', $result);
+    }
+    public function details($id)
+    {
+        $result = DeliveryMan::where('delivery_man_id', $id)->first();
+        return view('admin.deliveryman.details')->with('result', $result);
     }
 
     /**
@@ -228,13 +233,83 @@ class DeliveryManController extends Controller
     public function update(Request $request, DeliveryMan $deliveryMan)
     {
         unset($request['_token']);
-        $request ['delivery_man_password'] = Hash::make($request['delivery_man_password']);
+        if ($request->hasFile('image')) {
+
+
+            $image = $request->file('image');
+            $image_name = "profile_" . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $image_name);
+            $request['delivery_man_image'] = $image_name;
+
+        }
+        if ($request->hasFile('nid')) {
+
+
+            $image = $request->file('nid');
+            $image_name = "nid_" . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $image_name);
+            $request['delivery_man_document'] = $image_name;
+
+        }
+
+        if ($request->hasFile('licen')) {
+
+
+            $image = $request->file('licen');
+            $image_name = "licen_" . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/');
+            $image->move($destinationPath, $image_name);
+            $request['license'] = $image_name;
+
+
+        }
+
+        if ($request->hasFile('tax')) {
+
+
+            $image = $request->file('tax');
+            $image_name = "tax_" . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $image_name);
+            $request['tax_token'] = $image_name;
+
+
+        }
+
+        if ($request->hasFile('blue')) {
+
+
+            $image = $request->file('blue');
+            $image_name = "blue_" . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $image_name);
+            $request['blue_book'] = $image_name;
+
+        }
+
+        if ($request->hasFile('insu')) {
+
+
+            $image = $request->file('insu');
+            $image_name = "insu_" . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images');
+            $image->move($destinationPath, $image_name);
+            $request['insurence'] = $image_name;
+
+        }
+
+        $data = $request->except(['image', '_token', 'insu', 'blue', 'tax', 'licen', 'nid']);
+
+        //return $request->all();
         try {
-            DeliveryMan::where('delivery_man_id', $request['delivery_man_id'])->update($request->all());
+            DeliveryMan::where('delivery_man_id', $request['delivery_man_id'])->update($data);
             return back()->with('success', "Successfully Updated");
         } catch (\Exception $exception) {
             return back()->with('failed', $exception->getMessage());
         }
+
     }
 
     /**
