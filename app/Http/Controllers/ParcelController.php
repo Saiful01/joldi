@@ -68,7 +68,10 @@ class ParcelController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
+
     {
+        $area_charge=Area::where('area_id', $request['area_id'])->first();
+       /* return $request->all();*/
         if ($request->shop_id == null)
             Redirect::to('/logout');
 
@@ -101,7 +104,7 @@ class ParcelController extends Controller
             'delivery_charge' => $request['delivery_charge'],
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
-            'total_amount' => $request['payable_amount'] - ($request['cod'] + $request['delivery_charge']),
+            'total_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
             'is_same_day' => $request['is_same_day'],
             'delivery_date' => $delivery_date,
             'parcel_notes' => $request['parcel_notes'],
@@ -109,6 +112,7 @@ class ParcelController extends Controller
             'updated_at' => Carbon::now(),
 
         ];
+
 
 
         //return $parcel_array;

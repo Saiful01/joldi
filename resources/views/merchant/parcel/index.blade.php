@@ -74,6 +74,7 @@
                                         </div>
                                     </div>--}}
                                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
+                                {{--<input type="hidden" name="area_charge" ng-model="area_charge">--}}
                                 <input type="hidden" name="shop_id" value="{{Session::get('shop_id')}}">
                                 <input type="hidden" name="is_same_day" value="{{$is_same_day}}">
 
