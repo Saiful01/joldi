@@ -19,13 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::any('/login', 'Api\LoginApiController@login');
 
+Route::post('/pending-collection', 'Api\ParcelApiController@getCololectableParcel');
+Route::post('/parcel-collect', 'Api\ParcelApiController@collectParcel');
+
 Route::post('/parcels', 'Api\ParcelApiController@getParcel');
 Route::post('/parcel-details', 'Api\ParcelApiController@getParcelDetails');
 Route::post('/parcel-update', 'Api\ParcelApiController@parcelUpdate');
 
 Route::post('/parcel/tracking', 'Api\ParcelApiController@parcelTracking');
 
-Route::post('/parcel-collect', 'Api\ParcelApiController@collectParcel');
+
 
 Route::post('/location/store', 'Api\ParcelApiController@locationStore');
 Route::post('/location/get', 'Api\ParcelApiController@locationGet');

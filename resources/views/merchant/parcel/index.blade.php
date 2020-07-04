@@ -207,12 +207,17 @@
                                         Area</label>--}}
                                     <div class="col-sm-12">
 
-                                        <select class="form-control form-control-lg"
-                                                name="area_id">
-                                            <option>এলাকা</option>
-                                            @foreach($areas as $area)
-                                                <option value="{{$area->area_id}}">{{$area->area_name}}</option>
-                                            @endforeach
+
+                                        <select ng-model="area_id" class="form-control form-control-lg"
+                                                name="area_id" ng-change="updateArea()">
+                                            {{-- <option value="0">
+                                                 Select
+                                             </option>--}}
+                                            <option value="" selected disabled hidden>Area</option>
+                                            <option ng-repeat="x in areas" value="@{{x.area_id}}"
+                                                    ng-selected="1">
+                                                @{{x.area_name}}
+                                            </option>
                                         </select>
 
                                     </div>
@@ -261,6 +266,7 @@
                                                 <h6>Cash Collection</h6>
                                                 <h6>Delivery Charge</h6>
                                                 <h6>Cod Charge</h6>
+                                                <h6>Area Charge</h6>
                                                 <hr>
                                                 <h6>Total Payble Amount</h6>
                                             </div>
@@ -268,6 +274,7 @@
                                                 <h6 ng-bind="payable_amount">Tk. 100</h6>
                                                 <h6 ng-bind="delivery_charge">Tk. 60</h6>
                                                 <h6 ng-bind="cod_charge">Tk. 0</h6>
+                                                <h6 ng-bind="area_charge">Tk. 0</h6>
                                                 <hr>
                                                 <h6 ng-bind="total_amount">Tk. 40</h6>
                                             </div>
@@ -326,13 +333,36 @@
             $scope.delivery_charge = 0;
             $scope.payable_amount = 0;
             $scope.total_amount = 0;
+            $scope.area_charge = 0;
             $scope.cod_charge = '<?php echo $cod_charge?>';
             $scope.cod = '<?php echo $cod_charge?>';
+
             $http.get('/get-parcel-type', {}).then(function success(e) {
 
                 console.log(e.data);
                 $scope.parcels = e.data;
             });
+
+            $http.get('/get-area', {}).then(function success(e) {
+
+                console.log(e.data);
+                $scope.areas = e.data;
+            });
+
+            $scope.updateArea = function () {
+                console.log($scope.area_id+'---');
+
+                $http.get('/get-area-charge/' + $scope.area_id, {}).then(function success(e) {
+
+                    console.log(e.data.value);
+
+                    $scope.area_charge = parseFloat(e.data.value);
+                    $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
+
+                    console.log($scope+'--');
+                });
+
+            };
 
             $scope.update = function () {
 
@@ -341,7 +371,7 @@
                     console.log(e.data.charge);
 
                     $scope.delivery_charge = parseFloat(e.data.charge);
-                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge);
+                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
                     ;
 
                     console.log($scope.total_amount);
@@ -352,7 +382,7 @@
 
             $scope.totalPriceCalcualtion = function () {
 
-                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge);
+                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
 
                 console.log("hhhh" + parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount));
 
