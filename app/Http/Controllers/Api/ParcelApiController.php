@@ -67,15 +67,31 @@ class ParcelApiController extends Controller
         $delivery_man_id = $request['delivery_man_id'];
 
         try {
-            $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-                /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
-                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
-                ->where('parcel_statuses.delivery_man_id', $delivery_man_id);
-            if ($request['status'] != "all") {
-                $query->where('parcel_statuses.delivery_status', $request['status']);
-            }
 
-            $parcels = $query->get();
+            if ($request['status'] == "pickup_man_assigned") {
+                $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                    /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+                    ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                    ->where('parcel_statuses.order_pickup_man_id', $delivery_man_id);
+                if ($request['status'] != "all") {
+                    $query->where('parcel_statuses.delivery_status', $request['status']);
+                }
+
+                $parcels = $query->get();
+            } else {
+                $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                    /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+                    ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                    ->where('parcel_statuses.delivery_man_id', $delivery_man_id);
+                if ($request['status'] != "all") {
+                    $query->where('parcel_statuses.delivery_status', "delivery_man_assigned");
+                    $query->orWhere('parcel_statuses.delivery_status', "on_the_way");
+                    $query->orWhere('parcel_statuses.delivery_status', "returned");
+                    $query->orWhere('parcel_statuses.delivery_status', "partial_delivered");
+                }
+
+                $parcels = $query->get();
+            }
 
 
         } catch (\Exception $exception) {
@@ -309,10 +325,6 @@ class ParcelApiController extends Controller
             'data' => $parcels_details,
         ];
     }
-
-
-
-
 
 
     public function locationStore(Request $request)

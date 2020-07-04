@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Seeder;
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'merchant_phone'=>"455",
             'password'=>Hash::make('1234'),
             'area_id'=>1,
+            'active_status'=>1,
         ]);
         \App\Merchant::create([
 
@@ -45,6 +47,7 @@ class DatabaseSeeder extends Seeder
             'merchant_phone'=>"455",
             'password'=>Hash::make('123456'),
             'area_id'=>1,
+            'active_status'=>1,
         ]);
     }
 }
