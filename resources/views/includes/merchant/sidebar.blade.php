@@ -47,7 +47,7 @@
                 </li>
                 <li>
                     <a href="/merchant/shop/view" class=" waves-effect">
-                        <i class="fas fa-archive"></i>
+                        <i class="fas fa-shopping-bag"></i>
                         <span>Shop management</span>
                     </a>
                 </li>

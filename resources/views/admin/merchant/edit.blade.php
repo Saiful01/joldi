@@ -76,8 +76,8 @@
                             <div class="col-sm-10">
                                 <select class="form-control form-control-lg"  type="text"
                                         id="example-text-input-lg" name="is_cod_enable">
-                                    <option value="1" @if($result->is_cod_enable==1) selected @endif >Active</option>
-                                    <option value="0" @if($result->is_cod_enable==0) selected @endif>Inactive</option>
+                                    <option value="1" @if($result->is_cod_enable==1) selected @endif >Yes</option>
+                                    <option value="0" @if($result->is_cod_enable==0) selected @endif>No</option>
                                 </select>
                             </div>
                         </div>

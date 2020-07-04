@@ -102,6 +102,9 @@ class AdminController extends Controller
 
     }
     public function changeMerchant( Request $request){
+        if (!$request['merchant_id']) {
+            return back()->with('failed', "Please select atleast 1 item");
+        }
 
 
         if($request['change']==1){
@@ -159,6 +162,9 @@ class AdminController extends Controller
         //return $request->all();
     }
     public function deliverymanChange( Request $request){
+        if (!$request['delivery_man_id']) {
+            return back()->with('failed', "Please select atleast 1 item");
+        }
 
         if($request['change']==1){
 
@@ -214,10 +220,10 @@ class AdminController extends Controller
                 $message->subject('Account Verified mail');
 
             });
-            return 'success';
+            return back()->with('success', "Successfully Active");
         } catch (\Exception $exception) {
 
-            return back()->with('success', $exception->getMessage());
+            return back()->with('failed', $exception->getMessage());
         }
     }
 

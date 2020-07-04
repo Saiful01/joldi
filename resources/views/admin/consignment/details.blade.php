@@ -54,8 +54,9 @@
                                 <div class="col-6 mt-4">
                                     <address>
                                         <strong>Charge:</strong><br>
-                                        Amount: {{$result->payable_amount}}<br>
-                                        Charge: {{$result->delivery_charge}}<br>
+                                        Parcel Price: {{$result->payable_amount}}<br>
+                                        Delivery Charge: {{$result->delivery_charge}}<br>
+                                       Area Charge: {{$result->value}}<br>
                                         Total Amount: {{$result->total_amount}}<br>
                                         Status: <span class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
                                         Date: {{$result->delivery_date}}<br>
