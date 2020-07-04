@@ -86,9 +86,9 @@ class ParcelController extends Controller
 
 
         if ($request['is_same_day']) {
-            $delivery_date = Carbon::now()->format('Y-m-d');
+            $delivery_date = Carbon::now()->format('d-m-y');
         } else {
-            $delivery_date = Carbon::now()->addDays(1)->format('Y-m-d');
+            $delivery_date = Carbon::now()->addDays(1)->format('d-m-y');
             $request['is_same_day'] = false;
         }
 
@@ -401,11 +401,18 @@ class ParcelController extends Controller
      */
     public function edit($parcel_id)
     {
+        $cod_charge = Merchant::where('merchant_id', Auth::guard('merchant')->id())->first();
+        if (is_null($cod_charge)) {
+            $cod_charge = 0;
+        } else {
+            $cod_charge = $cod_charge->cod_charge;
+        }
         $result = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->where('parcels.parcel_id', $parcel_id)
             ->first();
         return view('merchant.parcel.edit')
+            ->with('cod_charge', $cod_charge)
             ->with('result', $result);
 
     }
@@ -419,6 +426,7 @@ class ParcelController extends Controller
      */
     public function update(Request $request, Parcel $parcel)
     {
+        return $request->all();
 
 
         if ($request['parcel_type_id'] == "? undefined:undefined ?") {
@@ -426,31 +434,30 @@ class ParcelController extends Controller
         }
         unset($request['_token']);
 
-        //return  $request->all();
-        if ($request['is_same_day'] == "on") {
-            $request['is_same_day'] = true;
-        } else {
-            $request['is_same_day'] = false;
-        }
+        $area_charge=Area::where('area_id', $request['area_id'])->first();
 
-        $request['delivery_date'] = Carbon::parse($request['delivery_date'])->format('Y-m-d');
+
+        //return $request->all();
         $parcel_array = [
             'parcel_title' => $request['parcel_title'],
+            'merchant_id' => Auth::guard('merchant')->id(),
             'parcel_invoice' => $request['parcel_invoice'],
             'parcel_type_id' => $request['parcel_type_id'],
+            'shop_id' => $request['shop_id'],
+            'area_id' => $request['area_id'],
             'delivery_charge' => $request['delivery_charge'],
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
-            'total_amount' => $request['payable_amount'] - ($request['cod'] + $request['delivery_charge']),
+            'total_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
             'is_same_day' => $request['is_same_day'],
-            'delivery_date' => $request['delivery_date'],
             'parcel_notes' => $request['parcel_notes'],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
         ];
 
-        $parcel_id = Parcel::where('parcel_id', $request['parcel_id'])->update($parcel_array);
+
+        Parcel::where('parcel_id', $request['parcel_id'])->update($parcel_array);
         $customer_array = [
             'customer_name' => $request['customer_name'],
             'customer_phone' => $request['customer_phone'],
