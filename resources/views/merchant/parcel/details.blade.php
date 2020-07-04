@@ -76,10 +76,12 @@
                                 <div class="col-12">
                                     <address>
                                         <strong>Charge:</strong><br>
-                                        Amount: {{$result->payable_amount}}<br>
-                                        Charge: {{$result->delivery_charge}}<br>
+                                        Parcel Price: {{$result->payable_amount}}<br>
+                                        Delivery Charge: {{$result->delivery_charge}}<br>
+                                        Area Charge: {{$result->value}}<br>
+                                        COD Charge: {{$result->cod}}<br>
                                         Total Amount: {{$result->total_amount}}<br>
-                                        Status: {{$result->delivery_status}}<br>
+                                        Status: <span class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
                                         Date: {{$result->delivery_date}}<br>
                                     </address>
                                 </div>

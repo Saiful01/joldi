@@ -1,4 +1,6 @@
 @extends('layouts.default')
+@section('title', 'Merchant Login')
+
 
 @section('content')
     <div class="account-pages my-5 pt-5">

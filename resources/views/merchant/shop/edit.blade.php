@@ -47,7 +47,7 @@
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">shop Phone</label>
                             <div class="col-sm-10">
-                                <input class="form-control form-control-lg" type="text" placeholder="phone"
+                                <input class="form-control form-control-lg" type="number" placeholder="phone"
                                        id="example-text-input-lg" name="shop_phone" value="{{$result->shop_phone}}"  >
                             </div>
                         </div>

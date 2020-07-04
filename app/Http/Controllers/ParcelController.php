@@ -73,6 +73,7 @@ class ParcelController extends Controller
         $area_charge=Area::where('area_id', $request['area_id'])->first();
        /* return $request->all();*/
         if ($request->shop_id == null)
+         /*   return back()->with('failed', "Please Select Your Shop");*/
             Redirect::to('/logout');
 
         $request->validate([
@@ -274,6 +275,7 @@ class ParcelController extends Controller
 
         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.parcel_id', $id)
             ->first();
         $shop = Shop::where('merchant_id', Auth::guard('merchant')->id())->first();
@@ -536,6 +538,7 @@ class ParcelController extends Controller
     {
         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.parcel_id', $id)
             ->first();
 
