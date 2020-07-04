@@ -13,6 +13,47 @@ use Illuminate\Http\Request;
 class ParcelApiController extends Controller
 {
 
+
+    public function getCololectableParcel(Request $request)
+    {
+
+
+        $status_code = 200;
+        $message = "Logged in";
+        $access_token = "ABC";
+        $parcels = null;
+
+
+        $delivery_man_id = $request['delivery_man_id'];
+
+        try {
+            $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+                ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                ->where('parcel_statuses.order_pickup_man_id', $delivery_man_id);
+            if ($request['status'] != "all") {
+                $query->where('parcel_statuses.delivery_status', $request['status']);
+            }
+
+            $parcels = $query->get();
+
+
+        } catch (\Exception $exception) {
+
+            $status_code = $exception->getCode();
+            $message = $exception->getMessage();
+        }
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
+            'data' => $parcels,
+        ];
+
+
+    }
+
     public function getParcel(Request $request)
     {
 
@@ -30,8 +71,6 @@ class ParcelApiController extends Controller
                 /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
                 ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
                 ->where('parcel_statuses.delivery_man_id', $delivery_man_id);
-
-
             if ($request['status'] != "all") {
                 $query->where('parcel_statuses.delivery_status', $request['status']);
             }
@@ -217,12 +256,11 @@ class ParcelApiController extends Controller
         $access_token = 0;
 
 
-        $parcel_invoice = $request['parcel_id'];
+        $parcel_invoice = $request['invoice_number'];
         $status = $request['status'];
 
         $changed_by = $request['changed_by'];
         $notes = $request['notes'];
-
 
         $is_exist = Parcel::where('parcel_invoice', $parcel_invoice)//TODO::Need Modificatuion
         ->first();
@@ -237,7 +275,6 @@ class ParcelApiController extends Controller
         }
 
         try {
-
 
             $parcel_array = [
                 'delivery_status' => $status,
@@ -272,6 +309,11 @@ class ParcelApiController extends Controller
             'data' => $parcels_details,
         ];
     }
+
+
+
+
+
 
     public function locationStore(Request $request)
     {

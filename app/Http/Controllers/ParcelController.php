@@ -73,8 +73,8 @@ class ParcelController extends Controller
             Redirect::to('/logout');
 
         $request->validate([
-          /*  'delivery_charge' => 'required|numeric',*/
-          /*  'total_amount' => 'required|numeric',*/
+            /*  'delivery_charge' => 'required|numeric',*/
+            /*  'total_amount' => 'required|numeric',*/
             'parcel_type_id' => 'required|numeric|min:1',
 
         ]);
@@ -91,7 +91,7 @@ class ParcelController extends Controller
 
 
         //return $request->all();
-         $parcel_array = [
+        $parcel_array = [
             'parcel_title' => $request['parcel_title'],
             'merchant_id' => Auth::guard('merchant')->id(),
             'parcel_invoice' => $request['parcel_invoice'],
@@ -235,6 +235,36 @@ class ParcelController extends Controller
             ->with('results', $parcels);
     }
 
+
+    public function parcelStatusChange($id)
+    {
+        $status = "hub_received";
+
+        try {
+
+            ParcelStatus::where('parcel_id', $id)->update([
+                'delivery_status' => "hub_received",
+                'hub_receiver' => Auth::user()->id,
+            ]);
+
+            //Insert into History Table
+            $array = [
+                'parcel_id' => $id,
+                'changed_by' => Auth::user()->id,
+                'parcel_status' => $status,
+                'notes' => "",
+                'user_type' => "admin",
+            ];
+            ParcelStatusHistory::create($array);
+
+            return back()->with('success', "Successfully Status Changed");
+
+        } catch (\Exception $exception) {
+
+            return back()->with('failed', $exception->getMessage());
+        }
+    }
+
     public function details($id)
     {
 
@@ -256,13 +286,14 @@ class ParcelController extends Controller
 
         $invoice = Parcel::where('parcel_id', $request['parcel_id'])->first();
 
+        $status = "delivery_man_assigned";
 
         try {
 
             ParcelStatus::where('parcel_id', $request['parcel_id'])->update(['delivery_man_id' => $request['delivery_man_id']]);
-            ParcelStatus::where('parcel_id', $request['parcel_id'])->update(['delivery_status' => 'on_the_way']);
+            ParcelStatus::where('parcel_id', $request['parcel_id'])->update(['delivery_status' => $status]);
             $array = [
-                'parcel_status' => 'on_the_way',
+                'parcel_status' => $status,
                 'changed_by' => Auth::guard()->user()->id,
                 'parcel_id' => $request['parcel_id'],
                 'user_type' => 'admin'
@@ -282,8 +313,43 @@ class ParcelController extends Controller
             return $exception->getMessage();
 
         }
+    }
 
 
+    public function adminAssignPickUpMan(Request $request)
+    {
+        $invoice = Parcel::where('parcel_id', $request['parcel_id'])->first();
+
+        try {
+
+            ParcelStatus::where('parcel_id', $request['parcel_id'])->update([
+                'order_pickup_man_id' => $request['delivery_man_id'],
+                'delivery_status' => 'pickup_man_assigned',
+
+            ]);
+            $array = [
+                'parcel_status' => 'pickup_man_assigned',
+                'changed_by' => Auth::guard()->user()->id,
+                'parcel_id' => $request['parcel_id'],
+                'user_type' => 'admin'
+            ];
+
+
+            ParcelStatusHistory::create($array);
+            $notification = [
+                'message' => 'Assigned for  no ' . $invoice->parcel_invoice,
+                'for_user_id' => $request['delivery_man_id'],
+                'changed_by' => Auth::guard()->user()->id,
+                'is_for_collect' => true
+
+            ];
+            Notification::create($notification);
+            return back()->with('success', "Successfully Assigned Delivery Man");
+        } catch (\Exception $exception) {
+
+            return $exception->getMessage();
+
+        }
     }
 
     public function productReceiveByAdmin(Request $request)
@@ -413,7 +479,7 @@ class ParcelController extends Controller
     {
 
 
-        if(!$request['parcel_id']){
+        if (!$request['parcel_id']) {
             return back()->with('failed', "Please select atleast 1 item");
         }
 
@@ -428,8 +494,7 @@ class ParcelController extends Controller
             }
 
 
-
-           // return $parcel_data;
+            // return $parcel_data;
             return view('merchant.parcel.print_qr')
                 ->with('shop', $shop)
                 ->with('parcel_data', $parcel_data);

@@ -19,6 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->unsignedBigInteger('for_user_id');
             $table->unsignedBigInteger('changed_by');
             $table->boolean('is_valid')->default(true);
+            $table->boolean('is_for_collect')->default(false);
             $table->timestamps();
         });
     }

@@ -102,6 +102,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/parcel/assign-pickup-man', 'ParcelController@adminAssignPickUpMan');
     Route::get('/admin/parcel/receive-by-admin', 'ParcelController@productReceiveByAdmin');
 
+    Route::get('/admin/parcel/status-change/{id}', 'ParcelController@parcelStatusChange');
+
     Route::get('/admin/setting', 'ParcelController@adminhtml');
     Route::post('/merchant-all/change', 'AdminController@changeMerchant');
     Route::post('/same-day/serach', 'AdminController@sameDaySearch');
@@ -184,11 +186,27 @@ Route::get('/merchant-test', function () {
 });
 
 //API
+Route::get('/get-area', function () {
+
+    return \App\Area::get();
+
+});
+
+Route::get('/get-area-charge/{id}', function (\Illuminate\Http\Request $request) {
+
+    return \App\Area::where('area_id', $request['id'])->first();
+
+});
+
+
+
 Route::get('/get-parcel-type', function () {
 
     return \App\ParcelType::get();
 
 });
+
+
 Route::get('/get-delivery-charge/{id}', function (\Illuminate\Http\Request $request) {
 
     return \App\ParcelType::where('parcel_type_id', $request['id'])->first();

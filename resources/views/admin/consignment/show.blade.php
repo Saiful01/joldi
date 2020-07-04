@@ -77,7 +77,8 @@
                     </div>
 
 
-                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer" style='overflow-x:auto'>
+                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
+                         style='overflow-x:auto'>
                         <div class="row">
                             <div class="col-sm-12">
 
@@ -92,6 +93,7 @@
                                         <th>D. Date</th>
                                         <th>Pickup Man</th>
                                         <th>Deliveryman</th>
+                                        <th>Hub Receiver</th>
                                         <th>Note</th>
                                         <th>Area</th>
                                         <th>Status</th>
@@ -130,11 +132,9 @@
 
                                             </td>
 
-                                            <td>}
+                                            <td>
 
-
-
-                                                @if($res->order_pickupman_id==null)
+                                                @if($res->order_pickup_man_id==null)
                                                     <div class="col-sm-6 col-md-3">
                                                         <div class="text-center">
                                                             <!-- Small modal -->
@@ -204,18 +204,13 @@
                                                         </div><!-- /.modal -->
                                                     </div>
                                                 @else
-                                                    {{$res->delivery_man_name}}
+                                                    {{getDeliveryManNameFromId($res->order_pickup_man_id)}}
                                                 @endif
-
-
-
 
                                             </td>
 
 
                                             <td>
-
-
                                                 @if($res->delivery_man_id==null)
                                                     <div class="col-sm-6 col-md-3">
                                                         <div class="text-center">
@@ -288,10 +283,9 @@
                                                 @else
                                                     {{$res->delivery_man_name}}
                                                 @endif
-
                                             </td>
 
-
+                                            <td>{{getUserNameFromId($res->hub_receiver)}}</td>
 
 
                                             <td>{{$res->parcel_notes}}</td>
@@ -370,6 +364,8 @@
                                                     </div><!-- /.modal -->
 
 
+                                                @else
+                                                    <span class="badge badge-pill badge-success">{{$res->delivery_status}}</span>
                                                 @endif
                                             </td>
                                             <td>
@@ -398,6 +394,13 @@
                                                         {{--                                                           href="/merchant/parcel/delete/{{$res->parcel_id}}">Delete</a>--}}
                                                         <a class="dropdown-item"
                                                            href="/admin/parcel/details/{{$res->parcel_id}}">Details</a>
+
+                                                        @if($res->delivery_status=="accepted")
+                                                            <a class="dropdown-item"
+                                                               href="/admin/parcel/status-change/{{$res->parcel_id}}">Hub
+                                                                Received</a>
+
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
