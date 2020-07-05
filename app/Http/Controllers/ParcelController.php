@@ -61,11 +61,13 @@ class ParcelController extends Controller
         $request->validate([
             /*  'delivery_charge' => 'required|numeric',*/
             /*  'total_amount' => 'required|numeric',*/
-            'parcel_type_id' => 'required|numeric|min:1',
-            'customer_phone' => 'required|numeric|min:10',
+          /*  'parcel_type_id' => 'required|numeric|min:1',*/
+            'customer_phone' => 'required|digits_between:11,11',
 
         ]);
 
+
+        return $request->all();
         unset($request['_token']);
 
 

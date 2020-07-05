@@ -73,7 +73,7 @@
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
                                         Phone</label>--}}
                                     <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="number" min="11" max="11"
+                                        <input class="form-control form-control-lg" type="number"
                                                placeholder=" কাস্টমার ফোন"
                                                id="example-text-input-lg" name="customer_phone">
                                     </div>
