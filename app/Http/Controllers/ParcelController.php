@@ -62,7 +62,6 @@ class ParcelController extends Controller
             /*  'delivery_charge' => 'required|numeric',*/
             /*  'total_amount' => 'required|numeric',*/
             'parcel_type_id' => 'required|numeric|min:1',
-            'parcel_type_id' => 'required|numeric|min:1',
             'customer_phone' => 'required|digits_between:11,11',
 
         ]);
@@ -91,6 +90,8 @@ class ParcelController extends Controller
             'delivery_charge' => $request['delivery_charge'],
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
+            'area_charge' => $area_charge->value,
+            'receivable_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
             'total_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
             'is_same_day' => $request['is_same_day'],
             'delivery_date' => $delivery_date,

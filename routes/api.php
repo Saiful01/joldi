@@ -30,6 +30,6 @@ Route::post('/parcel/tracking', 'Api\ParcelApiController@parcelTracking');
 
 
 
-Route::post('/location/store', 'Api\ParcelApiController@locationStore');
-Route::post('/location/get', 'Api\ParcelApiController@locationGet');
+Route::any('/location/store', 'Api\ParcelApiController@locationStore');
+Route::any('/location/get', 'Api\ParcelApiController@locationGet');
 

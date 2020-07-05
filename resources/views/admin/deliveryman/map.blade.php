@@ -22,10 +22,6 @@
         <div class="col-sm-6">
             <div class="page-title-box">
                 <h4 class="font-size-18">Delivery Man Location</h4>
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#"> Delivery man Location</a></li>
-                </ol>
             </div>
         </div>
 
@@ -49,13 +45,16 @@
     <script type="text/javascript">
         var locations = [
 
-                <?php for ($i = 1;$i < 5; $i++){?>
+                @foreach($datas as $data)
 
 
-            ['Bondi Beach', 23.7871595, 90.3535339],
+            [  '{{$data->address}}', {{$data->lat}},  {{$data->lon }}],
 
-            <?php}?>
+            @endforeach
+
         ];
+
+        //console.log(locations+"ddddddddddddddddd")
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 8,
@@ -68,6 +67,8 @@
         var marker, i;
 
         for (i = 0; i < locations.length; i++) {
+
+            //console.log(locations.length+"ddddddddddddddddd")
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 map: map

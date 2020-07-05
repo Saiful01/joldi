@@ -37,7 +37,7 @@
                                     <address>
                                         <strong>Billed To:</strong><br>
                                         {{$result->customer_name}}<br>
-                                        {{$result->customer_name}}<br>
+                                        {{$result->customer_phone}}<br>
                                         {{$result->customer_address}}
                                     </address>
                                 </div>

@@ -14,7 +14,7 @@ class CreateCurrentLocationsTable extends Migration
     public function up()
     {
         Schema::create('current_locations', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('location_id');
             $table->unsignedBigInteger('delivery_man_id');
             $table->decimal('lat', 10, 7)->nullable();
             $table->decimal('lon', 10, 7)->nullable();

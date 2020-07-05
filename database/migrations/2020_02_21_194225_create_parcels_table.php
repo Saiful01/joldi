@@ -22,11 +22,13 @@ class CreateParcelsTable extends Migration
             $table->unsignedBigInteger('shop_id');
             $table->unsignedBigInteger('area_id');
 
-            $table->double('payable_amount')->nullable();
+            $table->double('payable_amount')->nullable();//Parcel Charge
 
             $table->double('delivery_charge')->default(0);
             $table->double('cod')->default(0);
-            $table->double('total_amount')->nullable();//Not Needed
+            $table->double('area_charge')->nullable();//area_charge
+            $table->double('total_amount')->nullable();//payable_amount+delivery_charge+cod+area_charge
+            $table->double('receivable_amount')->nullable();//Will be changed if Partial Delivered or Returned
 
             $table->boolean('is_same_day')->default(true);
             $table->date('delivery_date')->nullable();
