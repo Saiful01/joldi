@@ -174,7 +174,7 @@
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>--}}
                                     <div class="col-sm-12">
                                         <input class="form-control form-control-lg" type="text" placeholder="0"
-                                               value="{{$cod_charge}}" name="cod" ng-model="cod"
+                                               value="{{$cod_charge}}" name="cod" ng-model="cod_charge"
                                         >
                                     </div>
                                 </div>
@@ -356,6 +356,7 @@
                 $http.get('/get-area-charge/' + $scope.area_id, {}).then(function success(e) {
 
                     console.log(e.data.value);
+                    $scope.cod_charge= (parseFloat($scope.payable_amount) * parseFloat($scope.cod)/100);
 
                     $scope.area_charge = parseFloat(e.data.value);
                     $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge) + parseFloat($scope.area_charge);
@@ -372,6 +373,7 @@
                     console.log(e.data.charge);
 
                     $scope.delivery_charge = parseFloat(e.data.charge);
+                    $scope.cod_charge= (parseFloat($scope.payable_amount) * parseFloat($scope.cod)/100);
                     $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge) + parseFloat($scope.area_charge);
                     ;
 
@@ -382,6 +384,7 @@
 
 
             $scope.totalPriceCalcualtion = function () {
+                $scope.cod_charge= (parseFloat($scope.payable_amount) * parseFloat($scope.cod)/100);
 
                 $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge) + parseFloat($scope.area_charge);
 

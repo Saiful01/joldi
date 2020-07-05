@@ -49,13 +49,16 @@
     <script type="text/javascript">
         var locations = [
 
-                <?php for ($i = 1;$i < 5; $i++){?>
+                @foreach($datas as $data)
 
 
-            ['Bondi Beach', 23.7871595, 90.3535339],
+            [  '{{$data->address}}', {{$data->lat}},  {{$data->lon }}],
 
-            <?php}?>
+            @endforeach
+
         ];
+
+        //console.log(locations+"ddddddddddddddddd")
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 8,
@@ -68,6 +71,8 @@
         var marker, i;
 
         for (i = 0; i < locations.length; i++) {
+
+            console.log(locations.length+"ddddddddddddddddd")
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 map: map

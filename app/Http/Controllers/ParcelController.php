@@ -61,13 +61,14 @@ class ParcelController extends Controller
         $request->validate([
             /*  'delivery_charge' => 'required|numeric',*/
             /*  'total_amount' => 'required|numeric',*/
-          /*  'parcel_type_id' => 'required|numeric|min:1',*/
+            'parcel_type_id' => 'required|numeric|min:1',
+            'parcel_type_id' => 'required|numeric|min:1',
             'customer_phone' => 'required|digits_between:11,11',
 
         ]);
 
 
-        return $request->all();
+        // return $request->all();
         unset($request['_token']);
 
 
@@ -148,12 +149,7 @@ class ParcelController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Parcel $parcel
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Parcel $parcel)
     {
 
@@ -227,6 +223,10 @@ class ParcelController extends Controller
 
     public function parcelStatusChange($id)
     {
+
+        //TODO::Delete check
+
+
         $status = "hub_received";
 
         try {
@@ -257,10 +257,10 @@ class ParcelController extends Controller
     public function details($id)
     {
 
-        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
-            ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')
-            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+        $parcels = Parcel::leftJoin('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->leftJoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')
+            ->leftJoin('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.parcel_id', $id)
             ->first();
         $shop = Shop::where('merchant_id', Auth::guard('merchant')->id())->first();
@@ -518,8 +518,12 @@ class ParcelController extends Controller
 
     public function destroy($id)
     {
+
+
+        //TODO::Delete check
+
         try {
-            Parcel::where('parcel_id', $id)->delete();
+            Parcel::where('parcel_id', $id)->where('')->delete();
             return back()->with('success', "Successfully Deleted");
 
         } catch (\Exception $exception) {

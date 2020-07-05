@@ -12,9 +12,7 @@
 */
 
 use App\Parcel;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 Route::get('/', function () {
     /*if (Auth::check()) {
@@ -200,7 +198,6 @@ Route::get('/get-area-charge/{id}', function (\Illuminate\Http\Request $request)
 });
 
 
-
 Route::get('/get-parcel-type', function () {
 
     return \App\ParcelType::get();
@@ -265,6 +262,15 @@ Route::get('/statistics', function () {
         'payable_amount' => $payable_amount,
         'total_sales' => $total_sales
     ];
+
+});
+
+
+Route::get('/map1', function () {
+
+    $datas= \App\CurrentLocation::get();
+    return view('maps.map1')->with('datas', $datas);
+
 
 });
 
