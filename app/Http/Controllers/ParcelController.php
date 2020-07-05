@@ -62,6 +62,7 @@ class ParcelController extends Controller
             /*  'delivery_charge' => 'required|numeric',*/
             /*  'total_amount' => 'required|numeric',*/
             'parcel_type_id' => 'required|numeric|min:1',
+            'customer_phone' => 'required|numeric|min:10',
 
         ]);
 
@@ -256,6 +257,7 @@ class ParcelController extends Controller
 
         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.parcel_id', $id)
             ->first();

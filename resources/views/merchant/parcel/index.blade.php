@@ -56,6 +56,69 @@
                           novalidate="">
                         <div class="row">
                             <div class="col-md-4">
+                                <h5 class=" mb-3">Customer Information </h5>
+                                <hr>
+
+
+                                <div class="form-group row">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Name</label>--}}
+                                    <div class="col-sm-12">
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder="কাস্টমার নাম"
+                                               id="example-text-input-lg" name="customer_name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Phone</label>--}}
+                                    <div class="col-sm-12">
+                                        <input class="form-control form-control-lg" type="number" min="11" max="11"
+                                               placeholder=" কাস্টমার ফোন"
+                                               id="example-text-input-lg" name="customer_phone">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Area</label>--}}
+                                    <div class="col-sm-12">
+
+
+                                        <select ng-model="area_id" class="form-control form-control-lg"
+                                                name="area_id" ng-change="updateArea()">
+                                            {{-- <option value="0">
+                                                 Select
+                                             </option>--}}
+                                            <option value="" selected disabled hidden>Area</option>
+                                            <option ng-repeat="x in areas" value="@{{x.area_id}}"
+                                                    ng-selected="1">
+                                                @{{x.area_name}}
+                                            </option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
+                                        Address</label>--}}
+                                    <div class="col-sm-12">
+                               <textarea class="form-control form-control-lg" type="text" placeholder="কাস্টমার ঠিকানা"
+                                         id="example-text-input-lg" name="customer_address"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">--}}
+                                    {{--Note</label>--}}
+                                    <div class="col-sm-12">
+                               <textarea class="form-control form-control-lg" type="text"
+                                         placeholder="কোনো বিশেষ নির্দেশনা"
+                                         id="example-text-input-lg" name="parcel_notes"></textarea>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-4">
                                 <h5 class=" mb-3">{{$invoice}} </h5>
                                 <hr>
                                 <input class="form-control form-control-lg" type="hidden" placeholder=""
@@ -134,15 +197,15 @@
                                                ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
                                     </div>
                                 </div>
-                                     <div class="form-group row" style="display: none">
-                                            <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
-                                                Amount</label>
-                                         <div class="col-sm-12">
-                                             <input class="form-control form-control-lg" type="text"
-                                                    placeholder="মোট টাকা"
-                                                    id="example-text-input-lg" name="total_amount" ng-model="total_amount">
-                                         </div>
-                                     </div>
+                                <div class="form-group row" style="display: none">
+                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
+                                        Amount</label>
+                                    <div class="col-sm-12">
+                                        <input class="form-control form-control-lg" type="text"
+                                               placeholder="মোট টাকা"
+                                               id="example-text-input-lg" name="total_amount" ng-model="total_amount">
+                                    </div>
+                                </div>
                                 {{--                                <div class="form-group row">--}}
                                 {{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day--}}
                                 {{--                                        Delivery</label>--}}
@@ -177,71 +240,6 @@
                                                value="{{$is_same_day}}">
                                     </div>
                                 </div>
-
-
-                            </div>
-                            <div class="col-md-4">
-                                <h5 class=" mb-3">Customer Information </h5>
-                                <hr>
-
-
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Name</label>--}}
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder="কাস্টমার নাম"
-                                               id="example-text-input-lg" name="customer_name">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Phone</label>--}}
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder=" কাস্টমার ফোন"
-                                               id="example-text-input-lg" name="customer_phone">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Area</label>--}}
-                                    <div class="col-sm-12">
-
-
-                                        <select ng-model="area_id" class="form-control form-control-lg"
-                                                name="area_id" ng-change="updateArea()">
-                                            {{-- <option value="0">
-                                                 Select
-                                             </option>--}}
-                                            <option value="" selected disabled hidden>Area</option>
-                                            <option ng-repeat="x in areas" value="@{{x.area_id}}"
-                                                    ng-selected="1">
-                                                @{{x.area_name}}
-                                            </option>
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Address</label>--}}
-                                    <div class="col-sm-12">
-                               <textarea class="form-control form-control-lg" type="text" placeholder="কাস্টমার ঠিকানা"
-                                         id="example-text-input-lg" name="customer_address"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">--}}
-                                    {{--Note</label>--}}
-                                    <div class="col-sm-12">
-                               <textarea class="form-control form-control-lg" type="text"
-                                         placeholder="কোনো বিশেষ নির্দেশনা"
-                                         id="example-text-input-lg" name="parcel_notes"></textarea>
-                                    </div>
-                                </div>
-
-
                                 <div class="form-group row">
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>--}}
                                     <div class="col-sm-12">
@@ -254,7 +252,9 @@
                                     </div>
                                 </div>
 
+
                             </div>
+
                             <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-header">
@@ -351,16 +351,16 @@
             });
 
             $scope.updateArea = function () {
-                console.log($scope.area_id+'---');
+                console.log($scope.area_id + '---');
 
                 $http.get('/get-area-charge/' + $scope.area_id, {}).then(function success(e) {
 
                     console.log(e.data.value);
 
                     $scope.area_charge = parseFloat(e.data.value);
-                    $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
+                    $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge) + parseFloat($scope.area_charge);
 
-                    console.log($scope+'--');
+                    console.log($scope + '--');
                 });
 
             };
@@ -372,7 +372,7 @@
                     console.log(e.data.charge);
 
                     $scope.delivery_charge = parseFloat(e.data.charge);
-                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
+                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge) + parseFloat($scope.area_charge);
                     ;
 
                     console.log($scope.total_amount);
@@ -383,7 +383,7 @@
 
             $scope.totalPriceCalcualtion = function () {
 
-                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
+                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge) + parseFloat($scope.area_charge);
 
                 console.log("hhhh" + parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount));
 

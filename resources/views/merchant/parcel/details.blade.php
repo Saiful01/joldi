@@ -30,7 +30,7 @@
                                         <div class="float-right">
                                             <a href="javascript:window.print()"
                                                class="btn btn-sm btn-success waves-effect waves-light"><i
-                                                        class="fa fa-print"></i> Print</a>
+                                                    class="fa fa-print"></i> Print</a>
                                             {{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                         COD Charge: {{$result->cod}}<br>
                                         Total Amount: {{$result->total_amount}}<br>
                                         Status: <span
-                                                class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
+                                            class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
                                         Date: {{$result->delivery_date}}<br>
                                     </address>
                                 </div>
@@ -97,8 +97,8 @@
         </div> <!-- end col -->
     </div>
     <div class="row">
-        <div class="col-12">
 
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-4">Activity</h4>
@@ -120,7 +120,21 @@
                 </div>
             </div>
 
-        </div> <!-- end col -->
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <address>
+                        <strong class="card-title mb-4">DeliveryMan Details:</strong><br>
+                        {{$result->delivery_man_name}}<br>
+                        {{$result->delivery_man_phone}}<br>
+                    </address>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
 
 @endsection
