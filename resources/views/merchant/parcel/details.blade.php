@@ -30,7 +30,7 @@
                                         <div class="float-right">
                                             <a href="javascript:window.print()"
                                                class="btn btn-sm btn-success waves-effect waves-light"><i
-                                                    class="fa fa-print"></i> Print</a>
+                                                        class="fa fa-print"></i> Print</a>
                                             {{--                                            <a href="#" class="btn btn-primary waves-effect waves-light">Send</a>--}}
                                         </div>
                                     </div>
@@ -49,7 +49,11 @@
                                     <img src="/assets/images/logo.png" alt="logo" height="24">
                                 </h3>--}}
                                 <h3 class="mt-0">
-                                    <img src="/assets/images/shop_logo/{{$shop->logo}}" alt="logo" height="40">
+                                    @if(isset($shop))
+                                        <img src="/assets/images/shop_logo/{{$shop->logo}}" alt="logo" height="40">
+                                        @else
+                                        <img src="/assets/images/logo.png" alt="logo" height="40">
+                                    @endif
                                 </h3>
                             </div>
                             <hr>
@@ -82,7 +86,7 @@
                                         COD Charge: {{$result->cod}}<br>
                                         Total Amount: {{$result->total_amount}}<br>
                                         Status: <span
-                                            class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
+                                                class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
                                         Date: {{$result->delivery_date}}<br>
                                     </address>
                                 </div>

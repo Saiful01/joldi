@@ -51,12 +51,12 @@
                         <span>Shop management</span>
                     </a>
                 </li>
-                <li>
+           {{--     <li>
                     <a href="/merchant/profile/setting" class=" waves-effect">
                         <i class="ti-settings"></i>
                         <span>Settings</span>
                     </a>
-                </li>
+                </li>--}}
 
             </ul>
         </div>

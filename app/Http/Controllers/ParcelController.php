@@ -62,10 +62,12 @@ class ParcelController extends Controller
             /*  'delivery_charge' => 'required|numeric',*/
             /*  'total_amount' => 'required|numeric',*/
             'parcel_type_id' => 'required|numeric|min:1',
-            'customer_phone' => 'required|numeric|min:11|min:11',
+            'customer_phone' => 'required|digits_between:11,11',
 
         ]);
 
+
+        // return $request->all();
         unset($request['_token']);
 
 
@@ -88,6 +90,8 @@ class ParcelController extends Controller
             'delivery_charge' => $request['delivery_charge'],
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
+            'area_charge' => $area_charge->value,
+            'receivable_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
             'total_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
             'is_same_day' => $request['is_same_day'],
             'delivery_date' => $delivery_date,
@@ -146,12 +150,7 @@ class ParcelController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param \App\Parcel $parcel
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Parcel $parcel)
     {
 
@@ -225,6 +224,10 @@ class ParcelController extends Controller
 
     public function parcelStatusChange($id)
     {
+
+        //TODO::Delete check
+
+
         $status = "hub_received";
 
         try {
@@ -255,10 +258,10 @@ class ParcelController extends Controller
     public function details($id)
     {
 
-        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
-            ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')
-            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+        $parcels = Parcel::leftJoin('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->leftJoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')
+            ->leftJoin('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.parcel_id', $id)
             ->first();
         $shop = Shop::where('merchant_id', Auth::guard('merchant')->id())->first();
@@ -516,13 +519,23 @@ class ParcelController extends Controller
 
     public function destroy($id)
     {
-        try {
+
+
+        //TODO::Delete check
+        $parcel = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->where('parcel_statuses.delivery_status', "pending")
+            ->where('parcels.parcel_id', $id)
+            ->first();
+        if (is_null($parcel)){
+            return back()->with('failed', "This parcel can't deleted");
+        }
+        else{
             Parcel::where('parcel_id', $id)->delete();
+            ParcelStatus::where('parcel_id', $id)->delete();
             return back()->with('success', "Successfully Deleted");
 
-        } catch (\Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
         }
+
 
     }
 

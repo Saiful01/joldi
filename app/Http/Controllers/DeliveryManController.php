@@ -20,8 +20,10 @@ class DeliveryManController extends Controller
 
     public function locationtrack()
     {
-        $results = DeliveryMan::get();
-        return view('admin.deliveryman.map')->with('results', $results);
+        //$results = DeliveryMan::get();
+        $datas= \App\CurrentLocation::get();
+
+        return view('admin.deliveryman.map')->with('datas', $datas);
 
     }
 

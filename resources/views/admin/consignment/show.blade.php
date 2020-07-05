@@ -81,8 +81,9 @@
                                     <thead>
                                     <tr role="row">
                                         <th>Invoice No</th>
-                                       {{-- <th>D.Chrage</th>--}}
+                                        {{-- <th>D.Chrage</th>--}}
                                         <th>Amount</th>
+                                        <th>Receivable Amount</th>
                                         <th>Same Day</th>
                                         <th>DeliveryDate</th>
                                         <th>Pickup Man</th>
@@ -106,8 +107,13 @@
 
                                             <th>{{$res->parcel_invoice}}</th>
                                             {{--                                <td>{{$res->parcel_type_id}}</td>--}}
-                                       {{--     <td>{{$res->delivery_charge}}</td>--}}
-                                            <td>{{$res->total_amount}}</td>
+                                            {{--     <td>{{$res->delivery_charge}}</td>--}}
+                                            <td>{{$res->total_amount}}
+
+                                                {{$res->payable_amount}}+{{$res->delivery_charge}}+{{$res->cod}}+{{$res->area_charge}}
+
+                                            </td>
+                                            <td>{{$res->receivable_amount}}</td>
                                             <td>
                                                 @if($res->is_same_day==true)
                                                     <span class="badge badge-pill badge-info">Yes</span>
@@ -366,7 +372,7 @@
                                                 @elseif($res->is_paid_to_merchant=="requested")
                                                     <span class="badge badge-pill badge-warning"> Requested</span>
                                                 @elseif($res->is_paid_to_merchant=="received")
-                                                    <span class="badge badge-pill badge-success"> Received</span>
+                                                    <span class="badge badge-pill badge-success"> Paid</span>
 
                                                 @endif
                                             </td>
