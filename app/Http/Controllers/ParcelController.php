@@ -465,8 +465,6 @@ class ParcelController extends Controller
 
     public function allParcel(Request $request)
     {
-
-
         if (!$request['parcel_id']) {
             return back()->with('failed', "Please select atleast 1 item");
         }

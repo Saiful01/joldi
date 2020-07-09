@@ -268,7 +268,7 @@ Route::get('/statistics', function () {
 
 Route::get('/map1', function () {
 
-    $datas= \App\CurrentLocation::get();
+    $datas = \App\CurrentLocation::get();
     return view('maps.map1')->with('datas', $datas);
 
 
