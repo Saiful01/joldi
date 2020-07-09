@@ -156,18 +156,14 @@ public class CollectParcelActivity extends AppCompatActivity implements ZXingSca
                     if (response.isSuccessful()) {
 
                         CommonUtils.message(getApplicationContext(), "Successfully Updated");
-
                         Log.d("MOTIUR", response.body().getTotalAmount() + "");
                         collectingStatus(response.body().getTotalAmount());
-
-
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-
                 CommonUtils.message(getApplicationContext(), "There is an error" + t.getMessage());
             }
         });

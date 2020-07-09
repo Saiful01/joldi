@@ -30,13 +30,13 @@ public class SplashScreenActivity extends AppCompatActivity {
        /* this.overridePendingTransition(R.anim.left_to_right,
                 R.anim.right_to_left);*/
 
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_right);
+      /*  Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_right);
         animation.setInterpolator(new LinearInterpolator());
         animation.setRepeatCount(Animation.INFINITE);
         animation.setDuration(1500);
 
         final ImageView splash = findViewById(R.id.logo);
-        splash.startAnimation(animation);
+        splash.startAnimation(animation);*/
 
 
         new Handler().postDelayed(new Runnable() {

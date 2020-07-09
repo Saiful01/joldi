@@ -44,6 +44,11 @@ public class PartialDeliverActivity extends AppCompatActivity {
 
         String notes = etNotes.getText().toString();
         String amount = etAmount.getText().toString();
+
+        if(amount==null){
+            CommonUtils.message(getApplicationContext(), "Amount is required");
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ServerApi.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
