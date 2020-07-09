@@ -177,7 +177,7 @@ public class HomeActivity extends AppCompatActivity
     public void pendingOrder(View view) {
 
         Intent intent = new Intent(getApplicationContext(), ParcelActivity.class);
-        intent.putExtra("status", CommonUtils.getDeliverymanassigned());
+        intent.putExtra("status", CommonUtils.getOnTheWay());
         intent.putExtra("title", "Pending Parcels");
         startActivity(intent);
         //Toast.makeText(this, "Hello", Toast.LENGTH_SHORT).show();
