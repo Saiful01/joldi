@@ -21,7 +21,7 @@ class DeliveryManController extends Controller
     public function locationtrack()
     {
         //$results = DeliveryMan::get();
-        $datas= \App\CurrentLocation::get();
+        $datas = \App\CurrentLocation::get();
 
         return view('admin.deliveryman.map')->with('datas', $datas);
 
@@ -165,70 +165,54 @@ class DeliveryManController extends Controller
     {
         unset($request['_token']);
         if ($request->hasFile('image')) {
-
-
             $image = $request->file('image');
             $image_name = "profile_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $image_name);
             $request['delivery_man_image'] = $image_name;
-
         }
         if ($request->hasFile('nid')) {
-
-
             $image = $request->file('nid');
             $image_name = "nid_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $image_name);
             $request['delivery_man_document'] = $image_name;
-
         }
 
         if ($request->hasFile('licen')) {
-
-
             $image = $request->file('licen');
             $image_name = "licen_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images/');
             $image->move($destinationPath, $image_name);
             $request['license'] = $image_name;
-
-
         }
 
         if ($request->hasFile('tax')) {
-
-
             $image = $request->file('tax');
             $image_name = "tax_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $image_name);
             $request['tax_token'] = $image_name;
-
-
         }
 
         if ($request->hasFile('blue')) {
-
-
             $image = $request->file('blue');
             $image_name = "blue_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $image_name);
             $request['blue_book'] = $image_name;
-
         }
 
         if ($request->hasFile('insu')) {
-
-
             $image = $request->file('insu');
             $image_name = "insu_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');
             $image->move($destinationPath, $image_name);
             $request['insurence'] = $image_name;
+        }
 
+        if ($request['password'] != null) {
+            $request['password'] = Hash::make($request['password']);
         }
 
         $data = $request->except(['image', '_token', 'insu', 'blue', 'tax', 'licen', 'nid']);

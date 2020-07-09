@@ -59,6 +59,13 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+                            <label for="example-text-input-lg" class="col-sm-2 col-form-label">Password</label>
+                            <div class="col-sm-10">
+                                <input class="form-control form-control-lg" type="Password" placeholder="Password" name="password">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label"> Address</label>
                             <div class="col-sm-10">

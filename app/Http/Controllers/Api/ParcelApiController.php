@@ -325,27 +325,57 @@ class ParcelApiController extends Controller
         ];
     }
 
-
-    public function locationStore(Request $request)
+    public function partialDeliverStore(Request $request)
     {
 
         $status_code = 200;
-        $message = "Location Updated";
+        $message = "Parcel Updated";
         $access_token = "ABC";
         $parcels_details = null;
         $access_token = 0;
 
 
+        $parcel_id = $request['parcel_id'];
+        $status = $request['status'];
+
+        $changed_by = $request['changed_by'];
+        $notes = $request['notes'];
+
+        $is_exist = Parcel::where('parcel_id', $parcel_id)//TODO::Need Modificatuion
+        ->first();
+        if (is_null($is_exist)) {
+            return [
+                'status_code' => 400,
+                'message' => "Not Found",
+                'access_token' => $access_token,
+                'getTotalAmount' => 0,
+                'data' => $parcels_details,
+            ];
+        }
+
         try {
 
-            $array = [
-                'delivery_man_id' => $request['delivery_man_id'],
-                'lat' => $request['lat'],
-                'lon' => $request['lon'],
-                'address' => $request['address'],
+            Parcel::where('parcel_id', $request['parcel_id'])->update([
+                'receivable_amount' => $request['amount'],
+                'partial_notes' => $request['notes'],
+            ]);
 
+            $parcel_array = [
+                'delivery_status' => $status,
+                'is_paid_to_merchant' => "received",
             ];
-            CurrentLocation::create($array);
+            ParcelStatus::where('parcel_id', $is_exist->parcel_id)->update($parcel_array);
+
+            //Insert into History Table
+
+            $array = [
+                'parcel_id' => $is_exist->parcel_id,
+                'changed_by' => $changed_by,
+                'parcel_status' => $status,
+                'notes' => $notes,
+                'user_type' => "deliveryman",
+            ];
+            ParcelStatusHistory::create($array);
 
         } catch (\Exception $exception) {
 
@@ -357,12 +387,55 @@ class ParcelApiController extends Controller
             'status_code' => $status_code,
             'message' => $message,
             'access_token' => $access_token,
-            'data' => $parcels_details
+            'getTotalAmount' => $is_exist->payable_amount,
+            'data' => $parcels_details,
         ];
     }
 
 
-    public function locationGet(Request $request)
+    public
+    function locationStore(Request $request)
+    {
+
+        // return $request->all();
+        $status_code = 200;
+        $message = "Location Updated";
+        $access_token = "ABC";
+        $parcels_details = null;
+        $access_token = 0;
+
+        $array = [
+            'delivery_man_id' => $request['delivery_man_id'],
+            'lat' => $request['latitude'],
+            'lon' => $request['longitude'],
+            'address' => $request['my_address'],
+
+        ];
+
+        $is_exist = CurrentLocation::where('delivery_man_id', $request['delivery_man_id'])->first();
+        if (is_null($is_exist)) {
+            CurrentLocation::create($array);
+        } else {
+            try {
+                CurrentLocation::where('delivery_man_id', $request['delivery_man_id'])->update($array);
+            } catch (\Exception $exception) {
+
+                $status_code = $exception->getCode();
+                $message = $exception->getMessage();
+            }
+        }
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
+            'data' => $request->all(),
+        ];
+    }
+
+
+    public
+    function locationGet(Request $request)
     {
 
         $status_code = 200;
