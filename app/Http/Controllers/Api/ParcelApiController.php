@@ -58,17 +58,19 @@ class ParcelApiController extends Controller
     {
 
 
+
         $status_code = 200;
-        $message = "Logged in";
+        $message = "Get Parcels";
         $access_token = "ABC";
         $parcels = null;
 
 
-        $delivery_man_id = $request['delivery_man_id'];
+         $delivery_man_id = $request['delivery_man_id'];
 
         try {
 
             if ($request['status'] == "pickup_man_assigned") {
+
                 $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
                     /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
                     ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
@@ -83,14 +85,19 @@ class ParcelApiController extends Controller
                     /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
                     ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
                     ->where('parcel_statuses.delivery_man_id', $delivery_man_id);
-                if ($request['status'] != "all") {
-                    $query->where('parcel_statuses.delivery_status', "delivery_man_assigned");
+               if ($request['status'] != "all") {
+
+                   if($request['status'] != "all"){
+                       $query->where('parcel_statuses.delivery_status', $request['status']);
+                   }
+
+                   /* $query->where('parcel_statuses.delivery_status', "delivery_man_assigned");
                     $query->orWhere('parcel_statuses.delivery_status', "on_the_way");
                     $query->orWhere('parcel_statuses.delivery_status', "returned");
-                    $query->orWhere('parcel_statuses.delivery_status', "partial_delivered");
+                    $query->orWhere('parcel_statuses.delivery_status', "partial_delivered");*/
                 }
 
-                $parcels = $query->get();
+                 $parcels = $query->get();
             }
 
 
@@ -320,7 +327,7 @@ class ParcelApiController extends Controller
             'status_code' => $status_code,
             'message' => $message,
             'access_token' => $access_token,
-            'getTotalAmount' => $is_exist->payable_amount,
+            'getTotalAmount' => $is_exist->total_amount,
             'data' => $parcels_details,
         ];
     }
