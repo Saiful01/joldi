@@ -158,7 +158,7 @@ class ParcelController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->where('merchant_id', Auth::guard('merchant')->id())
             ->orderBy('parcels.created_at', "DESC")
-            ->get();
+            ->paginate(15);
         return view('merchant.parcel.show')
             ->with('results', $parcels);
     }
@@ -212,7 +212,7 @@ class ParcelController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->orderBy('parcels.created_at', "DESC")
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
         return view('admin.consignment.show')

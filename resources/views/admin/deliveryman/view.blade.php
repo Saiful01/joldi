@@ -84,6 +84,7 @@
                                                     <a class="dropdown-item" href="/admin/deliveryman/edit/{{$res->delivery_man_id}}">Edit</a>
                                                     <a class="dropdown-item" href="/admin/deliveryman/delete/{{$res->delivery_man_id}}">Delete</a>
                                                     <a class="dropdown-item" href="/admin/deliveryman/details/{{$res->delivery_man_id}}">Details</a>
+                                                    <a class="dropdown-item" href="/admin/deliveryman/parcels/{{$res->delivery_man_id}}">Parcels</a>
                                                     @if($res->active_status)
                                                         <a class="dropdown-item" href="/admin/deliveryman/inactive/{{$res->delivery_man_id}}">Inactive</a>
                                                     @else

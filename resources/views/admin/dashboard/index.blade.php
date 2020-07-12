@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="pt-2">
                                     <div class="float-right">
-                                        <a href="/admin/merchants" class="text-white"><i
+                                        <a href="/merchant/payments/request" class="text-white"><i
                                                 class="mdi mdi-arrow-right h5"></i></a>
                                     </div>
 
@@ -103,7 +103,7 @@
                                         <img src="/assets/images/services-icon/01.png" alt="">
                                     </div>
                                     <h5 class="font-size-16 text-uppercase mt-0 text-white">Total Sales</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$total_sales}} <i
+                                    <h4 class="font-weight-medium font-size-24">{{$sum}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                     {{--                                <div class="mini-stat-label bg-success">--}}
                                     {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -305,7 +305,12 @@
                                             <span class="badge badge-pill badge-success"> Delivered</span>
                                         @elseif($list->delivery_status=="returned")
                                             <span class="badge badge-pill badge-warning"> Returned</span>
-
+                                        @elseif($list->delivery_status=="returned_to_admin")
+                                            <span class="badge badge-pill badge-success"> Returned To Admin</span>
+                                        @elseif($list->delivery_status=="partial_delivered")
+                                            <span class="badge badge-pill badge-warning"> Partial Delivered</span>
+                                        @else
+                                            <span class="badge badge-pill badge-success">{{getFormattedStatus($list->delivery_status)}}</span>
                                         @endif
                                     </td>
                                     <td>

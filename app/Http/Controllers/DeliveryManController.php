@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\DeliveryMan;
+use App\Parcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -39,13 +41,30 @@ class DeliveryManController extends Controller
 
     public function registrationStore(Request $request)
     {
+
+
         unset($request['_token']);
         $request ['password'] = Hash::make($request['password']);
         $request ['active_status'] = false;
 
+        if ($request->delivery_man_type == 2) {
+            $request->validate([
+                'delivery_man_phone' => 'required|unique:delivery_men,delivery_man_phone|digits_between:11,11',
+                'nid' => 'required',
+                'image' => 'required',
+            ]);
+        } else {
+            $request->validate([
+                'delivery_man_phone' => 'required|unique:delivery_men,delivery_man_phone|digits_between:11,11',
+                'nid' => 'required',
+                'image' => 'required',
+                'Driving_license' => 'required',
+                'tax' => 'required',
+                'blue' => 'required',
+                'insu' => 'required',
+            ]);
+        }
         if ($request->hasFile('image')) {
-
-
             $image = $request->file('image');
             $image_name = "profile_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');
@@ -64,10 +83,10 @@ class DeliveryManController extends Controller
 
         }
 
-        if ($request->hasFile('licen')) {
+        if ($request->hasFile('Driving_license')) {
 
 
-            $image = $request->file('licen');
+            $image = $request->file('Driving_license');
             $image_name = "licen_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images/');
             $image->move($destinationPath, $image_name);
@@ -110,7 +129,7 @@ class DeliveryManController extends Controller
 
         }
 
-        $data = $request->except(['image', '_token', 'insu', 'blue', 'tax', 'licen', 'nid']);
+        $data = $request->except(['image', '_token', 'insu', 'blue', 'tax', 'Driving_license', 'nid']);
 
         //return $request->all();
 
@@ -126,13 +145,23 @@ class DeliveryManController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\DeliveryMan $deliveryMan
+     * @param \App\DeliveryMan $deliveryMan
      * @return \Illuminate\Http\Response
      */
     public function show(DeliveryMan $deliveryMan)
     {
         $result = DeliveryMan::orderBY('created_at', "DESC")->get();
         return view('admin.deliveryman.view')->with('result', $result);
+    }
+    public function parcelShow($id)
+    {
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->where('delivery_men.delivery_man_id', $id)
+            ->orderBy('parcels.created_at', "DESC")
+            ->paginate(15);
+        return view('admin.deliveryman.parcels')
+            ->with('results', $parcels);
     }
 
     public function details($id)
@@ -144,7 +173,7 @@ class DeliveryManController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\DeliveryMan $deliveryMan
+     * @param \App\DeliveryMan $deliveryMan
      * @return \Illuminate\Http\Response
      */
     public function edit($delivery_man_id)
@@ -157,8 +186,8 @@ class DeliveryManController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\DeliveryMan $deliveryMan
+     * @param \Illuminate\Http\Request $request
+     * @param \App\DeliveryMan $deliveryMan
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, DeliveryMan $deliveryMan)
@@ -230,7 +259,7 @@ class DeliveryManController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\DeliveryMan $deliveryMan
+     * @param \App\DeliveryMan $deliveryMan
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

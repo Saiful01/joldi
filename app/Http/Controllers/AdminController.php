@@ -22,7 +22,7 @@ class AdminController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.is_same_day', true)
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 
@@ -40,7 +40,7 @@ class AdminController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.is_same_day', false)
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 
@@ -59,7 +59,7 @@ class AdminController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 
@@ -68,6 +68,25 @@ class AdminController extends Controller
             ->with('results', $parcels)
             ->with('areas', $areas)
             ->with('invoice', $invoice);
+
+    }
+    public function statusSearch(Request $request)
+    {
+        $status = $request['status'];
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->where('parcel_statuses.delivery_status', 'LIKE', '%' . $status . '%')
+            ->paginate(15);
+        $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas = Area::get();
+
+        return view('admin.consignment.show')
+            ->with('delivery_mans', $delivery_mans)
+            ->with('results', $parcels)
+            ->with('areas', $areas)
+            ->with('status', $status);
 
     }
 
@@ -79,7 +98,7 @@ class AdminController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('areas.area_id', 'LIKE', '%' . $area . '%')
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 

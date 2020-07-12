@@ -22,6 +22,15 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     @if(Session::has('success'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
                     @endif
@@ -106,7 +115,7 @@
                             <label for="example-text-input-lg" class="col-sm-2 col-form-label">License</label>
                             <div class="col-sm-10">
                                 <input class="form-control form-control-lg" type="file" placeholder=""
-                                       id="example-text-input-lg" name="licen">
+                                       id="example-text-input-lg" name="Driving_license">
                             </div>
                         </div>
                         <div class="form-group row">
