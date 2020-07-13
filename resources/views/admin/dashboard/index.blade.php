@@ -39,173 +39,97 @@
     <div class="row">
         <div class="col-md-9">
             <div class="row">
-                <a href="/admin/merchants" class="text-white">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card mini-stat bg-primary text-white">
-                            <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Total Merchant</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$merchant_count}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="/merchant/payments/request" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
 
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                <div class="col-md-4">
+                    <a href="/admin/merchants" class="text-white">
+                        <div class="card bg-primary">
+                            <div class="card-body">
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Merchant</h4>
+                                    <h4 class="text-center">{{$merchant_count}}</h4>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-                <a href="/merchant/payments/request" class="text-white">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card mini-stat bg-pink text-white">
-                            <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Total Charge</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$total_delivery_charge}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="/merchant/payments/request" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
+                    </a>
+                </div>
 
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+
+                <div class="col-md-4">
+                    <a href="/merchant/payments/request" class="text-white">
+                        <div class="card bg-pink">
+                            <div class="card-body">
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Charge</h4>
+                                    <h4 class="text-center">{{$total_delivery_charge}}</h4>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-                <a href="/merchant/payments/request" class="text-white">
+                    </a>
+                </div>
 
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card mini-stat bg-success text-white">
+                <div class="col-md-4">
+                    <a href="/merchant/payments/request" class="text-white">
+
+                        <div class="card bg-info">
                             <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Total Sales</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$sum}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="/merchant/payments/request" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Sales</h4>
+                                    <h4 class="text-center">{{$sum}}</h4>
 
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-                <a href="/admin/parcel/show" class="text-white">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card mini-stat bg-info text-white">
-                            <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Totall parcel</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$par_count}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="/admin/parcel/show" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
+                    </a>
 
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
+                </div>
+                <div class="col-md-4">
+                    <a href="/admin/parcel/show" class="text-white">
+
+                        <div class="card bg-success">
+                            <div class="card-body">
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total parcel</h4>
+                                    <h4 class="text-center">{{$par_count}}</h4>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
+                </div>
 
-                </a>
-                <a href="/admin/parcel/show" class="text-white">
+                <div class="col-md-4">
+                    <a href="/admin/parcel/show" class="text-white">
 
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card mini-stat bg-danger text-white">
+                        <div class="card bg-danger">
                             <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Canceled</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$delivery_cancelled}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Canceled</h4>
+                                    <h4 class="text-center">{{$delivery_cancelled}}</h4>
 
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-                <a href="/admin/parcel/show" class="text-white">
+                    </a>
 
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card mini-stat bg-warning text-white">
+                </div>
+                <div class="col-md-4">
+                    <a href="/admin/parcel/show" class="text-white">
+
+                        <div class="card bg-warning">
                             <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white"> Pending</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$delivery_pending}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="/admin/parcel/show" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Pending</h4>
+                                    <h4 class="text-center">{{$delivery_pending}}</h4>
 
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+
+                </div>
 
 
             </div>
@@ -310,7 +234,8 @@
                                         @elseif($list->delivery_status=="partial_delivered")
                                             <span class="badge badge-pill badge-warning"> Partial Delivered</span>
                                         @else
-                                            <span class="badge badge-pill badge-success">{{getFormattedStatus($list->delivery_status)}}</span>
+                                            <span
+                                                class="badge badge-pill badge-success">{{getFormattedStatus($list->delivery_status)}}</span>
                                         @endif
                                     </td>
                                     <td>
