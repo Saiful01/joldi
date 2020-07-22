@@ -368,8 +368,15 @@ class ParcelController extends Controller
                 'changed_by' => Auth::guard()->user()->id,
                 'parcel_id' => $request['parcel_id'],
                 'user_type' => 'admin',
-                'notes' => $request['notes']
             ];
+
+
+            //Parcel
+
+            Parcel::where('parcel_id', $request['parcel_id'])->update([
+                'notes' => $request['notes']
+            ]);
+
 
             //Update Parcel Status
             ParcelStatus::where('parcel_id', $request['parcel_id'])->update(['delivery_status' => 'returned_to_admin', 'is_complete' => true]);

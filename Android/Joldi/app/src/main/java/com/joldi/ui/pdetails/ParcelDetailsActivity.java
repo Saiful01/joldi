@@ -22,6 +22,7 @@ import com.joldi.model.pDetails.DStatus;
 import com.joldi.parcel.R;
 import com.joldi.server.ServerApi;
 import com.joldi.ui.PartialDeliverActivity;
+import com.joldi.ui.ReturnParcelActivity;
 import com.joldi.utils.CommonUtils;
 import com.joldi.utils.SharedPrefClass;
 
@@ -198,7 +199,7 @@ public class ParcelDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), PartialDeliverActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ReturnParcelActivity.class);
                 intent.putExtra("PARCEL_ID", data.getParcelId());
                 intent.putExtra("DELIVERYMAN_ID", data.getDeliveryManId());
                 startActivity(intent);

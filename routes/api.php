@@ -28,6 +28,7 @@ Route::post('/parcel-update', 'Api\ParcelApiController@parcelUpdate');
 
 Route::post('/parcel/tracking', 'Api\ParcelApiController@parcelTracking');
 Route::post('/partial-deliver/store', 'Api\ParcelApiController@partialDeliverStore');
+Route::post('/return-deliver/store', 'Api\ParcelApiController@returnDeliverStore');
 
 
 
