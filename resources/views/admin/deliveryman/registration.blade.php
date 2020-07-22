@@ -5,6 +5,15 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
                     @if(Session::has('success'))
                         <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('success') }}</p>
@@ -79,7 +88,7 @@
                                     <div id="hidden_div">
                                         <div class="form-group">
                                             <label for="userpassword">Driving License</label>
-                                            <input type="file" class="form-control" name="licen">
+                                            <input type="file" class="form-control" name="Driving_license">
                                         </div>
                                         <div class="form-group">
                                             <label for="userpassword">Tax Token</label>

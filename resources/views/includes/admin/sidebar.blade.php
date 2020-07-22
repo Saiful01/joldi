@@ -14,6 +14,32 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/admin/parcel/show" class=" waves-effect">
+                        <i class="fa fa-clipboard-list"></i>
+                        <span>All Consignment</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/view/payments-request" class=" waves-effect">
+                        <i class="fas fa-money-bill"></i>
+                        <span>View Payment Request</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/deliverymans" class=" waves-effect">
+                        <i class="fa fa-user-cog"></i>
+                        <span>Manage DeliveryMan</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/admin/merchants" class=" waves-effect">
+                        <i class="fas fa-users"></i>
+                        <span>Manage Merchant</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="/admin/area/view" class=" waves-effect">
@@ -28,43 +54,21 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="/admin/merchants" class=" waves-effect">
-                        <i class="fas fa-users"></i>
-                        <span>Manage Merchant</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/admin/deliverymans" class=" waves-effect">
-                        <i class="fa fa-user-cog"></i>
-                        <span>Manage DeliveryMan</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="/admin/view/payments-request" class=" waves-effect">
-                        <i class="fas fa-money-bill"></i>
-                        <span>View Payment Request</span>
-                    </a>
-                </li>
 
 
 
-                <li>
-                    <a href="/admin/parcel/show" class=" waves-effect">
-                        <i class="fa fa-clipboard-list"></i>
-                        <span>All Consignment</span>
-                    </a>
-                </li>
 
-                <li>
+
+
+
+
+
+              {{--  <li>
                     <a href="/admin/setting" class=" waves-effect">
                         <i class="ti-settings"></i>
                         <span>Settings</span>
                     </a>
-                </li>
+                </li>--}}
 
             </ul>
         </div>

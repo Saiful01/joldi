@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\DeliveryMan;
 use App\Merchant;
+use App\Notification;
 use App\Parcel;
+use App\ParcelStatus;
+use App\ParcelStatusHistory;
 use App\PaymentMethoed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -22,7 +26,7 @@ class AdminController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.is_same_day', true)
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 
@@ -40,7 +44,7 @@ class AdminController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcels.is_same_day', false)
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 
@@ -59,7 +63,7 @@ class AdminController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 
@@ -71,6 +75,26 @@ class AdminController extends Controller
 
     }
 
+    public function statusSearch(Request $request)
+    {
+        $status = $request['status'];
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->where('parcel_statuses.delivery_status', 'LIKE', '%' . $status . '%')
+            ->paginate(15);
+        $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas = Area::get();
+
+        return view('admin.consignment.show')
+            ->with('delivery_mans', $delivery_mans)
+            ->with('results', $parcels)
+            ->with('areas', $areas)
+            ->with('status', $status);
+
+    }
+
     public function areaSearch(Request $request)
     {
         $area = $request['area_id'];
@@ -79,7 +103,7 @@ class AdminController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('areas.area_id', 'LIKE', '%' . $area . '%')
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
 
@@ -338,6 +362,59 @@ class AdminController extends Controller
             ->with('payment_data', $payment_data)
             ->with('parcel_list', $parcel_list);
 
+
+    }
+
+    public function deliveryPickupmanAssign(Request $request)
+    {
+
+        return $request->all();
+        if (!$request['parcel_id']) {
+            return back()->with('failed', "Please select atleast 1 item");
+        }
+
+        if ($request['change'] == 1) {
+            $parcel_data = [];
+            $men = DeliveryMan::get();
+            foreach ($request['parcel_id'] as $parcel_id) {
+
+                $parcel_data[] = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                    ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                    ->where('parcels.parcel_id', $parcel_id)->first();
+            }
+
+
+            //return $parcel_data;
+            return view('admin.consignment.assignman')
+                ->with('men', $men)
+                ->with('parcel_data', $parcel_data);
+        } else {
+            foreach ($request['parcel_id'] as $parcel_id) {
+
+                $this->destroy($parcel_id);
+            }
+            return back()->with('success', "Successfully Deleted");
+        }
+
+
+    }
+
+    public function AssignPickUpDeliveryMan(Request $request)
+    {
+
+        //return $request->all();
+
+        foreach ($request['parcel_id'] as $parcel_id) {
+            $invoice = Parcel::where('parcel_id', $parcel_id)->first();
+
+            echo $parcel_id;
+
+
+
+        }
+
+        return ;
+        return Redirect::to("/admin/parcel/show")->with('success', "Successfully updated");
 
     }
 }

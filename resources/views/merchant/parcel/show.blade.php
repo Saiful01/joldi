@@ -221,6 +221,7 @@
 
 
                 </div>
+                {{ $results->links() }}
             </div>
         </div> <!-- end col -->
     </div>

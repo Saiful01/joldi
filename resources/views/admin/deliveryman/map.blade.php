@@ -48,7 +48,7 @@
                 @foreach($datas as $data)
 
 
-            [  '{{$data->address}}', {{$data->lat}},  {{$data->lon }}],
+            [  ' {{$data->delivery_man_name}},{{$data->address}}', {{$data->lat}},  {{$data->lon }}],
 
             @endforeach
 

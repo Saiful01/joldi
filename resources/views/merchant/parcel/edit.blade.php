@@ -51,135 +51,6 @@
                           novalidate="">
                         <div class="row">
                             <div class="col-md-4">
-                                <h5 class=" mb-3">{{$result->parcel_invoice}} </h5>
-                                <hr>
-
-                                {{--    <div class="form-group row">
-                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label">Invoice</label>
-                                        <div class="col-sm-12">
-                                            <input class="form-control form-control-lg" type="hidden" placeholder=""
-                                                   id="example-text-input-lg" name="parcel_invoice" value="{{$invoice}}"
-                                                   readonly>
-
-
-
-                                        </div>
-                                    </div>--}}
-                                <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                                {{--<input type="hidden" name="area_charge" ng-model="area_charge">--}}
-                                <input type="hidden" name="shop_id" value="{{Session::get('shop_id')}}">
-                                <input type="hidden" name="is_same_day" value="{{$result->is_same_day}}">
-                                <input type="hidden" name="parcel_id" value="{{$result->parcel_id}}">
-                                <input type="hidden" name="parcel_invoice" value="{{$result->parcel_invoice}}">
-                                <input type="hidden" name="parcel_type_id" value="{{$result->parcel_type_id}}">
-                                <input type="hidden" name="delivery_charge" value="{{$result->delivery_charge}}">
-                                <input type="hidden" name="customer_id" value="{{$result->customer_id}}">
-                                <input type="hidden" name="area_id" value="{{$result->area_id}}">
-
-
-                                {{--     <div class="form-group row">
-                                         <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                             Title</label>
-                                         <div class="col-sm-12">
-                                             <input class="form-control form-control-lg" type="text"
-                                                    placeholder=""
-                                                    id="example-text-input-lg" name="parcel_title">
-                                         </div>
-                                     </div>--}}
-
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                        Types</label>--}}
-                                    <div class="col-sm-12">
-                                        <select ng-model="parcel_type" class="form-control form-control-lg"
-                                                name="parcel_type_id" ng-change="update()">
-                                            {{-- <option value="0">
-                                                 Select
-                                             </option>--}}
-                                            <option value="" selected disabled hidden>ওজন</option>
-                                            <option ng-repeat="x in parcels" value="@{{x.parcel_type_id}}"
-                                                    ng-selected="1">
-                                                @{{x.title}}
-                                            </option>
-                                        </select>
-
-
-                                    </div>
-                                </div>
-                                <div class="form-group row" style="display: none;">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">COD</label>--}}
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text" placeholder="0"
-                                               value="{{$cod_charge}}" name="cod" ng-model="cod"
-                                        >
-                                    </div>
-                                </div>
-                                <div class="form-group row" style="display: none">
-                                    <label for="delivery_charge" class="col-sm-3 col-form-label">Delivery Charge</label>
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder="ডেলিভারি চার্জ"
-                                               id="delivery_charge" name="delivery_charge" ng-model="delivery_charge"
-                                               readonly>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{-- <label for="example-text-input-lg" class="col-sm-3 col-form-label">Parcel
-                                         Price</label>--}}
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="number"
-                                               placeholder="পার্সেল  প্রাইস"
-                                               id="example-text-input-lg" name="payable_amount" value="{{$result->payable_amount}}"
-                                               ng-model="payable_amount" ng-change="totalPriceCalcualtion()">
-                                    </div>
-                                </div>
-                                <div class="form-group row" style="display: none">
-                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Total
-                                        Amount</label>
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text"
-                                               placeholder="মোট টাকা"
-                                               id="example-text-input-lg" name="total_amount" ng-model="total_amount">
-                                    </div>
-                                </div>
-                                {{--                                <div class="form-group row">--}}
-                                {{--                                    <label for="example-text-input-lg" class="col-sm-3 col-form-label">Same Day--}}
-                                {{--                                        Delivery</label>--}}
-                                {{--                                    <div class="col-sm-12">--}}
-                                {{--                                        <input type="checkbox" id="is_same_day" switch="none" checked=""--}}
-                                {{--                                               name="is_same_day"--}}
-                                {{--                                               onchange="if(!this.checked){isSameDayTrue() }else{isSameDayFalse()}">--}}
-                                {{--                                        <label for="is_same_day" data-on-label="ON" data-off-label="OFF"></label>--}}
-                                {{--                                        <span>Check if not delivered in today</span>--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
-
-                                {{--                                <div class="form-group" id="delivery_date" style="display: none">--}}
-                                {{--                                    <div class="row">--}}
-                                {{--                                        <label for="example-text-input-lg" class="col-sm-3 col-form-label"> Delivery--}}
-                                {{--                                            Date</label>--}}
-                                {{--                                        <div class="col-sm-12">--}}
-                                {{--                                            <input type="text" class="form-control form-control-lg"--}}
-                                {{--                                                   placeholder="yyyy-mm-dd"--}}
-                                {{--                                                   id="datepicker-autoclose" name="delivery_date">--}}
-                                {{--                                        </div>--}}
-                                {{--                                    </div>--}}
-
-                                {{--                                </div>--}}
-
-
-                                <div class="form-group row" style="display: none;">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Is Same
-                                        day</label>--}}
-                                    <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="hidden" name="is_same_day"
-                                               value="{{$result->is_same_day}}">
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="col-md-4">
                                 <h5 class=" mb-3">Customer Information </h5>
                                 <hr>
 
@@ -188,6 +59,10 @@
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
                                         Name</label>--}}
                                     <div class="col-sm-12">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                        <input type="hidden" name="customer_id" value="{{$result->customer_id}}">
+                                        <input type="hidden" name="parcel_id" value="{{$result->parcel_id}}">
+
                                         <input class="form-control form-control-lg" type="text"
                                                placeholder="কাস্টমার নাম"
                                                id="example-text-input-lg" name="customer_name" value="{{$result->customer_name}}">
@@ -197,29 +72,9 @@
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
                                         Phone</label>--}}
                                     <div class="col-sm-12">
-                                        <input class="form-control form-control-lg" type="text"
+                                        <input class="form-control form-control-lg" type="number"
                                                placeholder=" কাস্টমার ফোন"
                                                id="example-text-input-lg" name="customer_phone" value="{{$result->customer_phone}}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label">Customer
-                                        Area</label>--}}
-                                    <div class="col-sm-12">
-
-
-                                        <select ng-model="area_id" class="form-control form-control-lg"
-                                                name="area_id" ng-change="updateArea()">
-                                            {{-- <option value="0">
-                                                 Select
-                                             </option>--}}
-                                            <option value="" selected disabled hidden>Area</option>
-                                            <option ng-repeat="x in areas" value="@{{x.area_id}}"
-                                                    ng-selected="1">
-                                                @{{x.area_name}}
-                                            </option>
-                                        </select>
-
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -239,13 +94,11 @@
                                          id="example-text-input-lg" name="parcel_notes">{{$result->parcel_notes}}</textarea>
                                     </div>
                                 </div>
-
-
                                 <div class="form-group row">
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>--}}
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
-                                            Submit
+                                            Update
                                         </button>
                                         {{-- <button type="reset" class="btn btn-secondary waves-effect">
                                              Reset
@@ -253,36 +106,9 @@
                                     </div>
                                 </div>
 
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6>ডেলিভারি চার্জ বিস্তারিত </h6>
-                                        <hr>
-                                    </div>
-                                    <div class="card-body" style="background-color: rgba(210,210,210,0.47)">
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <h6>Cash Collection</h6>
-                                                <h6>Delivery Charge</h6>
-                                                <h6>Cod Charge</h6>
-                                                <h6>Area Charge</h6>
-                                                <hr>
-                                                <h6>Total Payble Amount</h6>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h6 ng-bind="payable_amount">Tk. 100</h6>
-                                                <h6 ng-bind="delivery_charge">Tk. 60</h6>
-                                                <h6 ng-bind="cod_charge">Tk. 0</h6>
-                                                <h6 ng-bind="area_charge">Tk. 0</h6>
-                                                <hr>
-                                                <h6 ng-bind="total_amount">Tk. 40</h6>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                </div>
                             </div>
+
                         </div>
 
                     </form>
@@ -292,88 +118,7 @@
         </div> <!-- end col -->
     </div> <!-- end row -->
 
-    <script>
-        var app = angular.module('parcelCreateApp', []);
-        app.controller('parcelController', function ($scope, $http) {
 
-            $scope.delivery_charge = {{$result->delivery_charge}};
-            $scope.payable_amount = {{$result->payable_amount}};
-            $scope.total_amount = {{$result->total_amount}};
-            $scope.area_charge = 0;
-            $scope.cod_charge = '<?php echo $cod_charge?>';
-            $scope.cod = '<?php echo $cod_charge?>';
-
-            $http.get('/get-parcel-type', {}).then(function success(e) {
-
-                console.log(e.data);
-                $scope.parcels = e.data;
-            });
-
-            $http.get('/get-area', {}).then(function success(e) {
-
-                console.log(e.data);
-                $scope.areas = e.data;
-            });
-
-            $scope.updateArea = function () {
-                console.log($scope.area_id+'---');
-
-                $http.get('/get-area-charge/' + $scope.area_id, {}).then(function success(e) {
-
-                    console.log(e.data.value);
-
-                    $scope.area_charge = parseFloat(e.data.value);
-                    $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
-
-                    console.log($scope+'--');
-                });
-
-            };
-
-            $scope.update = function () {
-
-                $http.get('/get-delivery-charge/' + $scope.parcel_type, {}).then(function success(e) {
-
-                    console.log(e.data.charge);
-
-                    $scope.delivery_charge = parseFloat(e.data.charge);
-                    $scope.total_amount = parseFloat(e.data.charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
-                    ;
-
-                    console.log($scope.total_amount);
-                });
-
-            };
-
-
-            $scope.totalPriceCalcualtion = function () {
-
-                $scope.total_amount = parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod_charge)+parseFloat($scope.area_charge);
-
-                console.log("hhhh" + parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount));
-
-                //parseFloat($scope.delivery_charge) + parseFloat($scope.payable_amount) + parseFloat($scope.cod);
-
-
-            }
-        });
-
-
-        function isSameDayTrue() {
-            //var is_same_day = document.getElementById('is_same_day').value;
-            document.getElementById('delivery_date').style.display = 'block';
-
-            //console.log(document.getElementById("is_same_day").value);
-        }
-
-        function isSameDayFalse() {
-            //var is_same_day = document.getElementById('is_same_day').value;
-            document.getElementById('delivery_date').style.display = 'none';
-
-            //console.log(document.getElementById("is_same_day").value);
-        }
-
-    </script>
 
 
 @endsection

@@ -53,6 +53,11 @@ class ParcelController extends Controller
 
     {
         $area_charge = Area::where('area_id', $request['area_id'])->first();
+        if (is_null($area_charge)) {
+            $area_charge_value = 0;
+        } else {
+            $area_charge_value = $area_charge->value;
+        }
         //return $request->all();
         if ($request->shop_id == null)
             /*   return back()->with('failed', "Please Select Your Shop");*/
@@ -60,14 +65,13 @@ class ParcelController extends Controller
 
         $request->validate([
             /*  'delivery_charge' => 'required|numeric',*/
-            /*  'total_amount' => 'required|numeric',*/
+            'area_id' => 'required',
             'parcel_type_id' => 'required|numeric|min:1',
             'customer_phone' => 'required|digits_between:11,11',
 
         ]);
 
 
-        // return $request->all();
         unset($request['_token']);
 
 
@@ -79,7 +83,7 @@ class ParcelController extends Controller
         }
 
 
-        //return $request->all();
+        // return $request->all();
         $parcel_array = [
             'parcel_title' => $request['parcel_title'],
             'merchant_id' => Auth::guard('merchant')->id(),
@@ -90,9 +94,9 @@ class ParcelController extends Controller
             'delivery_charge' => $request['delivery_charge'],
             'payable_amount' => $request['payable_amount'],
             'cod' => $request['cod'],
-            'area_charge' => $area_charge->value,
-            'receivable_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
-            'total_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
+            'area_charge' => $area_charge_value,
+            'receivable_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge_value + $request['delivery_charge']),
+            'total_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge_value + $request['delivery_charge']),
             'is_same_day' => $request['is_same_day'],
             'delivery_date' => $delivery_date,
             'parcel_notes' => $request['parcel_notes'],
@@ -158,7 +162,7 @@ class ParcelController extends Controller
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->where('merchant_id', Auth::guard('merchant')->id())
             ->orderBy('parcels.created_at', "DESC")
-            ->get();
+            ->paginate(15);
         return view('merchant.parcel.show')
             ->with('results', $parcels);
     }
@@ -212,7 +216,7 @@ class ParcelController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->orderBy('parcels.created_at', "DESC")
-            ->get();
+            ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
         return view('admin.consignment.show')
@@ -423,49 +427,27 @@ class ParcelController extends Controller
      */
     public function update(Request $request, Parcel $parcel)
     {
-        return $request->all();
-
-
-        if ($request['parcel_type_id'] == "? undefined:undefined ?") {
-            return back()->with('failed', "Plaese select Parcel Type");
-        }
         unset($request['_token']);
+        try {
+            $parcel_array = [
+                'parcel_notes' => $request['parcel_notes'],
 
-        $area_charge = Area::where('area_id', $request['area_id'])->first();
-
-
-        //return $request->all();
-        $parcel_array = [
-            'parcel_title' => $request['parcel_title'],
-            'merchant_id' => Auth::guard('merchant')->id(),
-            'parcel_invoice' => $request['parcel_invoice'],
-            'parcel_type_id' => $request['parcel_type_id'],
-            'shop_id' => $request['shop_id'],
-            'area_id' => $request['area_id'],
-            'delivery_charge' => $request['delivery_charge'],
-            'payable_amount' => $request['payable_amount'],
-            'cod' => $request['cod'],
-            'total_amount' => $request['payable_amount'] + ($request['cod'] + $area_charge->value + $request['delivery_charge']),
-            'is_same_day' => $request['is_same_day'],
-            'parcel_notes' => $request['parcel_notes'],
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-
-        ];
+            ];
+            Parcel::where('parcel_id', $request['parcel_id'])->update($parcel_array);
 
 
-        Parcel::where('parcel_id', $request['parcel_id'])->update($parcel_array);
-        $customer_array = [
-            'customer_name' => $request['customer_name'],
-            'customer_phone' => $request['customer_phone'],
-            'customer_email' => $request['customer_email'],
-            'customer_address' => $request['customer_address'],
-            'longitude' => $request['longitude'],
-            'latitude' => $request['latitude']
-        ];
+            $customer_array = [
+                'customer_name' => $request['customer_name'],
+                'customer_phone' => $request['customer_phone'],
+                'customer_address' => $request['customer_address'],
+            ];
 
-        Customer::where('customer_id', $request['customer_id'])->update($customer_array);
-        return back()->with('success', "Successfully update");
+            Customer::where('customer_id', $request['customer_id'])->update($customer_array);
+            return back()->with('success', "Successfully update");
+
+        } catch (\Exception $exception) {
+            return back()->with('failed', $exception->getMessage());
+        }
 
 
     }
@@ -524,10 +506,9 @@ class ParcelController extends Controller
             ->where('parcel_statuses.delivery_status', "pending")
             ->where('parcels.parcel_id', $id)
             ->first();
-        if (is_null($parcel)){
+        if (is_null($parcel)) {
             return back()->with('failed', "This parcel can't deleted");
-        }
-        else{
+        } else {
             Parcel::where('parcel_id', $id)->delete();
             ParcelStatus::where('parcel_id', $id)->delete();
             return back()->with('success', "Successfully Deleted");

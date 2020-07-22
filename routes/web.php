@@ -87,6 +87,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/deliveryman/inactive/{id}', 'AdminController@deliverymanInactive');
     Route::get('/admin/deliveryman/activate/{id}', 'AdminController@deliverymanActivate');
     Route::get('/admin/deliveryman/details/{id}', 'DeliveryManController@details');
+    Route::get('/admin/deliveryman/parcels/{id}', 'DeliveryManController@parcelshow');
 
 
     Route::get('/admin/view/payments-request', 'PaymentController@adminPayment');
@@ -103,12 +104,15 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/admin/parcel/status-change/{id}', 'ParcelController@parcelStatusChange');
 
-    Route::get('/admin/setting', 'ParcelController@adminhtml');
+    Route::get('/admin/setting', 'ParcelController@adminSetting');
     Route::post('/merchant-all/change', 'AdminController@changeMerchant');
     Route::post('/same-day/serach', 'AdminController@sameDaySearch');
     Route::post('/next-day/serach', 'AdminController@nextDaySearch');
     Route::post('/invoice/serach', 'AdminController@invoiceSearch');
     Route::post('/area/serach', 'AdminController@areaSearch');
+    Route::post('/status/serach', 'AdminController@statusSearch');
+    Route::post('/multiple-parcel/deliveryman-assign', 'AdminController@deliveryPickupmanAssign');
+    Route::any('/deliveryman-pickupman/store', 'AdminController@AssignPickUpDeliveryMan');
 });
 
 Route::group(['middleware' => 'admin'], function () {
