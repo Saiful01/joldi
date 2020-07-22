@@ -198,6 +198,14 @@ public class ParcelDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                Intent intent = new Intent(getApplicationContext(), PartialDeliverActivity.class);
+                intent.putExtra("PARCEL_ID", data.getParcelId());
+                intent.putExtra("DELIVERYMAN_ID", data.getDeliveryManId());
+                startActivity(intent);
+
+
+
+                /*
                 AlertDialog alertDialog = new AlertDialog.Builder(ParcelDetailsActivity.this).create();
                 alertDialog.setTitle(getString(R.string.product_delivery));
                 alertDialog.setMessage(getString(R.string.returning_product));
@@ -218,7 +226,7 @@ public class ParcelDetailsActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                alertDialog.show();
+                alertDialog.show();*/
 
             }
         });

@@ -45,7 +45,6 @@ class DeliveryManController extends Controller
 
         if ($request->hasFile('image')) {
 
-
             $image = $request->file('image');
             $image_name = "profile_" . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/images');

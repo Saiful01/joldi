@@ -34,6 +34,7 @@ class CreateParcelsTable extends Migration
             $table->date('delivery_date')->nullable();
             $table->string('parcel_notes')->nullable();
             $table->string('partial_notes')->nullable();
+            $table->string('return_notes')->nullable();
 
             $table->foreign('parcel_type_id')->references('parcel_type_id')->on('parcel_types');
             $table->foreign('merchant_id')->references('merchant_id')->on('merchants');

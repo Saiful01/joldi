@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.joldi.ui.PartialDeliverActivity"></activity>
+        <activity android:name="com.joldi.ui.ReturnParcelActivity"></activity>
+        <activity android:name="com.joldi.ui.PartialDeliverActivity" />
         <activity android:name="com.joldi.ui.tools.LocationActivity" />
         <activity android:name="com.joldi.ui.CollectFromHubActivity" />
         <activity android:name="com.joldi.ui.CollectParcelActivity" />
