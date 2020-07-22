@@ -29,14 +29,14 @@
                          </div>--}}
                         <div class="col-md-1">
                             <form method="post" action="/same-day/serach">
-                                <button class="btn  btn-primary waves-effect waves-light">Same Day</button>
+                                <button class="btn btn-sm  btn-primary waves-effect waves-light">Same Day</button>
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                             </form>
                         </div>
                         <div class="col-md-1">
                             <form method="post" action="/next-day/serach">
-                                <button class="btn  btn-success waves-effect waves-light">Next Day</button>
+                                <button class="btn btn-sm  btn-success waves-effect waves-light">Next Day</button>
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                             </form>
 
@@ -91,7 +91,7 @@
 
                     </div>
 
-                   {{-- <form method="post" action="/multiple-parcel/deliveryman-assign">--}}
+                   <form method="post" action="/multiple-parcel/deliveryman-assign">
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
                              style='overflow-x:auto'>
                             <div class="row">
@@ -506,16 +506,17 @@
 
 
                         </div>
-               {{--         <input type="hidden" name="_token" value="{{csrf_token()}}">
-                        <button name="change" class="btn btn-primary btn-sm float-right waves-effect waves-light mr-1"
-                                value="1" type="submit" onclick="return confirm('are you sure?')">Print
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <button name="change" class="btn mt-2 btn-danger btn-sm float-right waves-effect waves-light mr-1"
+                            value="2"
+                            type="submit" onclick="return confirm('are you sure?')">deliveryman Assign
+                    </button>
+                        <button name="change" class="btn btn-primary mt-2 btn-sm float-right waves-effect waves-light mr-1"
+                                value="1" type="submit" onclick="return confirm('are you sure?')">Pickupman Assign
                         </button>
-                        --}}{{--<a href="/merchant/print/all" class="btn btn-info float-right waves-effect waves-light mr-1" >Print</a>--}}{{--
-                        <button name="change" class="btn btn-danger btn-sm float-right waves-effect waves-light mr-1"
-                                value="2"
-                                type="submit" onclick="return confirm('are you sure?')">Delete
-                        </button>
-                    </form>--}}
+
+
+                    </form>
                 </div>
                 {{ $results->links() }}
             </div>

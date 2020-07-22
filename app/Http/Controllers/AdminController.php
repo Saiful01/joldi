@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\DeliveryMan;
 use App\Merchant;
+use App\Notification;
 use App\Parcel;
+use App\ParcelStatus;
+use App\ParcelStatusHistory;
 use App\PaymentMethoed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +73,7 @@ class AdminController extends Controller
             ->with('invoice', $invoice);
 
     }
+
     public function statusSearch(Request $request)
     {
         $status = $request['status'];
@@ -359,4 +363,88 @@ class AdminController extends Controller
 
 
     }
-}
+
+    public function deliveryPickupmanAssign(Request $request)
+    {
+        if (!$request['parcel_id']) {
+            return back()->with('failed', "Please select atleast 1 item");
+        }
+
+        if ($request['change'] == 1) {
+            $parcel_data = [];
+            $men = DeliveryMan::get();
+            foreach ($request['parcel_id'] as $parcel_id) {
+
+                $parcel_data[] = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                    ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                    ->where('parcels.parcel_id', $parcel_id)->first();
+            }
+
+
+            // return $parcel_data;
+            return view('admin.consignment.assignman')
+                ->with('men', $men)
+                ->with('parcel_data', $parcel_data);
+        } else {
+            foreach ($request['parcel_id'] as $parcel_id) {
+
+                $this->destroy($parcel_id);
+            }
+            return back()->with('success', "Successfully Deleted");
+        }
+
+
+    }
+
+    public function AssignPickUpDeliveryMan(Request $request)
+    {
+
+        foreach ($request['parcel_id'] as $parcel_id) {
+            $invoice = Parcel::where('parcel_id', $parcel_id)->first();
+
+
+            $request->validate([
+                /*  'delivery_charge' => 'required|numeric',*/
+                /*  'total_amount' => 'required|numeric',*/
+                'delivery_man_id' => 'required|numeric|min:1',
+
+            ]);
+
+
+            try {
+
+                ParcelStatus::where('parcel_id', $parcel_id)->update([
+                    'order_pickup_man_id' => $request['delivery_man_id'],
+                    'delivery_status' => 'pickup_man_assigned',
+
+                ]);
+                $array = [
+                    'parcel_status' => 'pickup_man_assigned',
+                    'changed_by' => Auth::guard()->user()->id,
+                    'parcel_id' => $parcel_id,
+                    'user_type' => 'admin'
+                ];
+
+
+                ParcelStatusHistory::create($array);
+                $notification = [
+                    'message' => 'Assigned for  no ' . $invoice->parcel_invoice,
+                    'for_user_id' => $request['delivery_man_id'],
+                    'changed_by' => Auth::guard()->user()->id,
+                    'is_for_collect' => true
+
+                ];
+                Notification::create($notification);
+
+
+
+                return back()->with('success', "Successfully Assigned Delivery Man");
+            } catch (\Exception $exception) {
+
+                return $exception->getMessage();
+
+            }
+        }
+
+
+    }

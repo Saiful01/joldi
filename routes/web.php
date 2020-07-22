@@ -111,6 +111,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/invoice/serach', 'AdminController@invoiceSearch');
     Route::post('/area/serach', 'AdminController@areaSearch');
     Route::post('/status/serach', 'AdminController@statusSearch');
+    Route::post('/multiple-parcel/deliveryman-assign', 'AdminController@deliveryPickupmanAssign');
+    Route::any('/deliveryman-pickupman/store', 'AdminController@AssignPickUpDeliveryMan');
 });
 
 Route::group(['middleware' => 'admin'], function () {
