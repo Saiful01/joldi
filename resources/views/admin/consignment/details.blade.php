@@ -94,7 +94,7 @@
         </div> <!-- end col -->
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
 
             <div class="card">
                 <div class="card-body">
@@ -114,6 +114,25 @@
                         @endforeach
 
                     </ol>
+
+                </div>
+            </div>
+
+        </div> <!-- end col -->
+        <div class="col-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Parcel Notes</h4>
+
+                            <li class="feed-item">
+                                <div class="feed-item-list">
+                                 Parcel Notes:   <p>{{$result->parcel_notes}}</p>
+                                  DeliveryMan Notes:  <p>{{$result->delivery_notes}}</p>
+                                  Admin Notes:  <p>{{$result->admin_notes}}</p>
+                                </div>
+                            </li>
+
 
                 </div>
             </div>
