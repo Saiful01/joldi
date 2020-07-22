@@ -24,7 +24,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Assign Delivery/Pickup Man</h5>
                     <hr>
-                    <form method="post" action="/deliveryman-pickupman/store"
+                    <form method="post" action="/multiple-deliveryman/store"
                           enctype="multipart/form-data">
                         <div class="form-group row">
                             <label for="example-text-input-lg" class="col-sm-4 col-form-label">Select Delivery/PickUp
