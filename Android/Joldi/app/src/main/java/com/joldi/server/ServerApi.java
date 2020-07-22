@@ -102,4 +102,12 @@ public interface ServerApi {
                                              @Field("notes") String notes,
                                              @Field("amount") String amount);
 
+    @FormUrlEncoded
+    @POST("api/return-deliver/store")
+    Call<ResponseModel> returnParcelDeliver(@Field("parcel_id") String parcel_id,
+                                             @Field("access_token") String access_token,
+                                             @Field("changed_by") String changed_by,
+                                             @Field("status") String status,//return
+                                             @Field("notes") String notes);
+
 }
