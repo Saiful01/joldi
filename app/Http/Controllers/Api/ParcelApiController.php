@@ -78,7 +78,7 @@ class ParcelApiController extends Controller
                     $query->where('parcel_statuses.delivery_status', $request['status']);
                 }
 
-                $parcels = $query->get();
+                $parcels = $query->orderBy('parcels.created_at','DESC')->get();
             } else {
                 $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
                     /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
@@ -95,7 +95,7 @@ class ParcelApiController extends Controller
                      $query->orWhere('parcel_statuses.delivery_status', "partial_delivered");*/
                 }
 
-                $parcels = $query->get();
+                $parcels = $query->orderBy('parcels.created_at','DESC')->get();
             }
 
 
