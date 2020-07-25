@@ -60,7 +60,7 @@ public class ManualCollectFromHub extends AppCompatActivity {
 
                         CommonUtils.message(getApplicationContext(), "Successfully Updated");
                         progressDoalog.dismiss();
-                        Log.d("MOTIUR", response.body().getTotalAmount() + "");
+                        Log.d("MOTIUR", response.body().getTotalPayable() + "");
                         finish();
 
                     }

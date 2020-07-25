@@ -215,9 +215,18 @@ public class ParcelDetailsActivity extends AppCompatActivity {
         btnDeliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String message = "";
+
+                if (data.getIsOnlinePayment() == 1) {
+                    message = "Customer already paid. Deliver your product";
+                } else {
+                    message = (getString(R.string.collecting) + data.getTotalAmount() + " BDT " + getString(R.string.and_deliver_product));
+                }
+
                 AlertDialog alertDialog = new AlertDialog.Builder(ParcelDetailsActivity.this).create();
                 alertDialog.setTitle(getString(R.string.product_delivery));
-                alertDialog.setMessage(getString(R.string.collecting) + data.getTotalAmount() + " BDT " + getString(R.string.and_deliver_product));
+                alertDialog.setMessage(message);
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.yes),
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

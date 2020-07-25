@@ -503,4 +503,7 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
+    public void report(View view) {
+        startActivity(new Intent(getApplicationContext(), ReportActivity.class));
+    }
 }

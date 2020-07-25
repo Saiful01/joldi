@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
+   <!-- <item
         android:id="@+id/report"
         android:orderInCategory="100"
         android:title="Report"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
     <item
         android:id="@+id/manual_collection"
         android:orderInCategory="100"
-        android:title="Manual Parcel Collection"
+        android:title="@string/manual_pickup"
         app:showAsAction="never" />
     <item
         android:id="@+id/manual_collection_from_hub"
         android:orderInCategory="100"
-        android:title="Manual Collection from Hub"
+        android:title="@string/manual_hub_collect"
         app:showAsAction="never" />
     <item
+        android:visible="false"
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"

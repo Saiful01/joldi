@@ -17,7 +17,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/edit_white"
-        android:hint="Email"
+        android:hint="@string/email_address"
         android:inputType="text"
         android:padding="@dimen/_10sdp"
         android:text="" />
@@ -28,7 +28,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/edit_white"
-        android:hint="Username"
+        android:hint="@string/name"
         android:inputType="text"
         android:padding="@dimen/_10sdp"
         android:text="" />
@@ -40,7 +40,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/edit_white"
-        android:hint="Phone"
+        android:hint="@string/phone"
         android:inputType="text"
         android:padding="@dimen/_10sdp"
         android:text="" />
@@ -51,7 +51,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/edit_white"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:padding="@dimen/_10sdp"
         android:text="" />
@@ -62,7 +62,7 @@
         android:layout_height="@dimen/_70sdp"
         android:layout_marginBottom="@dimen/_5sdp"
         android:background="@drawable/edit_white"
-        android:hint="Address"
+        android:hint="@string/address"
         android:inputType="text"
         android:padding="@dimen/_10sdp"
         android:text="" />
@@ -78,7 +78,7 @@
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/bg_green"
         android:onClick="doRegistration"
-        android:text="Registration"
+        android:text="@string/registration"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/_15sdp"
         tools:ignore="OnClick" />
@@ -89,7 +89,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center_horizontal"
         android:onClick="loginPage"
-        android:text="Already have an account? Sign in"
+        android:text="@string/already_have_an_account_sign_in"
         android:textAlignment="center"
         tools:ignore="OnClick" />
 

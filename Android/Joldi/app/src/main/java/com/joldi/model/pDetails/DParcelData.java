@@ -13,6 +13,18 @@ public class DParcelData {
         this.areaCharge = areaCharge;
     }
 
+    public int getIsOnlinePayment() {
+        return isOnlinePayment;
+    }
+
+    public void setIsOnlinePayment(int isOnlinePayment) {
+        this.isOnlinePayment = isOnlinePayment;
+    }
+
+    @SerializedName("is_online_payment")
+    @Expose
+    private int isOnlinePayment;
+
     @SerializedName("area_charge")
     @Expose
     private String areaCharge;

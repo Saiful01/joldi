@@ -345,7 +345,9 @@ class ParcelApiController extends Controller
             'status_code' => $status_code,
             'message' => $message,
             'access_token' => $access_token,
-            'getTotalAmount' => $is_exist->total_amount,
+            'payable_amount' => $is_exist->payable_amount,
+            'is_online_payment' => $is_exist->is_online_payment,
+            'joldi_charge' => $is_exist->delivery_charge + $is_exist->cod + $is_exist->area_charge,
             'data' => $parcels_details,
         ];
     }

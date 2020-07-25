@@ -21,7 +21,7 @@
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_weight="1"
             android:background="#1A3060"
-            android:text="Today"
+            android:text="@string/today"
             android:onClick="today"
             android:textColor="@color/colorWhite"
             tools:ignore="OnClick" />
@@ -32,7 +32,7 @@
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_weight="1"
             android:background="#1A3060"
-            android:text="Week"
+            android:text="@string/week"
             android:onClick="week"
             android:textColor="@color/colorWhite"
             tools:ignore="OnClick" />
@@ -44,7 +44,7 @@
 
             android:layout_weight="1"
             android:background="#1A3060"
-            android:text="Month"
+            android:text="@string/month"
             android:onClick="month"
             android:textColor="@color/colorWhite" />
 
@@ -54,7 +54,7 @@
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_weight="1"
             android:background="#1A3060"
-            android:text="Lifetime"
+            android:text="@string/lifetime"
             android:onClick="lifetime"
             android:textColor="@color/colorWhite"
             tools:ignore="OnClick" />
@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_light_green"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_15sdp"
+            android:paddingLeft="@dimen/_11sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingRight="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp">
@@ -85,9 +85,9 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Delivered"
+                android:text="@string/delivered1"
                 android:textColor="#768367"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/deliver_count"
@@ -98,7 +98,7 @@
                 android:paddingBottom="@dimen/_5sdp"
                 android:text=""
                 android:textColor="#768367"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_11sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -108,7 +108,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_light_red"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_15sdp"
+            android:paddingLeft="@dimen/_11sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingRight="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp">
@@ -119,9 +119,9 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Ongoing"
+                android:text="@string/ongoing"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/ongoing_count"
@@ -132,7 +132,7 @@
                 android:paddingBottom="@dimen/_5sdp"
                 android:text=""
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_11sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -142,7 +142,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_light_green2"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_15sdp"
+            android:paddingLeft="@dimen/_11sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingRight="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp">
@@ -153,9 +153,9 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="Cancelled"
+                android:text="@string/cancelled"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_11sdp" />
 
             <TextView
                 android:id="@+id/cancelled_count"
@@ -166,7 +166,7 @@
                 android:paddingBottom="@dimen/_5sdp"
                 android:text=""
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_11sdp" />
         </LinearLayout>
 
     </LinearLayout>

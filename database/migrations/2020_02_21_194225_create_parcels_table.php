@@ -35,6 +35,7 @@ class CreateParcelsTable extends Migration
             $table->string('parcel_notes')->nullable();
             $table->string('delivery_notes')->nullable();
             $table->string('admin_notes')->nullable();
+            $table->boolean('is_online_payment')->default(false);
 
 
             $table->foreign('parcel_type_id')->references('parcel_type_id')->on('parcel_types');

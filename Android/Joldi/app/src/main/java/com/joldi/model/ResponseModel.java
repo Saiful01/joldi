@@ -5,17 +5,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class ResponseModel {
 
-    public double getTotalAmount() {
-        return totalAmount;
+
+    public int getTotalPayable() {
+        return payableAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setPayableAmount(int payableAmount) {
+        this.payableAmount = payableAmount;
     }
 
-    @SerializedName("getTotalAmount")
+    @SerializedName("payable_amount")
     @Expose
-    private double totalAmount;
+    private int payableAmount;
+
+
+    @SerializedName("joldi_charge")
+    @Expose
+    private int joldiCharge;
+
+    @SerializedName("is_online_payment")
+    @Expose
+    private int isOnlinePayment;
 
     @SerializedName("status_code")
     @Expose
@@ -28,6 +38,24 @@ public class ResponseModel {
     private String accessToken;
 
     @SerializedName("data")
+
+
+    public int getIsOnlinePayment() {
+        return isOnlinePayment;
+    }
+
+    public void setIsOnlinePayment(int isOnlinePayment) {
+        this.isOnlinePayment = isOnlinePayment;
+    }
+
+    public double getJoldiCharge() {
+        return joldiCharge;
+    }
+
+    public void setJoldiCharge(int joldiCharge) {
+        this.joldiCharge = joldiCharge;
+    }
+
 
 
     public String getStatusCode() {
