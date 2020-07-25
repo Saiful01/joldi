@@ -96,7 +96,7 @@ public class CollectParcelActivity extends AppCompatActivity implements ZXingSca
 
     @Override
     public void handleResult(Result result) {
-        Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
         gettingResponseFromServer(String.valueOf(result));
     }
 

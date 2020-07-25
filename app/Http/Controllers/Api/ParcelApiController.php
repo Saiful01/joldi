@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Parcel;
 use App\ParcelStatus;
 use App\ParcelStatusHistory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ParcelApiController extends Controller
@@ -78,7 +79,23 @@ class ParcelApiController extends Controller
                     $query->where('parcel_statuses.delivery_status', $request['status']);
                 }
 
-                $parcels = $query->orderBy('parcels.created_at','DESC')->get();
+                $parcels = $query->orderBy('parcels.created_at', 'DESC')->get();
+            } elseif ($request['status'] == "on_the_way") {
+
+                $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                    /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+                    ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                    ->where('parcel_statuses.delivery_man_id', $delivery_man_id);
+
+
+                $query->where('parcel_statuses.delivery_status', $request['status']);
+                $query->orWhere('parcel_statuses.delivery_status', "delivery_man_assigned");
+                /* $query->orWhere('parcel_statuses.delivery_status', "on_the_way");
+                 $query->orWhere('parcel_statuses.delivery_status', "returned");
+                 $query->orWhere('parcel_statuses.delivery_status', "partial_delivered");*/
+
+
+                $parcels = $query->orderBy('parcels.created_at', 'DESC')->get();
             } else {
                 $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
                     /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
@@ -95,7 +112,7 @@ class ParcelApiController extends Controller
                      $query->orWhere('parcel_statuses.delivery_status', "partial_delivered");*/
                 }
 
-                $parcels = $query->orderBy('parcels.created_at','DESC')->get();
+                $parcels = $query->orderBy('parcels.created_at', 'DESC')->get();
             }
 
 
@@ -294,11 +311,14 @@ class ParcelApiController extends Controller
             ];
         }
 
+
         try {
 
             $parcel_array = [
                 'delivery_status' => $status,
                 'is_paid_to_merchant' => "received",
+                'order_pickup_man_id' => $changed_by
+
             ];
 
 
@@ -523,6 +543,100 @@ class ParcelApiController extends Controller
             'access_token' => $access_token,
             'data' => $data,
         ];
+    }
+
+    public function report(Request $request)
+    {
+
+
+        //return Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')->get();
+        Carbon::setWeekStartsAt(Carbon::SUNDAY);
+        Carbon::setWeekEndsAt(Carbon::SATURDAY);
+
+        $delivery_man_id = $request['user_id'];
+        $range = $request['range'];//today,week, month, lifetime
+
+
+        //Delivered
+        $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+            ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('parcel_statuses.delivery_man_id', $delivery_man_id)
+            ->where('parcel_statuses.delivery_status', "delivered");
+        if ($range == "today") {
+            $query->whereDate('parcels.created_at', Carbon::today());
+        } else if ($range == "week") {
+            $query->whereBetween('parcels.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+        } else if ($range == "month") {
+            $query->whereMonth('parcels.created_at', date('m'))
+                ->whereYear('parcels.created_at', date('Y'));
+        }
+
+        $delivered_parcels = $query->orderBy('parcels.created_at', 'DESC')->count();
+
+        //Ongoing
+        $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+            ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('parcel_statuses.delivery_man_id', $delivery_man_id)
+            ->where('parcel_statuses.delivery_status', "on_the_way");
+        if ($range == "today") {
+            $query->whereDate('parcels.created_at', Carbon::today());
+        } else if ($range == "week") {
+            $query->whereBetween('parcels.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+        } else if ($range == "month") {
+            $query->whereMonth('parcels.created_at', date('m'))
+                ->whereYear('parcels.created_at', date('Y'));
+        }
+
+        $ongoing_parcels = $query->orderBy('parcels.created_at', 'DESC')->count();
+
+        //Cancelled
+        $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+            ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('parcel_statuses.delivery_man_id', $delivery_man_id)
+            ->where('parcel_statuses.delivery_status', "cancelled");
+        if ($range == "today") {
+            $query->whereDate('parcels.created_at', Carbon::today());
+        } else if ($range == "week") {
+            $query->whereBetween('parcels.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+        } else if ($range == "month") {
+            $query->whereMonth('parcels.created_at', date('m'))
+                ->whereYear('parcels.created_at', date('Y'));
+        }
+        $cancelled_parcels = $query->orderBy('parcels.created_at', 'DESC')->count();
+
+        //Cancelled
+        $query = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            /*   ->join('delivery_men', 'parcel_statuses.delivery_man_id', '=', 'delivery_men.delivery_man_id')*/
+            ->leftjoin('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->where('parcel_statuses.delivery_man_id', $delivery_man_id)
+            ->where('parcel_statuses.delivery_status', "delivery_man_assigned");
+        if ($range == "today") {
+            $query->whereDate('parcels.created_at', Carbon::today());
+        } else if ($range == "week") {
+            $query->whereBetween('parcels.created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()]);
+        } else if ($range == "month") {
+            $query->whereMonth('parcels.created_at', date('m'))
+                ->whereYear('parcels.created_at', date('Y'));
+        }
+
+        $assigned_parcels = $query->orderBy('parcels.created_at', 'DESC')->count();
+
+
+        return [
+            'status_code' => 200,
+            'message' => "",
+            'access_token' => "",
+            'cancelled_parcels' => $cancelled_parcels,
+            'ongoing_parcels' => $ongoing_parcels,
+            'delivered_parcels' => $delivered_parcels,
+            'assigned_parcels' => $assigned_parcels,
+            'data' => $request->all(),
+        ];
+
+
     }
 
 }

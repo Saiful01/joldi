@@ -55,8 +55,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity
-        implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener {
+    implements GoogleApiClient.ConnectionCallbacks,
+    GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private Location location;
     PieChart pieChart;
     TextView tvName, tvLocation;
@@ -114,9 +114,9 @@ public class HomeActivity extends AppCompatActivity
         // we build google api client
 
         googleApiClient = new GoogleApiClient.Builder(this).
-                addApi(LocationServices.API).
-                addConnectionCallbacks(this).
-                addOnConnectionFailedListener(this).build();
+            addApi(LocationServices.API).
+            addConnectionCallbacks(this).
+            addOnConnectionFailedListener(this).build();
 
     }
 
@@ -232,6 +232,15 @@ public class HomeActivity extends AppCompatActivity
                 SharedPrefClass.ClearPreference(getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 return (true);
+            case R.id.report:
+                startActivity(new Intent(getApplicationContext(), ReportActivity.class));
+                return (true);
+            case R.id.manual_collection:
+                startActivity(new Intent(getApplicationContext(), ManualCollectionActivity.class));
+                return (true);
+            case R.id.manual_collection_from_hub:
+                startActivity(new Intent(getApplicationContext(), ManualCollectFromHub.class));
+                return (true);
         }
         return (super.onOptionsItemSelected(item));
     }
@@ -320,9 +329,9 @@ public class HomeActivity extends AppCompatActivity
 
         Log.d("MOTIUR", "OnConnected adn started");
         if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this,
+            Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
 
@@ -369,9 +378,9 @@ public class HomeActivity extends AppCompatActivity
         locationRequest.setFastestInterval(FASTEST_INTERVAL);
 
         if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this,
+            Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, "You need to enable permissions to display location !", Toast.LENGTH_SHORT).show();
         }
 
@@ -430,17 +439,17 @@ public class HomeActivity extends AppCompatActivity
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (shouldShowRequestPermissionRationale(permissionsRejected.get(0))) {
                             new AlertDialog.Builder(HomeActivity.this).
-                                    setMessage("These permissions are mandatory to get your location. You need to allow them.").
-                                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                requestPermissions(permissionsRejected.
-                                                        toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
-                                            }
-
+                                setMessage("These permissions are mandatory to get your location. You need to allow them.").
+                                setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                            requestPermissions(permissionsRejected.
+                                                toArray(new String[permissionsRejected.size()]), ALL_PERMISSIONS_RESULT);
                                         }
-                                    }).setNegativeButton("Cancel", null).create().show();
+
+                                    }
+                                }).setNegativeButton("Cancel", null).create().show();
 
                             return;
                         }
@@ -462,9 +471,9 @@ public class HomeActivity extends AppCompatActivity
 
         Log.d("MOTIUR", "Location Send to server");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ServerApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
-                .build();
+            .baseUrl(ServerApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+            .build();
 
         ServerApi api = retrofit.create(ServerApi.class);
 

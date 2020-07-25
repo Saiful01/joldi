@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -20,7 +21,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.joldi.ui.ReturnParcelActivity"></activity>
+        <activity android:name="com.joldi.ui.ManualCollectFromHub"></activity>
+        <activity android:name="com.joldi.ui.ManualCollectionActivity" />
+        <activity android:name="com.joldi.ui.ForgetPasswordActivity" />
+        <activity android:name="com.joldi.ui.ReportActivity" />
+        <activity android:name="com.joldi.ui.RegistrationActivity" />
+        <activity android:name="com.joldi.ui.ReturnParcelActivity" />
         <activity android:name="com.joldi.ui.PartialDeliverActivity" />
         <activity android:name="com.joldi.ui.tools.LocationActivity" />
         <activity android:name="com.joldi.ui.CollectFromHubActivity" />

@@ -62,6 +62,6 @@
     <string name="deliver">Deliver</string>
     <string name="logout">Logout</string>
     <string name="pending_deliver">Pending \nDeliver</string>
-    <string name="pending_collection">Pending Collection</string>
+    <string name="pending_collection">Pending \nCollection</string>
     <string name="collect_nfrom_hub">Collect \nFrom Hub</string>
 </resources>

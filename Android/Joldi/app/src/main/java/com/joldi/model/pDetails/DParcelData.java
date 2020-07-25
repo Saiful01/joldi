@@ -5,9 +5,23 @@ import com.google.gson.annotations.SerializedName;
 
 public class DParcelData {
 
+    public String getAreaCharge() {
+        return areaCharge;
+    }
+
+    public void setAreaCharge(String areaCharge) {
+        this.areaCharge = areaCharge;
+    }
+
+    @SerializedName("area_charge")
+    @Expose
+    private String areaCharge;
+
     @SerializedName("parcel_id")
     @Expose
     private String parcelId;
+
+
     @SerializedName("parcel_title")
     @Expose
     private String parcelTitle;

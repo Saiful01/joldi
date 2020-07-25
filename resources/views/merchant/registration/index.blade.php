@@ -68,13 +68,13 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group mt-2 mb-0 row">
+                                   {{-- <div class="form-group mt-2 mb-0 row">
                                         <div class="col-12 mt-4">
                                             <p class="mb-0">By registering you agree to the Veltrix <a href="#"
                                                                                                        class="text-primary">Terms
                                                     of Use</a></p>
                                         </div>
-                                    </div>
+                                    </div>--}}
 
                                 </form>
 

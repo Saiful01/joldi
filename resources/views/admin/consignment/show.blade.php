@@ -91,7 +91,7 @@
 
                     </div>
 
-                   <form method="post" action="/multiple-parcel/deliveryman-assign">
+                   {{-- <form method="post" action="/multiple-parcel/deliveryman-assign">--}}
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"
                              style='overflow-x:auto'>
                             <div class="row">
@@ -209,7 +209,7 @@
 
                                                                                         @foreach($delivery_mans as $delivery_man)
                                                                                             <option
-                                                                                                value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
+                                                                                                    value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
 
                                                                                         @endforeach
 
@@ -289,7 +289,7 @@
 
                                                                                         @foreach($delivery_mans as $delivery_man)
                                                                                             <option
-                                                                                                value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
+                                                                                                    value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
 
                                                                                         @endforeach
 
@@ -358,7 +358,7 @@
                                                                               action="/admin/parcel/receive-by-admin">
                                                                             <div class="form-group">
                                                                                 <label
-                                                                                    class="control-label">Notes</label>
+                                                                                        class="control-label">Notes</label>
 
                                                                                 <input name="_token"
                                                                                        value="{{csrf_token()}}"
@@ -392,10 +392,10 @@
 
                                                     @elseif($res->delivery_status=="returned_to_admin")
                                                         <span
-                                                            class="badge badge-pill badge-success"> Returned To Admin</span>
+                                                                class="badge badge-pill badge-success"> Returned To Admin</span>
                                                     @elseif($res->delivery_status=="partial_delivered")
                                                         <span
-                                                            class="badge badge-pill badge-warning"> Partial Delivered</span>
+                                                                class="badge badge-pill badge-warning"> Partial Delivered</span>
 
                                                         <button type="button" class="btn btn-primary"
                                                                 data-toggle="modal"
@@ -422,7 +422,7 @@
                                                                               action="/admin/parcel/receive-by-admin">
                                                                             <div class="form-group">
                                                                                 <label
-                                                                                    class="control-label">Notes</label>
+                                                                                        class="control-label">Notes</label>
 
                                                                                 <input name="_token"
                                                                                        value="{{csrf_token()}}"
@@ -457,7 +457,7 @@
 
                                                     @else
                                                         <span
-                                                            class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
+                                                                class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -506,17 +506,19 @@
 
 
                         </div>
-                        <input type="hidden" name="_token" value="{{csrf_token()}}">
-                    <button name="change" class="btn mt-2 btn-danger btn-sm float-right waves-effect waves-light mr-1"
-                            value="2"
-                            type="submit" onclick="return confirm('are you sure?')">deliveryman Assign
-                    </button>
-                        <button name="change" class="btn btn-primary mt-2 btn-sm float-right waves-effect waves-light mr-1"
-                                value="1" type="submit" onclick="return confirm('are you sure?')">Pickupman Assign
+                       {{-- <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <button name="change"
+                                class="btn mt-2 btn-danger btn-sm float-right waves-effect waves-light mr-1"
+                                value="2"
+                                type="submit" onclick="return confirm('are you sure?')">deliveryman Assign
                         </button>
+                        <button name="change"
+                                class="btn btn-primary mt-2 btn-sm float-right waves-effect waves-light mr-1"
+                                value="1" type="submit" onclick="return confirm('are you sure?')">Pickupman Assign
+                        </button>--}}
 
 
-                    </form>
+                {{--    </form>--}}
                 </div>
                 {{ $results->links() }}
             </div>

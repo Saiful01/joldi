@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,7 +22,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReturnParcelActivity extends AppCompatActivity {
-    TextView  etNotes;
+    TextView etNotes;
     String parcel_id, deliveryman_id;
 
     @Override
@@ -35,7 +36,21 @@ public class ReturnParcelActivity extends AppCompatActivity {
         parcel_id = intent.getStringExtra("PARCEL_ID");
         deliveryman_id = intent.getStringExtra("DELIVERYMAN_ID");
 
+        setTitle("Return Details");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //Toast.makeText(getApplicationContext(), parcel_id + "--" + deliveryman_id + "--" + SharedPrefClass.getValueId(getApplicationContext()), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void partialSave(View view) {

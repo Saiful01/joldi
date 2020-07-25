@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -35,8 +36,23 @@ public class PartialDeliverActivity extends AppCompatActivity {
         parcel_id = intent.getStringExtra("PARCEL_ID");
         deliveryman_id = intent.getStringExtra("DELIVERYMAN_ID");
 
+        setTitle("Partial Deliver");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         //Toast.makeText(getApplicationContext(), parcel_id + "--" + deliveryman_id + "--" + SharedPrefClass.getValueId(getApplicationContext()), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
     public void partialSave(View view) {
 
@@ -45,24 +61,24 @@ public class PartialDeliverActivity extends AppCompatActivity {
         String notes = etNotes.getText().toString();
         String amount = etAmount.getText().toString();
 
-        if(amount==null){
+        if (amount == null) {
             CommonUtils.message(getApplicationContext(), "Amount is required");
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ServerApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
-                .build();
+            .baseUrl(ServerApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+            .build();
 
         ServerApi api = retrofit.create(ServerApi.class);
 
         Call<ResponseModel> call = api.partialParcelDeliver(
-                parcel_id,
-                CommonUtils.getToken(),
-                SharedPrefClass.getValueId(getApplicationContext()) + "",
-                CommonUtils.getPartialDeliveryStatus(),
-                notes,
-                amount);
+            parcel_id,
+            CommonUtils.getToken(),
+            SharedPrefClass.getValueId(getApplicationContext()) + "",
+            CommonUtils.getPartialDeliveryStatus(),
+            notes,
+            amount);
 
         call.enqueue(new Callback<ResponseModel>() {
             @SuppressLint("ResourceAsColor")

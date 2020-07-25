@@ -63,6 +63,6 @@
     <string name="deliver">ডেলিভার</string>
     <string name="logout">লগ আউট</string>
     <string name="pending_deliver">পেন্ডিং\n ডেলিভারি</string>
-    <string name="pending_collection">পেন্ডিং কালেকশন</string>
+    <string name="pending_collection">পেন্ডিং\n কালেকশন</string>
     <string name="collect_nfrom_hub">হাব থেকে\n সংগ্রহ </string>
 </resources>

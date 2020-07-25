@@ -1,5 +1,6 @@
 package com.joldi.server;
 
+import com.joldi.model.Report;
 import com.joldi.model.ResponseModel;
 import com.joldi.model.login.Login;
 import com.joldi.model.orderTrack.Orders;
@@ -54,14 +55,25 @@ public interface ServerApi {
 
 
     @FormUrlEncoded
-    @POST("api/parcels")
+    @POST("/api/registration")
+    Call<Login> registrationDo(@Field("email") String email,
+                               @Field("username") String username,
+                               @Field("password") String password,
+                               @Field("phone") String phone,
+                               @Field("address") String address,
+                               @Field("type") String type,
+                               @Field("access_token") String token);
+
+
+    @FormUrlEncoded
+    @POST("/api/parcels")
     Call<Orders> getParcels(@Field("delivery_man_id") String delivery_man_id,
                             @Field("app_secret_key") String app_secret_key,
                             @Field("status") String status);
 
 
     @FormUrlEncoded
-    @POST("api/parcel/tracking")
+    @POST("/api/parcel/tracking")
     Call<Orders> getParcelByPhoneNumber(@Field("customer_phone") String delivery_man_id,
                                         @Field("app_secret_key") String app_secret_key,
                                         @Field("status") String status);
@@ -105,9 +117,20 @@ public interface ServerApi {
     @FormUrlEncoded
     @POST("api/return-deliver/store")
     Call<ResponseModel> returnParcelDeliver(@Field("parcel_id") String parcel_id,
-                                             @Field("access_token") String access_token,
-                                             @Field("changed_by") String changed_by,
-                                             @Field("status") String status,//return
-                                             @Field("notes") String notes);
+                                            @Field("access_token") String access_token,
+                                            @Field("changed_by") String changed_by,
+                                            @Field("status") String status,//return
+                                            @Field("notes") String notes);
+
+    @FormUrlEncoded
+    @POST("api/report")
+    Call<Report> gettingReport(@Field("user_id") String user_id,
+                               @Field("access_token") String access_token,
+                               @Field("range") String range);
+
+    @FormUrlEncoded
+    @POST("api/reset-password")
+    Call<Login> resetPassword(@Field("user_id") String email,
+                               @Field("access_token") String access_token);
 
 }
