@@ -101,7 +101,8 @@
 
                                         <thead>
                                         <tr>
-                                            <th><input class="ml-1" type="checkbox" onclick="toggle(this);"/><br/></th>
+                                            <th><input class="ml-1" type="checkbox" onclick="toggle(this);"/><br/>
+                                            </th>
                                             <th>Invoice No</th>
                                             {{-- <th>D.Chrage</th>--}}
                                             <th>Amount</th>
@@ -130,8 +131,6 @@
                                                            value="{{$res->parcel_id}}"></td>
 
                                                 <td>{{$res->parcel_invoice}}</td>
-                                                <td>{{$res->parcel_type_id}}</td>
-                                                <td>{{$res->delivery_charge}}</td>
                                                 <td>{{$res->total_amount}}
 
                                                     {{$res->payable_amount}}+{{$res->delivery_charge}}+{{$res->cod}}
@@ -161,7 +160,7 @@
 
                                                     @if($res->order_pickup_man_id==null)
 
-                                                        Not Assigned
+                                                        <span class="badge-pill bg-primary text-white">Not Assigned</span>
 
                                                     @else
                                                         {{getDeliveryManNameFromId($res->order_pickup_man_id)}}
@@ -172,7 +171,7 @@
 
                                                 <td>
                                                     @if($res->delivery_man_id==null)
-                                                        Not Assigned
+                                                     <span class="badge-pill bg-primary text-white">Not Assigned</span>
                                                     @else
                                                         {{$res->delivery_man_name}}
                                                     @endif
@@ -196,10 +195,9 @@
                                                         <span class="badge badge-pill badge-success"> Delivered</span>
                                                     @elseif($res->delivery_status=="returned")
                                                         <span class="badge badge-pill badge-warning"> Returned</span>
-                                                        <button type="button" class="btn btn-primary"
-                                                                data-toggle="modal"
-                                                                data-target=".receive-modal{{$res->parcel_id}}">Receive
-                                                        </button>
+                                                        <a  class="btn btn-primary"
+                                                        href="/admin/returned-note/{{$res->parcel_id}}" >Receive
+                                                        </a>
                                                         <div class="modal fade receive-modal{{$res->parcel_id}}"
                                                              tabindex="-1"
                                                              role="dialog" aria-labelledby="mySmallModalLabel"

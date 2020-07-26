@@ -102,6 +102,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/parcel/assign-deliveryman', 'ParcelController@adminAssignDeliveryMan');
     Route::get('/admin/parcel/assign-pickup-man', 'ParcelController@adminAssignPickUpMan');
     Route::get('/admin/parcel/receive-by-admin', 'ParcelController@productReceiveByAdmin');
+    Route::get('/admin/returned-note/{id}', 'ParcelController@AdminReturentNotes');
 
     Route::get('/admin/parcel/status-change/{id}', 'ParcelController@parcelStatusChange');
 

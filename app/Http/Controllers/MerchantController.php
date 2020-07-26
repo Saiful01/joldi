@@ -55,18 +55,22 @@ class MerchantController extends Controller
         $delivery_returned = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'returned')->count();
-        $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-            ->where('is_complete', true)
+           $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+          /*  ->where('is_complete', true)
             ->where('delivery_status', "delivered")
-            ->where('is_paid_to_merchant', "pending")
+            ->where('is_paid_to_merchant', "pending")*/
             ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
             ->sum('payable_amount');
+        $sum1 = Parcel::where('parcels.merchant_id', Auth::guard('merchant')->id())->sum('delivery_charge');
+        $sum2 = Parcel::where('parcels.merchant_id', Auth::guard('merchant')->id())->sum('cod');
+         $sum3 = Parcel::where('parcels.merchant_id', Auth::guard('merchant')->id())->sum('area_charge');
+        $total_delivery_charge = $sum1 + $sum2 + $sum3;
 
         $total_sales = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-            ->where('is_complete', true)
+           /* ->where('is_complete', true)
             ->where('delivery_status', "delivered")
-            ->where('is_paid_to_merchant', "pending")
+            ->where('is_paid_to_merchant', "pending")*/
             ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
             ->sum('total_amount');
@@ -101,6 +105,7 @@ class MerchantController extends Controller
             ->with('payable_amount', $payable_amount)
             ->with('total_sales', $total_sales)
             ->with('parcel_list', $parcel_list)
+            ->with('total_delivery_charge', $total_delivery_charge)
 //            ->with('price ', $price )
 
             ->with('sum', $sum);

@@ -359,12 +359,18 @@ class ParcelController extends Controller
 
         }
     }
+    public function AdminReturentNotes($id) {
+        $res=Parcel::where('parcel_id', $id)->first();
+        return view('admin.consignment.return_note')->with('res', $res);
+    }
 
     public function productReceiveByAdmin(Request $request)
     {
 
 
+
         try {
+
 
             $array = [
                 'parcel_status' => 'returned_to_admin',
@@ -374,11 +380,10 @@ class ParcelController extends Controller
             ];
 
 
-            //Parcel
-
             Parcel::where('parcel_id', $request['parcel_id'])->update([
                 'admin_notes' => $request['notes']
             ]);
+
 
 
             //Update Parcel Status
@@ -393,7 +398,9 @@ class ParcelController extends Controller
 
               ];
               Notification::create($notification);*/
-            return back()->with('success', "Successfully Returned to Admin");
+            /*return back()->with('success', "Successfully Returned to Admin");*/
+
+            return Redirect::to("/admin/parcel/show")->with('success', "Successfully updated");
         } catch (\Exception $exception) {
 
             return back()->with('failed', $exception->getMessage());
