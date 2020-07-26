@@ -101,8 +101,7 @@
 
                                         <thead>
                                         <tr>
-                                            <th><input class="ml-1" type="checkbox" onclick="toggle(this);"/><br/>
-                                            </th>
+                                            <th><input class="ml-1" type="checkbox" onclick="toggle(this);"/><br/></th>
                                             <th>Invoice No</th>
                                             {{-- <th>D.Chrage</th>--}}
                                             <th>Amount</th>
@@ -131,8 +130,8 @@
                                                            value="{{$res->parcel_id}}"></td>
 
                                                 <td>{{$res->parcel_invoice}}</td>
-                                                {{--                                <td>{{$res->parcel_type_id}}</td>--}}
-                                                {{--     <td>{{$res->delivery_charge}}</td>--}}
+                                                <td>{{$res->parcel_type_id}}</td>
+                                                <td>{{$res->delivery_charge}}</td>
                                                 <td>{{$res->total_amount}}
 
                                                     {{$res->payable_amount}}+{{$res->delivery_charge}}+{{$res->cod}}
@@ -152,7 +151,7 @@
                                                     @if($res->is_same_day==true)
                                                         Today
                                                     @else
-                                                        {{getDateFormat($res->delivery_date)}}
+                                                        {{getDateFormat(getDateFromParcelId($res->parcel_id))}}
 
                                                     @endif
 
@@ -161,77 +160,9 @@
                                                 <td>
 
                                                     @if($res->order_pickup_man_id==null)
-                                                        <div class="col-sm-6 col-md-3">
-                                                            <div class="text-center">
-                                                                <!-- Small modal -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary waves-effect waves-light"
-                                                                        data-toggle="modal"
-                                                                        data-target=".modal-id{{$res->parcel_id}}">
-                                                                    Assign
-                                                                </button>
-                                                            </div>
 
-                                                            <div class="modal fade modal-id{{$res->parcel_id}}"
-                                                                 tabindex="-1"
-                                                                 role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                 style="display: none;" aria-hidden="true">
-                                                                <div class="modal-dialog modal-sm">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title mt-0"
-                                                                                id="mySmallModalLabel">Assign
-                                                                                Deliveryman</h5>
-                                                                            <button type="button" class="close"
-                                                                                    data-dismiss="modal"
-                                                                                    aria-hidden="true">
-                                                                                ×
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
+                                                        Not Assigned
 
-                                                                            <form method="get"
-                                                                                  action="/admin/parcel/assign-pickup-man">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Select
-                                                                                        Deliveryman</label>
-
-                                                                                    <input name="_token"
-                                                                                           value="{{csrf_token()}}"
-                                                                                           type="hidden"/>
-                                                                                    <input name="parcel_id"
-                                                                                           value="{{$res->parcel_id}}"
-                                                                                           type="hidden"/>
-                                                                                    <select class="form-control select2"
-                                                                                            name="delivery_man_id">
-                                                                                        <option>Select</option>
-
-                                                                                        @foreach($delivery_mans as $delivery_man)
-                                                                                            <option
-                                                                                                value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
-
-                                                                                        @endforeach
-
-                                                                                    </select>
-                                                                                </div>
-
-                                                                                <div class="form-group">
-                                                                                    {{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
-                                                                                    <button type="submit"
-                                                                                            class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
-                                                                                        Save
-                                                                                    </button>
-                                                                                </div>
-
-
-                                                                            </form>
-
-
-                                                                        </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
-                                                        </div>
                                                     @else
                                                         {{getDeliveryManNameFromId($res->order_pickup_man_id)}}
                                                     @endif
@@ -241,78 +172,7 @@
 
                                                 <td>
                                                     @if($res->delivery_man_id==null)
-                                                        <div class="col-sm-6 col-md-3">
-                                                            <div class="text-center">
-                                                                <!-- Small modal -->
-                                                                <button type="button"
-                                                                        class="btn btn-sm btn-primary waves-effect waves-light"
-                                                                        data-toggle="modal"
-                                                                        data-target=".modal-id{{$res->parcel_id}}">
-                                                                    Assign
-                                                                </button>
-                                                            </div>
-
-                                                            <div class="modal fade modal-id{{$res->parcel_id}}"
-                                                                 tabindex="-1"
-                                                                 role="dialog" aria-labelledby="mySmallModalLabel"
-                                                                 style="display: none;" aria-hidden="true">
-                                                                <div class="modal-dialog modal-sm">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title mt-0"
-                                                                                id="mySmallModalLabel">Assign
-                                                                                Deliveryman</h5>
-                                                                            <button type="button" class="close"
-                                                                                    data-dismiss="modal"
-                                                                                    aria-hidden="true">
-                                                                                ×
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-
-                                                                            <form method="get"
-                                                                                  action="/admin/parcel/assign-deliveryman">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Select
-                                                                                        Deliveryman</label>
-
-                                                                                    <input name="_token"
-                                                                                           value="{{csrf_token()}}"
-                                                                                           type="hidden"/>
-                                                                                    <input name="parcel_id"
-                                                                                           value="{{$res->parcel_id}}"
-                                                                                           type="hidden"/>
-                                                                                    <select
-                                                                                        class="form-control select2"
-                                                                                        name="delivery_man_id">
-                                                                                        <option>Select</option>
-
-                                                                                        @foreach($delivery_mans as $delivery_man)
-                                                                                            <option
-                                                                                                value="{{$delivery_man->delivery_man_id}}">{{$delivery_man->delivery_man_name}}</option>
-
-                                                                                        @endforeach
-
-                                                                                    </select>
-                                                                                </div>
-
-                                                                                <div class="form-group">
-                                                                                    {{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
-                                                                                    <button type="submit"
-                                                                                            class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
-                                                                                        Save
-                                                                                    </button>
-                                                                                </div>
-
-
-                                                                            </form>
-
-
-                                                                        </div>
-                                                                    </div><!-- /.modal-content -->
-                                                                </div><!-- /.modal-dialog -->
-                                                            </div><!-- /.modal -->
-                                                        </div>
+                                                        Not Assigned
                                                     @else
                                                         {{$res->delivery_man_name}}
                                                     @endif
@@ -360,7 +220,7 @@
                                                                               action="/admin/parcel/receive-by-admin">
                                                                             <div class="form-group">
                                                                                 <label
-                                                                                    class="control-label">Notes</label>
+                                                                                        class="control-label">Notes</label>
 
                                                                                 <input name="_token"
                                                                                        value="{{csrf_token()}}"
@@ -376,7 +236,8 @@
                                                                             </div>
 
                                                                             <div class="form-group">
-                                                                                {{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
+                                                                                <label class="control-label">Select
+                                                                                    Deliveryman</label>
                                                                                 <button type="submit"
                                                                                         class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
                                                                                     Save
@@ -394,10 +255,10 @@
 
                                                     @elseif($res->delivery_status=="returned_to_admin")
                                                         <span
-                                                            class="badge badge-pill badge-success"> Returned To Admin</span>
+                                                                class="badge badge-pill badge-success"> Returned To Admin</span>
                                                     @elseif($res->delivery_status=="partial_delivered")
                                                         <span
-                                                            class="badge badge-pill badge-warning"> Partial Delivered</span>
+                                                                class="badge badge-pill badge-warning"> Partial Delivered</span>
 
                                                         <button type="button" class="btn btn-primary"
                                                                 data-toggle="modal"
@@ -424,7 +285,7 @@
                                                                               action="/admin/parcel/receive-by-admin">
                                                                             <div class="form-group">
                                                                                 <label
-                                                                                    class="control-label">Notes</label>
+                                                                                        class="control-label">Notes</label>
 
                                                                                 <input name="_token"
                                                                                        value="{{csrf_token()}}"
@@ -440,7 +301,8 @@
                                                                             </div>
 
                                                                             <div class="form-group">
-                                                                                {{--                                                                                <label class="control-label">Select Deliveryman</label>--}}
+                                                                                <label class="control-label">Select
+                                                                                    Deliveryman</label>
                                                                                 <button type="submit"
                                                                                         class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
                                                                                     Save
@@ -459,7 +321,7 @@
 
                                                     @else
                                                         <span
-                                                            class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
+                                                                class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -482,10 +344,10 @@
                                                             <i class="mdi mdi-chevron-down"></i>
                                                         </button>
                                                         <div class="dropdown-menu" style="">
-                                                            {{--                                                        <a class="dropdown-item"--}}
-                                                            {{--                                                           href="/merchant/parcel/edit/{{$res->parcel_id}}">Edit</a>--}}
-                                                            {{--                                                        <a class="dropdown-item"--}}
-                                                            {{--                                                           href="/merchant/parcel/delete/{{$res->parcel_id}}">Delete</a>--}}
+                                                            <a class="dropdown-item"
+                                                               href="/merchant/parcel/edit/{{$res->parcel_id}}">Edit</a>
+                                                            <a class="dropdown-item"
+                                                               href="/merchant/parcel/delete/{{$res->parcel_id}}">Delete</a>
                                                             <a class="dropdown-item"
                                                                href="/admin/parcel/details/{{$res->parcel_id}}">Details</a>
 

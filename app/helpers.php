@@ -20,6 +20,18 @@ function getDateFormat($date)
     $createdAt = Carbon::parse($date);
     return $createdAt->format('d M, Y g:i A');
 }
+function getDateFromParcelId($parcel_id)
+{
+
+
+    $is_exist= \App\Parcel::where('parcel_id',$parcel_id)->first();
+    if(is_null($is_exist)){
+        return "-";
+    }else{
+        $is_exist->created_at;
+    }
+
+}
 
 
 function getDeliveryManNameFromId($id)

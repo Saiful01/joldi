@@ -52,7 +52,7 @@ class ParcelController extends Controller
     public function store(Request $request)
 
     {
-        return $request->all();
+        //return $request->all();
         $area_charge = Area::where('area_id', $request['area_id'])->first();
         if (is_null($area_charge)) {
             $area_charge_value = 0;
@@ -101,7 +101,7 @@ class ParcelController extends Controller
             'is_same_day' => $request['is_same_day'],
             'delivery_date' => $delivery_date,
             'parcel_notes' => $request['parcel_notes'],
-            'is_payment_collection' => $request['is_payment_collection'],
+            'is_online_payment' => $request['is_online_payment'],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 
@@ -218,6 +218,7 @@ class ParcelController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->orderBy('parcels.created_at', "DESC")
+            /*            ->select("parcels.*", "parcel_statuses.")*/
             ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();

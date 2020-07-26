@@ -367,7 +367,7 @@ class AdminController extends Controller
 
     public function deliveryPickupmanAssign(Request $request)
     {
-        return $request->all();
+       // return $request->all();
 
 
 
