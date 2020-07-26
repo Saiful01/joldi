@@ -52,6 +52,7 @@ class ParcelController extends Controller
     public function store(Request $request)
 
     {
+        return $request->all();
         $area_charge = Area::where('area_id', $request['area_id'])->first();
         if (is_null($area_charge)) {
             $area_charge_value = 0;
@@ -100,6 +101,7 @@ class ParcelController extends Controller
             'is_same_day' => $request['is_same_day'],
             'delivery_date' => $delivery_date,
             'parcel_notes' => $request['parcel_notes'],
+            'is_payment_collection' => $request['is_payment_collection'],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
 

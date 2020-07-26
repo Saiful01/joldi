@@ -123,15 +123,28 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Parcel Notes</h4>
-
+                    <h4 class="card-title mb-4"> Notes</h4>
+                    <ol class="activity-feed">
                             <li class="feed-item">
                                 <div class="feed-item-list">
-                                 Parcel Notes:   <p>{{$result->parcel_notes}}</p>
-                                  DeliveryMan Notes:  <p>{{$result->delivery_notes}}</p>
-                                  Admin Notes:  <p>{{$result->admin_notes}}</p>
+                                    <span class="date">Parcel Notes</span>
+                                    <p>{{$result->parcel_notes}}</p>
                                 </div>
                             </li>
+                        <li class="feed-item">
+                                <div class="feed-item-list">
+                                    <span class="date">Admin Notes</span>
+                                    <p>{{$result->admin_notes}}</p>
+                                </div>
+                            </li>
+                        <li class="feed-item">
+                                <div class="feed-item-list">
+                                    <span class="date">App Notes</span>
+                                    <p>{{$result->delivery_notes}}</p>
+                                </div>
+                            </li>
+
+                    </ol>
 
 
                 </div>

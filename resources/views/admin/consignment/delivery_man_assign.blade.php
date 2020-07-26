@@ -7,10 +7,10 @@
     <div class="row align-items-center">
         <div class="col-sm-6">
             <div class="page-title-box">
-                <h4 class="font-size-18">Assign Delivery/Pickup Man</h4>
+                <h4 class="font-size-18">Assign Delivery Man</h4>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Assign Delivery/Pickup Man</a></li>
+                    <li class="breadcrumb-item"><a href="#">Assign Delivery Man</a></li>
                 </ol>
             </div>
         </div>
@@ -22,12 +22,12 @@
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Assign Delivery/Pickup Man</h5>
+                    <h5 class="card-title">Assign Delivery Man</h5>
                     <hr>
                     <form method="post" action="/multiple-deliveryman/store"
                           enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label for="example-text-input-lg" class="col-sm-4 col-form-label">Select Delivery/PickUp
+                            <label for="example-text-input-lg" class="col-sm-4 col-form-label">Select Delivery
                                 Man</label>
                             <div class="col-sm-8">
                                 <select class="form-control form-control-lg" type="text" placeholder="Name"

@@ -240,6 +240,23 @@
                                                value="{{$is_same_day}}">
                                     </div>
                                 </div>
+                                <div class="form-group row" >
+                                    <label for="example-text-input-lg" class="col-md-6 col-form-label">Payment Collection</label>
+                                    <div class="col-md-3">
+                                        <input class="form-check-input " type="checkbox" name="is_payment_collection"  value="1" >
+                                        <label class="form-check-label  " >
+                                            Yes
+                                        </label>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input class="form-check-input  " type="checkbox" name="is_payment_collection" value="0" >
+                                        <label class="form-check-label   " >
+                                            No
+                                        </label>
+
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     {{--<label for="example-text-input-lg" class="col-sm-3 col-form-label"></label>--}}
                                     <div class="col-sm-12">

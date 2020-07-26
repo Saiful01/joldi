@@ -31,6 +31,7 @@ class CreateParcelsTable extends Migration
             $table->double('receivable_amount')->nullable();//Will be changed if Partial Delivered or Returned
 
             $table->boolean('is_same_day')->default(true);
+            $table->boolean('is_payment_collection')->default(false);
             $table->date('delivery_date')->nullable();
             $table->string('parcel_notes')->nullable();
             $table->string('delivery_notes')->nullable();

@@ -37,10 +37,10 @@
     <!-- end page title -->
 
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="row">
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="/admin/merchants" class="text-white">
                         <div class="card bg-primary">
                             <div class="card-body">
@@ -55,7 +55,7 @@
                 </div>
 
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="/merchant/payments/request" class="text-white">
                         <div class="card bg-pink">
                             <div class="card-body">
@@ -69,7 +69,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="/merchant/payments/request" class="text-white">
 
                         <div class="card bg-info">
@@ -84,7 +84,7 @@
                     </a>
 
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="/admin/parcel/show" class="text-white">
 
                         <div class="card bg-success">
@@ -100,22 +100,7 @@
 
                 </div>
 
-                <div class="col-md-4">
-                    <a href="/admin/parcel/show" class="text-white">
-
-                        <div class="card bg-danger">
-                            <div class="card-body">
-                                <div class="mx-auto text-white">
-                                    <h4 class="text-center">Total Canceled</h4>
-                                    <h4 class="text-center">{{$delivery_cancelled}}</h4>
-
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <a href="/admin/parcel/show" class="text-white">
 
                         <div class="card bg-warning">
@@ -130,13 +115,57 @@
                     </a>
 
                 </div>
+                <div class="col-md-3">
+                    <a href="/admin/parcel/show" class="text-white">
+
+                        <div class="card bg-danger">
+                            <div class="card-body">
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Canceled</h4>
+                                    <h4 class="text-center">{{$delivery_cancelled}}</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="col-md-3">
+                    <a href="/admin/parcel/show" class="text-white">
+
+                        <div class="card bg-dark">
+                            <div class="card-body">
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Delivered</h4>
+                                    <h4 class="text-center">{{$delivery_delivered}}</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+                <div class="col-md-3">
+                    <a href="/admin/parcel/show" class="text-white">
+
+                        <div class="card" style="background-color: #00ff80">
+                            <div class="card-body">
+                                <div class="mx-auto text-white">
+                                    <h4 class="text-center">Total Returened</h4>
+                                    <h4 class="text-center">{{$delivery_returned}}</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
 
 
             </div>
         </div>
-        <div class="col-md-3">
 
-        </div>
     </div>
     <!-- end row -->
 
