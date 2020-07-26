@@ -37,72 +37,143 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="rider"
+        android:background="#F5F6F8"
         android:orientation="horizontal">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
             android:layout_weight="1"
-            android:background="@drawable/bg_green"
+            android:background="#fff"
+            android:onClick="rider"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_15sdp"
             android:paddingTop="@dimen/_5sdp"
-            android:paddingRight="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp">
 
             <ImageView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:src="@drawable/ic_bike_white_24dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_rider" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/_5sdp"
                 android:text="@string/rider"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_15sdp" />
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_11sdp" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
             android:layout_weight="1"
-            android:background="@drawable/bg_blue"
+            android:background="#fff"
             android:onClick="user"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_15sdp"
             android:paddingTop="@dimen/_5sdp"
-            android:paddingRight="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp">
 
             <ImageView
-                android:layout_width="@dimen/_35sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:src="@drawable/ic_user_white_24dp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_user" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/_5sdp"
                 android:text="@string/user"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_15sdp" />
+                android:textAlignment="center"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_11sdp" />
         </LinearLayout>
 
 
     </LinearLayout>
 
+
+    <!--
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="rider"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_green"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/ic_bike_white_24dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/rider"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_15sdp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                android:layout_margin="@dimen/_8sdp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_blue"
+                android:onClick="user"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/_15sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingRight="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp">
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:src="@drawable/ic_user_white_24dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:text="@string/user"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_15sdp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

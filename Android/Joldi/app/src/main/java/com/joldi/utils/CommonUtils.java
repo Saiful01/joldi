@@ -44,13 +44,13 @@ public class CommonUtils {
 
     public static void message(Context context, String message) {
 
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 
     }
 
     public static String getToken() {
 
-        return "ABCD";
+        return "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9";
     }
 
     public static String getDelivered() {

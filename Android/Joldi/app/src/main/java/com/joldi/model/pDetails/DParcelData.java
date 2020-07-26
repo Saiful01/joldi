@@ -5,9 +5,35 @@ import com.google.gson.annotations.SerializedName;
 
 public class DParcelData {
 
+    public String getAreaCharge() {
+        return areaCharge;
+    }
+
+    public void setAreaCharge(String areaCharge) {
+        this.areaCharge = areaCharge;
+    }
+
+    public int getIsOnlinePayment() {
+        return isOnlinePayment;
+    }
+
+    public void setIsOnlinePayment(int isOnlinePayment) {
+        this.isOnlinePayment = isOnlinePayment;
+    }
+
+    @SerializedName("is_online_payment")
+    @Expose
+    private int isOnlinePayment;
+
+    @SerializedName("area_charge")
+    @Expose
+    private String areaCharge;
+
     @SerializedName("parcel_id")
     @Expose
     private String parcelId;
+
+
     @SerializedName("parcel_title")
     @Expose
     private String parcelTitle;

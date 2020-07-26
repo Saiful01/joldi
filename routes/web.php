@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::get('/merchant/help', 'HomeController@help');
 
 Route::get('/login', 'LoginController@login');
+
 Route::get('/admin/login', 'LoginController@login');
 Route::post('/login/check', 'LoginController@loginCheck');
 

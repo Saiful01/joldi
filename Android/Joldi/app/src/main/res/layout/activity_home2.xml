@@ -76,7 +76,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F5F6F8"
         android:orientation="horizontal">
 
 
@@ -85,230 +84,198 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
             android:layout_weight="1"
-            android:background="#fff"
+            android:background="@drawable/bg_green"
             android:onClick="collectParcel"
             android:orientation="vertical"
+            android:paddingLeft="@dimen/_15sdp"
             android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pickup_scan" />
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_collect_white24dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="@string/pickup_scan"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_11sdp" />
+                android:text="@string/collect_parcel"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_15sdp" />
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
             android:layout_weight="1"
-            android:background="#fff"
-            android:onClick="collectFromHub"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_hub_scan" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/_5sdp"
-                android:text="@string/hub_scan"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_11sdp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:layout_weight="1"
-            android:background="#fff"
+            android:background="@drawable/bg_red"
             android:onClick="pendingCollection"
             android:orientation="vertical"
+            android:paddingLeft="@dimen/_15sdp"
             android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_new_percel" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/_5sdp"
-                android:text="@string/new_parcel"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_11sdp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F5F6F8"
-        android:orientation="horizontal">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:onClick="pendingOrder"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_pending_delivery" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/_5sdp"
-                android:text="@string/pending_delivery"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_11sdp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:onClick="allParcel"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_all_parcel" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/_5sdp"
-                android:text="@string/all_parcel"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_11sdp" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:layout_weight="1"
-            android:background="#fff"
-            android:onClick="deliveredOrder"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_delivered_orders" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/_5sdp"
-                android:text="@string/delivered_orders"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_11sdp" />
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F5F6F8"
-        android:orientation="horizontal">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:background="#fff"
-            android:layout_weight="2"
-            android:onClick="report"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"
             tools:ignore="OnClick">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_report_summary" />
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_all_white_24dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/_5sdp"
-                android:text="@string/report_summary"
-                android:textAlignment="center"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_11sdp" />
+                android:text="@string/pending_collection"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_15sdp" />
         </LinearLayout>
 
 
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_red"
+            android:onClick="pendingOrder"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_access_time_black_24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/pending_deliver"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_green"
+            android:onClick="collectFromHub"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            tools:ignore="OnClick">
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_settings_overscan_black_24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/collect_nfrom_hub"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_yellow"
+            android:onClick="allParcel"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/ic_all_order_white_24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/all_parcel"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_blue"
+            android:onClick="deliveredOrder"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingRight="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="45dp"
+                android:src="@drawable/ic_all_white_24dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/delivered_orders"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

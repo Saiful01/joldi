@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
 
+
     }
 
     public void login(View view) {
@@ -61,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         finish();
         Intent intent = new Intent(LoginActivity.this, StartActivity.class);
         startActivity(intent);
@@ -86,9 +86,9 @@ public class LoginActivity extends AppCompatActivity {
         progressDoalog.show();
 
         final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ServerApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+            .baseUrl(ServerApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
         ServerApi api = retrofit.create(ServerApi.class);
         Call<Login> call = api.loginDo(phone, CommonUtils.getToken(), password);
@@ -104,11 +104,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         SharedPrefClass.saveDeliveryMan(getApplicationContext(),
-                                response.body().getLoginData().getDeliveryManName(),
-                                response.body().getLoginData().getDeliveryManPhone(),
-                                response.body().getLoginData().getDeliveryManId());
+                            response.body().getLoginData().getDeliveryManName(),
+                            response.body().getLoginData().getDeliveryManPhone(),
+                            response.body().getLoginData().getDeliveryManId());
 
-                        Log.d("MOTIUR", response.body().getLoginData().getDeliveryManId()+ "");
+                        Log.d("MOTIUR", response.body().getLoginData().getDeliveryManId() + "");
 
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
@@ -130,4 +130,15 @@ public class LoginActivity extends AppCompatActivity {
 
         return status;
     }
+
+    public void registration(View view) {
+        startActivity(new Intent(getApplicationContext(), RegistrationActivity.class));
+
+    }
+
+    public void forgetPassword(View view) {
+
+        startActivity(new Intent(getApplicationContext(), ForgetPasswordActivity.class));
+    }
+
 }

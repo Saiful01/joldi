@@ -248,7 +248,7 @@ class ParcelController extends Controller
                 'parcel_id' => $id,
                 'changed_by' => Auth::user()->id,
                 'parcel_status' => $status,
-                'notes' => "",
+                'admin_notes' => "",
                 'user_type' => "admin",
             ];
             ParcelStatusHistory::create($array);
@@ -376,7 +376,7 @@ class ParcelController extends Controller
             //Parcel
 
             Parcel::where('parcel_id', $request['parcel_id'])->update([
-                'notes' => $request['notes']
+                'admin_notes' => $request['notes']
             ]);
 
 

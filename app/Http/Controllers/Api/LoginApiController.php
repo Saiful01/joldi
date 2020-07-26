@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\DeliveryMan;
 use App\Http\Controllers\Controller;
 use App\Parcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginApiController extends Controller
 {
@@ -30,7 +32,7 @@ class LoginApiController extends Controller
         if (Auth::guard('deliveryman')->attempt($credentials)) {
             $data = Auth::guard('deliveryman')->user();
 
-            if (!Auth::guard('deliveryman')->user->is_active) {
+            if (!Auth::guard('deliveryman')->user()->active_status) {
                 $status_code = 400;
                 $message = "Your account is not activated.";
             }
@@ -52,6 +54,77 @@ class LoginApiController extends Controller
             'message' => $message,
             'access_token' => $access_token,
             'pending_order' => $delivery_pending,
+            'data' => $data,
+        ];
+    }
+
+    public function registration(Request $request)
+    {
+
+        $status_code = 200;
+        $message = "Logged in";
+        $access_token = "ABC";
+        $data = null;
+
+
+        $credentials = [
+            'delivery_man_phone' => $request['phone_number'],
+            'password' => $request['password'],
+        ];
+
+        $data = array(
+            'delivery_man_name' => $request['username'],
+            'delivery_man_email' => $request['email'],
+            'delivery_man_phone' => $request['phone'],
+            'password' => Hash::make($request['password']),
+            'delivery_man_address' => $request['address'],
+            'delivery_man_type' => $request['type'],
+        );
+
+        try {
+            DeliveryMan::create($data);
+            $status_code = 200;
+            $message = "Registration successful";
+        } catch (\Exception $exception) {
+
+            $status_code = 200;
+            $message = $exception->getMessage();
+        }
+
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
+            'data' => $data,
+        ];
+    }
+
+    public function resetPassword(Request $request)
+    {
+
+        $status_code = 200;
+        $message = "Logged in";
+        $access_token = "ABC";
+        $data = null;
+
+
+        //Reset
+
+        /*     try {
+                 $status_code = 200;
+                 $message = "Registration successful";
+             } catch (\Exception $exception) {
+
+                 $status_code = 200;
+                 $message = $exception->getMessage();
+             }*/
+
+
+        return [
+            'status_code' => $status_code,
+            'message' => $message,
+            'access_token' => $access_token,
             'data' => $data,
         ];
     }

@@ -54,7 +54,8 @@ class DashboardController extends Controller
         $sum = Parcel::sum('total_amount');
         $sum1 = Parcel::sum('delivery_charge');
         $sum2 = Parcel::sum('cod');
-        $sum3 = Parcel::sum('area_charge');
+     /*   $sum3 = Parcel::sum('area_charge');*/
+        $sum3 = 0;
         $total_delivery_charge = $sum1 + $sum2 + $sum3;
         $parcel_list = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')

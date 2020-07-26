@@ -10,11 +10,29 @@
     android:padding="@dimen/_25sdp"
     tools:context="com.joldi.ui.LoginActivity">
 
-    <ImageView
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/_40sdp"
-        android:src="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/edit_white"
+        android:hint="@string/email_address"
+        android:inputType="text"
+        android:padding="@dimen/_10sdp"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/edit_white"
+        android:hint="@string/name"
+        android:inputType="text"
+        android:padding="@dimen/_10sdp"
+        android:text="" />
+
 
     <EditText
         android:id="@+id/etPhone"
@@ -38,35 +56,41 @@
         android:padding="@dimen/_10sdp"
         android:text="" />
 
+    <EditText
+        android:id="@+id/etAddress"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/edit_white"
+        android:hint="@string/address"
+        android:inputType="text"
+        android:padding="@dimen/_10sdp"
+        android:text="" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp" />
+
     <Button
-        android:id="@+id/btLogin"
+        android:id="@+id/btnRegistration"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/bg_green"
-        android:onClick="login"
-        android:text="Login"
+        android:onClick="doRegistration"
+        android:text="@string/registration"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/_15sdp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/forget_password"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:onClick="forgetPassword"
-        android:textAlignment="center"
-        android:gravity="center_horizontal"
+        android:textSize="@dimen/_15sdp"
         tools:ignore="OnClick" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/don_t_have_an_account_sign_up"
         android:layout_marginTop="@dimen/_10sdp"
-        android:onClick="registration"
-        android:textAlignment="center"
         android:gravity="center_horizontal"
+        android:onClick="loginPage"
+        android:text="@string/already_have_an_account_sign_in"
+        android:textAlignment="center"
         tools:ignore="OnClick" />
-
 
 </LinearLayout>

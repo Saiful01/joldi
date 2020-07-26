@@ -154,7 +154,7 @@ public class CollectFromHubActivity extends AppCompatActivity implements ZXingSc
 
                         CommonUtils.message(getApplicationContext(), "Successfully Updated");
 
-                        Log.d("MOTIUR", response.body().getTotalAmount() + "");
+                        Log.d("MOTIUR", response.body().getTotalPayable() + "");
                         collectingStatus(response.body().getMessage());
 
 

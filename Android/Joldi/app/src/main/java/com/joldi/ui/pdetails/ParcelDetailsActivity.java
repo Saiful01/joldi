@@ -1,10 +1,15 @@
 package com.joldi.ui.pdetails;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +34,8 @@ import com.joldi.utils.SharedPrefClass;
 import java.util.ArrayList;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,13 +47,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ParcelDetailsActivity extends AppCompatActivity {
 
-
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 100;
     ProgressDialog progressDoalog;
     RecyclerView status_list;
     private ArrayList<DStatus> parcelDetailsList;
     private PDetailsStatusAdapter pAdapter;
-    TextView tvInvoice, tvOrderAmount, tvDeliveryCharge, tvTotal, tvDeliveryToName, tvDeliveryToAddress, tvStatus;
-    Button btnDeliver, btnReturn, btnMap, btnPartialDeliver;
+    TextView tvInvoice, tvOrderAmount, tvDeliveryCharge, tvTotal, tvDeliveryToName,
+        tvDeliveryToAddress, tvStatus, tvPhone, tvCod, tvArea;
+    Button btnDeliver, btnReturn, btnMap, btnPartialDeliver, btnCall;
 
 
     @Override
@@ -63,12 +71,16 @@ public class ParcelDetailsActivity extends AppCompatActivity {
         tvDeliveryToName = findViewById(R.id.name);
         tvDeliveryToAddress = findViewById(R.id.address);
         tvStatus = findViewById(R.id.status);
+        tvPhone = findViewById(R.id.phone);
+        tvCod = findViewById(R.id.cod_charge);
+        tvArea = findViewById(R.id.area_charge);
 
 
         btnDeliver = findViewById(R.id.deliverProduct);
         btnReturn = findViewById(R.id.returnProduct);
         btnMap = findViewById(R.id.map);
         btnPartialDeliver = findViewById(R.id.partialDeliver);
+        btnCall = findViewById(R.id.call);
 
         Intent intent = getIntent();
         String parcel_id = intent.getStringExtra("PARCEL_ID");
@@ -103,9 +115,9 @@ public class ParcelDetailsActivity extends AppCompatActivity {
         progressDoalog.show();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ServerApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+            .baseUrl(ServerApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
         ServerApi api = retrofit.create(ServerApi.class);
         Call<DParcel> call = api.getParcelDetails(parcel_id, CommonUtils.getToken(), String.valueOf(SharedPrefClass.getDeliverymanId(getApplicationContext())));
@@ -121,7 +133,8 @@ public class ParcelDetailsActivity extends AppCompatActivity {
                 for (int i = 0; i < response.body().getStatuses().size(); i++) {
                     Log.i("MOTIUR", "onResponse: " + response.body().getStatuses().get(i).getMessage());
 
-                    parcelDetailsList.add(new DStatus(response.body().getStatuses().get(i).getParcelInvoice(), response.body().getStatuses().get(i).getCreatedAt(), response.body().getStatuses().get(i).getMessage(), response.body().getStatuses().get(i).getParcelStatus()));
+                    parcelDetailsList.add(new DStatus(response.body().getStatuses().get(i).getParcelInvoice(),
+                        response.body().getStatuses().get(i).getCreatedAt(), response.body().getStatuses().get(i).getMessage(), response.body().getStatuses().get(i).getParcelStatus()));
                 }
 
 
@@ -158,11 +171,43 @@ public class ParcelDetailsActivity extends AppCompatActivity {
     private void setValue(final DParcelData data) {
 
         tvInvoice.setText(data.getParcelInvoice());
-        tvOrderAmount.setText(data.getPayableAmount());
-        tvDeliveryCharge.setText(data.getDeliveryCharge());
-        tvTotal.setText(data.getTotalAmount());
+        tvOrderAmount.setText(data.getPayableAmount() + " BDT");
+        tvDeliveryCharge.setText(data.getDeliveryCharge() + " BDT");
+        tvTotal.setText(data.getTotalAmount() + " BDT");
         tvDeliveryToName.setText(data.getCustomerName());
         tvDeliveryToAddress.setText(data.getCustomerAddress());
+        tvPhone.setText(data.getCustomerPhone());
+        tvCod.setText(data.getCod() + " BDT");
+        tvArea.setText(data.getAreaCharge() + " BDT");
+
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onClick(View view) {
+               /* Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:"+data.getCustomerPhone()));
+                startActivity(callIntent);*/
+
+                if (ContextCompat.checkSelfPermission(getApplicationContext(),
+                    Manifest.permission.CALL_PHONE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(ParcelDetailsActivity.this, new String[]{Manifest.permission.CALL_PHONE}, MY_PERMISSIONS_REQUEST_CALL_PHONE);
+                } else {
+                    //You already have permission
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + data.getCustomerPhone()));
+                    startActivity(intent);
+                }
+
+
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("p", data.getCustomerPhone());
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(getApplicationContext(), "Phone number copied", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         setStatus(data.getDeliveryStatus());
 
@@ -170,26 +215,35 @@ public class ParcelDetailsActivity extends AppCompatActivity {
         btnDeliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String message = "";
+
+                if (data.getIsOnlinePayment() == 1) {
+                    message = "Customer already paid. Deliver your product";
+                } else {
+                    message = (getString(R.string.collecting) + data.getTotalAmount() + " BDT " + getString(R.string.and_deliver_product));
+                }
+
                 AlertDialog alertDialog = new AlertDialog.Builder(ParcelDetailsActivity.this).create();
                 alertDialog.setTitle(getString(R.string.product_delivery));
-                alertDialog.setMessage(getString(R.string.collecting) + data.getPayableAmount() + getString(R.string.and_deliver_product));
+                alertDialog.setMessage(message);
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.yes),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                                parcelUpdate(data.getParcelId(), data.getDeliveryManId(), CommonUtils.getDelivered());
+                            parcelUpdate(data.getParcelId(), data.getDeliveryManId(), CommonUtils.getDelivered());
 
-                                dialog.dismiss();
-                            }
-                        });
+                            dialog.dismiss();
+                        }
+                    });
 
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.no),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
-                                dialog.dismiss();
-                            }
-                        });
+                            dialog.dismiss();
+                        }
+                    });
                 alertDialog.show();
 
             }
@@ -203,7 +257,6 @@ public class ParcelDetailsActivity extends AppCompatActivity {
                 intent.putExtra("PARCEL_ID", data.getParcelId());
                 intent.putExtra("DELIVERYMAN_ID", data.getDeliveryManId());
                 startActivity(intent);
-
 
 
                 /*
@@ -262,9 +315,9 @@ public class ParcelDetailsActivity extends AppCompatActivity {
 
         //.d("MOTIUR", parcelId + "--" + CommonUtils.getToken() + "--" + deliveryManId + "--" + status + "--" + "Notes");
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ServerApi.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
-                .build();
+            .baseUrl(ServerApi.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create()) //Here we are using the GsonConverterFactory to directly convert json data to object
+            .build();
 
         ServerApi api = retrofit.create(ServerApi.class);
 
@@ -298,9 +351,18 @@ public class ParcelDetailsActivity extends AppCompatActivity {
     @SuppressLint("ResourceAsColor")
     private void setStatus(String status) {
 
-        Log.d("MOTIUR", status+"kkkkk");
+        Log.d("MOTIUR", status + "kkkkk");
 
-        if (status.equals(CommonUtils.getDelivered()) || (status.equals(CommonUtils.getPartialDeliveryStatus()) || (status.equals(CommonUtils.getPickUpAssigned()) || (status.equals(CommonUtils.getReturendParcel()))))) {
+     /*   if (status.equals(CommonUtils.getDelivered()) || (status.equals(CommonUtils.getPartialDeliveryStatus()) || (status.equals(CommonUtils.getPickUpAssigned()) || (status.equals(CommonUtils.getReturendParcel()))))) {
+            btnReturn.setEnabled(false);
+            btnDeliver.setEnabled(false);
+            btnPartialDeliver.setEnabled(false);
+            btnDeliver.setBackgroundResource(R.drawable.bg_disable);
+            btnReturn.setBackgroundResource(R.drawable.bg_disable);
+            btnPartialDeliver.setBackgroundResource(R.drawable.bg_disable);
+        }*/
+
+        if (!status.equals(CommonUtils.getOnTheWay())) {
             btnReturn.setEnabled(false);
             btnDeliver.setEnabled(false);
             btnPartialDeliver.setEnabled(false);
@@ -308,7 +370,6 @@ public class ParcelDetailsActivity extends AppCompatActivity {
             btnReturn.setBackgroundResource(R.drawable.bg_disable);
             btnPartialDeliver.setBackgroundResource(R.drawable.bg_disable);
         }
-
 
 
         tvStatus.setText(status);
@@ -322,6 +383,30 @@ public class ParcelDetailsActivity extends AppCompatActivity {
             tvStatus.setTextColor(R.color.colorAccent);
         } else {
             tvStatus.setTextColor(R.color.red);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CALL_PHONE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the phone call
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
         }
     }
 

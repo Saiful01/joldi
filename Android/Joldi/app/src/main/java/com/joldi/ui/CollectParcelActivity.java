@@ -96,20 +96,27 @@ public class CollectParcelActivity extends AppCompatActivity implements ZXingSca
 
     @Override
     public void handleResult(Result result) {
-        Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), result.getText(), Toast.LENGTH_SHORT).show();
         gettingResponseFromServer(String.valueOf(result));
     }
 
-    private void collectingStatus(double amount) {
+    private void collectingStatus(double getTotalPayable, int is_online_payment, double joldi_charge) {
 
         total_parcel++;
-        total_collectable = total_collectable + amount;
+        total_collectable = total_collectable + getTotalPayable;
+        String message;
+        if (is_online_payment == 0) {
+            //String message = getString(R.string.total_amount) + " " + total_collectable + getString(R.string.total_parcel) + " " + total_parcel;
+            message = "Payable amount is: " + getTotalPayable + " and Joldi Charge: " + joldi_charge;
+        } else {
+            message = "Merchant already paid by Customer. Collect Joldi Charge from Merchant:" + joldi_charge;
+        }
 
 
         AlertDialog alertDialog = new AlertDialog.Builder(CollectParcelActivity.this).create();
         alertDialog.setTitle(R.string.collect_parcel);
 
-        alertDialog.setMessage(getString(R.string.total_amount) + " " + total_collectable + getString(R.string.total_parcel) + " " + total_parcel);
+        alertDialog.setMessage(message);
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.collect_more),
             new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
@@ -156,8 +163,8 @@ public class CollectParcelActivity extends AppCompatActivity implements ZXingSca
                     if (response.isSuccessful()) {
 
                         CommonUtils.message(getApplicationContext(), "Successfully Updated");
-                        Log.d("MOTIUR", response.body().getTotalAmount() + "");
-                        collectingStatus(response.body().getTotalAmount());
+                        Log.d("MOTIUR", response.body().getTotalPayable() + "");
+                        collectingStatus(response.body().getTotalPayable(), response.body().getIsOnlinePayment(), response.body().getJoldiCharge());
                     }
                 }
             }
