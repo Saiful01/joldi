@@ -218,7 +218,6 @@ class ParcelController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->orderBy('parcels.created_at', "DESC")
-            /*            ->select("parcels.*", "parcel_statuses.")*/
             ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
@@ -249,7 +248,6 @@ class ParcelController extends Controller
                 'parcel_id' => $id,
                 'changed_by' => Auth::user()->id,
                 'parcel_status' => $status,
-                'admin_notes' => "",
                 'user_type' => "admin",
             ];
             ParcelStatusHistory::create($array);

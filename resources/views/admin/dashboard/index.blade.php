@@ -56,7 +56,7 @@
 
 
                 <div class="col-md-3">
-                    <a href="/merchant/payments/request" class="text-white">
+                    <a href="#" class="text-white">
                         <div class="card bg-pink">
                             <div class="card-body">
                                 <div class="mx-auto text-white">
@@ -70,7 +70,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <a href="/merchant/payments/request" class="text-white">
+                    <a href="#" class="text-white">
 
                         <div class="card bg-info">
                             <div class="card-body">

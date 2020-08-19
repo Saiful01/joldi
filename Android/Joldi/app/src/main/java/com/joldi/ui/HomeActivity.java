@@ -232,9 +232,9 @@ public class HomeActivity extends AppCompatActivity
                 SharedPrefClass.ClearPreference(getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 return (true);
-            case R.id.report:
+            /*case R.id.report:
                 startActivity(new Intent(getApplicationContext(), ReportActivity.class));
-                return (true);
+                return (true);*/
             case R.id.manual_collection:
                 startActivity(new Intent(getApplicationContext(), ManualCollectionActivity.class));
                 return (true);

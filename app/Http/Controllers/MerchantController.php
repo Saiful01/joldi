@@ -34,8 +34,7 @@ class MerchantController extends Controller
         Session::get("shop_id");
         Session::get("shop_name");
 
-        $par_count = Parcel::
-        where('parcels.merchant_id', Auth::guard('merchant')->id())
+        $par_count = Parcel::where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->count();
         $delivery_pending = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->where('parcels.merchant_id', Auth::guard('merchant')->id())
@@ -56,17 +55,17 @@ class MerchantController extends Controller
             ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             ->where('parcel_statuses.delivery_status', 'returned')->count();
         $payable_amount = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-            ->where('is_complete', true)
+          /*  ->where('is_complete', true)*/
             ->where('delivery_status', "delivered")
-            ->where('is_paid_to_merchant', "pending")
+      /*      ->where('is_paid_to_merchant', "pending")*/
             ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
             ->sum('payable_amount');
 
         $total_sales = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
-            ->where('is_complete', true)
+         /*   ->where('is_complete', true)*/
             ->where('delivery_status', "delivered")
-            ->where('is_paid_to_merchant', "pending")
+         /*   ->where('is_paid_to_merchant', "pending")*/
             ->where('parcels.merchant_id', Auth::guard('merchant')->id())
             //->whereBetween('parcels.created_at', [$date_from->format('Y-m-d') . " 00:00:00", $date_to->format('Y-m-d') . " 23:59:59"])
             ->sum('total_amount');
@@ -163,6 +162,8 @@ class MerchantController extends Controller
         $credentials = $request->only('merchant_email', 'password');
         if (Auth::guard('merchant')->attempt($credentials)) {
 
+
+
             $id = Auth::guard('merchant')->id();
             $shop = Shop::where('merchant_id', $id)->first();
             if (!is_null($shop)) {
@@ -173,6 +174,7 @@ class MerchantController extends Controller
 
             return redirect()->intended('/merchant/dashboard');
         }
+
 
         return Redirect::to('/merchant/login')
             ->with('failed', 'Email or password is wrong.')

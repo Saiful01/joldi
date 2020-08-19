@@ -367,7 +367,9 @@ class AdminController extends Controller
 
     public function deliveryPickupmanAssign(Request $request)
     {
-       // return $request->all();
+       //return $request->all();
+
+        //return count($request['parcel_id']);
 
 
 

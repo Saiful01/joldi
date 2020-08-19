@@ -253,7 +253,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <input class="form-check-input  " type="radio" name="is_online_payment"
-                                               value="0">
+                                               value="0" checked>
                                         <label class="form-check-label   ">
                                             No
                                         </label>
