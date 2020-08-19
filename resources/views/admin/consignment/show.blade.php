@@ -101,7 +101,8 @@
 
                                         <thead>
                                         <tr>
-                                            <th><input class="ml-1" type="checkbox" onclick="toggle(this);"/><br/></th>
+                                            <th><input class="ml-1" type="checkbox" onclick="toggle(this);"/><br/>
+                                            </th>
                                             <th>Invoice No</th>
                                             {{-- <th>D.Chrage</th>--}}
                                             <th>Amount</th>
@@ -130,8 +131,6 @@
                                                            value="{{$res->parcel_id}}"></td>
 
                                                 <td>{{$res->parcel_invoice}}</td>
-                                              {{--  <td>{{$res->parcel_type_id}}</td>--}}
-                                               {{-- <td>{{$res->delivery_charge}}</td>--}}
                                                 <td>{{$res->total_amount}}
 
                                                     {{$res->payable_amount}}+{{$res->delivery_charge}}+{{$res->cod}}
@@ -161,7 +160,7 @@
 
                                                     @if($res->order_pickup_man_id==null)
 
-                                                        Not Assigned
+                                                        <span class="badge-pill bg-primary text-white">Not Assigned</span>
 
                                                     @else
                                                         {{getDeliveryManNameFromId($res->order_pickup_man_id)}}
@@ -172,7 +171,7 @@
 
                                                 <td>
                                                     @if($res->delivery_man_id==null)
-                                                        Not Assigned
+                                                        <span class="badge-pill bg-primary text-white">Not Assigned</span>
                                                     @else
                                                         {{$res->delivery_man_name}}
                                                     @endif
@@ -183,10 +182,7 @@
                                                 <td>{{getUserNameFromId($res->hub_receiver)}}</td>
 
                                                 <td>{{$res->area_name}}</td>
-                                              {{--  <td>{{$res->area_name}}</td>--}}
                                                 <td>
-
-
                                                     @if($res->delivery_status=="pending")
                                                         <span class="badge badge-pill badge-primary">Pending</span>
                                                     @elseif($res->delivery_status=="accepted")
@@ -199,9 +195,131 @@
                                                         <span class="badge badge-pill badge-success"> Delivered</span>
                                                     @elseif($res->delivery_status=="returned")
                                                         <span class="badge badge-pill badge-warning"> Returned</span>
-                                                    @else
+                                                        <a  class="btn btn-primary"
+                                                            href="/admin/returned-note/{{$res->parcel_id}}" >Receive
+                                                        </a>
+                                                        <div class="modal fade receive-modal{{$res->parcel_id}}"
+                                                             tabindex="-1"
+                                                             role="dialog" aria-labelledby="mySmallModalLabel"
+                                                             style="display: none;" aria-hidden="true">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title mt-0"
+                                                                            id="mySmallModalLabel">Receive Product</h5>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-hidden="true">
+                                                                            ×
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
 
-                                                        <span class="badge badge-pill badge-warning"> {{$res->delivery_status}}</span>
+                                                                        <form method="get"
+                                                                              action="/admin/parcel/receive-by-admin">
+                                                                            <div class="form-group">
+                                                                                <label
+                                                                                        class="control-label">Notes</label>
+
+                                                                                <input name="_token"
+                                                                                       value="{{csrf_token()}}"
+                                                                                       type="hidden"/>
+                                                                                <input name="parcel_id"
+                                                                                       value="{{$res->parcel_id}}"
+                                                                                       type="hidden"/>
+
+
+                                                                                <textarea class="form-control"
+                                                                                          name="notes"></textarea>
+
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Select
+                                                                                    Deliveryman</label>
+                                                                                <button type="submit"
+                                                                                        class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
+                                                                                    Save
+                                                                                </button>
+                                                                            </div>
+
+
+                                                                        </form>
+
+
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
+
+                                                    @elseif($res->delivery_status=="returned_to_admin")
+                                                        <span
+                                                                class="badge badge-pill badge-success"> Returned To Admin</span>
+                                                    @elseif($res->delivery_status=="partial_delivered")
+                                                        <span
+                                                                class="badge badge-pill badge-warning"> Partial Delivered</span>
+
+                                                        <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal"
+                                                                data-target=".receive-modal{{$res->parcel_id}}">Receive
+                                                        </button>
+
+                                                        <div class="modal fade receive-modal{{$res->parcel_id}}"
+                                                             tabindex="-1"
+                                                             role="dialog" aria-labelledby="mySmallModalLabel"
+                                                             style="display: none;" aria-hidden="true">
+                                                            <div class="modal-dialog modal-sm">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title mt-0"
+                                                                            id="mySmallModalLabel">Receive Product</h5>
+                                                                        <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-hidden="true">
+                                                                            ×
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+
+                                                                        <form method="get"
+                                                                              action="/admin/parcel/receive-by-admin">
+                                                                            <div class="form-group">
+                                                                                <label
+                                                                                        class="control-label">Notes</label>
+
+                                                                                <input name="_token"
+                                                                                       value="{{csrf_token()}}"
+                                                                                       type="hidden"/>
+                                                                                <input name="parcel_id"
+                                                                                       value="{{$res->parcel_id}}"
+                                                                                       type="hidden"/>
+
+
+                                                                                <textarea class="form-control"
+                                                                                          name="notes"></textarea>
+
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                <label class="control-label">Select
+                                                                                    Deliveryman</label>
+                                                                                <button type="submit"
+                                                                                        class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
+                                                                                    Save
+                                                                                </button>
+                                                                            </div>
+
+
+                                                                        </form>
+
+
+                                                                    </div>
+                                                                </div><!-- /.modal-content -->
+                                                            </div><!-- /.modal-dialog -->
+                                                        </div><!-- /.modal -->
+
+
+                                                    @else
+                                                        <span
+                                                                class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
                                                     @endif
                                                 </td>
                                                 <td>

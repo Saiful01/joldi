@@ -20,9 +20,9 @@
     <!-- end page title -->
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
             <div class="row">
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-4 col-md-6">
                     <div class="card mini-stat bg-primary text-white">
                         <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg" class="text-white">
                             <div class="card-body">
@@ -51,14 +51,14 @@
                     </div>
                 </div>
                 <a href="/merchant/payments/request" class="text-white">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mini-stat  text-white" style="background-color: #1e7e34">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card mini-stat bg-pink text-white">
                             <div class="card-body">
                                 <div class="mb-4">
                                     <div class="float-left mini-stat-img mr-4">
                                         <img src="/assets/images/services-icon/01.png" alt="">
                                     </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Total Price</h5>
+                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Payable Amount</h5>
                                     <h4 class="font-weight-medium font-size-24">{{$payable_amount}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                     {{--                                <div class="mini-stat-label bg-success">--}}
@@ -78,34 +78,7 @@
                     </div>
                 </a>
                 <a href="/merchant/payments/request" class="text-white">
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mini-stat bg-pink text-white">
-                            <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white">Total Charge</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$total_delivery_charge}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="/merchant/payments/request" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
-
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="/merchant/payments/request" class="text-white">
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-4 col-md-6">
                         <div class="card mini-stat bg-success text-white">
                             <div class="card-body">
                                 <div class="mb-4">
@@ -132,7 +105,7 @@
                     </div>
                 </a>
                 <a href="/merchant/parcel/show" class="text-white">
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-4 col-md-6">
                         <div class="card mini-stat bg-info text-white">
                             <div class="card-body">
                                 <div class="mb-4">
@@ -162,8 +135,8 @@
                 </a>
                 <a href="/merchant/parcel/show" class="text-white">
 
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mini-stat  text-white" style="background-color: red">
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card mini-stat bg-danger text-white">
                             <div class="card-body">
                                 <div class="mb-4">
                                     <div class="float-left mini-stat-img mr-4">
@@ -190,7 +163,7 @@
                 </a>
                 <a href="/merchant/parcel/show" class="text-white">
 
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-4 col-md-6">
                         <div class="card mini-stat bg-warning text-white">
                             <div class="card-body">
                                 <div class="mb-4">
@@ -199,34 +172,6 @@
                                     </div>
                                     <h5 class="font-size-16 text-uppercase mt-0 text-white"> Pending</h5>
                                     <h4 class="font-weight-medium font-size-24">{{$delivery_pending}} <i
-                                            class="mdi mdi-arrow-up text-success ml-2"></i></h4>
-                                    {{--                                <div class="mini-stat-label bg-success">--}}
-                                    {{--                                    <p class="mb-0">+ 12%</p>--}}
-                                    {{--                                </div>--}}
-                                </div>
-                                <div class="pt-2">
-                                    <div class="float-right">
-                                        <a href="/merchant/parcel/show" class="text-white"><i
-                                                class="mdi mdi-arrow-right h5"></i></a>
-                                    </div>
-
-                                    {{--                                <p class="text-white mb-0 mt-1">Since last month</p>--}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <a href="/merchant/parcel/show" class="text-white">
-
-                    <div class="col-xl-3 col-md-6">
-                        <div class="card mini-stat  text-white" style="background-color: #0f6674">
-                            <div class="card-body">
-                                <div class="mb-4">
-                                    <div class="float-left mini-stat-img mr-4">
-                                        <img src="/assets/images/services-icon/01.png" alt="">
-                                    </div>
-                                    <h5 class="font-size-16 text-uppercase mt-0 text-white"> Deliveered</h5>
-                                    <h4 class="font-weight-medium font-size-24">{{$delivery_delivered}} <i
                                             class="mdi mdi-arrow-up text-success ml-2"></i></h4>
                                     {{--                                <div class="mini-stat-label bg-success">--}}
                                     {{--                                    <p class="mb-0">+ 12%</p>--}}
@@ -256,7 +201,7 @@
 
 
     <div class="row">
-        <div class="col-xl-3">
+        <div class="col-xl-4">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-4">Parcel Report</h4>
