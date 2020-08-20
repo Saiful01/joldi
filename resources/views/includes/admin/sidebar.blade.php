@@ -53,6 +53,12 @@
                         <span>Manage Parcel Types</span>
                     </a>
                 </li>
+                <li>
+                    <a href="/admin/consignment/report" class=" waves-effect">
+                        <i class="fas fa-archive"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
 
 
 

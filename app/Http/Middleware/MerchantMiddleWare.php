@@ -19,7 +19,7 @@ class MerchantMiddleWare
         //return $next($request);
 
         if (!Auth::guard('merchant')->check()) {
-            return redirect('/merchant/login');
+            return redirect('/logout');
         } else {
 
             if (!Auth::guard('merchant')->user()->active_status) {

@@ -252,74 +252,11 @@
                                                         </div><!-- /.modal -->
 
                                                     @elseif($res->delivery_status=="returned_to_admin")
-                                                        <span
-                                                                class="badge badge-pill badge-success"> Returned To Admin</span>
+                                                        <span class="badge badge-pill badge-success"> Returned To Admin</span>
                                                     @elseif($res->delivery_status=="partial_delivered")
-                                                        <span
-                                                                class="badge badge-pill badge-warning"> Partial Delivered</span>
-
-                                                        <button type="button" class="btn btn-primary"
-                                                                data-toggle="modal"
-                                                                data-target=".receive-modal{{$res->parcel_id}}">Receive
-                                                        </button>
-
-                                                        <div class="modal fade receive-modal{{$res->parcel_id}}"
-                                                             tabindex="-1"
-                                                             role="dialog" aria-labelledby="mySmallModalLabel"
-                                                             style="display: none;" aria-hidden="true">
-                                                            <div class="modal-dialog modal-sm">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title mt-0"
-                                                                            id="mySmallModalLabel">Receive Product</h5>
-                                                                        <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-hidden="true">
-                                                                            ×
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-
-                                                                        <form method="get"
-                                                                              action="/admin/parcel/receive-by-admin">
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                        class="control-label">Notes</label>
-
-                                                                                <input name="_token"
-                                                                                       value="{{csrf_token()}}"
-                                                                                       type="hidden"/>
-                                                                                <input name="parcel_id"
-                                                                                       value="{{$res->parcel_id}}"
-                                                                                       type="hidden"/>
-
-
-                                                                                <textarea class="form-control"
-                                                                                          name="notes"></textarea>
-
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Select
-                                                                                    Deliveryman</label>
-                                                                                <button type="submit"
-                                                                                        class="btn btn-block btn-primary btn-sm waves-effect waves-light float-right">
-                                                                                    Save
-                                                                                </button>
-                                                                            </div>
-
-
-                                                                        </form>
-
-
-                                                                    </div>
-                                                                </div><!-- /.modal-content -->
-                                                            </div><!-- /.modal-dialog -->
-                                                        </div><!-- /.modal -->
-
-
+                                                        <span class="badge badge-pill badge-warning"> Partial Deliver</span>
                                                     @else
-                                                        <span
-                                                                class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
+                                                        <span class="badge badge-pill badge-success">{{getFormattedStatus($res->delivery_status)}}</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -351,9 +288,19 @@
 
                                                             @if($res->delivery_status=="accepted")
                                                                 <a class="dropdown-item"
-                                                                   href="/admin/parcel/status-change/{{$res->parcel_id}}">Hub
+                                                                   href="/admin/parcel/status-hub-receive/{{$res->parcel_id}}">Hub
                                                                     Received</a>
 
+                                                            @endif
+
+                                                            @if($res->delivery_status=="partial_delivered")
+                                                                <a class="dropdown-item"
+                                                                   href="/admin/parcel/return-to-admin/{{$res->parcel_id}}">Return to Admin</a>
+                                                            @endif
+
+                                                            @if($res->delivery_status=="returned_to_admin")
+                                                                <a class="dropdown-item"
+                                                                   href="/admin/parcel/resolve-merchant-return/{{$res->parcel_id}}">Resolve Merchant Return</a>
                                                             @endif
                                                         </div>
                                                     </div>

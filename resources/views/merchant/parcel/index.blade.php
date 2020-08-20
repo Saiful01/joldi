@@ -352,7 +352,7 @@
         app.controller('parcelController', function ($scope, $http) {
 
             $scope.delivery_charge = 0;
-            $scope.payable_amount = 0;
+            $scope.payable_amount = "";
             $scope.total_amount = 0;
             $scope.area_charge = 0;
             $scope.cod_charge = '<?php echo $cod_charge?>';

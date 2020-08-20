@@ -383,7 +383,7 @@ class ParcelApiController extends Controller
         try {
 
             Parcel::where('parcel_id', $request['parcel_id'])->update([
-                'receivable_amount' => $request['amount'],
+                'received_amount' => $request['amount'],
                 'delivery_notes' => $request['notes'],
             ]);
 
@@ -451,6 +451,7 @@ class ParcelApiController extends Controller
 
             Parcel::where('parcel_id', $request['parcel_id'])->update([
                 'delivery_notes' => $request['notes'],
+                'received_amount' => 0,
             ]);
 
             $parcel_array = [

@@ -83,6 +83,7 @@ class AdminController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcel_statuses.delivery_status', 'LIKE', '%' . $status . '%')
+            ->orderBy('parcel.created_at', 'desc')
             ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();
@@ -367,10 +368,9 @@ class AdminController extends Controller
 
     public function deliveryPickupmanAssign(Request $request)
     {
-       //return $request->all();
+        //return $request->all();
 
         //return count($request['parcel_id']);
-
 
 
         if (!$request['parcel_id']) {
@@ -415,13 +415,13 @@ class AdminController extends Controller
     public function AssignPickUpMan(Request $request)
     {
 
-   //  return $request->all();
+        //  return $request->all();
 
         foreach ($request['parcel_id'] as $parcel_id) {
 
             $invoice = Parcel::where('parcel_id', $parcel_id)->first();
 
-            ParcelStatus::where('parcel_id',$parcel_id)->update([
+            ParcelStatus::where('parcel_id', $parcel_id)->update([
                 'order_pickup_man_id' => $request['delivery_man_id'],
                 'delivery_status' => 'pickup_man_assigned',
 
@@ -447,18 +447,17 @@ class AdminController extends Controller
             Notification::create($notification);
 
 
-
         }
-
-
 
 
         return Redirect::to("/admin/parcel/show")->with('success', "Successfully updated");
 
-    }  public function AssignDeliveryMan(Request $request)
+    }
+
+    public function AssignDeliveryMan(Request $request)
     {
 
-   //  return $request->all();
+        //  return $request->all();
 
         foreach ($request['parcel_id'] as $parcel_id) {
 
@@ -466,32 +465,71 @@ class AdminController extends Controller
 
             $status = "delivery_man_assigned";
 
-                ParcelStatus::where('parcel_id', $parcel_id)->update(['delivery_man_id' => $request['delivery_man_id']]);
-                ParcelStatus::where('parcel_id', $parcel_id)->update(['delivery_status' => $status]);
-                $array = [
-                    'parcel_status' => $status,
-                    'changed_by' => Auth::guard()->user()->id,
-                    'parcel_id' => $parcel_id,
-                    'user_type' => 'admin'
-                ];
+            ParcelStatus::where('parcel_id', $parcel_id)->update(['delivery_man_id' => $request['delivery_man_id']]);
+            ParcelStatus::where('parcel_id', $parcel_id)->update(['delivery_status' => $status]);
+            $array = [
+                'parcel_status' => $status,
+                'changed_by' => Auth::guard()->user()->id,
+                'parcel_id' => $parcel_id,
+                'user_type' => 'admin'
+            ];
 
-                ParcelStatusHistory::create($array);
-                $notification = [
-                    'message' => 'Assigned for  no ' . $invoice->parcel_invoice,
-                    'for_user_id' => $request['delivery_man_id'],
-                    'changed_by' => Auth::guard()->user()->id,
+            ParcelStatusHistory::create($array);
+            $notification = [
+                'message' => 'Assigned for  no ' . $invoice->parcel_invoice,
+                'for_user_id' => $request['delivery_man_id'],
+                'changed_by' => Auth::guard()->user()->id,
 
-                ];
-                Notification::create($notification);
-
+            ];
+            Notification::create($notification);
 
 
         }
 
 
-
-
         return Redirect::to("/admin/parcel/show")->with('success', "Successfully updated");
 
+    }
+
+    public function report()
+    {
+        return view('admin.reports.show');
+    }
+
+    public function merchantParcelDetails(Request $request, $id)
+    {
+
+        if ($request->isMethod('post')) {
+
+            $status = $request['status'];
+
+            $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+                ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+                ->where('parcels.merchant_id', $id)
+                ->where('parcel_statuses.delivery_status', $status)
+                ->orderBy('parcels.created_at', "DESC")
+                ->paginate(15);
+        } else {
+
+            $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+                ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+                ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+                ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+                ->where('parcels.merchant_id', $id)
+                ->orderBy('parcels.created_at', "DESC")
+                ->paginate(15);
+
+        }
+
+        $delivery_mans = DeliveryMan::where('active_status', true)->get();
+        $areas = Area::get();
+
+        return view('admin.merchant.details')
+            ->with('delivery_mans', $delivery_mans)
+            ->with('areas', $areas)
+            ->with('results', $parcels)
+            ->with('id', $id);
     }
 }

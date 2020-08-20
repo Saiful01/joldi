@@ -29,6 +29,7 @@ class CreateParcelsTable extends Migration
             $table->double('area_charge')->default(0);//area_charge
             $table->double('total_amount')->nullable();//payable_amount+delivery_charge+cod+area_charge
             $table->double('receivable_amount')->nullable();//Will be changed if Partial Delivered or Returned
+            $table->double('received_amount')->nullable();//Will be changed if Partial Delivered or Returned
 
             $table->boolean('is_same_day')->default(true);
             $table->boolean('is_payment_collection')->default(false);

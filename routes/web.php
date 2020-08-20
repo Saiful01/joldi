@@ -51,6 +51,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/merchant/profile/{id}', 'AdminController@merchantProfile');
     Route::get('/admin/merchant/inactive/{id}', 'AdminController@merchantInactive');
     Route::get('/admin/merchant/activate/{id}', 'AdminController@merchantActivate');
+    Route::any('/admin/merchant/details/{id}', 'AdminController@merchantParcelDetails');
 
 
     //merchant
@@ -66,6 +67,7 @@ Route::group(['middleware' => 'admin'], function () {
     // Parcel Type Route
     Route::get('/admin/parceltypes/create', 'ParcelTypeController@create');
     Route::get('/admin/parceltypes/view', 'ParcelTypeController@show');
+    Route::get('/admin/reports/view', 'AdminController@report');
     Route::post('/admin/parceltypes/store', 'ParcelTypeController@store');
     Route::get('/admin/parceltypes/edit/{id}', 'ParcelTypeController@edit');
     Route::post('/admin/parceltypes/update', 'ParcelTypeController@update');
@@ -104,7 +106,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/parcel/receive-by-admin', 'ParcelController@productReceiveByAdmin');
     Route::get('/admin/returned-note/{id}', 'ParcelController@AdminReturentNotes');
 
-    Route::get('/admin/parcel/status-change/{id}', 'ParcelController@parcelStatusChange');
+    Route::get('/admin/parcel/status-hub-receive/{id}', 'ParcelController@parcelStatusHubReceive');
+    Route::get('/admin/parcel/return-to-admin/{id}', 'ParcelController@parcelStatusReturnToAdmin');
+    Route::get('/admin/parcel/resolve-merchant-return/{id}', 'ParcelController@parcelStatusResolveMerchantReturn');
 
     Route::get('/admin/setting', 'ParcelController@adminSetting');
     Route::post('/merchant-all/change', 'AdminController@changeMerchant');
@@ -136,6 +140,7 @@ Route::group(['middleware' => 'merchant'], function () {
     Route::post('/merchant/same-day/serach', 'ParcelController@sameDaySearch');
     Route::post('/merchant/next-day/serach', 'ParcelController@nextDaySearch');
     Route::post('/merchant/invoice/serach', 'ParcelController@invoiceSearch');
+    Route::post('/merchant/status/serach', 'ParcelController@statusSearch');
     Route::post('/parcel-all/change', 'ParcelController@allParcel');
     /*Route::get('/merchant/print/all', 'ParcelController@printParcel');*/
 
@@ -282,3 +287,7 @@ Route::get('/map1', function () {
 });
 
 
+//report generate
+
+
+Route::any('/admin/consignment/report', 'ReportController@consignmentReport');

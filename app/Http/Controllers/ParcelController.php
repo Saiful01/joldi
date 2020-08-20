@@ -177,7 +177,7 @@ class ParcelController extends Controller
             ->where('merchant_id', Auth::guard('merchant')->id())
             ->where('is_same_day', true)
             ->orderBy('parcels.created_at', "DESC")
-            ->get();
+            ->paginate(15);
         return view('merchant.parcel.show')
             ->with('results', $parcels);
     }
@@ -190,7 +190,7 @@ class ParcelController extends Controller
             ->where('merchant_id', Auth::guard('merchant')->id())
             ->where('is_same_day', false)
             ->orderBy('parcels.created_at', "DESC")
-            ->get();
+            ->paginate(15);
         return view('merchant.parcel.show')
             ->with('results', $parcels);
     }
@@ -203,10 +203,32 @@ class ParcelController extends Controller
             ->join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
             ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
             ->where('merchant_id', Auth::guard('merchant')->id())
-            ->get();
+            ->orderBy('parcels.created_at', 'desc')
+            ->paginate(15);
+
+
         return view('merchant.parcel.show')
             ->with('results', $parcels)
             ->with('invoice', $invoice);
+
+    }
+
+
+    public function statusSearch(Parcel $parcel, Request $request)
+    {
+
+
+        $status = $request['status'];
+        $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
+            ->join('customers', 'parcel_statuses.customer_id', '=', 'customers.customer_id')
+            ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
+            ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
+            ->where('parcel_statuses.delivery_status', 'LIKE', '%' . $status . '%')
+            ->orderBy('parcels.created_at', 'desc')
+            ->paginate(15);
+        return view('merchant.parcel.show')
+            ->with('results', $parcels)
+            ->with('status', $status);
     }
 
 
@@ -228,18 +250,71 @@ class ParcelController extends Controller
     }
 
 
-    public function parcelStatusChange($id)
+    public function parcelStatusHubReceive($id)
     {
-
         //TODO::Delete check
-
-
         $status = "hub_received";
-
         try {
 
             ParcelStatus::where('parcel_id', $id)->update([
                 'delivery_status' => "hub_received",
+                'hub_receiver' => Auth::user()->id,
+            ]);
+
+            //Insert into History Table
+            $array = [
+                'parcel_id' => $id,
+                'changed_by' => Auth::user()->id,
+                'parcel_status' => $status,
+                'user_type' => "admin",
+            ];
+            ParcelStatusHistory::create($array);
+
+            return back()->with('success', "Successfully Status Changed");
+
+        } catch (\Exception $exception) {
+
+            return back()->with('failed', $exception->getMessage());
+        }
+    }
+
+
+    public function parcelStatusReturnToAdmin($id)
+    {
+
+        $status = "returned_to_admin";
+        try {
+
+            ParcelStatus::where('parcel_id', $id)->update([
+                'delivery_status' => $status,
+                'hub_receiver' => Auth::user()->id,
+            ]);
+
+            //Insert into History Table
+            $array = [
+                'parcel_id' => $id,
+                'changed_by' => Auth::user()->id,
+                'parcel_status' => $status,
+                'user_type' => "admin",
+            ];
+            ParcelStatusHistory::create($array);
+
+            return back()->with('success', "Successfully Status Changed");
+
+        } catch (\Exception $exception) {
+
+            return back()->with('failed', $exception->getMessage());
+        }
+    }
+
+    public function parcelStatusResolveMerchantReturn($id)
+    {
+
+        $status = "resolve_merchant_return";
+        try {
+
+            ParcelStatus::where('parcel_id', $id)->update([
+                'delivery_status' => $status,
                 'hub_receiver' => Auth::user()->id,
             ]);
 
@@ -357,14 +432,15 @@ class ParcelController extends Controller
 
         }
     }
-    public function AdminReturentNotes($id) {
-        $res=Parcel::where('parcel_id', $id)->first();
+
+    public function AdminReturentNotes($id)
+    {
+        $res = Parcel::where('parcel_id', $id)->first();
         return view('admin.consignment.return_note')->with('res', $res);
     }
 
     public function productReceiveByAdmin(Request $request)
     {
-
 
 
         try {
@@ -381,7 +457,6 @@ class ParcelController extends Controller
             Parcel::where('parcel_id', $request['parcel_id'])->update([
                 'admin_notes' => $request['notes']
             ]);
-
 
 
             //Update Parcel Status
