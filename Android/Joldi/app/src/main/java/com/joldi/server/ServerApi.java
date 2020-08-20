@@ -131,6 +131,6 @@ public interface ServerApi {
     @FormUrlEncoded
     @POST("api/reset-password")
     Call<Login> resetPassword(@Field("user_id") String email,
-                               @Field("access_token") String access_token);
+                              @Field("access_token") String access_token);
 
 }
