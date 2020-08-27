@@ -56,11 +56,9 @@
                                         <strong>Charge:</strong><br>
                                         Parcel Price: {{$result->payable_amount}}<br>
                                         Delivery Charge: {{$result->delivery_charge}}<br>
-                                        Area Charge: {{$result->value}}<br>
+                                       Area Charge: {{$result->value}}<br>
                                         Total Amount: {{$result->total_amount}}<br>
-                                        Received Amount: {{$result->received_amount}}<br> {{--TODO::--}}
-                                        Status: <span
-                                                class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
+                                        Status: <span class="text-primary">{{ statusFormat($result->delivery_status) }}</span><br>
                                         Date: {{$result->delivery_date}}<br>
                                     </address>
                                 </div>
@@ -127,24 +125,24 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4"> Notes</h4>
                     <ol class="activity-feed">
+                            <li class="feed-item">
+                                <div class="feed-item-list">
+                                    <span class="date">Parcel Notes</span>
+                                    <p>{{$result->parcel_notes}}</p>
+                                </div>
+                            </li>
                         <li class="feed-item">
-                            <div class="feed-item-list">
-                                <span class="date">Parcel Notes</span>
-                                <p>{{$result->parcel_notes}}</p>
-                            </div>
-                        </li>
+                                <div class="feed-item-list">
+                                    <span class="date">Admin Notes</span>
+                                    <p>{{$result->admin_notes}}</p>
+                                </div>
+                            </li>
                         <li class="feed-item">
-                            <div class="feed-item-list">
-                                <span class="date">Admin Notes</span>
-                                <p>{{$result->admin_notes}}</p>
-                            </div>
-                        </li>
-                        <li class="feed-item">
-                            <div class="feed-item-list">
-                                <span class="date">App Notes</span>
-                                <p>{{$result->delivery_notes}}</p>
-                            </div>
-                        </li>
+                                <div class="feed-item-list">
+                                    <span class="date">App Notes</span>
+                                    <p>{{$result->delivery_notes}}</p>
+                                </div>
+                            </li>
 
                     </ol>
 

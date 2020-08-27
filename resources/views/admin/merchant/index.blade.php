@@ -39,7 +39,7 @@
                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                             <tr>
-                                <th><input class="ml-1" type="checkbox" onclick="toggle(this);"/><br/>
+                                <th><input class="ml-1" type="checkbox" onclick="toggle(this);" /><br />
                                 </th>
                                 <th>Name</th>
                                 <th>Phone</th>
@@ -104,8 +104,6 @@
                                                     <a class="dropdown-item"
                                                        href="/admin/merchant/activate/{{$res->merchant_id}}">Activate</a>
                                                 @endif
-
-                                                <a class="dropdown-item" href="/admin/merchant/details/{{$res->merchant_id}}">Details</a>
                                             </div>
                                         </div>
 

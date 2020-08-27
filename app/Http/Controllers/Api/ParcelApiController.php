@@ -451,7 +451,6 @@ class ParcelApiController extends Controller
 
             Parcel::where('parcel_id', $request['parcel_id'])->update([
                 'delivery_notes' => $request['notes'],
-                'received_amount' => 0,
             ]);
 
             $parcel_array = [

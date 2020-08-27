@@ -51,7 +51,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/merchant/profile/{id}', 'AdminController@merchantProfile');
     Route::get('/admin/merchant/inactive/{id}', 'AdminController@merchantInactive');
     Route::get('/admin/merchant/activate/{id}', 'AdminController@merchantActivate');
-    Route::any('/admin/merchant/details/{id}', 'AdminController@merchantParcelDetails');
 
 
     //merchant
@@ -106,9 +105,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/parcel/receive-by-admin', 'ParcelController@productReceiveByAdmin');
     Route::get('/admin/returned-note/{id}', 'ParcelController@AdminReturentNotes');
 
-    Route::get('/admin/parcel/status-hub-receive/{id}', 'ParcelController@parcelStatusHubReceive');
-    Route::get('/admin/parcel/return-to-admin/{id}', 'ParcelController@parcelStatusReturnToAdmin');
-    Route::get('/admin/parcel/resolve-merchant-return/{id}', 'ParcelController@parcelStatusResolveMerchantReturn');
+    Route::get('/admin/parcel/status-change/{id}', 'ParcelController@parcelStatusChange');
 
     Route::get('/admin/setting', 'ParcelController@adminSetting');
     Route::post('/merchant-all/change', 'AdminController@changeMerchant');
@@ -288,6 +285,4 @@ Route::get('/map1', function () {
 
 
 //report generate
-
-
 Route::any('/admin/consignment/report', 'ReportController@consignmentReport');
