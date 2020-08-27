@@ -83,7 +83,7 @@ class AdminController extends Controller
             ->leftJoin('delivery_men', 'delivery_men.delivery_man_id', '=', 'parcel_statuses.delivery_man_id')
             ->Join('areas', 'areas.area_id', '=', 'parcels.area_id')
             ->where('parcel_statuses.delivery_status', 'LIKE', '%' . $status . '%')
-            ->orderBy('parcel.created_at','desc')
+            ->orderBy('parcel_statuses.created_at','desc')
             ->paginate(15);
         $delivery_mans = DeliveryMan::where('active_status', true)->get();
         $areas = Area::get();

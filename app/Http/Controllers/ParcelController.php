@@ -206,18 +206,18 @@ class ParcelController extends Controller
             ->orderBy('parcels.created_at','desc')
             ->paginate(15);
 
-        
+
         return view('merchant.parcel.show')
             ->with('results', $parcels)
             ->with('invoice', $invoice);
-            
+
     }
 
 
 
     public function statusSearch(Parcel $parcel, Request $request)
     {
-       
+
 
         $status = $request['status'];
         $parcels = Parcel::join('parcel_statuses', 'parcel_statuses.parcel_id', '=', 'parcels.parcel_id')
@@ -229,7 +229,7 @@ class ParcelController extends Controller
             ->paginate(15);
         return view('merchant.parcel.show')
             ->with('results', $parcels)
-            
+
             ->with('status', $status);
     }
 
@@ -384,6 +384,7 @@ class ParcelController extends Controller
     public function AdminReturentNotes($id) {
         $res=Parcel::where('parcel_id', $id)->first();
         return view('admin.consignment.return_note')->with('res', $res);
+
     }
 
     public function productReceiveByAdmin(Request $request)

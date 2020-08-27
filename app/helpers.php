@@ -17,6 +17,9 @@ function getMerchantActiveMessage()
 function getDateFormat($date)
 {
 
+    if($date==null){
+        return "-";
+    }
     $createdAt = Carbon::parse($date);
     return $createdAt->format('d M, Y g:i A');
 }

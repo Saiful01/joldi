@@ -286,3 +286,4 @@ Route::get('/map1', function () {
 
 //report generate
 Route::any('/admin/consignment/report', 'ReportController@consignmentReport');
+Route::post('/admin/consignment/report/search', 'ReportController@consignmentReport');
